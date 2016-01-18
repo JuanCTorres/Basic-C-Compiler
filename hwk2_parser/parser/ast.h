@@ -24,6 +24,7 @@ typedef enum { ROOT_N,
 	       ID_N, INT_LITERAL_N, 
          OP_MODULUS_N, 
          OP_LESS_THAN_N,
+         OP_LESS_EQUAL_N,
          OP_GREATER_THAN_N,
          OP_GREATER_EQUAL_N,
          OP_NOT_EQUAL_N,
@@ -31,9 +32,20 @@ typedef enum { ROOT_N,
          OP_OR_N,
          OP_NOT_N,
          OP_INCREMENT_N,
-         OP_DECREMENT_M,
+         OP_DECREMENT_N,
+         WHILE_N,
+         DO_WHILE_N,
+         PRINT_N,
+         STRING_LITERAL_N,
+         INT_TYPE_N,
+         VOID_TYPE_N,
+         ARRAY_TYPE_N,
+         FUNCTION_N,
+         FORMAL_PARAMS_N,
+         RETURN_N,
+         READ_N,
+         FOR_N
        } ast_node_type;
-
 
 
 typedef struct {
@@ -63,6 +75,7 @@ static val_name_pair token_table[] = {
   { INT_LITERAL_N, "INT_LITERAL"},
   { OP_MODULUS_N, "%"},
   { OP_LESS_THAN_N, "<"},
+  { OP_LESS_EQUAL_N, "<="},
   { OP_GREATER_THAN_N, ">"},
   { OP_GREATER_EQUAL_N, ">="},
   { OP_NOT_EQUAL_N, "!="},
@@ -70,8 +83,19 @@ static val_name_pair token_table[] = {
   { OP_OR_N, "||"},
   { OP_NOT_N, "!"},
   { OP_INCREMENT_N, "++"},
-  { OP_DECREMENT_M, "--"},
-
+  { OP_DECREMENT_N, "--"},
+  { WHILE_N, "WHILE"},
+  { DO_WHILE_N, "DO_WHILE"},
+  { PRINT_N, "PRINT"},
+  { STRING_LITERAL_N, "STRING_LITERAL"},
+  { INT_TYPE_N, "INT_TYPE" },
+  { VOID_TYPE_N, "VOID_TYPE" },
+  { ARRAY_TYPE_N, "ARRAY_TYPE"},
+  { FUNCTION_N, "FUNCTION" },
+  { FORMAL_PARAMS_N, "FORMAL_PARAMS" },
+  { RETURN_N, "RETURN"},
+  { READ_N, "READ"},
+  { FOR_N, "FOR"},
   { 0, NULL }
 };
 
@@ -91,7 +115,9 @@ struct ast_node_struct {
   // as most one of these would be nonzero
   char *value_string;		/* for ID */
   int value_int;		/* for INT_LITERAL */
-  
+  ast_node_type return_type; /* for declarations */
+  int array_length;
+
 };
 
 /* Create a node with a given token type and return a pointer to the
