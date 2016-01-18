@@ -6,6 +6,94 @@ program : declarationList {
 
 declarationList : declarationList declaration  {
   ast_node t = $1;
+  assert(t != NULL);
+    while (t->right_sibling != NULL) { 
+      t = t->right_sibling; 
+    }
+    t->right_sibling = $2;
+    $$ = $1;
+ }
+|  declaration { 
+   $$ = $1;
+ }
+;
+
+declaration : varDeclaration  {
+  $$ = $1;
+  }
+|  funcDeclaration {
+  $$ = $1;
+  }
+;
+
+varDeclaration : varTypeSpecifier varDeclList ';' {
+<question>
+}
+;
+
+varTypeSpecifier : INT_T 
+; <question>
+
+varDeclList: varDeclList ',' varDecl  {
+  ast_node t = $1;
+  assert(t != NULL);
+    while (t->right_sibling != NULL) { 
+      t = t->right_sibling; 
+    }
+    t->right_sibling = $2;
+    $$ = $1;
+ }
+|  varDecl {$$ = $1}
+; <question>
+
+varDecl : ID_T  {
+    ast_node t = create_ast_node(ID_N);
+    t->value_string = strdup(savedIdText);
+    $$ = $1;
+  }
+|  ID_T  '=' expression  <question>  IDT is left child of = and expr is rightsib of IDT?
+|  ID_T '[' INTCONST_T ']' <question> are brackets meaningful (can be array)? instconst leftchild of idt?
+;
+
+funcDeclaration : funcTypeSpecifier ID_T '(' formalParams ')' compoundStatement
+; <question>
+
+funcTypeSpecifier : INT_T  
+|   VOID_T
+; <question>
+
+formalParams : formalList  {$$ = $1; }
+|  VOID_T  <question> void node?
+|  /* empty */ {$$ = NULL;}
+;
+
+formalList : formalList ',' formalParam  
+|  formalParam {$$ = $1; }
+;
+
+formalParam : varTypeSpecifier ID_T  <question> idt leftchild of typespec
+|  varTypeSpecifier ID_T '[' ']' <question> how is this different to above? array node?
+;
+
+compoundStatement : '{' localDeclarations statementList '}'
+; <question> use SEQ_N? (see lec 7 slide, ast diagram)
+
+localDeclarations : localDeclarations varDeclaration {
+  ast_node t = $1;
+  if (t != NULL) {
+    while (t->right_sibling != NULL)
+      t = t->right_sibling;
+    t->right_sibling = $2;
+    $$ = $1;
+  }
+  else
+    $$ = $2;
+ }  
+|  /* empty */
+;
+
+statementList : statementList statement  {
+  ast_node t = $1;
   if (t != NULL) {
     while (t->right_sibling != NULL)
       t = t->right_sibling;
@@ -15,59 +103,7 @@ declarationList : declarationList declaration  {
   else
     $$ = $2;
  }
-|  declaration { 
-
- }
-;
-
-declaration : varDeclaration  
-|  funcDeclaration
-;
-
-varDeclaration : varTypeSpecifier varDeclList';'
-;
-
-varTypeSpecifier : INT_T 
-;
-
-varDeclList: varDeclList ',' varDecl  
-|  varDecl
-;
-
-varDecl : ID_T  
-|  ID_T  '=' expression  
-|  ID_T '[' INTCONST_T ']'
-;
-
-funcDeclaration : funcTypeSpecifier ID_T '(' formalParams ')' compoundStatement
-;
-
-funcTypeSpecifier : INT_T  
-|   VOID_T
-;
-
-formalParams : formalList  {$$ = $1; }
-|  VOID_T  
-|  /* empty */
-;
-
-formalList : formalList ',' formalParam  
-|  formalParam {$$ = $1; }
-;
-
-formalParam : varTypeSpecifier ID_T  
-|  varTypeSpecifier ID_T '[' ']'
-;
-
-compoundStatement : '{' localDeclarations statementList '}'
-;
-
-localDeclarations : localDeclarations varDeclaration  
-|  /* empty */
-;
-
-statementList : statementList statement  
-|  /* empty */
+|  /* empty */ {$$ = NULL;}
 ;
 
 statement : expressionStatement  {$$ = $1; }
@@ -85,32 +121,71 @@ expressionStatement : expression ';'  { $$ = $1; }
 |  ';' { $$ = NULL; }
 ;
 
-ifStatement : IF_T '(' expression ')' statement  
-|  IF_T '(' expression ')' statement ELSE_T statement
+/*  ifStatement : IF_T '(' expression ')' statement         */
+/*  |  IF_T '(' expression ')' statement ELSE_T statement   */
+/*  ;                                                       */
+
+ifStatement : IF_T '(' expression ')' statement   %prec LOWER_THAN_ELSE {
+  ast_node t = create_ast_node(IF_STMT_N);
+  t->left_child = $3;
+  t->left_child->right_sibling = $5;
+  $$ = t; }
+| IF_T '(' expression ')' statement ELSE_T statement {
+  ast_node t = create_ast_node(IF_ELSE_STMT_N);
+  t->left_child = $3;
+  t->left_child->right_sibling = $5;
+  t->left_child->right_sibling->right_sibling = $7;
+  $$ = t; }
+| IF_T '(' error ')' statement %prec LOWER_THAN_ELSE
+{ $$ = NULL; }
+| IF_T '(' error ')' statement ELSE_T statement { $$ = NULL; }
 ;
 
-whileStatement : WHILE_T '(' expression ')' statement
+
+whileStatement : WHILE_T '(' expression ')' statement {
+  ast_node t = create_ast_node(WHILE_N);
+  t->left_child = $3;
+  t->left_child->right_sibling = $5;
+  $$ = t; }
 ;
 
-doWhileStatement : DO_T statement WHILE_T '(' expression ')' ';'
+doWhileStatement : DO_T statement WHILE_T '(' expression ')' ';' {
+  <question> STATEMENT LEFT CHILD OF DO-T AND EXPR LEFT CHILD OF WHILE-T
+  WHAT ABOUT BETWEEN SSTATEMENT AND WHILE?
+}
 ;
 
 forStatement : FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression ')' statement
+; <question>
+
+forHeaderExpression : expression  { $$ = $1; }
+|  /* empty */ { $$ = NULL; }
 ;
 
-forHeaderExpression : expression  
-|  /* empty */
-;
-
-returnStatement : RETURN_T ';'  
-|  RETURN_T expression ';'
+returnStatement : RETURN_T ';' {
+   MAKE A NODE?
+  }
+|  RETURN_T expression ';' {
+    <question> EXPR LEFT CHILD OF RETURNT NODE?
+  }
 ;
 
 readStatement : READ_T var ';'
-;
+; <question> read node and its leftchild is var??
 
-printStatement : PRINT_T expression ';'  
-|  PRINT_T STRINGCONST_T ';'
+printStatement : PRINT_T expression ';'  {
+  ast_node t = create_ast_node(PRINT_N);
+  t->left_child = $2;
+  $$ = t;
+}
+|  PRINT_T STRINGCONST_T ';' {
+  ast_node t1 = create_ast_node(PRINT_N);
+  ast_node t2 = create_ast_node(STRING_LITERAL_N);
+  t2->value_string = strdup(savedLiteralText);
+  t1->left_child = t2;
+  $$ = t1;
+  <question> is this right?
+}
 ;
 
 expression : var {
@@ -122,7 +197,7 @@ expression : var {
   t2->left_child = $1;
   t2->left_child->right_sibling = $4;
   $$ = t2; }
-|  rValue
+|  rValue {$$ = $1; }
 ;
 
 var : ID_T  {
@@ -237,9 +312,15 @@ args : argList  {$$ = $1; }
 ;
 
 argList : argList ',' expression  {
-        ast_node t = create_ast_node()
-}
-|  expression {$$ = $1}
+  ast_node t = $1;
+  assert(t != NULL);
+    while (t->right_sibling != NULL) { 
+      t = t->right_sibling; 
+    }
+    t->right_sibling = $3;
+    $$ = $1;
+ }
+|  expression {$$ = $1; }
 ;
 
 
