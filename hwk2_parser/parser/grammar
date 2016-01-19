@@ -173,7 +173,7 @@ localDeclarations : localDeclarations varDeclaration {
   else
     $$ = $2;
  }  
-|  /* empty */
+|  /* empty */ {$$ = NULL;}
 ;
 
 statementList : statementList statement  {
@@ -254,7 +254,9 @@ forStatement : FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHead
 ; 
 
 forHeaderExpression : expression  { $$ = $1; }
-|  /* empty */ { $$ = NULL; }
+|  /* empty */ { 
+    ast_node t = create_ast_node(FOR_HEADER_EMPTY_N);
+  }
 ;
 
 returnStatement : RETURN_T ';' {
