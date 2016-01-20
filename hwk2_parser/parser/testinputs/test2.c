@@ -1,4 +1,9 @@
-//void this_func(int g);
+// int this_func(void);
+
+int this_func(int g) {
+print "at this_func";
+return 0;
+}
 
 int main() {
 
@@ -16,14 +21,14 @@ while(b > 1000) {
 	int aaa = -123;
 	if(a+b) {
 
-		print "fine here\n";
+		print ("fine here\n");
 	}
 
 }
 
 
 do {
- for( int i = 0; i < z; ++i) {
+ for(  i = 0; i < z; ++i) {
  	c = d = e = f;
 
  }
@@ -32,15 +37,13 @@ do {
 d = 10;
 
 
-
+b = this_func(d);
 
 return 0;
 }
 
-// this_func(int g) {
-// print "at this_func";
 
-// }
+
 
 
 
