@@ -48,7 +48,7 @@ void print_ast(ast_node root, int depth) {
 
   case INT_LITERAL_N:		/* print the int literal */
     printf("%d", root->value_int);
-    printf("test123\n");
+    //printf("test123\n");
     break;
 
   default:
