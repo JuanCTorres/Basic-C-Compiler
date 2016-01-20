@@ -110,12 +110,14 @@ varDecl : ID_T  {
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
-|  ID_T  '=' expression {
-    ast_node t1 = create_ast_node(ID_N);
-    t1->value_string = strdup(savedIdText);
+|  ID_T {
+    ast_node t = create_ast_node(ID_N);
+    t->value_string = strdup(savedIdText);
+    $1 = t;
+  }  '=' expression {
     ast_node t2 = create_ast_node(OP_ASSIGN_N);
-    t2->left_child = t1;
-    t2->left_child->right_sibling = $3;
+    t2->left_child = $1;
+    $1->right_sibling = $4;
     $$ = t2;
   }
 |  ID_T '[' INTCONST_T ']' {
@@ -246,7 +248,7 @@ statementList : statementList statement  {
     }
     t->right_sibling = $2;
   }
-  
+
   $$ = $1;
  }
 |  /* empty */ {
