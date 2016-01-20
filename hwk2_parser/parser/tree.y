@@ -29,7 +29,7 @@ extern char savedLiteralText[];
 %nonassoc LOWER_THAN_ELSE
 %nonassoc ELSE_T
 
-
+%right '='
 %left OR_T /* || */
 %left AND_T
 %left NOTEQUAL_T ISEQUAL_T
@@ -142,7 +142,6 @@ funcDeclaration : INT_T ID_T '(' formalParams ')' compoundStatement {
 }
 | VOID_T ID_T '(' formalParams ')' compoundStatement {
 /* removed functypespecifier, replaced with VOID_T */
-  ast_node t2 = create_ast_node(FUNCTION_N);
   ast_node t2 = create_ast_node(FUNCTION_N);
   t2->value_string = strdup(savedIdText);
   t2->left_child = $4;
@@ -337,33 +336,16 @@ printStatement : PRINT_T expression ';'  {
 }
 ;
 
-expression : var {
-  ast_node t1 = create_ast_node(ID_N);
-  t1->value_string = strdup(savedIdText);
-  $1 = t1;
- } '=' expression {
+expression : var '=' expression {
   ast_node t2 = create_ast_node(OP_ASSIGN_N);
   t2->left_child = $1;
-  t2->left_child->right_sibling = $4;
+  t2->left_child->right_sibling = $3;
   $$ = t2; }
-|  rValue {$$ = $1; }
-;
-
-var : ID_T  {
-   ast_node t = create_ast_node(ID_N);
-   t->value_string = strdup(savedIdText);
-   $$ = t;
- }
-|  ID_T '[' expression ']' {
-     /*<later*/
-    ast_node t = create_ast_node(ARRAY_TYPE_N);
-    t->value_string = strdup(savedIdText);
-    t->left_child = $3;
-    $$ = t;
- }
-;
-
-rValue : expression '+' expression  
+|  expression '+' expression  {
+  ast_node t = create_ast_node(OP_PLUS_N);
+  t->left_child = $1;
+  t->left_child->right_sibling = $3;
+  $$ = t; }
 |  expression '-' expression  {
   ast_node t = create_ast_node(OP_MINUS_N);
   t->left_child = $1;
@@ -448,6 +430,21 @@ rValue : expression '+' expression
   t->value_int = atoi(savedLiteralText);
   $$ = t; }
 ;
+
+var : ID_T  {
+   ast_node t = create_ast_node(ID_N);
+   t->value_string = strdup(savedIdText);
+   $$ = t;
+ }
+|  ID_T '[' expression ']' {
+     /*<later*/
+    ast_node t = create_ast_node(ARRAY_TYPE_N);
+    t->value_string = strdup(savedIdText);
+    t->left_child = $3;
+    $$ = t;
+ }
+;
+
 
 call : ID_T '(' args ')' {
    ast_node t = create_ast_node(ID_N);

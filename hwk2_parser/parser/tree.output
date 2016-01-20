@@ -4,9 +4,6 @@ Terminals which are not used
    OTHER_T
 
 
-State 94 conflicts: 13 shift/reduce
-
-
 Grammar
 
     0 $accept: program $end
@@ -84,74 +81,70 @@ Grammar
    49 printStatement: PRINT_T expression ';'
    50               | PRINT_T STRINGCONST_T ';'
 
-   51 @1: /* empty */
+   51 expression: var '=' expression
+   52           | expression '+' expression
+   53           | expression '-' expression
+   54           | expression '*' expression
+   55           | expression '/' expression
+   56           | expression '%' expression
+   57           | expression '<' expression
+   58           | expression LESS_EQUAL_T expression
+   59           | expression '>' expression
+   60           | expression GREATER_EQUAL_T expression
+   61           | expression ISEQUAL_T expression
+   62           | expression NOTEQUAL_T expression
+   63           | expression AND_T expression
+   64           | expression OR_T expression
+   65           | '!' expression
+   66           | '-' expression
+   67           | var
+   68           | INCREMENT_T var
+   69           | DECREMENT_T var
+   70           | '(' expression ')'
+   71           | call
+   72           | INTCONST_T
 
-   52 expression: var @1 '=' expression
-   53           | rValue
+   73 var: ID_T
+   74    | ID_T '[' expression ']'
 
-   54 var: ID_T
-   55    | ID_T '[' expression ']'
+   75 call: ID_T '(' args ')'
 
-   56 rValue: expression '+' expression
-   57       | expression '-' expression
-   58       | expression '*' expression
-   59       | expression '/' expression
-   60       | expression '%' expression
-   61       | expression '<' expression
-   62       | expression LESS_EQUAL_T expression
-   63       | expression '>' expression
-   64       | expression GREATER_EQUAL_T expression
-   65       | expression ISEQUAL_T expression
-   66       | expression NOTEQUAL_T expression
-   67       | expression AND_T expression
-   68       | expression OR_T expression
-   69       | '!' expression
-   70       | '-' expression
-   71       | var
-   72       | INCREMENT_T var
-   73       | DECREMENT_T var
-   74       | '(' expression ')'
-   75       | call
-   76       | INTCONST_T
+   76 args: argList
+   77     | /* empty */
 
-   77 call: ID_T '(' args ')'
-
-   78 args: argList
-   79     | /* empty */
-
-   80 argList: argList ',' expression
-   81        | expression
+   78 argList: argList ',' expression
+   79        | expression
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
-'!' (33) 69
-'%' (37) 60
-'(' (40) 12 13 37 38 39 40 41 42 43 74 77
-')' (41) 12 13 37 38 39 40 41 42 43 74 77
-'*' (42) 58
-'+' (43) 56
-',' (44) 7 17 80
-'-' (45) 57 70
-'/' (47) 59
+'!' (33) 65
+'%' (37) 56
+'(' (40) 12 13 37 38 39 40 41 42 43 70 75
+')' (41) 12 13 37 38 39 40 41 42 43 70 75
+'*' (42) 54
+'+' (43) 52
+',' (44) 7 17 78
+'-' (45) 53 66
+'/' (47) 55
 ';' (59) 6 35 36 42 43 46 47 48 49 50
-'<' (60) 61
-'=' (61) 10 52
-'>' (62) 63
-'[' (91) 11 20 55
-']' (93) 11 20 55
+'<' (60) 57
+'=' (61) 10 51
+'>' (62) 59
+'[' (91) 11 20 74
+']' (93) 11 20 74
 '{' (123) 21
 '}' (125) 21
 error (256) 39 40
-ISEQUAL_T (258) 65
-NOTEQUAL_T (259) 66
-LESS_EQUAL_T (260) 62
-GREATER_EQUAL_T (261) 64
-INCREMENT_T (262) 72
-DECREMENT_T (263) 73
-AND_T (264) 67
-OR_T (265) 68
+ISEQUAL_T (258) 61
+NOTEQUAL_T (259) 62
+LESS_EQUAL_T (260) 58
+GREATER_EQUAL_T (261) 60
+INCREMENT_T (262) 68
+DECREMENT_T (263) 69
+AND_T (264) 63
+OR_T (265) 64
 INT_T (266) 6 12 19 20
 WHILE_T (267) 41 42
 FOR_T (268) 43
@@ -161,11 +154,11 @@ RETURN_T (271) 46 47
 VOID_T (272) 13 15
 READ_T (273) 48
 PRINT_T (274) 49 50
-ID_T (275) 9 10 11 12 13 19 20 54 55 77
+ID_T (275) 9 10 11 12 13 19 20 73 74 75
 UMINUS_T (276)
 DO_T (277) 42
 STRINGCONST_T (278) 50
-INTCONST_T (279) 11 76
+INTCONST_T (279) 11 72
 EOF_T (280)
 OTHER_T (281)
 LOWER_THAN_ELSE (282)
@@ -223,21 +216,17 @@ readStatement (67)
 printStatement (68)
     on left: 49 50, on right: 34
 expression (69)
-    on left: 52 53, on right: 10 35 37 38 41 42 44 47 49 52 55 56 57
-    58 59 60 61 62 63 64 65 66 67 68 69 70 74 80 81
-@1 (70)
-    on left: 51, on right: 52
-var (71)
-    on left: 54 55, on right: 48 52 71 72 73
-rValue (72)
-    on left: 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73
-    74 75 76, on right: 53
-call (73)
-    on left: 77, on right: 75
-args (74)
-    on left: 78 79, on right: 77
-argList (75)
-    on left: 80 81, on right: 78 80
+    on left: 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
+    69 70 71 72, on right: 10 35 37 38 41 42 44 47 49 51 52 53 54 55
+    56 57 58 59 60 61 62 63 64 65 66 70 74 78 79
+var (70)
+    on left: 73 74, on right: 48 51 67 68 69
+call (71)
+    on left: 75, on right: 71
+args (72)
+    on left: 76 77, on right: 75
+argList (73)
+    on left: 78 79, on right: 76 78
 
 
 state 0
@@ -380,29 +369,28 @@ state 14
 
     expression  go to state 27
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 15
 
    11 varDecl: ID_T '[' . INTCONST_T ']'
 
-    INTCONST_T  shift, and go to state 31
+    INTCONST_T  shift, and go to state 30
 
 
 state 16
 
    12 funcDeclaration: INT_T ID_T '(' . formalParams ')' compoundStatement
 
-    INT_T   shift, and go to state 32
-    VOID_T  shift, and go to state 33
+    INT_T   shift, and go to state 31
+    VOID_T  shift, and go to state 32
 
     $default  reduce using rule 16 (formalParams)
 
-    formalParams  go to state 34
-    formalList    go to state 35
-    formalParam   go to state 36
+    formalParams  go to state 33
+    formalList    go to state 34
+    formalParam   go to state 35
 
 
 state 17
@@ -416,65 +404,82 @@ state 18
 
     7 varDeclList: varDeclList ',' . varDecl
 
-    ID_T  shift, and go to state 37
+    ID_T  shift, and go to state 36
 
-    varDecl  go to state 38
+    varDecl  go to state 37
 
 
 state 19
 
    13 funcDeclaration: VOID_T ID_T '(' . formalParams ')' compoundStatement
 
-    INT_T   shift, and go to state 32
-    VOID_T  shift, and go to state 33
+    INT_T   shift, and go to state 31
+    VOID_T  shift, and go to state 32
 
     $default  reduce using rule 16 (formalParams)
 
-    formalParams  go to state 39
-    formalList    go to state 35
-    formalParam   go to state 36
+    formalParams  go to state 38
+    formalList    go to state 34
+    formalParam   go to state 35
 
 
 state 20
 
-   72 rValue: INCREMENT_T . var
+   68 expression: INCREMENT_T . var
 
-    ID_T  shift, and go to state 40
+    ID_T  shift, and go to state 39
 
-    var  go to state 41
+    var  go to state 40
 
 
 state 21
 
-   73 rValue: DECREMENT_T . var
+   69 expression: DECREMENT_T . var
 
-    ID_T  shift, and go to state 40
+    ID_T  shift, and go to state 39
 
-    var  go to state 42
+    var  go to state 41
 
 
 state 22
 
-   54 var: ID_T .
-   55    | ID_T . '[' expression ']'
-   77 call: ID_T . '(' args ')'
+   73 var: ID_T .
+   74    | ID_T . '[' expression ']'
+   75 call: ID_T . '(' args ')'
 
-    '['  shift, and go to state 43
-    '('  shift, and go to state 44
+    '['  shift, and go to state 42
+    '('  shift, and go to state 43
 
-    $default  reduce using rule 54 (var)
+    $default  reduce using rule 73 (var)
 
 
 state 23
 
-   76 rValue: INTCONST_T .
+   72 expression: INTCONST_T .
 
-    $default  reduce using rule 76 (rValue)
+    $default  reduce using rule 72 (expression)
 
 
 state 24
 
-   70 rValue: '-' . expression
+   66 expression: '-' . expression
+
+    INCREMENT_T  shift, and go to state 20
+    DECREMENT_T  shift, and go to state 21
+    ID_T         shift, and go to state 22
+    INTCONST_T   shift, and go to state 23
+    '-'          shift, and go to state 24
+    '!'          shift, and go to state 25
+    '('          shift, and go to state 26
+
+    expression  go to state 44
+    var         go to state 28
+    call        go to state 29
+
+
+state 25
+
+   65 expression: '!' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -486,13 +491,12 @@ state 24
 
     expression  go to state 45
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 25
+state 26
 
-   69 rValue: '!' . expression
+   70 expression: '(' . expression ')'
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -504,134 +508,107 @@ state 25
 
     expression  go to state 46
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
-
-
-state 26
-
-   74 rValue: '(' . expression ')'
-
-    INCREMENT_T  shift, and go to state 20
-    DECREMENT_T  shift, and go to state 21
-    ID_T         shift, and go to state 22
-    INTCONST_T   shift, and go to state 23
-    '-'          shift, and go to state 24
-    '!'          shift, and go to state 25
-    '('          shift, and go to state 26
-
-    expression  go to state 47
-    var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 27
 
    10 varDecl: ID_T '=' expression .
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
 
     $default  reduce using rule 10 (varDecl)
 
 
 state 28
 
-   52 expression: var . @1 '=' expression
-   71 rValue: var .
+   51 expression: var . '=' expression
+   67           | var .
 
-    '='       reduce using rule 51 (@1)
-    $default  reduce using rule 71 (rValue)
+    '='  shift, and go to state 60
 
-    @1  go to state 61
+    $default  reduce using rule 67 (expression)
 
 
 state 29
 
-   53 expression: rValue .
+   71 expression: call .
 
-    $default  reduce using rule 53 (expression)
+    $default  reduce using rule 71 (expression)
 
 
 state 30
 
-   75 rValue: call .
+   11 varDecl: ID_T '[' INTCONST_T . ']'
 
-    $default  reduce using rule 75 (rValue)
+    ']'  shift, and go to state 61
 
 
 state 31
 
-   11 varDecl: ID_T '[' INTCONST_T . ']'
-
-    ']'  shift, and go to state 62
-
-
-state 32
-
    19 formalParam: INT_T . ID_T
    20            | INT_T . ID_T '[' ']'
 
-    ID_T  shift, and go to state 63
+    ID_T  shift, and go to state 62
 
 
-state 33
+state 32
 
    15 formalParams: VOID_T .
 
     $default  reduce using rule 15 (formalParams)
 
 
-state 34
+state 33
 
    12 funcDeclaration: INT_T ID_T '(' formalParams . ')' compoundStatement
 
-    ')'  shift, and go to state 64
+    ')'  shift, and go to state 63
 
 
-state 35
+state 34
 
    14 formalParams: formalList .
    17 formalList: formalList . ',' formalParam
 
-    ','  shift, and go to state 65
+    ','  shift, and go to state 64
 
     $default  reduce using rule 14 (formalParams)
 
 
-state 36
+state 35
 
    18 formalList: formalParam .
 
     $default  reduce using rule 18 (formalList)
 
 
-state 37
+state 36
 
     9 varDecl: ID_T .
    10        | ID_T . '=' expression
@@ -643,47 +620,64 @@ state 37
     $default  reduce using rule 9 (varDecl)
 
 
-state 38
+state 37
 
     7 varDeclList: varDeclList ',' varDecl .
 
     $default  reduce using rule 7 (varDeclList)
 
 
-state 39
+state 38
 
    13 funcDeclaration: VOID_T ID_T '(' formalParams . ')' compoundStatement
 
-    ')'  shift, and go to state 66
+    ')'  shift, and go to state 65
+
+
+state 39
+
+   73 var: ID_T .
+   74    | ID_T . '[' expression ']'
+
+    '['  shift, and go to state 42
+
+    $default  reduce using rule 73 (var)
 
 
 state 40
 
-   54 var: ID_T .
-   55    | ID_T . '[' expression ']'
+   68 expression: INCREMENT_T var .
 
-    '['  shift, and go to state 43
-
-    $default  reduce using rule 54 (var)
+    $default  reduce using rule 68 (expression)
 
 
 state 41
 
-   72 rValue: INCREMENT_T var .
+   69 expression: DECREMENT_T var .
 
-    $default  reduce using rule 72 (rValue)
+    $default  reduce using rule 69 (expression)
 
 
 state 42
 
-   73 rValue: DECREMENT_T var .
+   74 var: ID_T '[' . expression ']'
 
-    $default  reduce using rule 73 (rValue)
+    INCREMENT_T  shift, and go to state 20
+    DECREMENT_T  shift, and go to state 21
+    ID_T         shift, and go to state 22
+    INTCONST_T   shift, and go to state 23
+    '-'          shift, and go to state 24
+    '!'          shift, and go to state 25
+    '('          shift, and go to state 26
+
+    expression  go to state 66
+    var         go to state 28
+    call        go to state 29
 
 
 state 43
 
-   55 var: ID_T '[' . expression ']'
+   75 call: ID_T '(' . args ')'
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -693,15 +687,91 @@ state 43
     '!'          shift, and go to state 25
     '('          shift, and go to state 26
 
+    $default  reduce using rule 77 (args)
+
     expression  go to state 67
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
+    args        go to state 68
+    argList     go to state 69
 
 
 state 44
 
-   77 call: ID_T '(' . args ')'
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   66           | '-' expression .
+
+    $default  reduce using rule 66 (expression)
+
+
+state 45
+
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   65           | '!' expression .
+
+    $default  reduce using rule 65 (expression)
+
+
+state 46
+
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   70           | '(' expression . ')'
+
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ')'              shift, and go to state 70
+
+
+state 47
+
+   61 expression: expression ISEQUAL_T . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -711,92 +781,14 @@ state 44
     '!'          shift, and go to state 25
     '('          shift, and go to state 26
 
-    $default  reduce using rule 79 (args)
-
-    expression  go to state 68
+    expression  go to state 71
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
-    args        go to state 69
-    argList     go to state 70
-
-
-state 45
-
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-   70       | '-' expression .
-
-    $default  reduce using rule 70 (rValue)
-
-
-state 46
-
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-   69       | '!' expression .
-
-    $default  reduce using rule 69 (rValue)
-
-
-state 47
-
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-   74       | '(' expression . ')'
-
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ')'              shift, and go to state 71
+    call        go to state 29
 
 
 state 48
 
-   65 rValue: expression ISEQUAL_T . expression
+   62 expression: expression NOTEQUAL_T . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -808,13 +800,12 @@ state 48
 
     expression  go to state 72
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 49
 
-   66 rValue: expression NOTEQUAL_T . expression
+   58 expression: expression LESS_EQUAL_T . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -826,13 +817,12 @@ state 49
 
     expression  go to state 73
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 50
 
-   62 rValue: expression LESS_EQUAL_T . expression
+   60 expression: expression GREATER_EQUAL_T . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -844,13 +834,12 @@ state 50
 
     expression  go to state 74
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 51
 
-   64 rValue: expression GREATER_EQUAL_T . expression
+   63 expression: expression AND_T . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -862,13 +851,12 @@ state 51
 
     expression  go to state 75
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 52
 
-   67 rValue: expression AND_T . expression
+   64 expression: expression OR_T . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -880,13 +868,12 @@ state 52
 
     expression  go to state 76
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 53
 
-   68 rValue: expression OR_T . expression
+   57 expression: expression '<' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -898,13 +885,12 @@ state 53
 
     expression  go to state 77
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 54
 
-   61 rValue: expression '<' . expression
+   59 expression: expression '>' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -916,13 +902,12 @@ state 54
 
     expression  go to state 78
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 55
 
-   63 rValue: expression '>' . expression
+   52 expression: expression '+' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -934,13 +919,12 @@ state 55
 
     expression  go to state 79
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 56
 
-   56 rValue: expression '+' . expression
+   53 expression: expression '-' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -952,13 +936,12 @@ state 56
 
     expression  go to state 80
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 57
 
-   57 rValue: expression '-' . expression
+   54 expression: expression '*' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -970,13 +953,12 @@ state 57
 
     expression  go to state 81
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 58
 
-   58 rValue: expression '*' . expression
+   55 expression: expression '/' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -988,13 +970,12 @@ state 58
 
     expression  go to state 82
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 59
 
-   59 rValue: expression '/' . expression
+   56 expression: expression '%' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -1006,13 +987,12 @@ state 59
 
     expression  go to state 83
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 60
 
-   60 rValue: expression '%' . expression
+   51 expression: var '=' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -1024,561 +1004,569 @@ state 60
 
     expression  go to state 84
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
 state 61
-
-   52 expression: var @1 . '=' expression
-
-    '='  shift, and go to state 85
-
-
-state 62
 
    11 varDecl: ID_T '[' INTCONST_T ']' .
 
     $default  reduce using rule 11 (varDecl)
 
 
-state 63
+state 62
 
    19 formalParam: INT_T ID_T .
    20            | INT_T ID_T . '[' ']'
 
-    '['  shift, and go to state 86
+    '['  shift, and go to state 85
 
     $default  reduce using rule 19 (formalParam)
 
 
-state 64
+state 63
 
    12 funcDeclaration: INT_T ID_T '(' formalParams ')' . compoundStatement
 
-    '{'  shift, and go to state 87
+    '{'  shift, and go to state 86
 
-    compoundStatement  go to state 88
+    compoundStatement  go to state 87
+
+
+state 64
+
+   17 formalList: formalList ',' . formalParam
+
+    INT_T  shift, and go to state 31
+
+    formalParam  go to state 88
 
 
 state 65
 
-   17 formalList: formalList ',' . formalParam
+   13 funcDeclaration: VOID_T ID_T '(' formalParams ')' . compoundStatement
 
-    INT_T  shift, and go to state 32
+    '{'  shift, and go to state 86
 
-    formalParam  go to state 89
+    compoundStatement  go to state 89
 
 
 state 66
 
-   13 funcDeclaration: VOID_T ID_T '(' formalParams ')' . compoundStatement
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   74 var: ID_T '[' expression . ']'
 
-    '{'  shift, and go to state 87
-
-    compoundStatement  go to state 90
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ']'              shift, and go to state 90
 
 
 state 67
 
-   55 var: ID_T '[' expression . ']'
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   79 argList: expression .
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ']'              shift, and go to state 91
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+
+    $default  reduce using rule 79 (argList)
 
 
 state 68
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-   81 argList: expression .
+   75 call: ID_T '(' args . ')'
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-
-    $default  reduce using rule 81 (argList)
+    ')'  shift, and go to state 91
 
 
 state 69
 
-   77 call: ID_T '(' args . ')'
+   76 args: argList .
+   78 argList: argList . ',' expression
 
-    ')'  shift, and go to state 92
+    ','  shift, and go to state 92
+
+    $default  reduce using rule 76 (args)
 
 
 state 70
 
-   78 args: argList .
-   80 argList: argList . ',' expression
+   70 expression: '(' expression ')' .
 
-    ','  shift, and go to state 93
-
-    $default  reduce using rule 78 (args)
+    $default  reduce using rule 70 (expression)
 
 
 state 71
 
-   74 rValue: '(' expression ')' .
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   61           | expression ISEQUAL_T expression .
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    $default  reduce using rule 74 (rValue)
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+
+    $default  reduce using rule 61 (expression)
 
 
 state 72
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   65       | expression ISEQUAL_T expression .
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   62           | expression NOTEQUAL_T expression .
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
 
-    $default  reduce using rule 65 (rValue)
+    $default  reduce using rule 62 (expression)
 
 
 state 73
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   66       | expression NOTEQUAL_T expression .
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   58           | expression LESS_EQUAL_T expression .
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
 
-    $default  reduce using rule 66 (rValue)
+    $default  reduce using rule 58 (expression)
 
 
 state 74
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   62       | expression LESS_EQUAL_T expression .
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   60           | expression GREATER_EQUAL_T expression .
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    '+'  shift, and go to state 56
-    '-'  shift, and go to state 57
-    '*'  shift, and go to state 58
-    '/'  shift, and go to state 59
-    '%'  shift, and go to state 60
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
 
-    $default  reduce using rule 62 (rValue)
+    $default  reduce using rule 60 (expression)
 
 
 state 75
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   64       | expression GREATER_EQUAL_T expression .
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   63           | expression AND_T expression .
+   64           | expression . OR_T expression
 
-    '+'  shift, and go to state 56
-    '-'  shift, and go to state 57
-    '*'  shift, and go to state 58
-    '/'  shift, and go to state 59
-    '%'  shift, and go to state 60
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
 
-    $default  reduce using rule 64 (rValue)
+    $default  reduce using rule 63 (expression)
 
 
 state 76
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   67       | expression AND_T expression .
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   64           | expression OR_T expression .
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
 
-    $default  reduce using rule 67 (rValue)
+    $default  reduce using rule 64 (expression)
 
 
 state 77
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-   68       | expression OR_T expression .
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   57           | expression '<' expression .
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
 
-    $default  reduce using rule 68 (rValue)
+    $default  reduce using rule 57 (expression)
 
 
 state 78
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   61       | expression '<' expression .
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   59           | expression '>' expression .
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    '+'  shift, and go to state 56
-    '-'  shift, and go to state 57
-    '*'  shift, and go to state 58
-    '/'  shift, and go to state 59
-    '%'  shift, and go to state 60
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
 
-    $default  reduce using rule 61 (rValue)
+    $default  reduce using rule 59 (expression)
 
 
 state 79
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   63       | expression '>' expression .
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   52           | expression '+' expression .
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    '+'  shift, and go to state 56
-    '-'  shift, and go to state 57
-    '*'  shift, and go to state 58
-    '/'  shift, and go to state 59
-    '%'  shift, and go to state 60
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
 
-    $default  reduce using rule 63 (rValue)
+    $default  reduce using rule 52 (expression)
 
 
 state 80
 
-   56 rValue: expression . '+' expression
-   56       | expression '+' expression .
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   53           | expression '-' expression .
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    '*'  shift, and go to state 58
-    '/'  shift, and go to state 59
-    '%'  shift, and go to state 60
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
 
-    $default  reduce using rule 56 (rValue)
+    $default  reduce using rule 53 (expression)
 
 
 state 81
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   57       | expression '-' expression .
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   54           | expression '*' expression .
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    '*'  shift, and go to state 58
-    '/'  shift, and go to state 59
-    '%'  shift, and go to state 60
-
-    $default  reduce using rule 57 (rValue)
+    $default  reduce using rule 54 (expression)
 
 
 state 82
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   58       | expression '*' expression .
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   55           | expression '/' expression .
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    $default  reduce using rule 58 (rValue)
+    $default  reduce using rule 55 (expression)
 
 
 state 83
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   59       | expression '/' expression .
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   56           | expression '%' expression .
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    $default  reduce using rule 59 (rValue)
+    $default  reduce using rule 56 (expression)
 
 
 state 84
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   60       | expression '%' expression .
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   51 expression: var '=' expression .
+   52           | expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    $default  reduce using rule 60 (rValue)
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+
+    $default  reduce using rule 51 (expression)
 
 
 state 85
 
-   52 expression: var @1 '=' . expression
+   20 formalParam: INT_T ID_T '[' . ']'
 
-    INCREMENT_T  shift, and go to state 20
-    DECREMENT_T  shift, and go to state 21
-    ID_T         shift, and go to state 22
-    INTCONST_T   shift, and go to state 23
-    '-'          shift, and go to state 24
-    '!'          shift, and go to state 25
-    '('          shift, and go to state 26
-
-    expression  go to state 94
-    var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    ']'  shift, and go to state 93
 
 
 state 86
-
-   20 formalParam: INT_T ID_T '[' . ']'
-
-    ']'  shift, and go to state 95
-
-
-state 87
 
    21 compoundStatement: '{' . localDeclarations statementList '}'
 
     $default  reduce using rule 23 (localDeclarations)
 
-    localDeclarations  go to state 96
+    localDeclarations  go to state 94
 
 
-state 88
+state 87
 
    12 funcDeclaration: INT_T ID_T '(' formalParams ')' compoundStatement .
 
     $default  reduce using rule 12 (funcDeclaration)
 
 
-state 89
+state 88
 
    17 formalList: formalList ',' formalParam .
 
     $default  reduce using rule 17 (formalList)
 
 
-state 90
+state 89
 
    13 funcDeclaration: VOID_T ID_T '(' formalParams ')' compoundStatement .
 
     $default  reduce using rule 13 (funcDeclaration)
 
 
+state 90
+
+   74 var: ID_T '[' expression ']' .
+
+    $default  reduce using rule 74 (var)
+
+
 state 91
 
-   55 var: ID_T '[' expression ']' .
+   75 call: ID_T '(' args ')' .
 
-    $default  reduce using rule 55 (var)
+    $default  reduce using rule 75 (call)
 
 
 state 92
 
-   77 call: ID_T '(' args ')' .
-
-    $default  reduce using rule 77 (call)
-
-
-state 93
-
-   80 argList: argList ',' . expression
+   78 argList: argList ',' . expression
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
@@ -1588,194 +1576,145 @@ state 93
     '!'          shift, and go to state 25
     '('          shift, and go to state 26
 
-    expression  go to state 97
+    expression  go to state 95
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 94
-
-   52 expression: var @1 '=' expression .
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-
-    ISEQUAL_T        [reduce using rule 52 (expression)]
-    NOTEQUAL_T       [reduce using rule 52 (expression)]
-    LESS_EQUAL_T     [reduce using rule 52 (expression)]
-    GREATER_EQUAL_T  [reduce using rule 52 (expression)]
-    AND_T            [reduce using rule 52 (expression)]
-    OR_T             [reduce using rule 52 (expression)]
-    '<'              [reduce using rule 52 (expression)]
-    '>'              [reduce using rule 52 (expression)]
-    '+'              [reduce using rule 52 (expression)]
-    '-'              [reduce using rule 52 (expression)]
-    '*'              [reduce using rule 52 (expression)]
-    '/'              [reduce using rule 52 (expression)]
-    '%'              [reduce using rule 52 (expression)]
-    $default         reduce using rule 52 (expression)
-
-
-state 95
+state 93
 
    20 formalParam: INT_T ID_T '[' ']' .
 
     $default  reduce using rule 20 (formalParam)
 
 
-state 96
+state 94
 
    21 compoundStatement: '{' localDeclarations . statementList '}'
    22 localDeclarations: localDeclarations . varDeclaration
 
-    INT_T  shift, and go to state 98
+    INT_T  shift, and go to state 96
 
     $default  reduce using rule 25 (statementList)
 
-    varDeclaration  go to state 99
-    statementList   go to state 100
+    varDeclaration  go to state 97
+    statementList   go to state 98
 
 
-state 97
+state 95
 
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-   80 argList: argList ',' expression .
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
+   78 argList: argList ',' expression .
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
 
-    $default  reduce using rule 80 (argList)
+    $default  reduce using rule 78 (argList)
 
 
-state 98
+state 96
 
     6 varDeclaration: INT_T . varDeclList ';'
 
-    ID_T  shift, and go to state 37
+    ID_T  shift, and go to state 36
 
     varDeclList  go to state 9
     varDecl      go to state 10
 
 
-state 99
+state 97
 
    22 localDeclarations: localDeclarations varDeclaration .
 
     $default  reduce using rule 22 (localDeclarations)
 
 
-state 100
+state 98
 
    21 compoundStatement: '{' localDeclarations statementList . '}'
    24 statementList: statementList . statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
-    '}'          shift, and go to state 109
+    '{'          shift, and go to state 86
+    '}'          shift, and go to state 107
 
-    compoundStatement    go to state 110
-    statement            go to state 111
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 109
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 101
+state 99
 
    41 whileStatement: WHILE_T . '(' expression ')' statement
 
-    '('  shift, and go to state 121
+    '('  shift, and go to state 119
 
 
-state 102
+state 100
 
    43 forStatement: FOR_T . '(' forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression ')' statement
 
-    '('  shift, and go to state 122
+    '('  shift, and go to state 120
 
 
-state 103
+state 101
 
    37 ifStatement: IF_T . '(' expression ')' statement
    38            | IF_T . '(' expression ')' statement ELSE_T statement
    39            | IF_T . '(' error ')' statement
    40            | IF_T . '(' error ')' statement ELSE_T statement
 
-    '('  shift, and go to state 123
+    '('  shift, and go to state 121
 
 
-state 104
+state 102
 
    46 returnStatement: RETURN_T . ';'
    47                | RETURN_T . expression ';'
@@ -1786,25 +1725,24 @@ state 104
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 124
+    ';'          shift, and go to state 122
     '('          shift, and go to state 26
 
-    expression  go to state 125
+    expression  go to state 123
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 105
+state 103
 
    48 readStatement: READ_T . var ';'
 
-    ID_T  shift, and go to state 40
+    ID_T  shift, and go to state 39
 
-    var  go to state 126
+    var  go to state 124
 
 
-state 106
+state 104
 
    49 printStatement: PRINT_T . expression ';'
    50               | PRINT_T . STRINGCONST_T ';'
@@ -1812,173 +1750,171 @@ state 106
     INCREMENT_T    shift, and go to state 20
     DECREMENT_T    shift, and go to state 21
     ID_T           shift, and go to state 22
-    STRINGCONST_T  shift, and go to state 127
+    STRINGCONST_T  shift, and go to state 125
     INTCONST_T     shift, and go to state 23
     '-'            shift, and go to state 24
     '!'            shift, and go to state 25
     '('            shift, and go to state 26
 
-    expression  go to state 128
+    expression  go to state 126
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 107
+state 105
 
    42 doWhileStatement: DO_T . statement WHILE_T '(' expression ')' ';'
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 129
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 127
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 108
+state 106
 
    36 expressionStatement: ';' .
 
     $default  reduce using rule 36 (expressionStatement)
 
 
-state 109
+state 107
 
    21 compoundStatement: '{' localDeclarations statementList '}' .
 
     $default  reduce using rule 21 (compoundStatement)
 
 
-state 110
+state 108
 
    27 statement: compoundStatement .
 
     $default  reduce using rule 27 (statement)
 
 
-state 111
+state 109
 
    24 statementList: statementList statement .
 
     $default  reduce using rule 24 (statementList)
 
 
-state 112
+state 110
 
    26 statement: expressionStatement .
 
     $default  reduce using rule 26 (statement)
 
 
-state 113
+state 111
 
    28 statement: ifStatement .
 
     $default  reduce using rule 28 (statement)
 
 
-state 114
+state 112
 
    29 statement: whileStatement .
 
     $default  reduce using rule 29 (statement)
 
 
-state 115
+state 113
 
    30 statement: doWhileStatement .
 
     $default  reduce using rule 30 (statement)
 
 
-state 116
+state 114
 
    31 statement: forStatement .
 
     $default  reduce using rule 31 (statement)
 
 
-state 117
+state 115
 
    32 statement: returnStatement .
 
     $default  reduce using rule 32 (statement)
 
 
-state 118
+state 116
 
    33 statement: readStatement .
 
     $default  reduce using rule 33 (statement)
 
 
-state 119
+state 117
 
    34 statement: printStatement .
 
     $default  reduce using rule 34 (statement)
 
 
-state 120
+state 118
 
    35 expressionStatement: expression . ';'
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ';'              shift, and go to state 130
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ';'              shift, and go to state 128
 
 
-state 121
+state 119
 
    41 whileStatement: WHILE_T '(' . expression ')' statement
 
@@ -1990,13 +1926,12 @@ state 121
     '!'          shift, and go to state 25
     '('          shift, and go to state 26
 
-    expression  go to state 131
+    expression  go to state 129
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 122
+state 120
 
    43 forStatement: FOR_T '(' . forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression ')' statement
 
@@ -2010,21 +1945,20 @@ state 122
 
     $default  reduce using rule 45 (forHeaderExpression)
 
-    forHeaderExpression  go to state 132
-    expression           go to state 133
+    forHeaderExpression  go to state 130
+    expression           go to state 131
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 123
+state 121
 
    37 ifStatement: IF_T '(' . expression ')' statement
    38            | IF_T '(' . expression ')' statement ELSE_T statement
    39            | IF_T '(' . error ')' statement
    40            | IF_T '(' . error ')' statement ELSE_T statement
 
-    error        shift, and go to state 134
+    error        shift, and go to state 132
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
     ID_T         shift, and go to state 22
@@ -2033,302 +1967,300 @@ state 123
     '!'          shift, and go to state 25
     '('          shift, and go to state 26
 
-    expression  go to state 135
+    expression  go to state 133
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 124
+state 122
 
    46 returnStatement: RETURN_T ';' .
 
     $default  reduce using rule 46 (returnStatement)
 
 
-state 125
+state 123
 
    47 returnStatement: RETURN_T expression . ';'
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ';'              shift, and go to state 136
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ';'              shift, and go to state 134
+
+
+state 124
+
+   48 readStatement: READ_T var . ';'
+
+    ';'  shift, and go to state 135
+
+
+state 125
+
+   50 printStatement: PRINT_T STRINGCONST_T . ';'
+
+    ';'  shift, and go to state 136
 
 
 state 126
 
-   48 readStatement: READ_T var . ';'
+   49 printStatement: PRINT_T expression . ';'
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ';'  shift, and go to state 137
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ';'              shift, and go to state 137
 
 
 state 127
 
-   50 printStatement: PRINT_T STRINGCONST_T . ';'
+   42 doWhileStatement: DO_T statement . WHILE_T '(' expression ')' ';'
 
-    ';'  shift, and go to state 138
+    WHILE_T  shift, and go to state 138
 
 
 state 128
-
-   49 printStatement: PRINT_T expression . ';'
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
-
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ';'              shift, and go to state 139
-
-
-state 129
-
-   42 doWhileStatement: DO_T statement . WHILE_T '(' expression ')' ';'
-
-    WHILE_T  shift, and go to state 140
-
-
-state 130
 
    35 expressionStatement: expression ';' .
 
     $default  reduce using rule 35 (expressionStatement)
 
 
-state 131
+state 129
 
    41 whileStatement: WHILE_T '(' expression . ')' statement
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ')'              shift, and go to state 141
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ')'              shift, and go to state 139
 
 
-state 132
+state 130
 
    43 forStatement: FOR_T '(' forHeaderExpression . ';' forHeaderExpression ';' forHeaderExpression ')' statement
 
-    ';'  shift, and go to state 142
+    ';'  shift, and go to state 140
 
 
-state 133
+state 131
 
    44 forHeaderExpression: expression .
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
 
     $default  reduce using rule 44 (forHeaderExpression)
 
 
-state 134
+state 132
 
    39 ifStatement: IF_T '(' error . ')' statement
    40            | IF_T '(' error . ')' statement ELSE_T statement
 
-    ')'  shift, and go to state 143
+    ')'  shift, and go to state 141
 
 
-state 135
+state 133
 
    37 ifStatement: IF_T '(' expression . ')' statement
    38            | IF_T '(' expression . ')' statement ELSE_T statement
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ')'              shift, and go to state 144
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ')'              shift, and go to state 142
 
 
-state 136
+state 134
 
    47 returnStatement: RETURN_T expression ';' .
 
     $default  reduce using rule 47 (returnStatement)
 
 
-state 137
+state 135
 
    48 readStatement: READ_T var ';' .
 
     $default  reduce using rule 48 (readStatement)
 
 
-state 138
+state 136
 
    50 printStatement: PRINT_T STRINGCONST_T ';' .
 
     $default  reduce using rule 50 (printStatement)
 
 
-state 139
+state 137
 
    49 printStatement: PRINT_T expression ';' .
 
     $default  reduce using rule 49 (printStatement)
 
 
-state 140
+state 138
 
    42 doWhileStatement: DO_T statement WHILE_T . '(' expression ')' ';'
 
-    '('  shift, and go to state 145
+    '('  shift, and go to state 143
 
 
-state 141
+state 139
 
    41 whileStatement: WHILE_T '(' expression ')' . statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 146
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 144
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 142
+state 140
 
    43 forStatement: FOR_T '(' forHeaderExpression ';' . forHeaderExpression ';' forHeaderExpression ')' statement
 
@@ -2342,90 +2274,87 @@ state 142
 
     $default  reduce using rule 45 (forHeaderExpression)
 
-    forHeaderExpression  go to state 147
-    expression           go to state 133
+    forHeaderExpression  go to state 145
+    expression           go to state 131
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 143
+state 141
 
    39 ifStatement: IF_T '(' error ')' . statement
    40            | IF_T '(' error ')' . statement ELSE_T statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 148
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 146
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 144
+state 142
 
    37 ifStatement: IF_T '(' expression ')' . statement
    38            | IF_T '(' expression ')' . statement ELSE_T statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 149
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 147
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 145
+state 143
 
    42 doWhileStatement: DO_T statement WHILE_T '(' . expression ')' ';'
 
@@ -2437,80 +2366,79 @@ state 145
     '!'          shift, and go to state 25
     '('          shift, and go to state 26
 
-    expression  go to state 150
+    expression  go to state 148
     var         go to state 28
-    rValue      go to state 29
-    call        go to state 30
+    call        go to state 29
 
 
-state 146
+state 144
 
    41 whileStatement: WHILE_T '(' expression ')' statement .
 
     $default  reduce using rule 41 (whileStatement)
 
 
-state 147
+state 145
 
    43 forStatement: FOR_T '(' forHeaderExpression ';' forHeaderExpression . ';' forHeaderExpression ')' statement
 
-    ';'  shift, and go to state 151
+    ';'  shift, and go to state 149
 
 
-state 148
+state 146
 
    39 ifStatement: IF_T '(' error ')' statement .
    40            | IF_T '(' error ')' statement . ELSE_T statement
 
-    ELSE_T  shift, and go to state 152
+    ELSE_T  shift, and go to state 150
 
     $default  reduce using rule 39 (ifStatement)
 
 
-state 149
+state 147
 
    37 ifStatement: IF_T '(' expression ')' statement .
    38            | IF_T '(' expression ')' statement . ELSE_T statement
 
-    ELSE_T  shift, and go to state 153
+    ELSE_T  shift, and go to state 151
 
     $default  reduce using rule 37 (ifStatement)
 
 
-state 150
+state 148
 
    42 doWhileStatement: DO_T statement WHILE_T '(' expression . ')' ';'
-   56 rValue: expression . '+' expression
-   57       | expression . '-' expression
-   58       | expression . '*' expression
-   59       | expression . '/' expression
-   60       | expression . '%' expression
-   61       | expression . '<' expression
-   62       | expression . LESS_EQUAL_T expression
-   63       | expression . '>' expression
-   64       | expression . GREATER_EQUAL_T expression
-   65       | expression . ISEQUAL_T expression
-   66       | expression . NOTEQUAL_T expression
-   67       | expression . AND_T expression
-   68       | expression . OR_T expression
+   52 expression: expression . '+' expression
+   53           | expression . '-' expression
+   54           | expression . '*' expression
+   55           | expression . '/' expression
+   56           | expression . '%' expression
+   57           | expression . '<' expression
+   58           | expression . LESS_EQUAL_T expression
+   59           | expression . '>' expression
+   60           | expression . GREATER_EQUAL_T expression
+   61           | expression . ISEQUAL_T expression
+   62           | expression . NOTEQUAL_T expression
+   63           | expression . AND_T expression
+   64           | expression . OR_T expression
 
-    ISEQUAL_T        shift, and go to state 48
-    NOTEQUAL_T       shift, and go to state 49
-    LESS_EQUAL_T     shift, and go to state 50
-    GREATER_EQUAL_T  shift, and go to state 51
-    AND_T            shift, and go to state 52
-    OR_T             shift, and go to state 53
-    '<'              shift, and go to state 54
-    '>'              shift, and go to state 55
-    '+'              shift, and go to state 56
-    '-'              shift, and go to state 57
-    '*'              shift, and go to state 58
-    '/'              shift, and go to state 59
-    '%'              shift, and go to state 60
-    ')'              shift, and go to state 154
+    ISEQUAL_T        shift, and go to state 47
+    NOTEQUAL_T       shift, and go to state 48
+    LESS_EQUAL_T     shift, and go to state 49
+    GREATER_EQUAL_T  shift, and go to state 50
+    AND_T            shift, and go to state 51
+    OR_T             shift, and go to state 52
+    '<'              shift, and go to state 53
+    '>'              shift, and go to state 54
+    '+'              shift, and go to state 55
+    '-'              shift, and go to state 56
+    '*'              shift, and go to state 57
+    '/'              shift, and go to state 58
+    '%'              shift, and go to state 59
+    ')'              shift, and go to state 152
 
 
-state 151
+state 149
 
    43 forStatement: FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' . forHeaderExpression ')' statement
 
@@ -2524,160 +2452,156 @@ state 151
 
     $default  reduce using rule 45 (forHeaderExpression)
 
-    forHeaderExpression  go to state 155
-    expression           go to state 133
+    forHeaderExpression  go to state 153
+    expression           go to state 131
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 152
+state 150
 
    40 ifStatement: IF_T '(' error ')' statement ELSE_T . statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 156
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 154
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 153
+state 151
 
    38 ifStatement: IF_T '(' expression ')' statement ELSE_T . statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 157
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 155
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 154
+state 152
 
    42 doWhileStatement: DO_T statement WHILE_T '(' expression ')' . ';'
 
-    ';'  shift, and go to state 158
+    ';'  shift, and go to state 156
 
 
-state 155
+state 153
 
    43 forStatement: FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression . ')' statement
 
-    ')'  shift, and go to state 159
+    ')'  shift, and go to state 157
 
 
-state 156
+state 154
 
    40 ifStatement: IF_T '(' error ')' statement ELSE_T statement .
 
     $default  reduce using rule 40 (ifStatement)
 
 
-state 157
+state 155
 
    38 ifStatement: IF_T '(' expression ')' statement ELSE_T statement .
 
     $default  reduce using rule 38 (ifStatement)
 
 
-state 158
+state 156
 
    42 doWhileStatement: DO_T statement WHILE_T '(' expression ')' ';' .
 
     $default  reduce using rule 42 (doWhileStatement)
 
 
-state 159
+state 157
 
    43 forStatement: FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression ')' . statement
 
     INCREMENT_T  shift, and go to state 20
     DECREMENT_T  shift, and go to state 21
-    WHILE_T      shift, and go to state 101
-    FOR_T        shift, and go to state 102
-    IF_T         shift, and go to state 103
-    RETURN_T     shift, and go to state 104
-    READ_T       shift, and go to state 105
-    PRINT_T      shift, and go to state 106
+    WHILE_T      shift, and go to state 99
+    FOR_T        shift, and go to state 100
+    IF_T         shift, and go to state 101
+    RETURN_T     shift, and go to state 102
+    READ_T       shift, and go to state 103
+    PRINT_T      shift, and go to state 104
     ID_T         shift, and go to state 22
-    DO_T         shift, and go to state 107
+    DO_T         shift, and go to state 105
     INTCONST_T   shift, and go to state 23
     '-'          shift, and go to state 24
     '!'          shift, and go to state 25
-    ';'          shift, and go to state 108
+    ';'          shift, and go to state 106
     '('          shift, and go to state 26
-    '{'          shift, and go to state 87
+    '{'          shift, and go to state 86
 
-    compoundStatement    go to state 110
-    statement            go to state 160
-    expressionStatement  go to state 112
-    ifStatement          go to state 113
-    whileStatement       go to state 114
-    doWhileStatement     go to state 115
-    forStatement         go to state 116
-    returnStatement      go to state 117
-    readStatement        go to state 118
-    printStatement       go to state 119
-    expression           go to state 120
+    compoundStatement    go to state 108
+    statement            go to state 158
+    expressionStatement  go to state 110
+    ifStatement          go to state 111
+    whileStatement       go to state 112
+    doWhileStatement     go to state 113
+    forStatement         go to state 114
+    returnStatement      go to state 115
+    readStatement        go to state 116
+    printStatement       go to state 117
+    expression           go to state 118
     var                  go to state 28
-    rValue               go to state 29
-    call                 go to state 30
+    call                 go to state 29
 
 
-state 160
+state 158
 
    43 forStatement: FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression ')' statement .
 
