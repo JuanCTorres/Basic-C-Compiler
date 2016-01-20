@@ -7,7 +7,7 @@
 
 #define YYSTYPE ast_node
 #define YYDEBUG 1
-#define DEBUG
+//#define DEBUG
 
 extern int yylex();
 int yyerror(char *s);
@@ -84,6 +84,7 @@ varDeclaration : INT_T varDeclList ';' {
   /* replaced varTypeSpecifier to INT_T*/
   $2->return_type = INT_TYPE_N;
   ast_node temp_t = $2;
+  assert($2 != NULL);
   while($2->right_sibling != NULL) {
       $2->return_type = INT_TYPE_N;
       $2 = $2->right_sibling;

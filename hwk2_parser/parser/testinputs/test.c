@@ -10,9 +10,9 @@ else {
 	print "hello";
 }
 
-// int b = 10;
-// int c = 20;
-// int c = b;
+int d = 10;
+
+
 return 0;
 }
 

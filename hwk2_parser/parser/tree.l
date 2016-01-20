@@ -119,7 +119,7 @@ signedint [-+]?{integer}
 "%"          return '%';
 "/"          return '/';
 
-<<EOF>>      return 0;
+<<EOF>>      return EOF;
  /* .            return OTHER_T; */
 
 %%
