@@ -97,7 +97,7 @@ static val_name_pair token_table[] = {
   { RETURN_N, "RETURN"},
   { READ_N, "READ"},
   { FOR_N, "FOR"},
-  { FOR_HEADER_EMPTY_N, "FOR_HEADER_EMPTY"}
+  { FOR_HEADER_EMPTY_N, "FOR_HEADER_EMPTY"},
   { 0, NULL }
 };
 

@@ -39,23 +39,59 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUM_T = 258,
-     IDENT_T = 259,
-     BADTOKEN_T = 260,
-     IF_T = 261,
-     ELSE_T = 262,
-     LOWER_THAN_ELSE = 263,
-     UMINUS_T = 264
+     ISEQUAL_T = 258,
+     NOTEQUAL_T = 259,
+     LESS_EQUAL_T = 260,
+     GREATER_EQUAL_T = 261,
+     INCREMENT_T = 262,
+     DECREMENT_T = 263,
+     AND_T = 264,
+     OR_T = 265,
+     INT_T = 266,
+     WHILE_T = 267,
+     FOR_T = 268,
+     IF_T = 269,
+     ELSE_T = 270,
+     RETURN_T = 271,
+     VOID_T = 272,
+     READ_T = 273,
+     PRINT_T = 274,
+     ID_T = 275,
+     UMINUS_T = 276,
+     DO_T = 277,
+     STRINGCONST_T = 278,
+     INTCONST_T = 279,
+     EOF_T = 280,
+     OTHER_T = 281,
+     LOWER_THAN_ELSE = 282
    };
 #endif
 /* Tokens.  */
-#define NUM_T 258
-#define IDENT_T 259
-#define BADTOKEN_T 260
-#define IF_T 261
-#define ELSE_T 262
-#define LOWER_THAN_ELSE 263
-#define UMINUS_T 264
+#define ISEQUAL_T 258
+#define NOTEQUAL_T 259
+#define LESS_EQUAL_T 260
+#define GREATER_EQUAL_T 261
+#define INCREMENT_T 262
+#define DECREMENT_T 263
+#define AND_T 264
+#define OR_T 265
+#define INT_T 266
+#define WHILE_T 267
+#define FOR_T 268
+#define IF_T 269
+#define ELSE_T 270
+#define RETURN_T 271
+#define VOID_T 272
+#define READ_T 273
+#define PRINT_T 274
+#define ID_T 275
+#define UMINUS_T 276
+#define DO_T 277
+#define STRINGCONST_T 278
+#define INTCONST_T 279
+#define EOF_T 280
+#define OTHER_T 281
+#define LOWER_THAN_ELSE 282
 
 
 

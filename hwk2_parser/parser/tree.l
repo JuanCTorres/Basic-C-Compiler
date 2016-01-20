@@ -56,8 +56,8 @@ signedint [-+]?{integer}
 {signedint}  {
 	strncpy(savedLiteralText, yytext, MAXTOKENLENGTH-1);
 	return INTCONST_T;}
-/* {fixedfloat} | */
-/* {expfloat}   return FLOATCONST_T; */
+ /* {fixedfloat} | */
+ /* {expfloat}   return FLOATCONST_T; */
 
 
 
@@ -65,7 +65,7 @@ signedint [-+]?{integer}
 
   /* Handle string special case */
 \"           { BEGIN(string); }
-<string>\n   { ++num_lines; return OTHER_T; }
+<string>\n   { ++num_lines;}
 <string>\\\" { yymore(); }
 <string>\"   {
   BEGIN(INITIAL);		/* go back to normal state */
