@@ -27,6 +27,8 @@ int main() {
 
   if (!noRoot)
     print_ast(root, 0);
+	//else 
+		//printf("NO root!\n");
 
   return 0;
 }

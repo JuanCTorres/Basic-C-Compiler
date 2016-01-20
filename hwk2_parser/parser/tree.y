@@ -7,6 +7,7 @@
 
 #define YYSTYPE ast_node
 #define YYDEBUG 1
+#define DEBUG
 
 extern int yylex();
 int yyerror(char *s);
@@ -101,7 +102,7 @@ varDeclList: varDeclList ',' varDecl  {
     t->right_sibling = $3;
     $$ = $1;
  }
-|  varDecl {$$ = $1}
+|  varDecl {$$ = $1;}
 ;
 
 varDecl : ID_T  {
@@ -337,15 +338,34 @@ printStatement : PRINT_T expression ';'  {
 ;
 
 expression : var '=' expression {
+  assert($1 != NULL);
   ast_node t2 = create_ast_node(OP_ASSIGN_N);
   t2->left_child = $1;
   t2->left_child->right_sibling = $3;
   $$ = t2; }
-|  expression '+' expression  {
-  ast_node t = create_ast_node(OP_PLUS_N);
+|  rValue {$$ = $1; }
+;
+
+var : ID_T  {
+   ast_node t = create_ast_node(ID_N);
+   t->value_string = strdup(savedIdText);
+   $$ = t;
+ }
+|  ID_T '[' expression ']' {
+     /*<later*/
+    ast_node t = create_ast_node(ARRAY_TYPE_N);
+    t->value_string = strdup(savedIdText);
+    t->left_child = $3;
+    $$ = t;
+ }
+;
+
+rValue : expression '+' expression  {
+ast_node t = create_ast_node(OP_PLUS_N);
   t->left_child = $1;
   t->left_child->right_sibling = $3;
-  $$ = t; }
+  $$ = t;
+  }
 |  expression '-' expression  {
   ast_node t = create_ast_node(OP_MINUS_N);
   t->left_child = $1;
@@ -428,23 +448,14 @@ expression : var '=' expression {
 |  INTCONST_T  {
   ast_node t = create_ast_node(INT_LITERAL_N);
   t->value_int = atoi(savedLiteralText);
-  $$ = t; }
-;
+  $$ = t;
 
-var : ID_T  {
-   ast_node t = create_ast_node(ID_N);
-   t->value_string = strdup(savedIdText);
-   $$ = t;
- }
-|  ID_T '[' expression ']' {
-     /*<later*/
-    ast_node t = create_ast_node(ARRAY_TYPE_N);
-    t->value_string = strdup(savedIdText);
-    t->left_child = $3;
-    $$ = t;
- }
-;
+  #ifdef DEBUG
+  printf(" value_int = %d\n", t->value_int);
+  #endif
 
+   }
+;
 
 call : ID_T '(' args ')' {
    ast_node t = create_ast_node(ID_N);
@@ -485,6 +496,6 @@ argList : argList ',' expression  {
 
 int yyerror(char *s) {
   parseError = 1;
-  fprintf(stderr, "%s at line %d\n", s, num_lines);
+  fprintf(stderr, "%s at line %d\n yytext = '%s', savedIdText = '%s', savedLiteralText = '%s' \n", s, num_lines, yytext, savedIdText, savedLiteralText);
   return 0;
 }

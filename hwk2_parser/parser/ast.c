@@ -38,15 +38,21 @@ void print_ast(ast_node root, int depth) {
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
+  case STRING_LITERAL_N:
+    printf("%s", root->value_string);
+    break;
   case ID_N:			/* print the id */
     printf("%s", root->value_string);
+    //printf("%d", root->value_int);
     break;
 
   case INT_LITERAL_N:		/* print the int literal */
     printf("%d", root->value_int);
+    printf("test123\n");
     break;
 
   default:
+    //printf("at default of switch\n");
     break;
   }
 

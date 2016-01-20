@@ -364,8 +364,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 44
-#define YY_END_OF_BUFFER 45
+#define YY_NUM_RULES 43
+#define YY_END_OF_BUFFER 44
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -375,7 +375,7 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[61] =
     {   0,
-        0,    0,    0,    0,    0,    0,    0,    0,   45,   43,
+        0,    0,    0,    0,    0,    0,    0,    0,   44,   43,
         1,    4,   39,    5,   41,   43,   29,   30,   21,   19,
        40,   20,   26,   42,    3,   17,   22,   18,   23,    2,
        27,   28,   31,   43,   32,    9,    6,    8,    9,   12,
@@ -839,7 +839,7 @@ case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
 #line 68 "tree.l"
-{ ++num_lines;}
+{ ++num_lines; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
@@ -1039,19 +1039,15 @@ case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(string):
 case YY_STATE_EOF(line_comment):
 #line 122 "tree.l"
-return EOF_T;
+return 0;
 	YY_BREAK
+/* .            return OTHER_T; */
 case 43:
-YY_RULE_SETUP
-#line 123 "tree.l"
-return OTHER_T;
-	YY_BREAK
-case 44:
 YY_RULE_SETUP
 #line 125 "tree.l"
 ECHO;
 	YY_BREAK
-#line 1055 "lex.yy.c"
+#line 1051 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{

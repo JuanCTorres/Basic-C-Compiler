@@ -65,7 +65,7 @@ signedint [-+]?{integer}
 
   /* Handle string special case */
 \"           { BEGIN(string); }
-<string>\n   { ++num_lines;}
+<string>\n   { ++num_lines; }
 <string>\\\" { yymore(); }
 <string>\"   {
   BEGIN(INITIAL);		/* go back to normal state */
@@ -119,8 +119,8 @@ signedint [-+]?{integer}
 "%"          return '%';
 "/"          return '/';
 
-<<EOF>>      return EOF_T;
-.            return OTHER_T;
+<<EOF>>      return 0;
+ /* .            return OTHER_T; */
 
 %%
 
