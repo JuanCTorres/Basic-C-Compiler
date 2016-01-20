@@ -131,25 +131,23 @@ varDecl : ID_T  {
 
 funcDeclaration : INT_T ID_T '(' formalParams ')' compoundStatement {
 /* removed functypespecifier, replaced with INT_T */
-  ast_node t2 = create_ast_node(FUNCTION_N);
-  t2->value_string = strdup(savedIdText);
-  t2->left_child = $4;
-  t2->left_child->right_sibling = $6;
+  ast_node t = create_ast_node(FUNCTION_N);
+  t->value_string = strdup(savedIdText);
+  t->left_child = $4;
+  t->left_child->right_sibling = $6;
+  t->return_type = INT_TYPE_N;
 
-  t2->return_type = INT_TYPE_N;
-  $$ = t2;
-
-
+  $$ = t;
 }
 | VOID_T ID_T '(' formalParams ')' compoundStatement {
 /* removed functypespecifier, replaced with VOID_T */
-  ast_node t2 = create_ast_node(FUNCTION_N);
-  t2->value_string = strdup(savedIdText);
-  t2->left_child = $4;
-  t2->left_child->right_sibling = $6;
+  ast_node t = create_ast_node(FUNCTION_N);
+  t->value_string = strdup(savedIdText);
+  t->left_child = $4;
+  t->left_child->right_sibling = $6;
 
-  t2->return_type = VOID_TYPE_N;
-  $$ = t2;
+  t->return_type = VOID_TYPE_N;
+  $$ = t;
 
 }
 ; 
@@ -163,7 +161,7 @@ formalParams : formalList  {
   }
 |  VOID_T {
   ast_node t = create_ast_node(FORMAL_PARAMS_N);
-  $$ = t;
+  $$ = t; /* <later> */
 } 
 |  /* empty */ {
   ast_node t = create_ast_node(FORMAL_PARAMS_N);
@@ -192,6 +190,7 @@ formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
 |  INT_T ID_T '[' ']' { /* replaced varTypeSpecifier to INT_T*/
     /*<later*/
     ast_node t = create_ast_node(ARRAY_TYPE_N);
+    t->return_type = INT_TYPE_N;
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
@@ -199,41 +198,62 @@ formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
 
 compoundStatement : '{' localDeclarations statementList '}' {
   ast_node t = create_ast_node(SEQ_N);
+  ast_node temp = t;
   t->left_child = $2;
+  t = t->left_child;
   while(t->right_sibling != NULL){
     t = t->right_sibling;
   }
   t->right_sibling = $3; /* local declarations before code */
-  $$ = $2;
+  $$ = temp;
 }
 ; /* SEQ_N? (see lec 7 slide, ast diagram) */
 
 localDeclarations : localDeclarations varDeclaration {
   ast_node t = $1;
-  if (t != NULL) {
-    while (t->right_sibling != NULL)
-      t = t->right_sibling;
-    t->right_sibling = $2;
-    $$ = $1;
+
+  if(t->left_child == NULL) {
+    t->left_child = $2;
   }
-  else
-    $$ = $2;
+  else {
+    t = t->left_child;
+    while(t->right_sibling != NULL) {
+      t = t->right_sibling;
+    }
+    t->right_sibling = $2;
+  }
+
+  $$ = $1;
  }  
-|  /* empty */ {$$ = NULL;}
+|  /* empty */ {
+  ast_node t = create_ast_node(LOCAL_DECLARATIONS_N);
+  $$ = t;
+
+
+}
 ;
 
 statementList : statementList statement  {
   ast_node t = $1;
-  if (t != NULL) {
-    while (t->right_sibling != NULL)
-      t = t->right_sibling;
-    t->right_sibling = $2;
-    $$ = $1;
+
+  if(t->left_child == NULL) {
+    t->left_child = $2;
   }
-  else
-    $$ = $2;
+  else {
+    t = t->left_child;
+    while(t->right_sibling != NULL) {
+      t = t->right_sibling;
+    }
+    t->right_sibling = $2;
+  }
+  
+  $$ = $1;
  }
-|  /* empty */ {$$ = NULL;}
+|  /* empty */ {
+  ast_node t = create_ast_node(STATEMENT_LIST_N);
+  $$ = t;
+
+  }
 ;
 
 statement : expressionStatement  {$$ = $1; }
