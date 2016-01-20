@@ -128,32 +128,33 @@ varDecl : ID_T  {
   }
 ;
 
-funcDeclaration : funcTypeSpecifier ID_T '(' formalParams ')' compoundStatement {
-
-  ast_node t1 = $1;
+funcDeclaration : INT_T ID_T '(' formalParams ')' compoundStatement {
+/* removed functypespecifier, replaced with INT_T */
   ast_node t2 = create_ast_node(FUNCTION_N);
   t2->value_string = strdup(savedIdText);
   t2->left_child = $4;
   t2->left_child->right_sibling = $6;
 
-  if(t1->node_type == INT_TYPE_N){
-    t2->return_type = INT_TYPE_N;
-  } else if(t1->node_type == VOID_TYPE_N){
-    t2->return_type = VOID_TYPE_N;
-  }
+  t2->return_type = INT_TYPE_N;
+  $$ = t2;
+
+
+}
+| VOID_T ID_T '(' formalParams ')' compoundStatement {
+/* removed functypespecifier, replaced with VOID_T */
+  ast_node t2 = create_ast_node(FUNCTION_N);
+  ast_node t2 = create_ast_node(FUNCTION_N);
+  t2->value_string = strdup(savedIdText);
+  t2->left_child = $4;
+  t2->left_child->right_sibling = $6;
+
+  t2->return_type = VOID_TYPE_N;
+  $$ = t2;
 
 }
 ; 
 
-funcTypeSpecifier : INT_T {
-  ast_node t = create_ast_node(INT_TYPE_N);
-  $$ = t;
-}
-|   VOID_T {
-  ast_node t = create_ast_node(VOID_TYPE_N);
-  $$ = t;
-}
-;
+
 
 formalParams : formalList  {
     ast_node t = create_ast_node(FORMAL_PARAMS_N);
