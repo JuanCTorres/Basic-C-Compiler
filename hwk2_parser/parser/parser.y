@@ -139,30 +139,30 @@ varDecl : ID_T  {
   }
 ;
 
-funcDeclaration : INT_T ID_T '(' formalParams ')' compoundStatement {
+funcDeclaration : INT_T ID_T {
+  ast_node t1 = create_ast_node(FUNCTION_N);
+  t1->value_string = strdup(savedIdText);
+  t1->return_type = INT_TYPE_N;
+  $2 = t1; 
+  }'(' formalParams ')' compoundStatement {
 /* removed functypespecifier, replaced with INT_T */
-  ast_node t = create_ast_node(FUNCTION_N);
-  t->value_string = strdup(savedIdText);
-  t->left_child = $4;
-  t->left_child->right_sibling = $6;
-  t->return_type = INT_TYPE_N;
-
+  ast_node t = $2;
+  t->left_child = $5;
+  t->left_child->right_sibling = $7;
   $$ = t;
 }
-| VOID_T ID_T '(' formalParams ')' compoundStatement {
-/* removed functypespecifier, replaced with VOID_T */
-  ast_node t = create_ast_node(FUNCTION_N);
-  t->value_string = strdup(savedIdText);
-  t->left_child = $4;
-  t->left_child->right_sibling = $6;
-
-  t->return_type = VOID_TYPE_N;
+| VOID_T ID_T {
+  ast_node t1 = create_ast_node(FUNCTION_N);
+  t1->value_string = strdup(savedIdText);
+  t1->return_type = VOID_TYPE_N;
+  $2 = t1; 
+  } '(' formalParams ')' compoundStatement {
+/* removed functypespecifier, replaced with INT_T */
+  ast_node t = $2;
+  t->left_child = $5;
+  t->left_child->right_sibling = $7;
   $$ = t;
-
 }
-| INT_T ID_T '(' error ')' compoundStatement {$$ = NULL;}
-| INT_T ID_T '(' formalParams ')' error {$$ = NULL;}
-| INT_T ID_T '(' error ')' error {$$ = NULL;}
 ; 
 
 
@@ -395,14 +395,16 @@ var : ID_T  {
    t->value_string = strdup(savedIdText);
    $$ = t;
  }
-|  ID_T '[' expression ']' {
+|  ID_T {
+     ast_node t1 = create_ast_node(ARRAY_TYPE_N);
+     t1->value_string = strdup(savedIdText);
+     $1 = t1; 
+  } '[' expression ']' {
      /*<later*/
-    ast_node t = create_ast_node(ARRAY_TYPE_N);
-    t->value_string = strdup(savedIdText);
-    t->left_child = $3;
-    $$ = t;
+   ast_node t2 = $1;
+    t2->left_child = $4;
+    $$ = t2;
  }
-|   ID_T '[' error ']' {$$ = NULL;}
 ;
 
 rValue : expression '+' expression  {

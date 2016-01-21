@@ -7,31 +7,31 @@ void your_func() {
 	print "LOL!\n";
 }
 
-int main() {
+int main(void) {
 
-int a = 5;
-int v, q, w, t, y, u;
-int input;
-v = q = w = t = y = u = -99;
+// int a = 5;
+// int v, q, w, t, y, u;
+// int input;
+// v = q = w = t = y = u = -99;
 
-w = v + q;
-w = v - q;
-w = v * q;
-w = v / q;
-w = v % q;
-w = v < q;
-w = v <= q;
-w = v > q;
-w = v >= q;
-w = v == q;
-w = v != q;
-w = v && q;
-w = v || q;
-w = !v;
-w = -v;
-w = ++v;
-w = --v;
-w = 10000000;
+// w = v + q;
+// w = v - q;
+// w = v * q;
+// w = v / q;
+// w = v % q;
+// w = v < q;
+// w = v <= q;
+// w = v > q;
+// w = v >= q;
+// w = v == q;
+// w = v != q;
+// w = v && q;
+// w = v || q;
+// w = !v;
+// w = -v;
+// w = ++v;
+// w = --v;
+// w = 10000000;
 
 
 if(a > 10) {

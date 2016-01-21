@@ -1,6 +1,6 @@
     /* ast.c
  *
- * Written by THC for CS 57; massaged by SWS
+ * Written by THC for CS 57; massaged by SWS; modified by Seok Jun Bing and Juan Torres
  *
  * Relies on an enum and a struct for
  * various node types that appear in ast.h.  You should modify the
@@ -38,6 +38,9 @@ void print_ast(ast_node root, int depth) {
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
+  case ARRAY_TYPE_N:
+    printf("%s", root->value_string);
+    break;
   case FUNCTION_N:
     printf("%s", root->value_string);
     break;

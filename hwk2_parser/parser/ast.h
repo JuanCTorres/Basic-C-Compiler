@@ -4,7 +4,7 @@
  * File defining an enum and a struct for node types in an abstract
  * syntax tree.
  *
- * Written by THC for CS 57; massaged by SWS.  
+ * Written by THC for CS 57; massaged by SWS; modified by Seok Jun Bing and Juan Torres.
  *
  * You should modify this file as appropriate.
  *
@@ -16,6 +16,8 @@
 /* You should fill in the various AST node types.  The following are given
    to you to start with.  You may add or remove node types as you
    wish. */
+
+/* Added a bunch of tokens */
 typedef enum { ROOT_N,
 	       SEQ_N,
 	       OP_ASSIGN_N, OP_PLUS_N, OP_MINUS_N, OP_NEG_N, OP_TIMES_N, OP_DIVIDE_N,
