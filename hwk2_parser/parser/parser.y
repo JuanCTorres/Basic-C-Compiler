@@ -1,3 +1,20 @@
+/*
+ * 
+ * parser.y
+ *
+ * This bison file contains the grammar for the subset of c
+ * as well as the algorithm to build a abstract syntax tree from
+ * the tokens passed from parse.l flex file. 
+ * 
+ * Written by Seok Jun Bing, Juan Torres.
+ *
+ * Please note that, in our AST, all the conditional statements are placed as a left child to a node
+ *
+ * Last modified date: 01/21/16
+ *
+*/
+
+
 %{
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +24,7 @@
 
 #define YYSTYPE ast_node
 #define YYDEBUG 1
-//#define DEBUG
+//#define DEBUG //uncomment to see additional debugging printf
 
 extern int yylex();
 int yyerror(char *s);
@@ -52,7 +69,7 @@ extern char savedLiteralText[];
 
 
 
-
+/* root is a global variable */
 
 program : declarationList {
   ast_node t = create_ast_node(ROOT_N);
@@ -118,7 +135,7 @@ varDecl : ID_T  {
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
-|  ID_T {
+|  ID_T { /* embedded action needed to prevent yytext from being overwritten */
     ast_node t = create_ast_node(ID_N);
     t->value_string = strdup(savedIdText);
     $1 = t;
@@ -128,7 +145,7 @@ varDecl : ID_T  {
     $1->right_sibling = $4;
     $$ = t2;
   }
-|  ID_T '[' INTCONST_T ']' {
+|  ID_T '[' INTCONST_T ']' { /* array[number] */
     ast_node t1 = create_ast_node(ARRAY_TYPE_N);
     ast_node  t2 = create_ast_node(INT_LITERAL_N);
     t1->value_string = strdup(savedIdText);
@@ -139,7 +156,7 @@ varDecl : ID_T  {
   }
 ;
 
-funcDeclaration : INT_T ID_T {
+funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtext from being overwritten */
   ast_node t1 = create_ast_node(FUNCTION_N);
   t1->value_string = strdup(savedIdText);
   t1->return_type = INT_TYPE_N;
@@ -151,7 +168,7 @@ funcDeclaration : INT_T ID_T {
   t->left_child->right_sibling = $7;
   $$ = t;
 }
-| VOID_T ID_T {
+| VOID_T ID_T { /* embedded action required to prevent savedIDtext from being overwritten */
   ast_node t1 = create_ast_node(FUNCTION_N);
   t1->value_string = strdup(savedIdText);
   t1->return_type = VOID_TYPE_N;

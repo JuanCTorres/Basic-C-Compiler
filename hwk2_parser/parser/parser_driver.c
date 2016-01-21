@@ -1,10 +1,10 @@
 /*
- * tree_main.c
+ * parser_driver.c
  *
  * Driver program for a parser that builds an abstract syntax tree.
  *
- * Written by THC for CS 57; massaged by SWS.  Modify this file as appropriate.
- *
+ * Written by THC for CS 57; massaged by SWS; modified by Seok Jun Bing, Juan Torres.
+ * Last modified date: 01/21/16
  */
 
 #include <stdio.h>
