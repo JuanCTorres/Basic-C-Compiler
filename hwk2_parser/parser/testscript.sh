@@ -16,7 +16,7 @@ printf "Result of test done to parser.\n\n" >> "${file}"
 printf "test1.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser < ./testinputs/test1.c >> "${file}"
+./parser < ./testinputs/test1.c >> "${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test1.c finished.\n" >> "${file}"
@@ -28,7 +28,7 @@ printf "Result of test done to parser.\n\n" >> "${file}"
 printf "test2.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser < ./testinputs/test2.c >> "${file}"
+./parser < ./testinputs/test2.c >> "${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test2.c finished.\n" >> "${file}"
@@ -40,7 +40,7 @@ printf "Result of test done to parser.\n\n" >> "${file}"
 printf "test3.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser < ./testinputs/test3.c >> "${file}"
+./parser < ./testinputs/test3.c >> "${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test3.c finished.\n" >> "${file}"
