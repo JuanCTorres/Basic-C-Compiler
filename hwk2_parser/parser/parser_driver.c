@@ -4,6 +4,9 @@
  * Driver program for a parser that builds an abstract syntax tree.
  *
  * Written by THC for CS 57; massaged by SWS; modified by Seok Jun Bing, Juan Torres.
+ *
+ * root node is a global variable that is needed by parser.y
+ *
  * Last modified date: 01/21/16
  */
 

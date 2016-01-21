@@ -50,6 +50,7 @@ extern char savedLiteralText[];
 %nonassoc LOWER_THAN_ELSE
 %nonassoc ELSE_T
 
+ /* top has the lowest precedence. bottom has the highest precedence. */
 %right '='
 %left OR_T /* || */
 %left AND_T
@@ -66,8 +67,8 @@ extern char savedLiteralText[];
 
 
 
-
-
+ /* all these grammar was taken from the course home page.  */
+ /* additional modifications to the grammar has been made to flat out ambiguities */
 
 /* root is a global variable */
 
@@ -135,7 +136,7 @@ varDecl : ID_T  {
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
-|  ID_T { /* embedded action needed to prevent yytext from being overwritten */
+|  ID_T { /* embedded action needed to prevent savedidtext from being overwritten */
     ast_node t = create_ast_node(ID_N);
     t->value_string = strdup(savedIdText);
     $1 = t;
@@ -287,7 +288,7 @@ statementList : statementList statement  {
  /* | statementList error {$$ = NULL;} */
  /* enabling error token for statementList causes segfaults by ast preorder walk print out */
 ;
-
+ /* for all the statements requiring a condition input, the conditions are inserted in ast as left child */
 statement : expressionStatement  {$$ = $1; }
 |  compoundStatement    {$$ = $1; }
 |  ifStatement          {$$ = $1; }
@@ -306,6 +307,8 @@ expressionStatement : expression ';'  { $$ = $1; }
 /*  ifStatement : IF_T '(' expression ')' statement         */
 /*  |  IF_T '(' expression ')' statement ELSE_T statement   */
 /*  ;                                                       */
+
+ /* implementation followed from flex and bison book */
 
 ifStatement : IF_T '(' expression ')' statement   %prec LOWER_THAN_ELSE {
   ast_node t = create_ast_node(IF_STMT_N);
@@ -424,6 +427,8 @@ var : ID_T  {
  }
 ;
 
+
+ /* define grammar for standard unary and binary operators */
 rValue : expression '+' expression  {
 ast_node t = create_ast_node(OP_PLUS_N);
   t->left_child = $1;
@@ -521,6 +526,7 @@ ast_node t = create_ast_node(OP_PLUS_N);
    }
 ;
 
+/* embedded action is required to retain the string val of id_t */
 call : ID_T {
     ast_node t1 = create_ast_node(FUNCTION_N);
     t1->value_string = strdup(savedIdText);
@@ -558,7 +564,7 @@ argList : argList ',' expression  {
 
 
 %%
-
+ /* this function redefinition prints out line number as well */
 
 int yyerror(char *s) {
   parseError = 1;
