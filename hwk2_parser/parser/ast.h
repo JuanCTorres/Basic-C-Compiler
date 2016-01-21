@@ -47,7 +47,8 @@ typedef enum { ROOT_N,
          FOR_N,
          FOR_HEADER_EMPTY_N,
          STATEMENT_LIST_N,
-         LOCAL_DECLARATIONS_N
+         LOCAL_DECLARATIONS_N,
+         CALL_N
        } ast_node_type;
 
 
@@ -102,6 +103,7 @@ static val_name_pair token_table[] = {
   { FOR_HEADER_EMPTY_N, "FOR_HEADER_EMPTY"},
   { STATEMENT_LIST_N, "STATEMENT_LIST"},
   { LOCAL_DECLARATIONS_N, "LOCAL_DECLARATIONS"},
+  { CALL_N, "CALL"},
   { 0, NULL }
 };
 

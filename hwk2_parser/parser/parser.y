@@ -1,10 +1,67 @@
+%{
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <assert.h>
+#include "ast.h"
+
+#define YYSTYPE ast_node
+#define YYDEBUG 1
+//#define DEBUG
+
+extern int yylex();
+int yyerror(char *s);
+extern char *yytext;
+extern int YYRECOVERING();
+
+extern int num_lines;
+extern ast_node root;
+extern int parseError;
+
+extern char savedIdText[];
+extern char savedLiteralText[];
+
+//int yyerrstatus;
+
+%}
+
+%token ISEQUAL_T NOTEQUAL_T LESS_EQUAL_T GREATER_EQUAL_T INCREMENT_T DECREMENT_T AND_T OR_T
+%token INT_T WHILE_T FOR_T IF_T ELSE_T RETURN_T VOID_T READ_T PRINT_T ID_T UMINUS_T
+%token DO_T STRINGCONST_T INTCONST_T EOF_T OTHER_T
+
+/* from flex&bison book: how to resolve if/then/else */
+%nonassoc LOWER_THAN_ELSE
+%nonassoc ELSE_T
+
+%right '='
+%left OR_T /* || */
+%left AND_T
+%left NOTEQUAL_T ISEQUAL_T
+%left '<' LESS_EQUAL_T '>' GREATER_EQUAL_T
+%left '+' '-'
+%left '*' '/' '%'
+%right '!' INCREMENT_T DECREMENT_T %left UMINUS_T /* uminus... left or right assoc?? */
+
+
+
+
+%%
+
+
+
+
+
+
+
+
 program : declarationList {
   ast_node t = create_ast_node(ROOT_N);
   t->left_child = $1;
-  root = $$ = t; }
+  root = $$ = t; 
+}
 ;
 
-declarationList : declarationList declaration  {
+declarationList : declarationList declaration {
   ast_node t = $1;
   assert(t != NULL);
     while (t->right_sibling != NULL) { 
@@ -16,6 +73,8 @@ declarationList : declarationList declaration  {
 |  declaration { 
    $$ = $1;
  }
+|  declarationList error {$$ = NULL;}
+|  error declaration {$$ = NULL;}
 ;
 
 declaration : varDeclaration  {
@@ -26,26 +85,19 @@ declaration : varDeclaration  {
   }
 ;
 
-varDeclaration : varTypeSpecifier varDeclList ';' {
-  assert($1->node_type == INT_TYPE_N);
-  if($1->node_type == INT_TYPE_N) {
-    assert($2 != NULL);
-    ast_node temp_t = $2;
-    $2->return_type = INT_TYPE_N;
-    while($2->right_sibling != NULL) {
+varDeclaration : INT_T varDeclList ';' {
+  /* replaced varTypeSpecifier to INT_T*/
+  $2->return_type = INT_TYPE_N;
+  ast_node temp_t = $2;
+  assert($2 != NULL);
+  while($2->right_sibling != NULL) {
       $2->return_type = INT_TYPE_N;
       $2 = $2->right_sibling;
     }
-  }
   $$ = temp_t;
 }
 ;
 
-varTypeSpecifier : INT_T {
-  ast_node t = create_ast_node(INT_TYPE_N);
-  $$ = t;
-}
-; 
 
 varDeclList: varDeclList ',' varDecl  {
   ast_node t = $1;
@@ -56,20 +108,24 @@ varDeclList: varDeclList ',' varDecl  {
     t->right_sibling = $3;
     $$ = $1;
  }
-|  varDecl {$$ = $1}
+|  varDecl {$$ = $1;}
+|  varDeclList ',' error {$$ = NULL;}
+|  error '.' varDecl {$$ = NULL;}
 ;
 
 varDecl : ID_T  {
     ast_node t = create_ast_node(ID_N);
     t->value_string = strdup(savedIdText);
-    $$ = $1;
+    $$ = t;
   }
-|  ID_T  '=' expression {
-    ast_node t1 = create_ast_node(ID_N);
-    t1->value_string = strdup(savedIdText);
+|  ID_T {
+    ast_node t = create_ast_node(ID_N);
+    t->value_string = strdup(savedIdText);
+    $1 = t;
+  }  '=' expression {
     ast_node t2 = create_ast_node(OP_ASSIGN_N);
-    t2->left_child = t1;
-    t2->left_child->right_sibling = $2;
+    t2->left_child = $1;
+    $1->right_sibling = $4;
     $$ = t2;
   }
 |  ID_T '[' INTCONST_T ']' {
@@ -83,32 +139,33 @@ varDecl : ID_T  {
   }
 ;
 
-funcDeclaration : funcTypeSpecifier ID_T '(' formalParams ')' compoundStatement {
+funcDeclaration : INT_T ID_T '(' formalParams ')' compoundStatement {
+/* removed functypespecifier, replaced with INT_T */
+  ast_node t = create_ast_node(FUNCTION_N);
+  t->value_string = strdup(savedIdText);
+  t->left_child = $4;
+  t->left_child->right_sibling = $6;
+  t->return_type = INT_TYPE_N;
 
-  ast_node t1 = $1;
-  ast_node t2 = create_ast_node(FUNCTION_N);
-  t2->value_string = strdup(savedIdText);
-  t2->left_child = $4;
-  t2->left_child->right_sibling = $6;
+  $$ = t;
+}
+| VOID_T ID_T '(' formalParams ')' compoundStatement {
+/* removed functypespecifier, replaced with VOID_T */
+  ast_node t = create_ast_node(FUNCTION_N);
+  t->value_string = strdup(savedIdText);
+  t->left_child = $4;
+  t->left_child->right_sibling = $6;
 
-  if(t1->node_type == INT_TYPE_N){
-    t2->return_type = INT_TYPE_N;
-  } else if(t->node_type == VOID_TYPE_N){
-    t2->return_type = VOID_TYPE_N;
-  }
+  t->return_type = VOID_TYPE_N;
+  $$ = t;
 
 }
+| INT_T ID_T '(' error ')' compoundStatement {$$ = NULL;}
+| INT_T ID_T '(' formalParams ')' error {$$ = NULL;}
+| INT_T ID_T '(' error ')' error {$$ = NULL;}
 ; 
 
-funcTypeSpecifier : INT_T {
-  ast_node t = create_ast_node(INT_TYPE_N);
-  $$ = t;
-}
-|   VOID_T {
-  ast_node_t = create_ast_node(VOID_TYPE_N);
-  $$ = t;
-}
-;
+
 
 formalParams : formalList  {
     ast_node t = create_ast_node(FORMAL_PARAMS_N);
@@ -117,7 +174,7 @@ formalParams : formalList  {
   }
 |  VOID_T {
   ast_node t = create_ast_node(FORMAL_PARAMS_N);
-  $$ = t;
+  $$ = t; /* <later> */
 } 
 |  /* empty */ {
   ast_node t = create_ast_node(FORMAL_PARAMS_N);
@@ -134,60 +191,84 @@ formalList : formalList ',' formalParam {
     $$ = $1;
   } 
 |  formalParam {$$ = $1; }
+|   formalList ',' error {$$ = NULL;}
 ;
 
-formalParam : varTypeSpecifier ID_T {
-    assert($1->node_type == INT_TYPE_N); /* error handling <later>? */
+formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
+     /* error handling <later>? */
     ast_node t = create_ast_node(ID_N);
     t->value_string = strdup(savedIdText);
     t->return_type = INT_TYPE_N;
     $$ = t;
   }
-|  varTypeSpecifier ID_T '[' ']' {
-    assert($1->node_type == INT_TYPE_N); /*<later*/
+|  INT_T ID_T '[' ']' { /* replaced varTypeSpecifier to INT_T*/
+    /*<later*/
     ast_node t = create_ast_node(ARRAY_TYPE_N);
+    t->return_type = INT_TYPE_N;
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
+| INT_T error {$$ = NULL;}
 ;
 
 compoundStatement : '{' localDeclarations statementList '}' {
   ast_node t = create_ast_node(SEQ_N);
+  ast_node temp = t;
   t->left_child = $2;
+  t = t->left_child;
   while(t->right_sibling != NULL){
     t = t->right_sibling;
   }
   t->right_sibling = $3; /* local declarations before code */
-  $$ = $2;
+  $$ = temp;
 }
 ; /* SEQ_N? (see lec 7 slide, ast diagram) */
 
 localDeclarations : localDeclarations varDeclaration {
   ast_node t = $1;
-  if (t != NULL) {
-    while (t->right_sibling != NULL)
-      t = t->right_sibling;
-    t->right_sibling = $2;
-    $$ = $1;
+
+  if(t->left_child == NULL) {
+    t->left_child = $2;
   }
-  else
-    $$ = $2;
+  else {
+    t = t->left_child;
+    while(t->right_sibling != NULL) {
+      t = t->right_sibling;
+    }
+    t->right_sibling = $2;
+  }
+
+  $$ = $1;
  }  
-|  /* empty */ {$$ = NULL;}
+|  /* empty */ {
+  ast_node t = create_ast_node(LOCAL_DECLARATIONS_N);
+  $$ = t;
+}
 ;
 
 statementList : statementList statement  {
   ast_node t = $1;
-  if (t != NULL) {
-    while (t->right_sibling != NULL)
-      t = t->right_sibling;
-    t->right_sibling = $2;
-    $$ = $1;
+
+  if(t->left_child == NULL) {
+    t->left_child = $2;
   }
-  else
-    $$ = $2;
+  else {
+    t = t->left_child;
+    while(t->right_sibling != NULL) {
+      t = t->right_sibling;
+    }
+    t->right_sibling = $2;
+  }
+
+  $$ = $1;
  }
-|  /* empty */ {$$ = NULL;}
+|  /* empty */ {
+  ast_node t = create_ast_node(STATEMENT_LIST_N);
+  $$ = t;
+
+  }
+ /* | statementList error {$$ = NULL;} */
+ /* enabling error token for statementList causes segfaults by ast preorder walk print out */
 ;
 
 statement : expressionStatement  {$$ = $1; }
@@ -231,6 +312,7 @@ whileStatement : WHILE_T '(' expression ')' statement {
   t->left_child = $3;
   t->left_child->right_sibling = $5;
   $$ = t; }
+| WHILE_T '(' error ')' error {$$ = NULL;}
 ;
 
 doWhileStatement : DO_T statement WHILE_T '(' expression ')' ';' {
@@ -239,6 +321,7 @@ doWhileStatement : DO_T statement WHILE_T '(' expression ')' ';' {
     t->left_child->right_sibling = $2;
     $$ = t;
   }
+| DO_T error WHILE_T '(' error ')' ';' {$$ = NULL;}
 ;
 
 forStatement : FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHeaderExpression ')' statement {
@@ -249,8 +332,9 @@ forStatement : FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHead
     t->left_child->right_sibling->right_sibling->right_sibling = $9;
 
     $$ = t;
-
   }
+|   FOR_T '(' error ';' error ';' error ')' error {$$ = NULL;}
+|   FOR_T '(' error ')' error {$$ = NULL;}
 ; 
 
 forHeaderExpression : expression  { $$ = $1; }
@@ -268,6 +352,7 @@ returnStatement : RETURN_T ';' {
     t->left_child = $2;
     $$ = t;
   }
+|  RETURN_T error ';' {$$ = NULL;}
 ;
 
 readStatement : READ_T var ';' {
@@ -275,6 +360,7 @@ readStatement : READ_T var ';' {
     t->left_child = $2;
     $$ = t;
   }
+| READ_T error ';' {$$=NULL;}
 ; 
 
 printStatement : PRINT_T expression ';'  {
@@ -289,18 +375,19 @@ printStatement : PRINT_T expression ';'  {
   t1->left_child = t2;
   $$ = t1;
 }
+| PRINT_T error ';' {$$ = NULL;}
 ;
 
-expression : var {
-  ast_node t1 = create_ast_node(ID_N);
-  t1->value_string = strdup(savedIdText);
-  $1 = t1;
- } '=' expression {
-  ast_node t2 = create_ast_node(OP_ASSIGN_N);
-  t2->left_child = $1;
-  t2->left_child->right_sibling = $4;
-  $$ = t2; }
+expression : var '=' expression {
+    assert($1 != NULL);
+    assert($3 != NULL);
+    ast_node t = create_ast_node(OP_ASSIGN_N);
+    t->left_child = $1;
+    t->left_child->right_sibling = $3;
+    $$ = t; 
+  }
 |  rValue {$$ = $1; }
+|  var '=' error {$$ = NULL;}
 ;
 
 var : ID_T  {
@@ -315,9 +402,15 @@ var : ID_T  {
     t->left_child = $3;
     $$ = t;
  }
+|   ID_T '[' error ']' {$$ = NULL;}
 ;
 
-rValue : expression '+' expression  
+rValue : expression '+' expression  {
+ast_node t = create_ast_node(OP_PLUS_N);
+  t->left_child = $1;
+  t->left_child->right_sibling = $3;
+  $$ = t;
+  }
 |  expression '-' expression  {
   ast_node t = create_ast_node(OP_MINUS_N);
   t->left_child = $1;
@@ -400,14 +493,25 @@ rValue : expression '+' expression
 |  INTCONST_T  {
   ast_node t = create_ast_node(INT_LITERAL_N);
   t->value_int = atoi(savedLiteralText);
-  $$ = t; }
+  $$ = t;
+
+  #ifdef DEBUG
+  printf("value_int = %d\n", t->value_int);
+  #endif
+
+   }
 ;
 
-call : ID_T '(' args ')' {
-   ast_node t = create_ast_node(ID_N);
-   t->value_string = strdup(savedIdText);
-   t->left_child = $3;
-   $$ = t;
+call : ID_T {
+    ast_node t1 = create_ast_node(FUNCTION_N);
+    t1->value_string = strdup(savedIdText);
+    $1 = t1;
+  } '(' args ')' {
+   ast_node t2 = create_ast_node(CALL_N);
+   $1->left_child = $4;
+   
+   t2->left_child = $1;
+   $$ = t2;
  }
 ;
 
@@ -425,7 +529,22 @@ argList : argList ',' expression  {
     $$ = $1;
  }
 |  expression {$$ = $1; }
+|  error ',' error {$$ = NULL;}
 ;
 
 
 
+
+
+
+
+%%
+
+
+int yyerror(char *s) {
+  parseError = 1;
+  
+  //if( YYRECOVERING() )
+    fprintf(stderr, "%s at line %d\t yytext = '%s'\n", s, num_lines, yytext);
+  return 0;
+}
