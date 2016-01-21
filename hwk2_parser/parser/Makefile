@@ -10,31 +10,31 @@ FLEXFLAGS = -ll
 .cc.o:
 	$(CC) $(CFLAGS) -c $<
 
-tree : lex.yy.o tree.tab.o ast.o tree_main.o
-	$(CC) -o $@ $(CFLAGS) lex.yy.o tree.tab.o ast.o tree_main.o $(FLEXFLAGS)
+parser : lex.yy.o parser.tab.o ast.o parser_driver.o
+	$(CC) -o $@ $(CFLAGS) lex.yy.o parser.tab.o ast.o parser_driver.o $(FLEXFLAGS)
 
 lex.yy.o : lex.yy.c
 	$(CC) -c $(CFLAGS) $<
 
-tree.tab.o : tree.tab.c
+parser.tab.o : parser.tab.c
 	$(CC) -c $(CFLAGS) $<
 
-lex.yy.c : tree.l tree.tab.h
-	flex tree.l
+lex.yy.c : parser.l parser.tab.h
+	flex parser.l
 
-tree.tab.h : tree.y
+parser.tab.h : parser.y
 	bison $(BISONFL) $<
 
-tree.tab.c : tree.y
+parser.tab.c : parser.y
 	bison $(BISONFL) $<
 
-tree_main.o : tree_main.c
+parser_driver.o : parser_driver.c
 
 clean :
-	rm -f tree lex.yy.o tree.tab.o tree_main.o ast.o \
-	tree.tab.h tree.tab.c lex.yy.c *~ tree.output
+	rm -f parser lex.yy.o parser.tab.o parser_driver.o ast.o \
+	parser.tab.h parser.tab.c lex.yy.c *~ parser.output
 
 depend :
-	makedepend -- $(CFLAGS) -- tree_main.c
+	makedepend -- $(CFLAGS) -- parser_driver.c
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.

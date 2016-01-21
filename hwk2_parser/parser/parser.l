@@ -15,7 +15,7 @@
 
 %{
 #include <string.h>
-#include "tree.tab.h"
+#include "parser.tab.h"
 int lexLookup(char *);
 int oldstate;
 int num_lines = 1;
@@ -120,7 +120,7 @@ signedint [-+]?{integer}
 "/"          return '/';
 
 <<EOF>>      return EOF;
- /* .            return OTHER_T; */
+  .          return OTHER_T;
 
 %%
 
