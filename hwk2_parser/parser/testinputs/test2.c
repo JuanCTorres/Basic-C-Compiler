@@ -1,49 +1,41 @@
-// int this_func(void);
-
-int this_func(int g) {
-print "at this_func";
-return 0;
+int my_func(int q, int b) {
+	print(q + b);
+	return 12345;
 }
 
-int main() {
-
-if(1) 
-{
-int b = 3 ;
-}
-else {
-
-	int a = 5;
-	print "hello";
+void your_func() {
+	int gg, ee;
+	print "LOL!\n";
 }
 
-while(b > 1000) {
-	int aaa = -123;
-	if(a+b) {
+int main(void) {
 
-		print ("fine here\n");
+	int a, t, y, u, w, v, ppp;
+	a = t= y = -(4/5);
+
+	if(a > 10) {
+		if(1) {
+			do {
+				read input;
+			} while (a * (t - u) / w != 10);
+		}
+		else{
+			print "not\n";
+		}
+
+	}
+	else {
+		for(t = 0; t < 99; ++t) {
+			a = y = u;
+			y = a = w;
+			print "in for loop\n"; 
+		}
 	}
 
+	w = my_func(w, v, ppp);
+	your_func();
+
+
+	return 0;
 }
-
-
-do {
- for(  i = 0; i < z; ++i) {
- 	c = d = e = f;
-
- }
-} while (ab+c+d+e+f != 123);
-
-d = 10;
-
-
-b = this_func(d);
-
-return 0;
-}
-
-
-
-
-
 

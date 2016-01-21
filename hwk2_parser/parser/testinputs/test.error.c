@@ -1,4 +1,4 @@
-int main() {
+int main(void) {
 
 	int a = 5;
 	int c = 10;
@@ -7,7 +7,7 @@ int main() {
 		print "hi there\n";
 	}
 
-	my_func(a b c); //incorrect variable input into a function (no commas to separate)
+	//my_func(a b c); //incorrect variable input into a function (no commas to separate)
 	print ("hello\n"); //illegal because strings cannot be inside brackets in our grammar
 
 	for(321) { //this is a illegal for-header
@@ -28,6 +28,6 @@ int main() {
 
 
 
-return 0;
+	return 0;
 }
 
