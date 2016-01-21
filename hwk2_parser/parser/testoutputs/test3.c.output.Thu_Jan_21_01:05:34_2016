@@ -1,0 +1,110 @@
+Result of test done to parser.
+
+test3.c BEGIN.
+===========================================================
+
+No syntatical errors detected.
+
+ROOT 
+  FUNCTION this_func
+    FORMAL_PARAMS 
+      ID g
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+        PRINT 
+          STRING_LITERAL at this_func
+        RETURN 
+          INT_LITERAL 0
+  FUNCTION main
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+        IF_ELSE_STMT 
+          INT_LITERAL 1
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = 
+                ID b
+                INT_LITERAL 3
+            STATEMENT_LIST 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = 
+                ID a
+                INT_LITERAL 5
+            STATEMENT_LIST 
+              PRINT 
+                STRING_LITERAL hello
+        WHILE 
+          > 
+            ID b
+            INT_LITERAL 1000
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = 
+                ID aaa
+                INT_LITERAL -123
+            STATEMENT_LIST 
+              IF_STMT 
+                + 
+                  ID a
+                  ID b
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                    = 
+                      ID qwe
+                      INT_LITERAL 0
+                    ARRAY_TYPE av
+                      INT_LITERAL 123
+                  STATEMENT_LIST 
+        DO_WHILE 
+          != 
+            + 
+              + 
+                + 
+                  + 
+                    ID ab
+                    ID c
+                  ID d
+                ID e
+              ID f
+            INT_LITERAL 123
+          SEQ 
+            LOCAL_DECLARATIONS 
+            STATEMENT_LIST 
+              FOR 
+                = 
+                  ID i
+                  INT_LITERAL 0
+                < 
+                  ID i
+                  ID z
+                ++ 
+                  ID i
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    = 
+                      ID c
+                      = 
+                        ID d
+                        = 
+                          ID e
+                          ID f
+        = 
+          ID d
+          INT_LITERAL 10
+        RETURN 
+          * 
+            % 
+              ID a
+              INT_LITERAL 2
+            - 
+              INT_LITERAL 5
+              INT_LITERAL 13
+
+
+===========================================================
+test3.c finished.

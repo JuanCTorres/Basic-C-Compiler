@@ -1,0 +1,126 @@
+Result of test done to parser.
+
+test2.c BEGIN.
+===========================================================
+
+No syntatical errors detected.
+
+ROOT 
+  FUNCTION my_func
+    FORMAL_PARAMS 
+      ID q
+      ID b
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+        PRINT 
+          + 
+            ID q
+            ID b
+        RETURN 
+          INT_LITERAL 12345
+  FUNCTION your_func
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID gg
+        ID ee
+      STATEMENT_LIST 
+        PRINT 
+          STRING_LITERAL LOL!\n
+  FUNCTION main
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID a
+        ID t
+        ID y
+        ID u
+        ID w
+        ID v
+        ID ppp
+      STATEMENT_LIST 
+        = 
+          ID a
+          = 
+            ID t
+            = 
+              ID y
+              - 
+                / 
+                  INT_LITERAL 4
+                  INT_LITERAL 5
+        IF_ELSE_STMT 
+          > 
+            ID a
+            INT_LITERAL 10
+          SEQ 
+            LOCAL_DECLARATIONS 
+            STATEMENT_LIST 
+              IF_ELSE_STMT 
+                INT_LITERAL 1
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    DO_WHILE 
+                      != 
+                        / 
+                          * 
+                            ID a
+                            - 
+                              ID t
+                              ID u
+                          ID w
+                        INT_LITERAL 10
+                      SEQ 
+                        LOCAL_DECLARATIONS 
+                        STATEMENT_LIST 
+                          READ 
+                            ID input
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    PRINT 
+                      STRING_LITERAL not\n
+          SEQ 
+            LOCAL_DECLARATIONS 
+            STATEMENT_LIST 
+              FOR 
+                = 
+                  ID t
+                  INT_LITERAL 0
+                < 
+                  ID t
+                  INT_LITERAL 99
+                ++ 
+                  ID t
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    = 
+                      ID a
+                      = 
+                        ID y
+                        ID u
+                    = 
+                      ID y
+                      = 
+                        ID a
+                        ID w
+                    PRINT 
+                      STRING_LITERAL in for loop\n
+        = 
+          ID w
+          CALL 
+            FUNCTION my_func
+              ID w
+              ID v
+              ID ppp
+        CALL 
+          FUNCTION your_func
+        RETURN 
+          INT_LITERAL 0
+
+
+===========================================================
+test2.c finished.

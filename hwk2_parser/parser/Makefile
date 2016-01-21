@@ -38,3 +38,6 @@ depend :
 	makedepend -- $(CFLAGS) -- parser_driver.c
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+
+test:
+	bash ./testscript.sh
