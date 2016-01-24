@@ -33,6 +33,31 @@ ROOT
           ID f
         = 
           ID c
+          - 
+            INT_LITERAL 5
+            INT_LITERAL 5
+        = 
+          ID c
+          * 
+            INT_LITERAL 1
+            INT_LITERAL -6
+        = 
+          ID c
+          - 
+            INT_LITERAL -2
+            INT_LITERAL 9
+        = 
+          ID c
+          + 
+            INT_LITERAL 1
+            INT_LITERAL 7
+        = 
+          ID c
+          - 
+            INT_LITERAL 1
+            INT_LITERAL -10
+        = 
+          ID c
           * 
             ID a
             - 

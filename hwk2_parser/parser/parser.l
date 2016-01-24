@@ -41,6 +41,7 @@ signedint [-+]?{integer}
 %x string
 %x line_comment
 %x multi_comment
+%x num
 
 
 %%
@@ -53,15 +54,19 @@ signedint [-+]?{integer}
 
 {id}         { strncpy(savedIdText, yytext, MAXTOKENLENGTH-1);
 				return lexLookup(yytext); }
-{signedint}  {
-	strncpy(savedLiteralText, yytext, MAXTOKENLENGTH-1);
-	return INTCONST_T;}
- /* {fixedfloat} | */
- /* {expfloat}   return FLOATCONST_T; */
+{signedint}{id} {return OTHER_T;}
 
-
+{signedint}  {  
+    strncpy(savedLiteralText, yytext, MAXTOKENLENGTH-1); 
+    oldstate = YY_START; 
+    BEGIN(num);
+    return INTCONST_T;} 
 
 \n { ++num_lines; }
+
+<num>[+-] {BEGIN(oldstate); return yytext[0];}
+<num>[^+-] {yyless(0); BEGIN(oldstate); } 
+<num>"++"|"--" {yyless(0); BEGIN(oldstate); }
 
   /* Handle string special case */
 \"           { BEGIN(string); }

@@ -41,22 +41,34 @@ signedint [-+]?{integer}
 %x string
 %x line_comment
 %x multi_comment
+%x FINAL
 
 
 %%
 
 {white}      /* skip whitespace */
 
-{id}         { strncpy(savedIdText, yytext, MAXTOKENLENGTH-1);
+{id}         { strncpy(savedIdText, yytext, MAXTOKENLENGTH-1); oldstate = YY_START;BEGIN(FINAL);
         return lexLookup(yytext); }
-{signedint}  {
-  strncpy(savedLiteralText, yytext, MAXTOKENLENGTH-1);
-  return INTCONST_T;}
+
+  {signedint}{id} {return OTHER_T;}
 
 
-
+  {signedint}  {  
+    strncpy(savedLiteralText, yytext, MAXTOKENLENGTH-1); 
+    oldstate = YY_START; 
+    BEGIN(FINAL);
+    return INTCONST_T;} 
 
 \n { ++num_lines; }
+
+
+<FINAL>[+-] {BEGIN(oldstate); return yytext[0];}
+<FINAL>[^+-] {yyless(0); BEGIN(oldstate); } 
+<FINAL>"++"|"--" {yyless(0); BEGIN(oldstate); }
+
+
+
 
   /* Handle string special case */
 \"           { BEGIN(string); }
@@ -69,7 +81,6 @@ signedint [-+]?{integer}
   return STRINGCONST_T;
  }
 <string>.    { yymore(); }
-
 
 
  /* One line comments */

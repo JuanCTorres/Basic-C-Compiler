@@ -14,6 +14,12 @@ cc[a * b] = a * b;
 print "test basics!\n";
 read f;
 
+c=5-5;
+c=1*-6;
+c=-2-9;
+c=+1+7;
+c=1 - -10; 
+
 c = a * -b;
 c = a + b;
 c = a - b;
