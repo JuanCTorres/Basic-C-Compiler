@@ -22,7 +22,7 @@
  int main() {
   int noRoot = 0;		/* 0 means we will have a root */
 
-  //yydebug = 1; 
+  //yydebug = 1; 	//uncomment to enable tracing
  	noRoot = yyparse();
 
  	if (parseError)	{	

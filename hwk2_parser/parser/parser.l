@@ -35,8 +35,7 @@ digit [0-9]
 id ({letter}|_)({letter}|{digit}|_)*
 integer {digit}+
 signedint [-+]?{integer}
-/* fixedfloat {signedint}"."{integer}?|[-+]?"."{integer} */
-/* expfloat {fixedfloat}[Ee]{signedint}|{signedint}[Ee]{signedint} */
+
 
 %x string
 %x line_comment
@@ -53,7 +52,10 @@ signedint [-+]?{integer}
 {white}      /* skip whitespace */
 
 {id}         { strncpy(savedIdText, yytext, MAXTOKENLENGTH-1);
-				return lexLookup(yytext); }
+                oldstate = YY_START;
+                BEGIN(num);
+				        return lexLookup(yytext); }
+
 {signedint}{id} {return OTHER_T;}
 
 {signedint}  {  
@@ -65,6 +67,7 @@ signedint [-+]?{integer}
 \n { ++num_lines; }
 
 <num>[+-] {BEGIN(oldstate); return yytext[0];}
+<num>[ \t]+
 <num>[^+-] {yyless(0); BEGIN(oldstate); } 
 <num>"++"|"--" {yyless(0); BEGIN(oldstate); }
 

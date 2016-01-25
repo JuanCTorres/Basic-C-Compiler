@@ -112,6 +112,7 @@ varDeclaration : INT_T varDeclList ';' {
       $2->return_type = INT_TYPE_N;
       $2 = $2->right_sibling;
     }
+  $2->return_type = INT_TYPE_N;
   $$ = temp_t;
 }
 ;

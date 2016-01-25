@@ -6,17 +6,17 @@ test1.c BEGIN.
 No syntatical errors detected.
 
 ROOT 
-  FUNCTION main
+  FUNCTION main (type: INT_TYPE)
     FORMAL_PARAMS 
     SEQ 
       LOCAL_DECLARATIONS 
-        ID a
-        ID b
-        ID c
-        ID d
-        ID e
-        ID f
-        ARRAY_TYPE cc
+        ID a (type: INT_TYPE)
+        ID b (type: INT_TYPE)
+        ID c (type: INT_TYPE)
+        ID d (type: INT_TYPE)
+        ID e (type: INT_TYPE)
+        ID f (type: INT_TYPE)
+        ARRAY_TYPE cc (type: INT_TYPE)
           INT_LITERAL 12
       STATEMENT_LIST 
         = 
@@ -31,6 +31,16 @@ ROOT
           STRING_LITERAL test basics!\n
         READ 
           ID f
+        = 
+          ID c
+          - 
+            INT_LITERAL 1
+            ID b
+        = 
+          ID c
+          + 
+            ID b
+            INT_LITERAL 1
         = 
           ID c
           - 
@@ -56,6 +66,11 @@ ROOT
           - 
             INT_LITERAL 1
             INT_LITERAL -10
+        = 
+          ID c
+          - 
+            INT_LITERAL 22
+            INT_LITERAL -88
         = 
           ID c
           * 
@@ -186,8 +201,8 @@ ROOT
             INT_LITERAL 100
           SEQ 
             LOCAL_DECLARATIONS 
-              ID tt
-              ARRAY_TYPE uu
+              ID tt (type: INT_TYPE)
+              ARRAY_TYPE uu (type: INT_TYPE)
                 INT_LITERAL 10
             STATEMENT_LIST 
               PRINT 
@@ -198,8 +213,8 @@ ROOT
           INT_LITERAL 1
           SEQ 
             LOCAL_DECLARATIONS 
-              ID asd
-              ID dsa
+              ID asd (type: INT_TYPE)
+              ID dsa (type: INT_TYPE)
             STATEMENT_LIST 
               = 
                 ID asd
@@ -212,11 +227,11 @@ ROOT
             ID c
           SEQ 
             LOCAL_DECLARATIONS 
-              ID x
+              ID x (type: INT_TYPE)
             STATEMENT_LIST 
           SEQ 
             LOCAL_DECLARATIONS 
-              ID y
+              ID y (type: INT_TYPE)
             STATEMENT_LIST 
         RETURN 
           INT_LITERAL 0

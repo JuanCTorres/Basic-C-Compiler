@@ -40,16 +40,21 @@ void print_ast(ast_node root, int depth) {
   switch (root->node_type) {
   case ARRAY_TYPE_N:
     printf("%s", root->value_string);
+    if(root->return_type != 0)
+    printf(" (type: %s)", NODE_NAME(root->return_type));
     break;
   case FUNCTION_N:
     printf("%s", root->value_string);
+    if(root->return_type != 0)
+    printf(" (type: %s)", NODE_NAME(root->return_type));
     break;
   case STRING_LITERAL_N:
     printf("%s", root->value_string);
     break;
   case ID_N:			/* print the id */
     printf("%s", root->value_string);
-    //printf("%d", root->value_int);
+    if(root->return_type != 0)
+    printf(" (type: %s)", NODE_NAME(root->return_type));
     break;
 
   case INT_LITERAL_N:		/* print the int literal */

@@ -5,6 +5,7 @@ int main (void) {
 
 //same here
 
+
 int a, b, c;
 int d, e, f;
 int cc[12];
@@ -14,11 +15,19 @@ cc[a * b] = a * b;
 print "test basics!\n";
 read f;
 
+c=1-b;
+
+c=b +1;
+
+//c=c-c;
+
 c=5-5;
 c=1*-6;
 c=-2-9;
 c=+1+7;
-c=1 - -10; 
+c=1 - -10;
+c=22- -88; 
+
 
 c = a * -b;
 c = a + b;

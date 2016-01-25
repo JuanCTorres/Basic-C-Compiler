@@ -6,10 +6,10 @@ test2.c BEGIN.
 No syntatical errors detected.
 
 ROOT 
-  FUNCTION my_func
+  FUNCTION my_func (type: INT_TYPE)
     FORMAL_PARAMS 
-      ID q
-      ID b
+      ID q (type: INT_TYPE)
+      ID b (type: INT_TYPE)
     SEQ 
       LOCAL_DECLARATIONS 
       STATEMENT_LIST 
@@ -19,26 +19,26 @@ ROOT
             ID b
         RETURN 
           INT_LITERAL 12345
-  FUNCTION your_func
+  FUNCTION your_func (type: VOID_TYPE)
     FORMAL_PARAMS 
     SEQ 
       LOCAL_DECLARATIONS 
-        ID gg
-        ID ee
+        ID gg (type: INT_TYPE)
+        ID ee (type: INT_TYPE)
       STATEMENT_LIST 
         PRINT 
           STRING_LITERAL LOL!\n
-  FUNCTION main
+  FUNCTION main (type: INT_TYPE)
     FORMAL_PARAMS 
     SEQ 
       LOCAL_DECLARATIONS 
-        ID a
-        ID t
-        ID y
-        ID u
-        ID w
-        ID v
-        ID ppp
+        ID a (type: INT_TYPE)
+        ID t (type: INT_TYPE)
+        ID y (type: INT_TYPE)
+        ID u (type: INT_TYPE)
+        ID w (type: INT_TYPE)
+        ID v (type: INT_TYPE)
+        ID ppp (type: INT_TYPE)
       STATEMENT_LIST 
         = 
           ID a

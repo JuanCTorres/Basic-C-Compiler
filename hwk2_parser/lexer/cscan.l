@@ -46,7 +46,7 @@ signedint [-+]?{integer}
 
 %%
 
-{white}      /* skip whitespace */
+{white}       /* skip whitespace */
 
 {id}         { strncpy(savedIdText, yytext, MAXTOKENLENGTH-1); oldstate = YY_START;BEGIN(FINAL);
         return lexLookup(yytext); }
@@ -64,8 +64,10 @@ signedint [-+]?{integer}
 
 
 <FINAL>[+-] {BEGIN(oldstate); return yytext[0];}
+<FINAL>[ \t]+
 <FINAL>[^+-] {yyless(0); BEGIN(oldstate); } 
 <FINAL>"++"|"--" {yyless(0); BEGIN(oldstate); }
+
 
 
 
@@ -100,8 +102,8 @@ signedint [-+]?{integer}
  /* changed single char to symbols */
 ";"          return ';';
 "="          return '=';
-"+"          return '+';
-"-"          return '-';
+"+"          {return '+';}
+"-"          {return '-';}
 "*"          return '*';
 "<"          return '<';
 ">"          return '>';

@@ -6,9 +6,9 @@ test3.c BEGIN.
 No syntatical errors detected.
 
 ROOT 
-  FUNCTION this_func
+  FUNCTION this_func (type: INT_TYPE)
     FORMAL_PARAMS 
-      ID g
+      ID g (type: INT_TYPE)
     SEQ 
       LOCAL_DECLARATIONS 
       STATEMENT_LIST 
@@ -16,7 +16,7 @@ ROOT
           STRING_LITERAL at this_func
         RETURN 
           INT_LITERAL 0
-  FUNCTION main
+  FUNCTION main (type: INT_TYPE)
     FORMAL_PARAMS 
     SEQ 
       LOCAL_DECLARATIONS 
@@ -56,7 +56,7 @@ ROOT
                     = 
                       ID qwe
                       INT_LITERAL 0
-                    ARRAY_TYPE av
+                    ARRAY_TYPE av (type: INT_TYPE)
                       INT_LITERAL 123
                   STATEMENT_LIST 
         DO_WHILE 
