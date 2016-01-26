@@ -1,0 +1,241 @@
+Result of test done to parser.
+
+test1.c BEGIN.
+===========================================================
+
+No syntatical errors detected.
+
+ROOT 
+  FUNCTION main (type: INT_TYPE)
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID a (type: INT_TYPE)
+        ID b (type: INT_TYPE)
+        ID c (type: INT_TYPE)
+        ID d (type: INT_TYPE)
+        ID e (type: INT_TYPE)
+        ID f (type: INT_TYPE)
+        ARRAY_TYPE cc (type: INT_TYPE)
+          INT_LITERAL 12
+      STATEMENT_LIST 
+        = 
+          ARRAY_TYPE cc
+            * 
+              ID a
+              ID b
+          * 
+            ID a
+            ID b
+        PRINT 
+          STRING_LITERAL test basics!\n
+        READ 
+          ID f
+        = 
+          ID c
+          - 
+            INT_LITERAL 1
+            ID b
+        = 
+          ID c
+          + 
+            ID b
+            INT_LITERAL 1
+        = 
+          ID c
+          - 
+            INT_LITERAL 5
+            INT_LITERAL 5
+        = 
+          ID c
+          * 
+            INT_LITERAL 1
+            INT_LITERAL -6
+        = 
+          ID c
+          - 
+            INT_LITERAL -2
+            INT_LITERAL 9
+        = 
+          ID c
+          + 
+            INT_LITERAL 1
+            INT_LITERAL 7
+        = 
+          ID c
+          - 
+            INT_LITERAL 1
+            INT_LITERAL -10
+        = 
+          ID c
+          - 
+            INT_LITERAL 22
+            INT_LITERAL -88
+        = 
+          ID c
+          * 
+            ID a
+            - 
+              ID b
+        = 
+          ID c
+          + 
+            ID a
+            ID b
+        = 
+          ID c
+          - 
+            ID a
+            ID b
+        = 
+          ID c
+          * 
+            ID a
+            ID b
+        = 
+          ID c
+          / 
+            ID a
+            ID b
+        = 
+          ID c
+          % 
+            ID a
+            ID b
+        = 
+          ID c
+          < 
+            ID a
+            ID b
+        = 
+          ID c
+          <= 
+            ID a
+            ID b
+        = 
+          ID c
+          > 
+            ID a
+            ID b
+        = 
+          ID c
+          >= 
+            ID a
+            ID b
+        = 
+          ID c
+          == 
+            ID a
+            ID b
+        = 
+          ID c
+          != 
+            ID a
+            ID b
+        = 
+          ID c
+          && 
+            ID a
+            ID b
+        = 
+          ID c
+          || 
+            ID a
+            ID b
+        = 
+          ID c
+          ! 
+            ID b
+        = 
+          ID c
+          - 
+            ID b
+        = 
+          ID c
+          ++ 
+            ID b
+        = 
+          ID c
+          -- 
+            ID b
+        = 
+          ID c
+          % 
+            ID a
+            INT_LITERAL 5
+        = 
+          ID c
+          INT_LITERAL -23
+        FOR 
+          = 
+            ID a
+            INT_LITERAL 100
+          < 
+            ID a
+            INT_LITERAL 200
+          ++ 
+            ID a
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = 
+                ID zz
+                INT_LITERAL -100
+            STATEMENT_LIST 
+              + 
+                ID a
+                ID b
+              = 
+                ID c
+                + 
+                  ID e
+                  ID f
+        WHILE 
+          == 
+            - 
+              / 
+                ID a
+                INT_LITERAL 5
+              + 
+                INT_LITERAL -3
+                INT_LITERAL -8
+            INT_LITERAL 100
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID tt (type: INT_TYPE)
+              ARRAY_TYPE uu (type: INT_TYPE)
+                INT_LITERAL 10
+            STATEMENT_LIST 
+              PRINT 
+                * 
+                  INT_LITERAL 12
+                  INT_LITERAL 21
+        DO_WHILE 
+          INT_LITERAL 1
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID asd (type: INT_TYPE)
+              ID dsa (type: INT_TYPE)
+            STATEMENT_LIST 
+              = 
+                ID asd
+                ID dsa
+        IF_ELSE_STMT 
+          == 
+            * 
+              ID a
+              ID b
+            ID c
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID x (type: INT_TYPE)
+            STATEMENT_LIST 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID y (type: INT_TYPE)
+            STATEMENT_LIST 
+        RETURN 
+          INT_LITERAL 0
+
+
+===========================================================
+test1.c finished.
