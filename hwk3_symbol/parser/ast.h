@@ -130,6 +130,8 @@ struct ast_node_struct {
 
 };
 
+//int get_max_unused_index(int** table);
+
 /* Create a node with a given token type and return a pointer to the
    node. */
 ast_node create_ast_node(ast_node_type node_type);

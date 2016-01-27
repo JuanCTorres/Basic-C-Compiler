@@ -16,9 +16,19 @@
 #include <assert.h>
 #include "ast.h"
 
+int table_size = 20;
 int lvl = 0;
 // Assuming program will have at most 10 sublevels, for now
 int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+// also, make more space in the init_tables array than in the sublevel array.
+//int [table_size][2] init_tables;
+
+// Initialize table to 0s
+//for(int i = 0; i < table_size; i++){
+//  for(int j = 0; j < 2; j++){
+//    table[i][j] = 0;
+//  }
+//}
 
 
 /* Create a node with a given token type and return a pointer to the
@@ -28,6 +38,16 @@ ast_node create_ast_node(ast_node_type node_type) {
   new_node->node_type = node_type;
   return new_node;
 }
+
+// int get_max_unused_index(int** table){
+//   //int max = 1;  // start at 1, as the first entry in array will always be for 0.0
+//   for(int i = 1; i < table_size; i++){
+//     if(table[i][0] == 0 && table[i][1] == 0){
+//       return i;
+//     }
+//   }
+//   return -1
+// }
 
 /* Print the contents of a subtree of an abstract syntax tree, given
    the root of the subtree and the depth of the subtree root. */
@@ -83,7 +103,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       break;
   }
 
-  printf("(%d, %d)", lvl, sublvl);
+  printf("(%d, %d) ", lvl, sublvl);
+  printf("(Child of %d, %d)", lvl - 1, siblings[lvl - 1]);
   printf("\n");
 
   /* Recurse on each child of the subtree root, with a depth one
