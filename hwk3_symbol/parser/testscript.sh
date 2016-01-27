@@ -61,6 +61,35 @@ printf "test4.c finished.\n" >> "${file}"
 
 
 
+
+file="./testoutputs/test5.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >> "${file}"
+
+printf "test5.c BEGIN.\n" >> "${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser < ./testinputs/test5.c >> "${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "test5.c finished.\n" >> "${file}"
+
+
+
+
+file="./testoutputs/test6.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >> "${file}"
+
+printf "test6.c BEGIN.\n" >> "${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser < ./testinputs/test6.c >> "${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "test6.c finished.\n" >> "${file}"
+
+
+
+
 file="./testoutputs/test.error.c.output.`date +"%a_%b_%d_%T_%Y"`"
 printf "Result of test done to parser.\n\n" >>"${file}"
 

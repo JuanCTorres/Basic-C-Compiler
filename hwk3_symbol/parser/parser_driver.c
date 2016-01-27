@@ -25,15 +25,15 @@
   //yydebug = 1; 	//uncomment to enable tracing
  	noRoot = yyparse();
 
- 	if (parseError)	{	
+ 	if (parseError)	{
  		fprintf(stderr, "WARNING: There were parse errors.\nParse tree may be ill-formed.\n\n");
 	}
 	else {
 		printf("No syntatical errors detected.\n\n");
 	}
  	if (!noRoot)
- 		print_ast(root, 0);
- 	else 
+ 		print_ast(root, 0, 0, 0);
+ 	else
  		fprintf(stderr,"Error: NO root!\n");
 
  	return 0;

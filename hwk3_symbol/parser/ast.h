@@ -1,4 +1,4 @@
-/* 
+/*
  * ast.h
  *
  * File defining an enum and a struct for node types in an abstract
@@ -23,8 +23,8 @@ typedef enum { ROOT_N,
 	       OP_ASSIGN_N, OP_PLUS_N, OP_MINUS_N, OP_NEG_N, OP_TIMES_N, OP_DIVIDE_N,
 	       OP_EQUALS_N,
 	       IF_STMT_N, IF_ELSE_STMT_N,
-	       ID_N, INT_LITERAL_N, 
-         OP_MODULUS_N, 
+	       ID_N, INT_LITERAL_N,
+         OP_MODULUS_N,
          OP_LESS_THAN_N,
          OP_LESS_EQUAL_N,
          OP_GREATER_THAN_N,
@@ -136,6 +136,6 @@ ast_node create_ast_node(ast_node_type node_type);
 
 /* Print the contents of a subtree of an abstract syntax tree, given
    the root of the subtree and the depth of the subtree root. */
-void print_ast(ast_node root, int depth);
+void print_ast(ast_node root, int depth, int lvl, int sublvl);
 
 #endif
