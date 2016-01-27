@@ -43,7 +43,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
-    case SEQ_N:
+    case SEQ_N:     // change main level when see a new sequence
       lvl++;
       break;
 
@@ -93,7 +93,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     print_ast(child, depth + 1, lvl, siblings[lvl]);
 
   if(root->node_type == SEQ_N){//} || root->node_type == FORMAL_PARAMS_N){
-    siblings[lvl]++;
+    siblings[lvl]++;  // change sibling level after you're done printing all
+                      // subtrees, i.e., after done recursing.
   }
 
 }
