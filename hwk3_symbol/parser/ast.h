@@ -112,6 +112,9 @@ static val_name_pair token_table[] = {
 #define NODE_INDEX(X)    ( (X) - ROOT_N)
 #define NODE_NAME(X)     ( token_table[ NODE_INDEX((X)) ].name)
 
+#define MAX(x, y) (((x) > (y)) ? (x) : (y)) // For fixing one error in hash table creation
+
+
 
 /* Structure for nodes of the abstract syntax tree.  Uses the
    left-child/right-sibling representation, so that each node can have

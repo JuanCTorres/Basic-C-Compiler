@@ -104,7 +104,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   }
 
   printf("(%d, %d) ", lvl, sublvl);
-  printf("(Child of %d, %d)", lvl - 1, siblings[lvl - 1]);
+  printf("(Child of %d, %d)", MAX(lvl - 1, 0), siblings[lvl - 1]);
   printf("\n");
 
   /* Recurse on each child of the subtree root, with a depth one
