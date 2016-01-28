@@ -67,6 +67,10 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       lvl++;
       break;
 
+    case FORMAL_PARAMS_N:
+      lvl++;
+      break;
+
     //case CALL_N:
     //  siblings[lvl]++;
     //  break;
