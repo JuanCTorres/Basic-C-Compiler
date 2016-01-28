@@ -5,9 +5,9 @@ test1.c BEGIN.
 
 No syntatical errors detected.
 
-ROOT (0, 0) (Child of -1, 0)
-  FUNCTION main (type: INT_TYPE)(0, 0) (Child of -1, 0)
-    FORMAL_PARAMS (0, 0) (Child of -1, 0)
+ROOT (0, 0) (Child of 0, 0)
+  FUNCTION main (type: INT_TYPE)(0, 0) (Child of 0, 0)
+    FORMAL_PARAMS (1, 0) (Child of 0, 0)
     SEQ (1, 0) (Child of 0, 0)
       LOCAL_DECLARATIONS (1, 0) (Child of 0, 0)
         ID a (type: INT_TYPE)(1, 0) (Child of 0, 0)
