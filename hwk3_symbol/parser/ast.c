@@ -17,7 +17,6 @@
 #include "ast.h"
 
 int table_size = 20;
-int lvl = 0;
 // Assuming program will have at most 10 sublevels, for now
 int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 // also, make more space in the init_tables array than in the sublevel array.

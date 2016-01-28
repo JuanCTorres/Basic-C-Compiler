@@ -1,0 +1,63 @@
+Result of test done to parser.
+
+test6.c BEGIN.
+===========================================================
+
+No syntatical errors detected.
+
+ROOT (0, 0) (Child of -1, 0)
+  FUNCTION myfunc (type: INT_TYPE)(0, 0) (Child of -1, 0)
+    FORMAL_PARAMS (0, 0) (Child of -1, 0)
+      ID a (type: INT_TYPE)(0, 0) (Child of -1, 0)
+      ID b (type: INT_TYPE)(0, 0) (Child of -1, 0)
+    SEQ (1, 0) (Child of 0, 0)
+      LOCAL_DECLARATIONS (1, 0) (Child of 0, 0)
+      STATEMENT_LIST (1, 0) (Child of 0, 0)
+        RETURN (1, 0) (Child of 0, 0)
+          + (1, 0) (Child of 0, 0)
+            ID a(1, 0) (Child of 0, 0)
+            ID b(1, 0) (Child of 0, 0)
+  FUNCTION main (type: INT_TYPE)(0, 0) (Child of -1, 0)
+    FORMAL_PARAMS (0, 0) (Child of -1, 0)
+    SEQ (1, 0) (Child of 0, 0)
+      LOCAL_DECLARATIONS (1, 1) (Child of 0, 0)
+      STATEMENT_LIST (1, 1) (Child of 0, 0)
+        SEQ (2, 1) (Child of 1, 1)
+          LOCAL_DECLARATIONS (2, 0) (Child of 1, 1)
+            = (2, 0) (Child of 1, 1)
+              ID c(2, 0) (Child of 1, 1)
+              INT_LITERAL 4(2, 0) (Child of 1, 1)
+            = (2, 0) (Child of 1, 1)
+              ID d(2, 0) (Child of 1, 1)
+              INT_LITERAL 5(2, 0) (Child of 1, 1)
+          STATEMENT_LIST (2, 0) (Child of 1, 1)
+            SEQ (3, 0) (Child of 2, 0)
+              LOCAL_DECLARATIONS (3, 0) (Child of 2, 0)
+                = (3, 0) (Child of 2, 0)
+                  ID e(3, 0) (Child of 2, 0)
+                  INT_LITERAL 6(3, 0) (Child of 2, 0)
+              STATEMENT_LIST (3, 0) (Child of 2, 0)
+            CALL (2, 0) (Child of 1, 1)
+              FUNCTION myfunc(2, 0) (Child of 1, 1)
+                ID f(2, 0) (Child of 1, 1)
+                ID g(2, 0) (Child of 1, 1)
+            CALL (2, 0) (Child of 1, 1)
+              FUNCTION newfunc(2, 0) (Child of 1, 1)
+                ID h(2, 0) (Child of 1, 1)
+                ID i(2, 0) (Child of 1, 1)
+            SEQ (3, 0) (Child of 2, 0)
+              LOCAL_DECLARATIONS (3, 1) (Child of 2, 0)
+                = (3, 1) (Child of 2, 0)
+                  ID mynewvar(3, 1) (Child of 2, 0)
+                  INT_LITERAL 9(3, 1) (Child of 2, 0)
+              STATEMENT_LIST (3, 1) (Child of 2, 0)
+            = (2, 0) (Child of 1, 1)
+              ID j(2, 0) (Child of 1, 1)
+              INT_LITERAL 3(2, 0) (Child of 1, 1)
+        = (1, 1) (Child of 0, 0)
+          ID k(1, 1) (Child of 0, 0)
+          INT_LITERAL 8(1, 1) (Child of 0, 0)
+
+
+===========================================================
+test6.c finished.
