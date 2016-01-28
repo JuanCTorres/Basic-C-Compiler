@@ -6,7 +6,7 @@ int myfunc(int b, int c){ // 0.0
 
 }
 
-int main(){  // 0.0
+int main(int uu, int ww){  // 0.0
 	int i;     // 1.1
 	for(i = 4; i < 4; ++i){ // 1.1
 		int a = 3;            // 2.1

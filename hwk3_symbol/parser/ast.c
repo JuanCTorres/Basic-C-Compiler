@@ -17,6 +17,7 @@
 #include "ast.h"
 
 int table_size = 20;
+//int lvl = 0;
 // Assuming program will have at most 10 sublevels, for now
 int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 // also, make more space in the init_tables array than in the sublevel array.
@@ -63,6 +64,10 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   /* Print attributes specific to node types. */
   switch (root->node_type) {
     case SEQ_N:     // change main level when see a new sequence
+      lvl++;
+      break;
+
+    case FORMAL_PARAMS_N:
       lvl++;
       break;
 
