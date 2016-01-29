@@ -197,7 +197,7 @@ symhashtable_t *find_hashtable(symhashtable_t  *root, int lvl, int sib) {
     symhashtable_t *res, *child;
     res = NULL;
     for(child = root->child; child != NULL  && res == NULL; child = child->rightsib) {
-      if(child != NULL) {printf("in find) lvl: %d, sibno: %d\n", child->level,child->sibno);}
+      //if(child != NULL) {printf("in find) lvl: %d, sibno: %d\n", child->level,child->sibno);}
       res = find_hashtable(child, lvl, sib);
     }
 
@@ -227,8 +227,8 @@ symhashtable_t *make_insert_hashtable(symhashtable_t  *root, int lvl, int sibno,
   //insert as rightmost child of parent
   if(parent_hashtable->child != NULL) {
     for(temp = parent_hashtable->child ; temp->rightsib != NULL; temp = temp->rightsib) {
+      ;}
       temp->rightsib = hashtable;
-    }
   }
   else {
     parent_hashtable->child = hashtable;
@@ -263,13 +263,13 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       //does hashtable exist with given lvl, siblvl (use find_hashtable)
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
-        insert_into_symhashtable(hash, root->value_string);
+        //insert_into_symhashtable(hash, root->value_string);
         printf("found \n");
       }
       else {
         printf("not found \n");
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-        insert_into_symhashtable(hash, root->value_string);
+        //insert_into_symhashtable(hash, root->value_string);
       }
         //if yes
           // return point to that hashtable
@@ -284,7 +284,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       if(root->return_type != 0) {  //declaration
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
-        insert_into_symhashtable(hash, root->value_string);
+        //insert_into_symhashtable(hash, root->value_string);
         printf("found \n");
       }
       else {

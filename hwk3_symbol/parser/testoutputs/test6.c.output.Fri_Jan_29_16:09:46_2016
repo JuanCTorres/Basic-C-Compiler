@@ -3,7 +3,6 @@ Result of test done to parser.
 test6.c BEGIN.
 ===========================================================
 
-Assertion failed: (parent_hashtable != NULL), function make_insert_hashtable, file symtab.c, line 220.
 No syntatical errors detected.
 
 ROOT (0, 0) (Child of 0, 0)
@@ -68,8 +67,33 @@ found
 found 
 found 
 not found 
+found 
 not found 
+found 
+found 
+found 
+found 
+found 
 not found 
+found 
+found 
+found 
+found 
+found 
+not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+lvl: 0, sibno: 0 
+  lvl: 1, sibno: 0 
+  lvl: 1, sibno: 1 
+    lvl: 2, sibno: 0 
+      lvl: 3, sibno: 0 
+      lvl: 3, sibno: 1 
 
 
 ===========================================================

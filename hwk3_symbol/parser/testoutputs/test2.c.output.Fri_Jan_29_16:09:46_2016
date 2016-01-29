@@ -85,13 +85,15 @@ ROOT (0, 0) (Child of 0, 0)
           SEQ (2, 2) (Child of 1, 2)
             LOCAL_DECLARATIONS (2, 1) (Child of 1, 2)
             STATEMENT_LIST (2, 1) (Child of 1, 2)
+              = (2, 1) (Child of 1, 2)
+                ID qwert(2, 1) (Child of 1, 2)
+                INT_LITERAL 123(2, 1) (Child of 1, 2)
               FOR (2, 1) (Child of 1, 2)
                 = (2, 1) (Child of 1, 2)
                   ID t(2, 1) (Child of 1, 2)
                   INT_LITERAL 0(2, 1) (Child of 1, 2)
                 < (2, 1) (Child of 1, 2)
-    Assertion failed: (parent_hashtable != NULL), function make_insert_hashtable, file symtab.c, line 220.
-              ID t(2, 1) (Child of 1, 2)
+                  ID t(2, 1) (Child of 1, 2)
                   INT_LITERAL 99(2, 1) (Child of 1, 2)
                 ++ (2, 1) (Child of 1, 2)
                   ID t(2, 1) (Child of 1, 2)
@@ -133,32 +135,83 @@ found
 found 
 found 
 not found 
-not found 
-not found 
-not found 
-not found 
-not found 
+found 
+found 
+found 
+found 
+found 
 found 
 not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
 not found 
+found 
+found 
+found 
 not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
 not found 
+found 
+found 
 not found 
+found 
+found 
+found 
 not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
 not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
-not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+lvl: 0, sibno: 0 
+  lvl: 1, sibno: 0 
+  lvl: 1, sibno: 1 
+  lvl: 1, sibno: 2 
+    lvl: 2, sibno: 0 
+      lvl: 3, sibno: 0 
+        lvl: 4, sibno: 0 
+      lvl: 3, sibno: 1 
+    lvl: 2, sibno: 1 
+      lvl: 3, sibno: 2 
 
 
 ===========================================================
