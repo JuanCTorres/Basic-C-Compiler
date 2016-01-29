@@ -90,7 +90,8 @@ ROOT (0, 0) (Child of 0, 0)
                   ID t(2, 1) (Child of 1, 2)
                   INT_LITERAL 0(2, 1) (Child of 1, 2)
                 < (2, 1) (Child of 1, 2)
-                  ID t(2, 1) (Child of 1, 2)
+    Assertion failed: (parent_hashtable != NULL), function make_insert_hashtable, file symtab.c, line 220.
+              ID t(2, 1) (Child of 1, 2)
                   INT_LITERAL 99(2, 1) (Child of 1, 2)
                 ++ (2, 1) (Child of 1, 2)
                   ID t(2, 1) (Child of 1, 2)
@@ -120,6 +121,44 @@ ROOT (0, 0) (Child of 0, 0)
           FUNCTION your_func(1, 2) (Child of 0, 0)
         RETURN (1, 2) (Child of 0, 0)
           INT_LITERAL 0(1, 2) (Child of 0, 0)
+found 
+found 
+not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
+not found 
 
 
 ===========================================================

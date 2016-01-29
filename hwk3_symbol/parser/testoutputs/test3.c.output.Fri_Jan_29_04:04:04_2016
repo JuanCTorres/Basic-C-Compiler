@@ -92,7 +92,8 @@ ROOT (0, 0) (Child of 0, 0)
                         ID d(3, 1) (Child of 2, 3)
                         = (3, 1) (Child of 2, 3)
                           ID e(3, 1) (Child of 2, 3)
-                          ID f(3, 1) (Child of 2, 3)
+                          ID f(3, 1) Assertion failed: (parent_hashtable != NULL), function make_insert_hashtable, file symtab.c, line 220.
+(Child of 2, 3)
         = (1, 1) (Child of 0, 0)
           ID d(1, 1) (Child of 0, 0)
           INT_LITERAL 10(1, 1) (Child of 0, 0)
@@ -104,6 +105,21 @@ ROOT (0, 0) (Child of 0, 0)
             - (1, 1) (Child of 0, 0)
               INT_LITERAL 5(1, 1) (Child of 0, 0)
               INT_LITERAL 13(1, 1) (Child of 0, 0)
+found 
+found 
+not found 
+found 
+found 
+found 
+found 
+found 
+found 
+found 
+not found 
+not found 
+not found 
+not found 
+not found 
 
 
 ===========================================================

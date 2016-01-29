@@ -43,6 +43,7 @@
  		print_ast(root, 0, 0, 0);
  		symboltable_t *something = create_symboltable();
  		build_symbol_table(root, 0, 0, something);
+ 		pretty_print(something->root, 0);
  	}
 
  	else

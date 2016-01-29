@@ -81,4 +81,7 @@ symhashtable_t *create_symhashtable(int entries);
 
 void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab);
 
+void pretty_print(symhashtable_t *hash, int a);
+
+
 #endif
