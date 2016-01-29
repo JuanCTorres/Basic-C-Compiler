@@ -7,16 +7,12 @@
  * You should extend the functions as appropriate.
  */
 
-#include <stdio.h>
+
 #include <stdlib.h>
-#include "string.h"
-#include "assert.h"
-#include "ast.h"
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
 #include "symtab.h"
-
-
-
-
 
 #define NOHASHSLOT -1
 
@@ -243,14 +239,6 @@ symhashtable_t *make_insert_hashtable(symhashtable_t  *root, int lvl, int sibno,
 
 
 
-
-
-
-
-
-
-
-
 void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab) {
   //calculate the scope for the variable/func declaration
   //calculate the parent for that variable/func declaration
@@ -275,6 +263,10 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
         insert_into_symhashtable(hash, root->value_string);
+
+      }
+      else {
+
 
       }
         //if yes
@@ -317,6 +309,14 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
 
 }
+
+
+
+
+
+
+
+
 
 
 

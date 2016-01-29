@@ -11,16 +11,16 @@
  *
  */
 
-#include "ast.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
 
+#include "ast.h"
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y)) // For fixing one error in hash table creation
+int sibl[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 int table_size = 20;
 //int lvl = 0;
 // Assuming program will have at most 10 sublevels, for now
-int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 // also, make more space in the init_tables array than in the sublevel array.
 //int [table_size][2] init_tables;
 
@@ -115,18 +115,27 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   }
 
   printf("(%d, %d) ", lvl, sublvl);
-  printf("(Child of %d, %d)", MAX(lvl - 1, 0), siblings[lvl - 1]);
+  printf("(Child of %d, %d)", MAX(lvl - 1, 0), sibl[lvl - 1]);
   printf("\n");
 
   /* Recurse on each child of the subtree root, with a depth one
      greater than the root's depth. */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling)
-    print_ast(child, depth + 1, lvl, siblings[lvl]);
+    print_ast(child, depth + 1, lvl, sibl[lvl]);
 
   if(root->node_type == SEQ_N){//} || root->node_type == FORMAL_PARAMS_N){
-    siblings[lvl]++;  // change sibling level after you're done printing all
+    sibl[lvl]++;  // change sibling level after you're done printing all
                       // subtrees, i.e., after done recursing.
   }
 
 }
+
+
+
+
+
+
+
+
+

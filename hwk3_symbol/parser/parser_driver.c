@@ -10,9 +10,16 @@
  * Last modified date: 01/21/16
  */
 
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 #include "ast.h"
 #include "symtab.h"
+
+
+
+
 
  ast_node root = NULL;
 
@@ -32,8 +39,12 @@
 	else {
 		printf("No syntatical errors detected.\n\n");
 	}
- 	if (!noRoot)
+ 	if (!noRoot) {
  		print_ast(root, 0, 0, 0);
+ 		symboltable_t *something = create_symboltable();
+ 		build_symbol_table(root, 0, 0, something);
+ 	}
+
  	else
  		fprintf(stderr,"Error: NO root!\n");
 

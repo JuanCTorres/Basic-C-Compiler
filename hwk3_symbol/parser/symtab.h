@@ -9,6 +9,9 @@
 #ifndef SYMTAB_H_
 #define SYMTAB_H_
 
+#include "ast.h"
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
 typedef struct scope {
   int level;

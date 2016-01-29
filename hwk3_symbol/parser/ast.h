@@ -12,6 +12,11 @@
 
 #ifndef AST_H_
 #define AST_H_
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h> 
+
 
 /* You should fill in the various AST node types.  The following are given
    to you to start with.  You may add or remove node types as you
@@ -113,7 +118,6 @@ static val_name_pair token_table[] = {
 #define NODE_INDEX(X)    ( (X) - ROOT_N)
 #define NODE_NAME(X)     ( token_table[ NODE_INDEX((X)) ].name)
 
-#define MAX(x, y) (((x) > (y)) ? (x) : (y)) // For fixing one error in hash table creation
 
 
 
