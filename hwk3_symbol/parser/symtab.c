@@ -123,8 +123,9 @@ symnode_t *create_symnode(char *name, symhashtable_t *hashtable) {
 
 /* Insert a new entry into a symhashtable, but only if it is not
    already present. */
-symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, char *name) {
+symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode) {
 
+  char *name = astnode->value_string;
   assert(hashtable);
 
   int slot = hashPJW(name, hashtable->size);
@@ -134,6 +135,26 @@ symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, char *name) {
 
   if (node == NULL) {
     node = create_symnode(name,hashtable);
+
+    if(astnode->node_type == FUNC_DECLARATION_N) {
+      //printf("FUNC_DEC detected!");
+      if(astnode->return_type == INT_TYPE_N) {
+        node->type = FUNC_INT_T;
+        //printf(" %s\n", TYPE_NAME(node->type));
+      }
+      else if(astnode->return_type == VOID_TYPE_N) {
+        node->type = FUNC_VOID_T;
+        //printf(" %s\n", TYPE_NAME(node->type));
+      }
+    }
+    else if(astnode->node_type == ID_N) {
+      //printf("VAR detected!");
+      if(astnode->return_type == INT_TYPE_N) {
+        node->type = VAR_INT_T;
+        //printf(" %s\n", TYPE_NAME(node->type));
+      }
+    }
+
     node->next = hashtable->table[slot];
     hashtable->table[slot] = node;
   }
@@ -144,8 +165,9 @@ symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, char *name) {
 /* Insert an entry into the innermost scope of symbol table.  First
    make sure it's not already in that scope.  Return a pointer to the
    entry. */
-symnode_t *insert_into_symboltable(symboltable_t *symtab, char *name) {
+symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode) {
 
+  char *name = astnode->value_string;
   assert(symtab);
   assert(symtab->leaf);
   
@@ -154,7 +176,7 @@ symnode_t *insert_into_symboltable(symboltable_t *symtab, char *name) {
   /* error check!! */
   
   if (node == NULL) {
-    node = insert_into_symhashtable(symtab->leaf, name);
+    node = insert_into_symhashtable(symtab->leaf, astnode);
     return node;
   } else {
     return NULL;
@@ -171,24 +193,6 @@ symnode_t *insert_into_symboltable(symboltable_t *symtab, char *name) {
   If found return a pointer to it.
   Otherwise, return NULL */
 symhashtable_t *find_hashtable(symhashtable_t  *root, int lvl, int sib) {
-
-
-  // assert(symtab);
-  // assert(symtab->leaf != NULL);
-
-  // for(hashtable = symtab->leaf; hashtable != NULL; hashtable = hashtable->parent) {
-  //   for(hashtable2 = hashtable; hashtable2 != NULL; hashtable2 = hashtable2->rightsib) {
-  //     if(hashtable2->level == lvl && hashtable2->sibno == sib) {
-  //       assert(hashtable2 != NULL);
-  //       return hashtable2;
-  //     }
-
-  //   }
-
-  // }
-
-  // return NULL;
-
 
     if (lvl == root->level && sib == root->sibno) {
       return(root);
@@ -263,34 +267,26 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       //does hashtable exist with given lvl, siblvl (use find_hashtable)
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
-        //insert_into_symhashtable(hash, root->value_string);
-        printf("found \n");
+        insert_into_symhashtable(hash, root);
       }
       else {
-        printf("not found \n");
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-        //insert_into_symhashtable(hash, root->value_string);
+        insert_into_symhashtable(hash, root);
       }
-        //if yes
-          // return point to that hashtable
-        //if no
-          // return null
-      //if it does not exist, make that hashtable and attach to appropriate parent
-      //insert the node appropriatly
       break;
+
     case CALL_N:
       //need to check if it has been previously declared.
+      break;
     case ID_N:      /* print the id */
       if(root->return_type != 0) {  //declaration
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
-        //insert_into_symhashtable(hash, root->value_string);
-        printf("found \n");
+        insert_into_symhashtable(hash, root);
       }
       else {
-        printf("not found \n");
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-        insert_into_symhashtable(hash, root->value_string);
+        insert_into_symhashtable(hash, root);
       }
       }
       else {  //don't know if previously declared
@@ -300,12 +296,8 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
     
     default:
       //printf("at default of switch\n");
-    hash = find_hashtable(symtab->root, level, sibno);
-      if(hash != NULL) {
-        printf("found \n");
-      }
-      else {
-        printf("not found \n");
+      hash = find_hashtable(symtab->root, level, sibno);
+      if(hash == NULL) {
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       }
       break;
@@ -337,7 +329,19 @@ void pretty_print(symhashtable_t *root, int depth) {
     printf("  ");
 
   /* Print the node type. */
-  printf("lvl: %d, sibno: %d \n", root->level, root->sibno);
+  printf("lvl: %d, sibno: %d contains:\n", root->level, root->sibno);
+
+
+
+  for(int j = 0; j < HASHSIZE+1; j++ ) {
+    for(symnode_t *node = root->table[j]; node != NULL; node = node->next) {
+        for (i = 0; i < depth + 1; i++) {
+          printf("  ");
+        }
+        printf("%s %s\n", node->name, TYPE_NAME(node->type));
+    }
+  }
+
 
 
   /* Print attributes specific to node types. */

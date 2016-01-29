@@ -62,54 +62,30 @@ ROOT (0, 0) (Child of 0, 0)
                   ID yy(3, 0) (Child of 2, 3)
                   INT_LITERAL 2(3, 0) (Child of 2, 3)
               STATEMENT_LIST (3, 0) (Child of 2, 3)
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-lvl: 0, sibno: 0 
-  lvl: 1, sibno: 0 
-    lvl: 2, sibno: 0 
-  lvl: 1, sibno: 1 
-    lvl: 2, sibno: 1 
-    lvl: 2, sibno: 2 
-    lvl: 2, sibno: 3 
-      lvl: 3, sibno: 0 
+FUNC_DEC detected! FUNC_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+FUNC_DEC detected! FUNC_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+lvl: 0, sibno: 0 contains:
+  main FUNC_INT
+  myfunc FUNC_INT
+  lvl: 1, sibno: 0 contains:
+    b VAR_INT
+    c VAR_INT
+    lvl: 2, sibno: 0 contains:
+      c VAR_INT
+  lvl: 1, sibno: 1 contains:
+    uu VAR_INT
+    i VAR_INT
+    ww VAR_INT
+    lvl: 2, sibno: 1 contains:
+    lvl: 2, sibno: 2 contains:
+    lvl: 2, sibno: 3 contains:
+      lvl: 3, sibno: 0 contains:
 
 
 ===========================================================

@@ -123,95 +123,44 @@ ROOT (0, 0) (Child of 0, 0)
           FUNCTION your_func(1, 2) (Child of 0, 0)
         RETURN (1, 2) (Child of 0, 0)
           INT_LITERAL 0(1, 2) (Child of 0, 0)
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-not found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-lvl: 0, sibno: 0 
-  lvl: 1, sibno: 0 
-  lvl: 1, sibno: 1 
-  lvl: 1, sibno: 2 
-    lvl: 2, sibno: 0 
-      lvl: 3, sibno: 0 
-        lvl: 4, sibno: 0 
-      lvl: 3, sibno: 1 
-    lvl: 2, sibno: 1 
-      lvl: 3, sibno: 2 
+FUNC_DEC detected! FUNC_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+FUNC_DEC detected! FUNC_VOID
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+FUNC_DEC detected! FUNC_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+VAR detected! VAR_INT
+lvl: 0, sibno: 0 contains:
+  main FUNC_INT
+  your_func FUNC_VOID
+  my_func FUNC_INT
+  lvl: 1, sibno: 0 contains:
+    b VAR_INT
+    q VAR_INT
+  lvl: 1, sibno: 1 contains:
+    ee VAR_INT
+    gg VAR_INT
+  lvl: 1, sibno: 2 contains:
+    a VAR_INT
+    t VAR_INT
+    u VAR_INT
+    v VAR_INT
+    w VAR_INT
+    y VAR_INT
+    ppp VAR_INT
+    lvl: 2, sibno: 0 contains:
+      lvl: 3, sibno: 0 contains:
+        lvl: 4, sibno: 0 contains:
+      lvl: 3, sibno: 1 contains:
+    lvl: 2, sibno: 1 contains:
+      lvl: 3, sibno: 2 contains:
 
 
 ===========================================================
