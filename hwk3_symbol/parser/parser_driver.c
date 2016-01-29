@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include "ast.h"
+#include "symtab.h"
 
  ast_node root = NULL;
 

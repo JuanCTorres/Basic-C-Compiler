@@ -108,8 +108,7 @@ static val_name_pair token_table[] = {
   { LOCAL_DECLARATIONS_N, "LOCAL_DECLARATIONS"},
   { CALL_N, "CALL"},
   { FUNC_DECLARATION_N, "FUNC_DECLARATION"},
-  { 0, NULL }
-};
+  { 0, NULL} };
 
 #define NODE_INDEX(X)    ( (X) - ROOT_N)
 #define NODE_NAME(X)     ( token_table[ NODE_INDEX((X)) ].name)

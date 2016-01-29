@@ -11,10 +11,11 @@
  *
  */
 
+#include "ast.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "ast.h"
+
 
 int table_size = 20;
 //int lvl = 0;
