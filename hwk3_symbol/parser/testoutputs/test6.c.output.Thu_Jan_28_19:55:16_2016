@@ -6,7 +6,7 @@ test6.c BEGIN.
 No syntatical errors detected.
 
 ROOT (0, 0) (Child of 0, 0)
-  FUNCTION myfunc (type: INT_TYPE)(0, 0) (Child of 0, 0)
+  FUNC_DECLARATION myfunc (type: INT_TYPE)(0, 0) (Child of 0, 0)
     FORMAL_PARAMS (1, 0) (Child of 0, 0)
       ID a (type: INT_TYPE)(1, 0) (Child of 0, 0)
       ID b (type: INT_TYPE)(1, 0) (Child of 0, 0)
@@ -17,7 +17,7 @@ ROOT (0, 0) (Child of 0, 0)
           + (1, 0) (Child of 0, 0)
             ID a(1, 0) (Child of 0, 0)
             ID b(1, 0) (Child of 0, 0)
-  FUNCTION main (type: INT_TYPE)(0, 0) (Child of 0, 0)
+  FUNC_DECLARATION main (type: INT_TYPE)(0, 0) (Child of 0, 0)
     FORMAL_PARAMS (1, 0) (Child of 0, 0)
     SEQ (1, 0) (Child of 0, 0)
       LOCAL_DECLARATIONS (1, 1) (Child of 0, 0)

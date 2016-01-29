@@ -6,7 +6,7 @@ test3.c BEGIN.
 No syntatical errors detected.
 
 ROOT (0, 0) (Child of 0, 0)
-  FUNCTION this_func (type: INT_TYPE)(0, 0) (Child of 0, 0)
+  FUNC_DECLARATION this_func (type: INT_TYPE)(0, 0) (Child of 0, 0)
     FORMAL_PARAMS (1, 0) (Child of 0, 0)
       ID g (type: INT_TYPE)(1, 0) (Child of 0, 0)
     SEQ (1, 0) (Child of 0, 0)
@@ -16,7 +16,7 @@ ROOT (0, 0) (Child of 0, 0)
           STRING_LITERAL at this_func(1, 0) (Child of 0, 0)
         RETURN (1, 0) (Child of 0, 0)
           INT_LITERAL 0(1, 0) (Child of 0, 0)
-  FUNCTION main (type: INT_TYPE)(0, 0) (Child of 0, 0)
+  FUNC_DECLARATION main (type: INT_TYPE)(0, 0) (Child of 0, 0)
     FORMAL_PARAMS (1, 0) (Child of 0, 0)
     SEQ (1, 0) (Child of 0, 0)
       LOCAL_DECLARATIONS (1, 1) (Child of 0, 0)

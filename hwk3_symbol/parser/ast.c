@@ -102,6 +102,12 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       //printf("test123\n");
       break;
 
+    case FUNC_DECLARATION_N:
+      printf("%s", root->value_string);
+      assert(root->return_type != 0);
+      if(root->return_type != 0)
+      printf(" (type: %s)", NODE_NAME(root->return_type));
+
     default:
       //printf("at default of switch\n");
       break;

@@ -6,7 +6,7 @@ test4.c BEGIN.
 No syntatical errors detected.
 
 ROOT (0, 0) (Child of 0, 0)
-  FUNCTION main (type: VOID_TYPE)(0, 0) (Child of 0, 0)
+  FUNC_DECLARATION main (type: VOID_TYPE)(0, 0) (Child of 0, 0)
     FORMAL_PARAMS (1, 0) (Child of 0, 0)
     SEQ (1, 0) (Child of 0, 0)
       LOCAL_DECLARATIONS (1, 0) (Child of 0, 0)

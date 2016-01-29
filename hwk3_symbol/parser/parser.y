@@ -159,7 +159,7 @@ varDecl : ID_T  {
 ;
 
 funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtext from being overwritten */
-  ast_node t1 = create_ast_node(FUNCTION_N);
+  ast_node t1 = create_ast_node(FUNC_DECLARATION_N);
   t1->value_string = strdup(savedIdText);
   t1->return_type = INT_TYPE_N;
   $2 = t1; 
@@ -171,12 +171,12 @@ funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtex
   $$ = t;
 }
 | VOID_T ID_T { /* embedded action required to prevent savedIDtext from being overwritten */
-  ast_node t1 = create_ast_node(FUNCTION_N);
+  ast_node t1 = create_ast_node(FUNC_DECLARATION_N);
   t1->value_string = strdup(savedIdText);
   t1->return_type = VOID_TYPE_N;
   $2 = t1; 
   } '(' formalParams ')' compoundStatement {
-/* removed functypespecifier, replaced with INT_T */
+/* removed functypespecifier, replaced with void_t */
   ast_node t = $2;
   t->left_child = $5;
   t->left_child->right_sibling = $7;
