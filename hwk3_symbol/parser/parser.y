@@ -1,11 +1,11 @@
 /*
- * 
+ *
  * parser.y
  *
  * This bison file contains the grammar for the subset of c
  * as well as the algorithm to build a abstract syntax tree from
- * the tokens passed from parse.l flex file. 
- * 
+ * the tokens passed from parse.l flex file.
+ *
  * Written by Seok Jun Bing, Juan Torres.
  *
  * Please note that, in our AST, all the conditional statements are placed as a left child to a node
@@ -75,20 +75,20 @@ extern char savedLiteralText[];
 program : declarationList {
   ast_node t = create_ast_node(ROOT_N);
   t->left_child = $1;
-  root = $$ = t; 
+  root = $$ = t;
 }
 ;
 
 declarationList : declarationList declaration {
   ast_node t = $1;
   assert(t != NULL);
-    while (t->right_sibling != NULL) { 
-      t = t->right_sibling; 
+    while (t->right_sibling != NULL) {
+      t = t->right_sibling;
     }
     t->right_sibling = $2;
     $$ = $1;
  }
-|  declaration { 
+|  declaration {
    $$ = $1;
  }
 |  declarationList error {$$ = NULL;}
@@ -105,15 +105,32 @@ declaration : varDeclaration  {
 
 varDeclaration : INT_T varDeclList ';' {
   /* replaced varTypeSpecifier to INT_T*/
-  $2->return_type = INT_TYPE_N;
-  ast_node temp_t = $2;
-  assert($2 != NULL);
-  while($2->right_sibling != NULL) {
+  if($2->node_type == ID_N){
+    $2->return_type = INT_TYPE_N;
+    ast_node temp_t = $2;
+    assert($2 != NULL);
+    while($2->right_sibling != NULL) {
+        $2->return_type = INT_TYPE_N;
+        $2 = $2->right_sibling;
+      }
       $2->return_type = INT_TYPE_N;
-      $2 = $2->right_sibling;
+      $$ = temp_t;
+    } else{
+      //ast_node t = $2;
+      //
+      // if(t->node_type == ID_N){
+      //   t->return_type = INT_TYPE_N;
+      // }
+      // for(t = t->left_child; t != NULL; t = t->right_sibling){
+      //   if(t->node_type == ID_N){
+      //     t->return_type = INT_TYPE_N;
+      //   }
+        ast_node t = $2;
+        assign_var_type(t);
+        $$ = $2;
+      //}
     }
-  $2->return_type = INT_TYPE_N;
-  $$ = temp_t;
+
 }
 ;
 
@@ -121,8 +138,8 @@ varDeclaration : INT_T varDeclList ';' {
 varDeclList: varDeclList ',' varDecl  {
   ast_node t = $1;
   assert(t != NULL);
-    while (t->right_sibling != NULL) { 
-      t = t->right_sibling; 
+    while (t->right_sibling != NULL) {
+      t = t->right_sibling;
     }
     t->right_sibling = $3;
     $$ = $1;
@@ -162,7 +179,7 @@ funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtex
   ast_node t1 = create_ast_node(FUNC_DECLARATION_N);
   t1->value_string = strdup(savedIdText);
   t1->return_type = INT_TYPE_N;
-  $2 = t1; 
+  $2 = t1;
   }'(' formalParams ')' compoundStatement {
 /* removed functypespecifier, replaced with INT_T */
   ast_node t = $2;
@@ -174,7 +191,7 @@ funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtex
   ast_node t1 = create_ast_node(FUNC_DECLARATION_N);
   t1->value_string = strdup(savedIdText);
   t1->return_type = VOID_TYPE_N;
-  $2 = t1; 
+  $2 = t1;
   } '(' formalParams ')' compoundStatement {
 /* removed functypespecifier, replaced with void_t */
   ast_node t = $2;
@@ -182,7 +199,7 @@ funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtex
   t->left_child->right_sibling = $7;
   $$ = t;
 }
-; 
+;
 
 
 
@@ -194,7 +211,7 @@ formalParams : formalList  {
 |  VOID_T {
   ast_node t = create_ast_node(FORMAL_PARAMS_N);
   $$ = t; /* <later> */
-} 
+}
 |  /* empty */ {
   ast_node t = create_ast_node(FORMAL_PARAMS_N);
   $$ = t;
@@ -208,7 +225,7 @@ formalList : formalList ',' formalParam {
     }
     t->right_sibling = $3;
     $$ = $1;
-  } 
+  }
 |  formalParam {$$ = $1; }
 |   formalList ',' error {$$ = NULL;}
 ;
@@ -258,7 +275,7 @@ localDeclarations : localDeclarations varDeclaration {
   }
 
   $$ = $1;
- }  
+ }
 |  /* empty */ {
   ast_node t = create_ast_node(LOCAL_DECLARATIONS_N);
   $$ = t;
@@ -356,10 +373,10 @@ forStatement : FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHead
   }
 |   FOR_T '(' error ';' error ';' error ')' error {$$ = NULL;}
 |   FOR_T '(' error ')' error {$$ = NULL;}
-; 
+;
 
 forHeaderExpression : expression  { $$ = $1; }
-|  /* empty */ { 
+|  /* empty */ {
     ast_node t = create_ast_node(FOR_HEADER_EMPTY_N);
   }
 ;
@@ -382,7 +399,7 @@ readStatement : READ_T var ';' {
     $$ = t;
   }
 | READ_T error ';' {$$=NULL;}
-; 
+;
 
 printStatement : PRINT_T expression ';'  {
   ast_node t = create_ast_node(PRINT_N);
@@ -405,7 +422,7 @@ expression : var '=' expression {
     ast_node t = create_ast_node(OP_ASSIGN_N);
     t->left_child = $1;
     t->left_child->right_sibling = $3;
-    $$ = t; 
+    $$ = t;
   }
 |  rValue {$$ = $1; }
 |  var '=' error {$$ = NULL;}
@@ -419,7 +436,7 @@ var : ID_T  {
 |  ID_T {
      ast_node t1 = create_ast_node(ARRAY_TYPE_N);
      t1->value_string = strdup(savedIdText);
-     $1 = t1; 
+     $1 = t1;
   } '[' expression ']' {
      /*<later*/
    ast_node t2 = $1;
@@ -535,7 +552,7 @@ call : ID_T {
   } '(' args ')' {
    ast_node t2 = create_ast_node(CALL_N);
    $1->left_child = $4;
-   
+
    t2->left_child = $1;
    $$ = t2;
  }
@@ -548,8 +565,8 @@ args : argList  {$$ = $1; }
 argList : argList ',' expression  {
   ast_node t = $1;
   assert(t != NULL);
-    while (t->right_sibling != NULL) { 
-      t = t->right_sibling; 
+    while (t->right_sibling != NULL) {
+      t = t->right_sibling;
     }
     t->right_sibling = $3;
     $$ = $1;
@@ -569,8 +586,25 @@ argList : argList ',' expression  {
 
 int yyerror(char *s) {
   parseError = 1;
-  
+
   //if( YYRECOVERING() )
     fprintf(stderr, "%s at line %d\t yytext = '%s'\n", s, num_lines, yytext);
   return 0;
+}
+
+void assign_var_type(ast_node root){
+  ast_node root_cp = root;
+  if(root->node_type == ID_N){
+    printf("%s is an iid!\n", root->value_string);
+    root->return_type = INT_TYPE_N;
+  } else{
+    printf("(%s, %d) is not an idd\n", root->value_string, root->value_int);
+  }
+  for(root = root->left_child; root != NULL; root = root->right_sibling){
+    assign_var_type(root);
+  }
+  for(root_cp = root_cp->right_sibling; root_cp != NULL; root_cp = root_cp->left_child){
+    assign_var_type(root_cp);
+  }
+
 }
