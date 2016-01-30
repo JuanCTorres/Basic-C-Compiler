@@ -5,6 +5,7 @@ int main (void) {
 
 //same here
 
+int a = 1, b = 1;
 
 int a, b, c;
 int d, e, f;

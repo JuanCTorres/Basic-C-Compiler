@@ -53,6 +53,8 @@ typedef struct symnode {
   decl_type type;
   struct symnode  *next;	    /* next symnode in list */
   struct symhashtable *parent;
+  decl_type *parameters;
+  int num_parameters;
   /* Other attributes go here. */
 } symnode_t;
 

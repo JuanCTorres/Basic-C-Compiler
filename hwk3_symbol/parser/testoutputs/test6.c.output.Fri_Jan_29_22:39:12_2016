@@ -57,20 +57,18 @@ ROOT (0, 0) (Child of 0, 0)
         = (1, 1) (Child of 0, 0)
           ID k(1, 1) (Child of 0, 0)
           INT_LITERAL 8(1, 1) (Child of 0, 0)
-FUNC_DEC detected! FUNC_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-FUNC_DEC detected! FUNC_INT
-lvl: 0, sibno: 0 contains:
-  main FUNC_INT
-  myfunc FUNC_INT
-  lvl: 1, sibno: 0 contains:
-    a VAR_INT
-    b VAR_INT
-  lvl: 1, sibno: 1 contains:
-    lvl: 2, sibno: 0 contains:
-      lvl: 3, sibno: 0 contains:
-      lvl: 3, sibno: 1 contains:
+node_name: a return_type: INT_TYPE i: 1
+node_name: b return_type: INT_TYPE i: 2
+(lvl: 0, sibno: 0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_INT myfunc (2 params: VAR_INT  VAR_INT )
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT a
+    VAR_INT b
+  (lvl: 1, sibno: 1) contains:
+    (lvl: 2, sibno: 0) contains:
+      (lvl: 3, sibno: 0) contains:
+      (lvl: 3, sibno: 1) contains:
 
 
 ===========================================================

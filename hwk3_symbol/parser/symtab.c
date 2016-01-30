@@ -117,6 +117,7 @@ symnode_t *create_symnode(char *name, symhashtable_t *hashtable) {
 
   node->name = strdup(name);
   node->parent = hashtable;
+  node->num_parameters = 0;
 
   return node;
 }
@@ -146,6 +147,32 @@ symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode)
         node->type = FUNC_VOID_T;
         //printf(" %s\n", TYPE_NAME(node->type));
       }
+
+      ast_node anode; 
+      int i = 0;
+      assert(astnode->left_child != NULL);
+      for(anode = astnode->left_child->left_child; anode != NULL; anode = anode->right_sibling) {
+        //if(anode->return_type == INT_TYPE_N)
+        i++;
+        //printf("node_name: %s return_type: %s i: %d\n", anode->value_string ,NODE_NAME(anode->return_type), i);
+        
+
+      }
+      
+      node->num_parameters = i;
+      node->parameters = calloc(sizeof(decl_type), i);
+      assert(node->parameters);
+
+      i=0;
+
+      for(anode = astnode->left_child->left_child; anode != NULL; anode = anode->right_sibling) {
+        if(anode->return_type == INT_TYPE_N) {
+          node->parameters[i] = VAR_INT_T;
+          i++;
+        }
+        
+      }
+
     }
     else if(astnode->node_type == ID_N) {
       //printf("VAR detected!");
@@ -273,13 +300,15 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
         insert_into_symhashtable(hash, root);
       }
+
       break;
 
     case CALL_N:
       //need to check if it has been previously declared.
       break;
+
     case ID_N:      /* print the id */
-      if(root->return_type != 0) {  //declaration
+      if(root->return_type != 0) {  //a non-zero value means that it is a declaration
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
         insert_into_symhashtable(hash, root);
@@ -293,7 +322,9 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
       }
       break;
-    
+    case ARRAY_TYPE_N:
+      break;
+
     default:
       //printf("at default of switch\n");
       hash = find_hashtable(symtab->root, level, sibno);
@@ -329,7 +360,7 @@ void pretty_print(symhashtable_t *root, int depth) {
     printf("  ");
 
   /* Print the node type. */
-  printf("lvl: %d, sibno: %d contains:\n", root->level, root->sibno);
+  printf("(lvl: %d, sibno: %d) contains:\n", root->level, root->sibno);
 
 
 
@@ -338,7 +369,17 @@ void pretty_print(symhashtable_t *root, int depth) {
         for (i = 0; i < depth + 1; i++) {
           printf("  ");
         }
-        printf("%s %s\n", node->name, TYPE_NAME(node->type));
+        printf("%s %s", TYPE_NAME(node->type), node->name);
+
+        if(node->type == FUNC_VOID_T || node->type == FUNC_INT_T) {
+          printf(" (%d params:", node->num_parameters);
+          for(int k = 0; k < node->num_parameters; k++) {
+            printf(" %s ", TYPE_NAME(node->parameters[k]));
+          }
+          printf(")");
+        }
+
+        printf("\n");
     }
   }
 

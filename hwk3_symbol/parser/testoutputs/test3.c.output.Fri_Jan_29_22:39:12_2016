@@ -104,21 +104,19 @@ ROOT (0, 0) (Child of 0, 0)
             - (1, 1) (Child of 0, 0)
               INT_LITERAL 5(1, 1) (Child of 0, 0)
               INT_LITERAL 13(1, 1) (Child of 0, 0)
-FUNC_DEC detected! FUNC_INT
-VAR detected! VAR_INT
-FUNC_DEC detected! FUNC_INT
-lvl: 0, sibno: 0 contains:
-  main FUNC_INT
-  this_func FUNC_INT
-  lvl: 1, sibno: 0 contains:
-    g VAR_INT
-  lvl: 1, sibno: 1 contains:
-    lvl: 2, sibno: 0 contains:
-    lvl: 2, sibno: 1 contains:
-    lvl: 2, sibno: 2 contains:
-      lvl: 3, sibno: 0 contains:
-    lvl: 2, sibno: 3 contains:
-      lvl: 3, sibno: 1 contains:
+node_name: g return_type: INT_TYPE i: 1
+(lvl: 0, sibno: 0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_INT this_func (1 params: VAR_INT )
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT g
+  (lvl: 1, sibno: 1) contains:
+    (lvl: 2, sibno: 0) contains:
+    (lvl: 2, sibno: 1) contains:
+    (lvl: 2, sibno: 2) contains:
+      (lvl: 3, sibno: 0) contains:
+    (lvl: 2, sibno: 3) contains:
+      (lvl: 3, sibno: 1) contains:
 
 
 ===========================================================
