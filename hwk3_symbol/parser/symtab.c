@@ -41,10 +41,11 @@ static const int HASHSIZE = 211;
 
 /* Create an empty symbol table. */
 symboltable_t  *create_symboltable() {
-  symboltable_t *symtab = malloc(sizeof(symboltable_t));
+  symboltable_t *symtab = calloc(sizeof(symboltable_t),1);
   assert(symtab);
 
   symhashtable_t *hashtable=create_symhashtable(HASHSIZE);
+  assert(hashtable != NULL);
   hashtable->level = 0;
   hashtable->name = "0";
 
@@ -82,10 +83,10 @@ void set_node_name(symnode_t *node, char *name) {
 /* Create an empty symhashtable and return a pointer to it.  The
    parameter entries gives the initial size of the table. */
 symhashtable_t *create_symhashtable(int entries) {
-  symhashtable_t *hashtable = malloc(sizeof(symhashtable_t));
+  symhashtable_t *hashtable = calloc(sizeof(symhashtable_t),1);
   assert(hashtable);
   hashtable->size = entries;
-  hashtable->table = calloc(entries, sizeof(symnode_t));
+  hashtable->table = calloc(entries, sizeof(symnode_t *));
 
   assert(hashtable->table);
 
@@ -224,10 +225,12 @@ symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode) {
   Otherwise, return NULL */
 symhashtable_t *find_hashtable(symhashtable_t  *root, int lvl, int sib) {
 
+  if(root != NULL) {
     if (lvl == root->level && sib == root->sibno) {
       return(root);
     } 
- 
+  }
+
     symhashtable_t *res, *child;
     res = NULL;
     for(child = root->child; child != NULL  && res == NULL; child = child->rightsib) {
@@ -340,6 +343,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
     default:
       //printf("at default of switch\n");
+      assert(symtab->root != NULL);
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash == NULL) {
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
@@ -385,7 +389,7 @@ void pretty_print(symhashtable_t *root, int depth) {
 
 
 
-  for(int j = 0; j < HASHSIZE+1; j++ ) {
+  for(int j = 0; j < HASHSIZE; j++ ) {
     for(symnode_t *node = root->table[j]; node != NULL; node = node->next) {
         for (i = 0; i < depth + 1; i++) {
           printf("  ");
