@@ -603,7 +603,7 @@ void assign_var_type(ast_node root){
   for(root = root->left_child; root != NULL; root = root->right_sibling){
     assign_var_type(root);
   }
-  for(root_cp = root_cp->right_sibling; root_cp != NULL; root_cp = root_cp->left_child){
+  for(root_cp = root_cp->right_sibling; root_cp != NULL; root_cp = root_cp->right_sibling){
     assign_var_type(root_cp);
   }
 

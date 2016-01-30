@@ -10,7 +10,7 @@ int a = 1, b = 1;
 int a, b, c;
 int d, e, f;
 int h = 2, i = 3;
-int cc[12];
+int cc[12], dd[5];
 
 cc[a * b] = a * b;
 
