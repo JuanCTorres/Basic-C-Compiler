@@ -10,6 +10,12 @@ ROOT (0, 0) (Child of 0, 0)
     FORMAL_PARAMS (1, 0) (Child of 0, 0)
     SEQ (1, 0) (Child of 0, 0)
       LOCAL_DECLARATIONS (1, 0) (Child of 0, 0)
+        = (1, 0) (Child of 0, 0)
+          ID a(1, 0) (Child of 0, 0)
+          INT_LITERAL 1(1, 0) (Child of 0, 0)
+        = (1, 0) (Child of 0, 0)
+          ID b(1, 0) (Child of 0, 0)
+          INT_LITERAL 1(1, 0) (Child of 0, 0)
         ID a (type: INT_TYPE)(1, 0) (Child of 0, 0)
         ID b (type: INT_TYPE)(1, 0) (Child of 0, 0)
         ID c (type: INT_TYPE)(1, 0) (Child of 0, 0)
@@ -235,37 +241,25 @@ ROOT (0, 0) (Child of 0, 0)
             STATEMENT_LIST (2, 4) (Child of 1, 0)
         RETURN (1, 0) (Child of 0, 0)
           INT_LITERAL 0(1, 0) (Child of 0, 0)
-FUNC_DEC detected! FUNC_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-VAR detected! VAR_INT
-lvl: 0, sibno: 0 contains:
-  main FUNC_INT
-  lvl: 1, sibno: 0 contains:
-    a VAR_INT
-    b VAR_INT
-    c VAR_INT
-    d VAR_INT
-    e VAR_INT
-    f VAR_INT
-    lvl: 2, sibno: 0 contains:
-    lvl: 2, sibno: 1 contains:
-      tt VAR_INT
-    lvl: 2, sibno: 2 contains:
-      dsa VAR_INT
-      asd VAR_INT
-    lvl: 2, sibno: 3 contains:
-      x VAR_INT
-    lvl: 2, sibno: 4 contains:
-      y VAR_INT
+(lvl: 0, sibno: 0) contains:
+  FUNC_INT main (0 params:)
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    VAR_INT d
+    VAR_INT e
+    VAR_INT f
+    (lvl: 2, sibno: 0) contains:
+    (lvl: 2, sibno: 1) contains:
+      VAR_INT tt
+    (lvl: 2, sibno: 2) contains:
+      VAR_INT dsa
+      VAR_INT asd
+    (lvl: 2, sibno: 3) contains:
+      VAR_INT x
+    (lvl: 2, sibno: 4) contains:
+      VAR_INT y
 
 
 ===========================================================
