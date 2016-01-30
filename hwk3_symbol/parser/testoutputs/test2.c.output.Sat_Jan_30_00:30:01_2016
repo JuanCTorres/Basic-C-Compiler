@@ -123,8 +123,6 @@ ROOT (0, 0) (Child of 0, 0)
           FUNCTION your_func(1, 2) (Child of 0, 0)
         RETURN (1, 2) (Child of 0, 0)
           INT_LITERAL 0(1, 2) (Child of 0, 0)
-node_name: q return_type: INT_TYPE i: 1
-node_name: b return_type: INT_TYPE i: 2
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   FUNC_VOID your_func (0 params:)

@@ -8,15 +8,17 @@
  */
 
 
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 #include <string.h>
-#include <assert.h>
+// #include <assert.h>
 #include "symtab.h"
 
 #define NOHASHSLOT -1
 
 int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+// int *siblings;
+
 /*
  * Functions for symnodes.
  */
@@ -280,6 +282,11 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
 
 
+  // if(siblings == NULL) {
+  //   siblings = calloc(sizeof(int), 5 + level);
+  // }
+  // else if 
+
   /* Print attributes specific to node types. */
   switch (root->node_type) {
     case SEQ_N:     // change main level when see a new sequence
@@ -309,20 +316,28 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
     case ID_N:      /* print the id */
       if(root->return_type != 0) {  //a non-zero value means that it is a declaration
-      hash = find_hashtable(symtab->root, level, sibno);
-      if(hash != NULL) {
-        insert_into_symhashtable(hash, root);
-      }
-      else {
-        hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-        insert_into_symhashtable(hash, root);
-      }
+        hash = find_hashtable(symtab->root, level, sibno);
+        if(hash != NULL) {
+          insert_into_symhashtable(hash, root);
+        }
+        else {
+          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+          insert_into_symhashtable(hash, root);
+        }
       }
       else {  //don't know if previously declared
 
       }
       break;
     case ARRAY_TYPE_N:
+        hash = find_hashtable(symtab->root, level, sibno);
+        if(hash != NULL) {
+          insert_into_symhashtable(hash, root);
+        }
+        else {
+          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+          insert_into_symhashtable(hash, root);
+        }
       break;
 
     default:

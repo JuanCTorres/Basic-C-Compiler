@@ -26,13 +26,13 @@ ROOT (0, 0) (Child of 0, 0)
           SEQ (2, 1) (Child of 1, 1)
             LOCAL_DECLARATIONS (2, 0) (Child of 1, 1)
               = (2, 0) (Child of 1, 1)
-                ID b(2, 0) (Child of 1, 1)
+                ID b (type: INT_TYPE)(2, 0) (Child of 1, 1)
                 INT_LITERAL 3(2, 0) (Child of 1, 1)
             STATEMENT_LIST (2, 0) (Child of 1, 1)
           SEQ (2, 1) (Child of 1, 1)
             LOCAL_DECLARATIONS (2, 1) (Child of 1, 1)
               = (2, 1) (Child of 1, 1)
-                ID a(2, 1) (Child of 1, 1)
+                ID a (type: INT_TYPE)(2, 1) (Child of 1, 1)
                 INT_LITERAL 5(2, 1) (Child of 1, 1)
             STATEMENT_LIST (2, 1) (Child of 1, 1)
               PRINT (2, 1) (Child of 1, 1)
@@ -44,7 +44,7 @@ ROOT (0, 0) (Child of 0, 0)
           SEQ (2, 1) (Child of 1, 1)
             LOCAL_DECLARATIONS (2, 2) (Child of 1, 1)
               = (2, 2) (Child of 1, 1)
-                ID aaa(2, 2) (Child of 1, 1)
+                ID aaa (type: INT_TYPE)(2, 2) (Child of 1, 1)
                 INT_LITERAL -123(2, 2) (Child of 1, 1)
             STATEMENT_LIST (2, 2) (Child of 1, 1)
               IF_STMT (2, 2) (Child of 1, 1)
@@ -54,9 +54,9 @@ ROOT (0, 0) (Child of 0, 0)
                 SEQ (3, 2) (Child of 2, 2)
                   LOCAL_DECLARATIONS (3, 0) (Child of 2, 2)
                     = (3, 0) (Child of 2, 2)
-                      ID qwe(3, 0) (Child of 2, 2)
+                      ID qwe (type: INT_TYPE)(3, 0) (Child of 2, 2)
                       INT_LITERAL 0(3, 0) (Child of 2, 2)
-                    ARRAY_TYPE av (type: INT_TYPE)(3, 0) (Child of 2, 2)
+                    ARRAY_TYPE av(3, 0) (Child of 2, 2)
                       INT_LITERAL 123(3, 0) (Child of 2, 2)
                   STATEMENT_LIST (3, 0) (Child of 2, 2)
         DO_WHILE (1, 1) (Child of 0, 0)
@@ -104,7 +104,6 @@ ROOT (0, 0) (Child of 0, 0)
             - (1, 1) (Child of 0, 0)
               INT_LITERAL 5(1, 1) (Child of 0, 0)
               INT_LITERAL 13(1, 1) (Child of 0, 0)
-node_name: g return_type: INT_TYPE i: 1
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   FUNC_INT this_func (1 params: VAR_INT )
@@ -112,9 +111,14 @@ node_name: g return_type: INT_TYPE i: 1
     VAR_INT g
   (lvl: 1, sibno: 1) contains:
     (lvl: 2, sibno: 0) contains:
+      VAR_INT b
     (lvl: 2, sibno: 1) contains:
+      VAR_INT a
     (lvl: 2, sibno: 2) contains:
+      VAR_INT aaa
       (lvl: 3, sibno: 0) contains:
+        VAR_INT qwe
+        VAR_INT av
     (lvl: 2, sibno: 3) contains:
       (lvl: 3, sibno: 1) contains:
 

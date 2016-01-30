@@ -11,8 +11,9 @@
  *
  */
 
-
 #include "ast.h"
+#include "symtab.h"
+
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y)) // For fixing one error in hash table creation
 int sibl[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

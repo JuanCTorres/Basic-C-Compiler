@@ -9,13 +9,16 @@
  * You should modify this file as appropriate.
  *
  */
+#include "symtab.h"
+#include <assert.h>
 
 #ifndef AST_H_
 #define AST_H_
 
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
+
 
 
 /* You should fill in the various AST node types.  The following are given
@@ -135,6 +138,7 @@ struct ast_node_struct {
   int value_int;		/* for INT_LITERAL */
   ast_node_type return_type; /* for declarations */
   int array_length;
+  //symnode_t snode;
 
 };
 

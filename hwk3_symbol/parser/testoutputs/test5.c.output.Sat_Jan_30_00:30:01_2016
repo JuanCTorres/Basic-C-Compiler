@@ -38,7 +38,7 @@ ROOT (0, 0) (Child of 0, 0)
           SEQ (2, 1) (Child of 1, 1)
             LOCAL_DECLARATIONS (2, 1) (Child of 1, 1)
               = (2, 1) (Child of 1, 1)
-                ID a(2, 1) (Child of 1, 1)
+                ID a (type: INT_TYPE)(2, 1) (Child of 1, 1)
                 INT_LITERAL 3(2, 1) (Child of 1, 1)
             STATEMENT_LIST (2, 1) (Child of 1, 1)
         = (1, 1) (Child of 0, 0)
@@ -47,25 +47,21 @@ ROOT (0, 0) (Child of 0, 0)
         SEQ (2, 1) (Child of 1, 1)
           LOCAL_DECLARATIONS (2, 2) (Child of 1, 1)
             = (2, 2) (Child of 1, 1)
-              ID z(2, 2) (Child of 1, 1)
+              ID z (type: INT_TYPE)(2, 2) (Child of 1, 1)
               INT_LITERAL 3(2, 2) (Child of 1, 1)
           STATEMENT_LIST (2, 2) (Child of 1, 1)
         SEQ (2, 1) (Child of 1, 1)
           LOCAL_DECLARATIONS (2, 3) (Child of 1, 1)
             = (2, 3) (Child of 1, 1)
-              ID y(2, 3) (Child of 1, 1)
+              ID y (type: INT_TYPE)(2, 3) (Child of 1, 1)
               INT_LITERAL 5(2, 3) (Child of 1, 1)
           STATEMENT_LIST (2, 3) (Child of 1, 1)
             SEQ (3, 3) (Child of 2, 3)
               LOCAL_DECLARATIONS (3, 0) (Child of 2, 3)
                 = (3, 0) (Child of 2, 3)
-                  ID yy(3, 0) (Child of 2, 3)
+                  ID yy (type: INT_TYPE)(3, 0) (Child of 2, 3)
                   INT_LITERAL 2(3, 0) (Child of 2, 3)
               STATEMENT_LIST (3, 0) (Child of 2, 3)
-node_name: b return_type: INT_TYPE i: 1
-node_name: c return_type: INT_TYPE i: 2
-node_name: uu return_type: INT_TYPE i: 1
-node_name: ww return_type: INT_TYPE i: 2
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (2 params: VAR_INT  VAR_INT )
   FUNC_INT myfunc (2 params: VAR_INT  VAR_INT )
@@ -79,9 +75,13 @@ node_name: ww return_type: INT_TYPE i: 2
     VAR_INT i
     VAR_INT ww
     (lvl: 2, sibno: 1) contains:
+      VAR_INT a
     (lvl: 2, sibno: 2) contains:
+      VAR_INT z
     (lvl: 2, sibno: 3) contains:
+      VAR_INT y
       (lvl: 3, sibno: 0) contains:
+        VAR_INT yy
 
 
 ===========================================================

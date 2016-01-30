@@ -55,6 +55,7 @@ typedef struct symnode {
   struct symhashtable *parent;
   decl_type *parameters;
   int num_parameters;
+  //ast_node ast;
   /* Other attributes go here. */
 } symnode_t;
 

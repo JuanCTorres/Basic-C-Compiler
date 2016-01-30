@@ -21,11 +21,14 @@
 
 
 
+
+
  ast_node root = NULL;
 
  extern int yyparse();
  extern int yydebug;
  int parseError = 0;
+
 
  int main() {
   int noRoot = 0;		/* 0 means we will have a root */
