@@ -56,39 +56,10 @@ ROOT (0, 0) (Child of 0, 0)
           * (1, 0) (Child of 0, 0)
             ID b(1, 0) (Child of 0, 0)
             INT_LITERAL -1(1, 0) (Child of 0, 0)
-found 
-found 
-not found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-found 
-lvl: 0, sibno: 0 
-  lvl: 1, sibno: 0 
+FUNC_DEC detected! FUNC_VOID
+lvl: 0, sibno: 0 contains:
+  main FUNC_VOID
+  lvl: 1, sibno: 0 contains:
 
 
 ===========================================================

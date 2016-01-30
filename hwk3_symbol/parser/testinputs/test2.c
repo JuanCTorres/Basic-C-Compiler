@@ -29,7 +29,7 @@ int main(void) {	//0
 	}
 	else { // 1.2
 		// 2.1
-		qwert = 123;
+		qwert = 123; //2.1
 		for(t = 0; t < 99; ++t) { // 2.1
 			a = y = u; // 3.2
 			y = a = w;
