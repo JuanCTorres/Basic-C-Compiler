@@ -595,10 +595,10 @@ int yyerror(char *s) {
 void assign_var_type(ast_node root){
   ast_node root_cp = root;
   if(root->node_type == ID_N){
-    printf("%s is an iid!\n", root->value_string);
+    //printf("%s is an iid!\n", root->value_string);
     root->return_type = INT_TYPE_N;
   } else{
-    printf("(%s, %d) is not an idd\n", root->value_string, root->value_int);
+    //printf("(%s, %d) is not an idd\n", root->value_string, root->value_int);
   }
   for(root = root->left_child; root != NULL; root = root->right_sibling){
     assign_var_type(root);
