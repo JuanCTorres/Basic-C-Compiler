@@ -1,0 +1,33 @@
+Result of test done to parser.
+
+test5.c BEGIN.
+===========================================================
+
+error: use of undeclared identifier b
+No syntatical errors detected.
+
+array same as level
+(lvl: 0, sibno: 0) contains:
+  FUNC_INT main (2 params: VAR_INT  VAR_INT )
+  FUNC_INT myfunc (2 params: VAR_INT  VAR_INT )
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT b
+    VAR_INT c
+    (lvl: 2, sibno: 0) contains:
+      VAR_INT c
+  (lvl: 1, sibno: 1) contains:
+    VAR_INT uu
+    VAR_INT i
+    VAR_INT ww
+    (lvl: 2, sibno: 1) contains:
+      VAR_INT a
+    (lvl: 2, sibno: 2) contains:
+      VAR_INT z
+    (lvl: 2, sibno: 3) contains:
+      VAR_INT y
+      (lvl: 3, sibno: 0) contains:
+        VAR_INT yy
+
+
+===========================================================
+test5.c finished.

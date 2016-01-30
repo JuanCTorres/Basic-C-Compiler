@@ -1,0 +1,47 @@
+Result of test done to parser.
+
+test3.c BEGIN.
+===========================================================
+
+error: use of undeclared identifier b
+error: use of undeclared identifier a
+error: use of undeclared identifier b
+error: use of undeclared identifier ab
+error: use of undeclared identifier c
+error: use of undeclared identifier d
+error: use of undeclared identifier e
+error: use of undeclared identifier f
+error: use of undeclared identifier i
+error: use of undeclared identifier i
+error: use of undeclared identifier z
+error: use of undeclared identifier i
+error: use of undeclared identifier c
+error: use of undeclared identifier d
+error: use of undeclared identifier e
+error: use of undeclared identifier f
+error: use of undeclared identifier d
+error: use of undeclared identifier a
+No syntatical errors detected.
+
+array same as level
+(lvl: 0, sibno: 0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_INT this_func (1 params: VAR_INT )
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT g
+  (lvl: 1, sibno: 1) contains:
+    (lvl: 2, sibno: 0) contains:
+      VAR_INT b
+    (lvl: 2, sibno: 1) contains:
+      VAR_INT a
+    (lvl: 2, sibno: 2) contains:
+      VAR_INT aaa
+      (lvl: 3, sibno: 0) contains:
+        VAR_INT qwe
+        VAR_ARRAY_INT av
+    (lvl: 2, sibno: 3) contains:
+      (lvl: 3, sibno: 1) contains:
+
+
+===========================================================
+test3.c finished.

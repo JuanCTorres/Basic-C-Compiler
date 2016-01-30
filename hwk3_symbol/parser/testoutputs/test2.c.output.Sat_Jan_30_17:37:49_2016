@@ -1,0 +1,38 @@
+Result of test done to parser.
+
+test2.c BEGIN.
+===========================================================
+
+error: use of undeclared identifier input
+error: use of undeclared identifier qwert
+No syntatical errors detected.
+
+array same as level
+(lvl: 0, sibno: 0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_VOID your_func (0 params:)
+  FUNC_INT my_func (2 params: VAR_INT  VAR_INT )
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT b
+    VAR_INT q
+  (lvl: 1, sibno: 1) contains:
+    VAR_INT ee
+    VAR_INT gg
+  (lvl: 1, sibno: 2) contains:
+    VAR_INT a
+    VAR_INT t
+    VAR_INT u
+    VAR_INT v
+    VAR_INT w
+    VAR_INT y
+    VAR_INT ppp
+    (lvl: 2, sibno: 0) contains:
+      (lvl: 3, sibno: 0) contains:
+        (lvl: 4, sibno: 0) contains:
+      (lvl: 3, sibno: 1) contains:
+    (lvl: 2, sibno: 1) contains:
+      (lvl: 3, sibno: 2) contains:
+
+
+===========================================================
+test2.c finished.

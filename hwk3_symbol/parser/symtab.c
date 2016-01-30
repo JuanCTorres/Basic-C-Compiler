@@ -19,6 +19,7 @@
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int *siblings;
+unsigned arraylen = 0;
 
 /*
  * Functions for symnodes.
@@ -282,8 +283,51 @@ symhashtable_t *make_insert_hashtable(symhashtable_t  *root, int lvl, int sibno,
   return hashtable;
 }
 
+int check_if_declared(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
+  
+  symhashtable_t *hash = find_hashtable(symtab->root, lvl, sibno);
+  
+  assert(hash != NULL);
+  assert(anode != NULL);
 
-unsigned arraylen=0;
+  symnode_t *node = NULL;
+
+  node = lookup_symhashtable(hash, anode->value_string, NOHASHSLOT);
+
+  if(node != NULL){
+    // if(node->type == VAR_INT_T && anode->return_type == INT_TYPE_N && anode->node_type == ID_N) {
+    //   return 2; // the case where it is a redeclaration of a same variable name within the same scope
+    // }
+    // else if(node->type == FUNC_VOID_T && anode->return_type == VOID_TYPE_N && anode->node_type == FUNC_DECLARATION_N) {
+    //   return 2;
+    // }
+    // else if(node->type == FUNC_INT_T && anode->return_type == INT_TYPE_N && anode->node_type == FUNC_DECLARATION_N) {
+    //   return 2;
+    // }
+    // else if(node->type == VAR_ARRAY_INT_T && anode->return_type == INT_TYPE_N && anode->node_type == ARRAY_TYPE_N) {
+    //   return 2;
+    // }
+    if(anode->return_type != 0) {
+      return 2;
+    }
+  }
+
+
+  for(;hash != NULL && node == NULL; hash = hash->parent) {
+    node = lookup_symhashtable(hash, anode->value_string, NOHASHSLOT);
+  }
+
+  if(node == NULL) {
+    return 0;
+  }
+  else {
+    return 1; //return 1 if we find declaration
+  }
+
+}
+
+
+
 
 void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab) {
   //calculate the scope for the variable/func declaration
@@ -291,10 +335,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
   //need function to take as input 
   //printf("here \n");
   symhashtable_t *hash;
-
-
-
-
+  int check;
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
@@ -318,7 +359,17 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       }
 
       break;
+    case FUNCTION_N:
+        check = check_if_declared(root, symtab ,level, sibno);
+        if(check == 0) {
+          fprintf(stderr, "error: use of undeclared identifier %s\n", root->value_string);
+        }
+        else if(check == 2) {
+          fprintf(stderr, "error: redefinition of identifier %s\n", root->value_string);
+        }
 
+
+      break;
     case CALL_N:
       //need to check if it has been previously declared.
       break;
@@ -335,6 +386,13 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
         }
       }
       else {  //don't know if previously declared
+        check = check_if_declared(root, symtab ,level, sibno);
+        if(check == 0) {
+          fprintf(stderr, "error: use of undeclared identifier %s\n", root->value_string);
+        }
+        else if(check == 2) {
+          fprintf(stderr, "error: redefinition of identifier %s\n", root->value_string);
+        }
 
       }
       break;
@@ -351,6 +409,13 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       }
       else {
         //check if previously declared
+        check = check_if_declared(root, symtab ,level, sibno);
+        if(check == 0) {
+          fprintf(stderr, "error: use of undeclared identifier %s\n", root->value_string);
+        }
+        else if(check == 2) {
+          fprintf(stderr, "error: redefinition of identifier %s\n", root->value_string);
+        }
       }
       break;
 

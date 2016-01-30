@@ -12,7 +12,10 @@ int d, e, f;
 int h = 2, i = 3;
 int cc[12], dd[5];
 
+
 cc[a * b] = a * b;
+
+zz[a];
 
 print "test basics!\n";
 read f;

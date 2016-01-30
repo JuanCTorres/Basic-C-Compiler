@@ -1,0 +1,36 @@
+Result of test done to parser.
+
+test4.c BEGIN.
+===========================================================
+
+error: use of undeclared identifier k
+No syntatical errors detected.
+
+array same as level
+(lvl: 0, sibno: 0) contains:
+  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
+  (lvl: 1, sibno: 0) contains:
+    VAR_INT zzzz
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    (lvl: 2, sibno: 0) contains:
+      VAR_INT d
+      (lvl: 3, sibno: 0) contains:
+        VAR_INT e
+        (lvl: 4, sibno: 0) contains:
+          VAR_INT f
+          (lvl: 5, sibno: 0) contains:
+            VAR_INT g
+            (lvl: 6, sibno: 0) contains:
+              VAR_INT h
+              (lvl: 7, sibno: 0) contains:
+                VAR_INT i
+                (lvl: 8, sibno: 0) contains:
+                  VAR_INT j
+                  (lvl: 9, sibno: 0) contains:
+                    VAR_INT k
+
+
+===========================================================
+test4.c finished.
