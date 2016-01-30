@@ -97,3 +97,7 @@ The program traverses the syntax tree created in previous steps in a top-down ma
 1. We have assumed that the tree will be traversed using a preoder walk, and have tailored our tree so that code generation is easier on future steps. For instance, a for loop is created so that with a preorder walk we would see the initialization, test condition, and iteration stataments in that order, before moving to the body of the loop.
 
 2. We have decided to maintain some extra information in order to preserve condition 1 and make future code generation easier. For instance, a compound statement in our grammar requires that local variables be defined before other executable code (compound-statement -> local-declarations statement-list). In the case that no local variables are defined, we could have not created a node for local-declarations, but this would have made complying with condition 1 harder, as we would have had to handle a special case of pointer manipulation. We have, then, kept an empty node in here to facilitate future code generation easier, as well as facilitate our compliance with condition 1.
+
+## Changes from previous programs
+
+- Fixed bug where parser would not see all the variables if the declarations contained an assignment. 
