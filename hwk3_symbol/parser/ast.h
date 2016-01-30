@@ -138,7 +138,7 @@ struct ast_node_struct {
   int value_int;		/* for INT_LITERAL */
   ast_node_type return_type; /* for declarations */
   int array_length;
-  // symnode_t snode;
+  void *snode; //using void to avoid circular heaer issues
 
 };
 

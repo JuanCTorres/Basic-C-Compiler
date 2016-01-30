@@ -30,6 +30,8 @@ ROOT (0, 0) (Child of 0, 0)
           INT_LITERAL 3(1, 0) (Child of 0, 0)
         ARRAY_TYPE cc (type: INT_TYPE)(1, 0) (Child of 0, 0)
           INT_LITERAL 12(1, 0) (Child of 0, 0)
+        ARRAY_TYPE dd (type: INT_TYPE)(1, 0) (Child of 0, 0)
+          INT_LITERAL 5(1, 0) (Child of 0, 0)
       STATEMENT_LIST (1, 0) (Child of 0, 0)
         = (1, 0) (Child of 0, 0)
           ARRAY_TYPE cc(1, 0) (Child of 0, 0)
@@ -251,6 +253,7 @@ array same as level
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   (lvl: 1, sibno: 0) contains:
+    VAR_ARRAY_INT dd
     VAR_INT a
     VAR_INT b
     VAR_INT c

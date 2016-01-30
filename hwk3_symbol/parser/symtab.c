@@ -140,6 +140,8 @@ symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode)
 
   if (node == NULL) {
     node = create_symnode(name,hashtable);
+    node->abnode = astnode;
+    astnode->snode = node;
 
     if(astnode->node_type == FUNC_DECLARATION_N) {
       //printf("FUNC_DEC detected!");
@@ -304,7 +306,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       level++;
       break;
 
-    case FUNC_DECLARATION_N:
+    case FUNC_DECLARATION_N: //function declaraions
       //does hashtable exist with given lvl, siblvl (use find_hashtable)
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
