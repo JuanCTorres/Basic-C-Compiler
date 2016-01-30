@@ -23,6 +23,7 @@ typedef struct scope {
 /* Added a bunch of tokens */
 typedef enum { 
   VAR_INT_T,
+  VAR_ARRAY_INT_T,
   FUNC_INT_T,
   FUNC_VOID_T
 } decl_type;
@@ -36,6 +37,7 @@ typedef enum {
 
 static val_name_pair decl_table[] = {
   { VAR_INT_T, "VAR_INT" },
+  { VAR_ARRAY_INT_T, "VAR_ARRAY_INT"},
   { FUNC_INT_T, "FUNC_INT" },
   { FUNC_VOID_T, "FUNC_VOID"},
   { 0, NULL}
@@ -55,7 +57,7 @@ typedef struct symnode {
   struct symhashtable *parent;
   decl_type *parameters;
   int num_parameters;
-  //ast_node ast;
+  // ast_node ast;
   /* Other attributes go here. */
 } symnode_t;
 
@@ -70,7 +72,6 @@ int name_is_equal(symnode_t *node, char *name);
 
 typedef struct symhashtable {
   char *name;
- // symtab_type type;
   int size;			/* size of hash table */
   symnode_t **table;		/* hash table, array of pointers! */ 
   int level;			/* level of scope, 0 is outermost */

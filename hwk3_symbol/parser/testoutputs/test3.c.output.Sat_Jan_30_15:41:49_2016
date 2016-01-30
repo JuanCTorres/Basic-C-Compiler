@@ -56,7 +56,7 @@ ROOT (0, 0) (Child of 0, 0)
                     = (3, 0) (Child of 2, 2)
                       ID qwe (type: INT_TYPE)(3, 0) (Child of 2, 2)
                       INT_LITERAL 0(3, 0) (Child of 2, 2)
-                    ARRAY_TYPE av(3, 0) (Child of 2, 2)
+                    ARRAY_TYPE av (type: INT_TYPE)(3, 0) (Child of 2, 2)
                       INT_LITERAL 123(3, 0) (Child of 2, 2)
                   STATEMENT_LIST (3, 0) (Child of 2, 2)
         DO_WHILE (1, 1) (Child of 0, 0)
@@ -119,7 +119,7 @@ array same as level
       VAR_INT aaa
       (lvl: 3, sibno: 0) contains:
         VAR_INT qwe
-        VAR_INT av
+        VAR_ARRAY_INT av
     (lvl: 2, sibno: 3) contains:
       (lvl: 3, sibno: 1) contains:
 

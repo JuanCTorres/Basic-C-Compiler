@@ -185,6 +185,12 @@ symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode)
         //printf(" %s\n", TYPE_NAME(node->type));
       }
     }
+    else if(astnode->node_type == ARRAY_TYPE_N){
+      if(astnode->return_type == INT_TYPE_N) {
+        node->type = VAR_ARRAY_INT_T;
+        //printf(" %s\n", TYPE_NAME(node->type));
+      }
+    }
 
     node->next = hashtable->table[slot];
     hashtable->table[slot] = node;
@@ -330,7 +336,8 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
       }
       break;
-    case ARRAY_TYPE_N:
+    case ARRAY_TYPE_N: //check for return types!
+      if(root->return_type != 0) {
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash != NULL) {
           insert_into_symhashtable(hash, root);
@@ -339,6 +346,10 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
           hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
           insert_into_symhashtable(hash, root);
         }
+      }
+      else {
+        //check if previously declared
+      }
       break;
 
     default:

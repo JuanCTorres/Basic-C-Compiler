@@ -594,7 +594,7 @@ int yyerror(char *s) {
 
 void assign_var_type(ast_node root){
   ast_node root_cp = root;
-  if(root->node_type == ID_N){
+  if(root->node_type == ID_N || root->node_type == ARRAY_TYPE_N){
     //printf("%s is an iid!\n", root->value_string);
     root->return_type = INT_TYPE_N;
   } else{
