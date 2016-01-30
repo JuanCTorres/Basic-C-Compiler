@@ -104,6 +104,7 @@ ROOT (0, 0) (Child of 0, 0)
             - (1, 1) (Child of 0, 0)
               INT_LITERAL 5(1, 1) (Child of 0, 0)
               INT_LITERAL 13(1, 1) (Child of 0, 0)
+array same as level
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   FUNC_INT this_func (1 params: VAR_INT )

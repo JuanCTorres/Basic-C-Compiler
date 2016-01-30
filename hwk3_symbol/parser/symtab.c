@@ -15,9 +15,10 @@
 #include "symtab.h"
 
 #define NOHASHSLOT -1
+#define DELTA 10
 
-int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-// int *siblings;
+// int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int *siblings;
 
 /*
  * Functions for symnodes.
@@ -271,7 +272,7 @@ symhashtable_t *make_insert_hashtable(symhashtable_t  *root, int lvl, int sibno,
 }
 
 
-
+unsigned arraylen=0;
 
 void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab) {
   //calculate the scope for the variable/func declaration
@@ -282,10 +283,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
 
 
-  // if(siblings == NULL) {
-  //   siblings = calloc(sizeof(int), 5 + level);
-  // }
-  // else if 
+
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
@@ -349,9 +347,15 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       break;
   }
 
-  // printf("(%d, %d) ", level, sibno);
-  // printf("(Child of %d, %d)", MAX(level - 1, 0), siblings[level - 1]);
-  // printf("\n");
+    if(arraylen <= level) {
+    printf("array same as level\n");
+    arraylen = arraylen + DELTA;
+    siblings = realloc(siblings, sizeof(int) * arraylen);
+    assert(siblings != NULL);
+    for(int k=0; k < DELTA; k++) {
+      siblings[arraylen - (DELTA-k)] = 0;
+    }
+  }
 
   /* Recurse on each child of the subtree root, with a depth one
      greater than the root's depth. */
@@ -363,6 +367,8 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
     siblings[level]++;  // change sibling level after you're done printing all
                       // subtrees, i.e., after done recursing.
   }
+
+
 
 
 }

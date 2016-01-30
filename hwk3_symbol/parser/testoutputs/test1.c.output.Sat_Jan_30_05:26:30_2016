@@ -247,6 +247,7 @@ ROOT (0, 0) (Child of 0, 0)
             STATEMENT_LIST (2, 4) (Child of 1, 0)
         RETURN (1, 0) (Child of 0, 0)
           INT_LITERAL 0(1, 0) (Child of 0, 0)
+array same as level
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   (lvl: 1, sibno: 0) contains:

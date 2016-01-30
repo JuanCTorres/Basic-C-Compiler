@@ -123,6 +123,7 @@ ROOT (0, 0) (Child of 0, 0)
           FUNCTION your_func(1, 2) (Child of 0, 0)
         RETURN (1, 2) (Child of 0, 0)
           INT_LITERAL 0(1, 2) (Child of 0, 0)
+array same as level
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   FUNC_VOID your_func (0 params:)

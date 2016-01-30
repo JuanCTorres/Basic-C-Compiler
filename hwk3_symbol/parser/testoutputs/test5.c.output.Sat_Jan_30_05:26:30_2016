@@ -62,6 +62,7 @@ ROOT (0, 0) (Child of 0, 0)
                   ID yy (type: INT_TYPE)(3, 0) (Child of 2, 3)
                   INT_LITERAL 2(3, 0) (Child of 2, 3)
               STATEMENT_LIST (3, 0) (Child of 2, 3)
+array same as level
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (2 params: VAR_INT  VAR_INT )
   FUNC_INT myfunc (2 params: VAR_INT  VAR_INT )
