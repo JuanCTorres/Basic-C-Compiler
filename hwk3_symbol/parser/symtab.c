@@ -205,7 +205,7 @@ symhashtable_t *create_symhashtable(int entries) {
 /* Insert an entry into the innermost scope of symbol table.  First
    make sure it's not already in that scope.  Return a pointer to the
    entry. */
-   symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode) {
+  symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode) {
 
     char *name = astnode->value_string;
     assert(symtab);
@@ -263,18 +263,18 @@ symhashtable_t *create_symhashtable(int entries) {
     hashtable = create_symhashtable(HASHSIZE);
     assert(hashtable != NULL);
 
-  parent_hashtable = find_hashtable(root, parent_lvl, parent_sibno);  //parent must have been created
-  assert(parent_hashtable != NULL);
+    parent_hashtable = find_hashtable(root, parent_lvl, parent_sibno);  //parent must have been created
+    assert(parent_hashtable != NULL);
 
-  hashtable->parent = parent_hashtable;
-  hashtable->level = lvl;
-  hashtable->sibno = sibno;
+    hashtable->parent = parent_hashtable;
+    hashtable->level = lvl;
+    hashtable->sibno = sibno;
 
-  //insert as rightmost child of parent
-  if(parent_hashtable->child != NULL) {
-    for(temp = parent_hashtable->child ; temp->rightsib != NULL; temp = temp->rightsib) {
-      ;}
-      temp->rightsib = hashtable;
+    //insert as rightmost child of parent
+    if(parent_hashtable->child != NULL) {
+      for(temp = parent_hashtable->child ; temp->rightsib != NULL; temp = temp->rightsib) {
+        ;}
+        temp->rightsib = hashtable;
     }
     else {
       parent_hashtable->child = hashtable;
@@ -283,18 +283,17 @@ symhashtable_t *create_symhashtable(int entries) {
     return hashtable;
   }
 
+
+
   int check_if_declared(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
 
     symhashtable_t *hash = find_hashtable(symtab->root, lvl, sibno);
 
     assert(hash != NULL);
 
-  //if(hash == NULL){return 0;}
     assert(anode != NULL);
 
     symnode_t *node = NULL;
-
-
 
 
     for(;hash != NULL && node == NULL; hash = hash->parent) {
@@ -312,10 +311,10 @@ symhashtable_t *create_symhashtable(int entries) {
       return 0;
     }
     else {
-    return 1; //return 1 if we find declaration
-  }
+      return 1; //return 1 if we find declaration
+    }
 
-}
+  }
 
 int check_if_redef(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
   symhashtable_t *hash = find_hashtable(symtab->root, lvl, sibno);
@@ -355,33 +354,30 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
   /* Print attributes specific to node types. */
   switch (root->node_type) {
     case SEQ_N:     // change main level when see a new sequence
-    level++;
-    break;
+      level++;
+      break;
 
     case FORMAL_PARAMS_N:
-    level++;
-    break;
+      level++;
+      break;
 
     case FUNC_DECLARATION_N: //function declaraions
       //does hashtable exist with given lvl, siblvl (use find_hashtable)
-    check_if_redef(root, symtab ,level, sibno);
-    hash = find_hashtable(symtab->root, level, sibno);
-    if(hash == NULL) {
-      hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-    }
+      check_if_redef(root, symtab ,level, sibno);
+      hash = find_hashtable(symtab->root, level, sibno);
+      if(hash == NULL) {
+        hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      }
       insert_into_symhashtable(hash, root); //will only insert if it is empty.
       break;
 
-      case FUNCTION_N:
+    case FUNCTION_N:
       check_if_declared(root, symtab ,level, sibno);
       break;
 
-      case CALL_N:
+    case CALL_N:
       //need to check if it has been previously declared.
       break;
-
-
-
 
     case ID_N:      /* print the id */
       check_if_redef(root, symtab ,level, sibno); 
@@ -394,35 +390,32 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       }
       else {  //don't know if previously declared
         check_if_declared(root, symtab , level, sibno);
-    }
-    break;
-
-
-
+      }
+      break;
 
     case ARRAY_TYPE_N: //check for return types!
-    check_if_redef(root, symtab ,level, sibno);
-    if(root->return_type != 0) {
+      check_if_redef(root, symtab ,level, sibno);
+      if(root->return_type != 0) {
+        hash = find_hashtable(symtab->root, level, sibno);
+        if(hash == NULL) {
+          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+          }
+        insert_into_symhashtable(hash, root);        
+      }
+      else {
+        //check if previously declared
+        check_if_declared(root, symtab , level, sibno);
+      }
+      break;
+
+    default:
+      //printf("at default of switch\n");
+      assert(symtab->root != NULL);
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash == NULL) {
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       }
-      insert_into_symhashtable(hash, root);        
-    }
-    else {
-        //check if previously declared
-      check_if_declared(root, symtab , level, sibno);
-    }
-    break;
-
-    default:
-      //printf("at default of switch\n");
-    assert(symtab->root != NULL);
-    hash = find_hashtable(symtab->root, level, sibno);
-    if(hash == NULL) {
-      hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-    }
-    break;
+      break;
   }
 
   if(arraylen <= level) {
@@ -488,8 +481,6 @@ void pretty_print(symhashtable_t *root, int depth) {
     symhashtable_t *child;
     for (child = root->child; child != NULL; child = child->rightsib)
       pretty_print(child, depth + 1);
-
-
 
   }
 
