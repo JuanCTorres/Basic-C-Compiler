@@ -12,6 +12,8 @@ int d, e, f;
 int h = 2, i = 3;
 int cc[12], dd[5];
 
+int a;
+int b;
 
 cc[a * b] = a * b;
 

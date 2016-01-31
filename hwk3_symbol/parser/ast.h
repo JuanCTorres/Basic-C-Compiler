@@ -26,7 +26,8 @@
    wish. */
 
 /* Added a bunch of tokens */
-typedef enum { ROOT_N,
+typedef enum { 
+         ROOT_N,
 	       SEQ_N,
 	       OP_ASSIGN_N, OP_PLUS_N, OP_MINUS_N, OP_NEG_N, OP_TIMES_N, OP_DIVIDE_N,
 	       OP_EQUALS_N,

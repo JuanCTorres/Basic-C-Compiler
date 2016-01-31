@@ -3,11 +3,39 @@ Result of test done to parser.
 test2.c BEGIN.
 ===========================================================
 
+error: redefinition of identifier my_func
+error: redefinition of identifier q
+error: redefinition of identifier b
+error: redefinition of identifier your_func
+error: redefinition of identifier gg
+error: redefinition of identifier ee
+error: redefinition of identifier main
+error: redefinition of identifier a
+error: redefinition of identifier t
+error: redefinition of identifier y
+error: redefinition of identifier u
+error: redefinition of identifier w
+error: redefinition of identifier v
+error: redefinition of identifier ppp
 error: use of undeclared identifier input
 error: use of undeclared identifier qwert
 No syntatical errors detected.
 
 array same as level
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
 (lvl: 0, sibno: 0) contains:
   FUNC_INT main (0 params:)
   FUNC_VOID your_func (0 params:)

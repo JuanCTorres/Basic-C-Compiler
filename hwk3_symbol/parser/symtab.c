@@ -288,6 +288,8 @@ int check_if_declared(ast_node anode, symboltable_t *symtab ,int lvl, int sibno)
   symhashtable_t *hash = find_hashtable(symtab->root, lvl, sibno);
   
   assert(hash != NULL);
+
+  //if(hash == NULL){return 0;}
   assert(anode != NULL);
 
   symnode_t *node = NULL;
@@ -307,7 +309,10 @@ int check_if_declared(ast_node anode, symboltable_t *symtab ,int lvl, int sibno)
     // else if(node->type == VAR_ARRAY_INT_T && anode->return_type == INT_TYPE_N && anode->node_type == ARRAY_TYPE_N) {
     //   return 2;
     // }
-    if(anode->return_type != 0) {
+    //printf("\nanode->return_type = %d\n", anode->return_type);
+    if(anode->return_type != ROOT_N) {
+      printf("REDEFINITION FOUND!\n");
+      fprintf(stderr, "error: redefinition of identifier %s\n", anode->value_string);
       return 2;
     }
   }
@@ -318,6 +323,7 @@ int check_if_declared(ast_node anode, symboltable_t *symtab ,int lvl, int sibno)
   }
 
   if(node == NULL) {
+  fprintf(stderr, "error: use of undeclared identifier %s\n", anode->value_string);
     return 0;
   }
   else {
@@ -349,75 +355,75 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
     case FUNC_DECLARATION_N: //function declaraions
       //does hashtable exist with given lvl, siblvl (use find_hashtable)
+      
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash != NULL) {
-        insert_into_symhashtable(hash, root);
       }
       else {
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-        insert_into_symhashtable(hash, root);
+        
       }
+      insert_into_symhashtable(hash, root);
+      check_if_declared(root, symtab , level, sibno);
+      
+      
 
       break;
     case FUNCTION_N:
-        check = check_if_declared(root, symtab ,level, sibno);
-        if(check == 0) {
-          fprintf(stderr, "error: use of undeclared identifier %s\n", root->value_string);
-        }
-        else if(check == 2) {
-          fprintf(stderr, "error: redefinition of identifier %s\n", root->value_string);
-        }
-
-
+      check_if_declared(root, symtab ,level, sibno);
       break;
+
     case CALL_N:
       //need to check if it has been previously declared.
       break;
 
+
+
+
     case ID_N:      /* print the id */
+      
       if(root->return_type != 0) {  //a non-zero value means that it is a declaration
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash != NULL) {
-          insert_into_symhashtable(hash, root);
         }
         else {
           hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-          insert_into_symhashtable(hash, root);
+          
         }
+        insert_into_symhashtable(hash, root);
+        check_if_declared(root, symtab , level, sibno);
+        
+        
       }
       else {  //don't know if previously declared
-        check = check_if_declared(root, symtab ,level, sibno);
-        if(check == 0) {
-          fprintf(stderr, "error: use of undeclared identifier %s\n", root->value_string);
-        }
-        else if(check == 2) {
-          fprintf(stderr, "error: redefinition of identifier %s\n", root->value_string);
-        }
-
+        check_if_declared(root, symtab , level, sibno);
       }
       break;
+
+
+
+
     case ARRAY_TYPE_N: //check for return types!
       if(root->return_type != 0) {
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash != NULL) {
-          insert_into_symhashtable(hash, root);
+
         }
         else {
           hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
-          insert_into_symhashtable(hash, root);
         }
+        insert_into_symhashtable(hash, root);
+        check_if_declared(root, symtab , level, sibno);
+        
       }
       else {
         //check if previously declared
-        check = check_if_declared(root, symtab ,level, sibno);
-        if(check == 0) {
-          fprintf(stderr, "error: use of undeclared identifier %s\n", root->value_string);
-        }
-        else if(check == 2) {
-          fprintf(stderr, "error: redefinition of identifier %s\n", root->value_string);
-        }
+        check_if_declared(root, symtab , level, sibno);
       }
       break;
+
+
+
 
     default:
       //printf("at default of switch\n");

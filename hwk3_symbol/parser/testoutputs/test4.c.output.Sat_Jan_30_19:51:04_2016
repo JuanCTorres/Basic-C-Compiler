@@ -3,10 +3,36 @@ Result of test done to parser.
 test4.c BEGIN.
 ===========================================================
 
+error: redefinition of identifier main
+error: redefinition of identifier a
+error: redefinition of identifier b
+error: redefinition of identifier c
+error: redefinition of identifier zzzz
+error: redefinition of identifier d
+error: redefinition of identifier e
+error: redefinition of identifier f
+error: redefinition of identifier g
+error: redefinition of identifier h
+error: redefinition of identifier i
+error: redefinition of identifier j
 error: use of undeclared identifier k
+error: redefinition of identifier k
 No syntatical errors detected.
 
 array same as level
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
+REDEFINITION FOUND!
 (lvl: 0, sibno: 0) contains:
   FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
   (lvl: 1, sibno: 0) contains:
