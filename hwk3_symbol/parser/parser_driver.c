@@ -34,14 +34,14 @@
  	if (parseError)	{
  		fprintf(stderr, "WARNING: There were parse errors.\nParse tree may be ill-formed.\n\n");
  	}
- 	else {
- 		printf("\nNo syntatical errors detected.\n\n");
- 	}
+ 	// else {
+ 	// printf("\nNo syntatical errors detected.\n\n");
+ 	//}
  	if (!noRoot) {
  		//print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations 		printf("Print the hashtables in their hierachical order:\n");
  		symboltable_t *something = create_symboltable();
  		build_symbol_table(root, 0, 0, something);
- 		printf("Print hashtables (level-sibno) according to their hierachy\n");
+ 		printf("Print hashtables (level-sibno) according to their hierarchy\n");
  		pretty_print(something->root, 0);
  	}
 

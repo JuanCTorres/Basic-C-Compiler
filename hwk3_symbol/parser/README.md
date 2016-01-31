@@ -96,15 +96,17 @@ The program traverses the syntax tree created in previous steps in a top-down ma
 
 ### pretty_print
 
-Our function to print the contents of our symbol table is `pretty_print`, and it contains not only the identifiers defined in each scope and the scope names,  but also the hierarchical relations between different scopes. This is accomplished by indenting different scopes differently. For instance, in the following diagram, scope (0-1) is the parent of scope (1-0), which in turn is the parent of scope (2-0):
+Our function to print the contents of our symbol table is `pretty_print`, and it contains not only the identifiers defined in each scope and the scope names,  but also the hierarchical relations between different scopes. This is accomplished by indenting different scopes differently. For instance, in the following diagram, scope (0-0) is the parent of scope (1-0), which in turn is the parent of scope (2-0):
 
 ```
-(0-1) contains
+(0-0) contains
 ...
     (1-0) contains
     ...
         (2-0) contains
         ...
+    (1-1) contains
+		...
 ```
 
 
