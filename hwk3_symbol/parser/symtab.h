@@ -4,6 +4,7 @@
  * You should extend the structs and functions as appropriate.
  *
  * extended and changed muchly by sean
+ * Added to by SeokJun Bing, Juan C. Torres
  */
 
 #ifndef SYMTAB_H_
