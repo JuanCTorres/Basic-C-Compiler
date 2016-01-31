@@ -151,11 +151,13 @@ varDeclList: varDeclList ',' varDecl  {
 
 varDecl : ID_T  {
     ast_node t = create_ast_node(ID_N);
+    t->line_num = num_lines;
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
 |  ID_T { /* embedded action needed to prevent savedidtext from being overwritten */
     ast_node t = create_ast_node(ID_N);
+    t->line_num = num_lines;
     t->value_string = strdup(savedIdText);
     $1 = t;
   }  '=' expression {
@@ -166,6 +168,7 @@ varDecl : ID_T  {
   }
 |  ID_T '[' INTCONST_T ']' { /* array[number] */
     ast_node t1 = create_ast_node(ARRAY_TYPE_N);
+    t1->line_num = num_lines;
     ast_node  t2 = create_ast_node(INT_LITERAL_N);
     t1->value_string = strdup(savedIdText);
     t1->left_child = t2;
@@ -177,6 +180,7 @@ varDecl : ID_T  {
 
 funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtext from being overwritten */
   ast_node t1 = create_ast_node(FUNC_DECLARATION_N);
+  t1->line_num = num_lines;
   t1->value_string = strdup(savedIdText);
   t1->return_type = INT_TYPE_N;
   $2 = t1;
@@ -189,6 +193,7 @@ funcDeclaration : INT_T ID_T { /* embedded action required to prevent savedIDtex
 }
 | VOID_T ID_T { /* embedded action required to prevent savedIDtext from being overwritten */
   ast_node t1 = create_ast_node(FUNC_DECLARATION_N);
+  t1->line_num = num_lines;
   t1->value_string = strdup(savedIdText);
   t1->return_type = VOID_TYPE_N;
   $2 = t1;
@@ -233,6 +238,7 @@ formalList : formalList ',' formalParam {
 formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
      /* error handling <later>? */
     ast_node t = create_ast_node(ID_N);
+    t->line_num = num_lines;
     t->value_string = strdup(savedIdText);
     t->return_type = INT_TYPE_N;
     $$ = t;
@@ -240,6 +246,7 @@ formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
 |  INT_T ID_T '[' ']' { /* replaced varTypeSpecifier to INT_T*/
     /*<later*/
     ast_node t = create_ast_node(ARRAY_TYPE_N);
+    t->line_num = num_lines;
     t->return_type = INT_TYPE_N;
     t->value_string = strdup(savedIdText);
     $$ = t;
@@ -430,11 +437,13 @@ expression : var '=' expression {
 
 var : ID_T  {
    ast_node t = create_ast_node(ID_N);
+   t->line_num = num_lines;
    t->value_string = strdup(savedIdText);
    $$ = t;
  }
 |  ID_T {
      ast_node t1 = create_ast_node(ARRAY_TYPE_N);
+     t1->line_num = num_lines;
      t1->value_string = strdup(savedIdText);
      $1 = t1;
   } '[' expression ']' {
@@ -547,6 +556,7 @@ ast_node t = create_ast_node(OP_PLUS_N);
 /* embedded action is required to retain the string val of id_t */
 call : ID_T {
     ast_node t1 = create_ast_node(FUNCTION_N);
+    t1->line_num = num_lines;
     t1->value_string = strdup(savedIdText);
     $1 = t1;
   } '(' args ')' {

@@ -8,6 +8,10 @@ void your_func() {
 	print "LOL!\n";
 }
 
+void my_func(int g) {
+	int mmm;
+}
+
 int main(void) {	//0
 					//1.2
 	int a, t, y, u, w, v, ppp;	//1.2

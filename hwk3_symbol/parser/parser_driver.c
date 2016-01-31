@@ -18,11 +18,6 @@
 #include "symtab.h"
 
 
-
-
-
-
-
  ast_node root = NULL;
 
  extern int yyparse();
@@ -31,21 +26,22 @@
 
 
  int main() {
-  int noRoot = 0;		/* 0 means we will have a root */
+ int noRoot = 0;		/* 0 means we will have a root */
 
   //yydebug = 1; 	//uncomment to enable tracing
  	noRoot = yyparse();
 
  	if (parseError)	{
  		fprintf(stderr, "WARNING: There were parse errors.\nParse tree may be ill-formed.\n\n");
-	}
-	else {
-		printf("No syntatical errors detected.\n\n");
-	}
+ 	}
+ 	else {
+ 		printf("\nNo syntatical errors detected.\n\n");
+ 	}
  	if (!noRoot) {
- 		//print_ast(root, 0, 0, 0);
+ 		//print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations 		printf("Print the hashtables in their hierachical order:\n");
  		symboltable_t *something = create_symboltable();
  		build_symbol_table(root, 0, 0, something);
+ 		printf("Print hashtables (level-sibno) according to their hierachy\n");
  		pretty_print(something->root, 0);
  	}
 

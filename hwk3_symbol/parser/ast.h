@@ -140,6 +140,7 @@ struct ast_node_struct {
   ast_node_type return_type; /* for declarations */
   int array_length;
   void *snode; //using void to avoid circular heaer issues
+  int line_num;
 
 };
 

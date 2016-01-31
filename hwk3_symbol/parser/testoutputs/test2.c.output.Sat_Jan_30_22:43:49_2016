@@ -1,0 +1,43 @@
+Result of test done to parser.
+
+test2.c BEGIN.
+===========================================================
+
+line: 11 | error: redefinition of function my_func
+line: 26 | error: use of undeclared identifier input
+line: 36 | error: use of undeclared identifier qwert
+
+No syntatical errors detected.
+
+Print hashtables (level-sibno) according to their hierachy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_VOID your_func (0 params:)
+  FUNC_INT my_func (2 params: VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT b
+    VAR_INT q
+  (1-1) contains:
+    VAR_INT ee
+    VAR_INT gg
+  (1-2) contains:
+    VAR_INT mmm
+    VAR_INT g
+  (1-3) contains:
+    VAR_INT a
+    VAR_INT t
+    VAR_INT u
+    VAR_INT v
+    VAR_INT w
+    VAR_INT y
+    VAR_INT ppp
+    (2-0) contains:
+      (3-0) contains:
+        (4-0) contains:
+      (3-1) contains:
+    (2-1) contains:
+      (3-2) contains:
+
+
+===========================================================
+test2.c finished.

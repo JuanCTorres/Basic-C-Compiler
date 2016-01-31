@@ -22,4 +22,6 @@ int main(int uu, int ww){  // 0.0
 		}
 	}
 
+	mysterious_func(i);
+
 }

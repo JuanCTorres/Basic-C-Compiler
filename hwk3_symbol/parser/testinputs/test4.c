@@ -15,7 +15,7 @@ void main(int a, int b, int c) {
 							{
 								int j;
 								for(j=0;j<k;++j){
-									int k;
+									int mmm;
 
 								}
 							}

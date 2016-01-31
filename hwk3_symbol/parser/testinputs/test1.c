@@ -14,6 +14,8 @@ int cc[12], dd[5];
 
 int a;
 int b;
+int dd;
+int dd[6];
 
 cc[a * b] = a * b;
 

@@ -14,11 +14,13 @@
 #include "ast.h"
 #include "symtab.h"
 
-
+#define DELTA 10
 #define MAX(x, y) (((x) > (y)) ? (x) : (y)) // For fixing one error in hash table creation
-int sibl[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+//int sibl[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+ static int *siblings;
+ static unsigned arraylen = 0;
 
-int table_size = 20;
+//int table_size = 20;
 //int lvl = 0;
 // Assuming program will have at most 10 sublevels, for now
 
@@ -35,7 +37,7 @@ int table_size = 20;
 
 /* Create a node with a given token type and return a pointer to the
    node. */
-ast_node create_ast_node(ast_node_type node_type) {
+ ast_node create_ast_node(ast_node_type node_type) {
   ast_node new_node = calloc(1,sizeof(struct ast_node_struct));  // for zeros
   new_node->node_type = node_type;
   return new_node;
@@ -66,67 +68,84 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   /* Print attributes specific to node types. */
   switch (root->node_type) {
     case SEQ_N:     // change main level when see a new sequence
-      lvl++;
-      break;
+    lvl++;
+    break;
 
     case FORMAL_PARAMS_N:
-      lvl++;
-      break;
-
-    //case CALL_N:
-    //  siblings[lvl]++;
-    //  break;
-
-    //case FORMAL_PARAMS_N:   // keeping for now, might break
-    //  lvl++;
+    lvl++;
+    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+    break;
 
     case ARRAY_TYPE_N:
-      printf("%s", root->value_string);
-      if(root->return_type != 0)
+    printf("%s", root->value_string);
+    if(root->return_type != 0) {
       printf(" (type: %s)", NODE_NAME(root->return_type));
-      break;
+    }
+    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+    break;
+
     case FUNCTION_N:
-      printf("%s", root->value_string);
-      if(root->return_type != 0)
+    printf("%s", root->value_string);
+    if(root->return_type != 0) {
       printf(" (type: %s)", NODE_NAME(root->return_type));
-      break;
+    }
+    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+    break;
+
     case STRING_LITERAL_N:
-      printf("%s", root->value_string);
-      break;
+    printf("%s", root->value_string);
+    break;
+
     case ID_N:			/* print the id */
-      printf("%s", root->value_string);
-      if(root->return_type != 0)
+    printf("%s", root->value_string);
+    if(root->return_type != 0) {
       printf(" (type: %s)", NODE_NAME(root->return_type));
-      break;
+    }
+    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+    break;
 
     case INT_LITERAL_N:		/* print the int literal */
-      printf("%d", root->value_int);
+    printf("%d", root->value_int);
       //printf("test123\n");
-      break;
+    break;
 
     case FUNC_DECLARATION_N:
-      printf("%s", root->value_string);
-      assert(root->return_type != 0);
-      if(root->return_type != 0)
+    printf("%s", root->value_string);
+    assert(root->return_type != 0);
+    if(root->return_type != 0) {
       printf(" (type: %s)", NODE_NAME(root->return_type));
+    }
+    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
 
     default:
       //printf("at default of switch\n");
-      break;
+    break;
   }
 
-  printf("(%d, %d) ", lvl, sublvl);
-  printf("(Child of %d, %d)", MAX(lvl - 1, 0), sibl[lvl - 1]);
+  if(arraylen <= lvl) {
+    arraylen = arraylen + DELTA;
+    siblings = realloc(siblings, sizeof(int) * arraylen);
+
+    assert(siblings != NULL);
+
+    for(int k=0; k < DELTA; k++) {
+      siblings[arraylen - (DELTA-k)] = 0;
+    }
+  }
+
+  // printf("[in scope: (%d,%d) | (child of %d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+
   printf("\n");
+
 
   /* Recurse on each child of the subtree root, with a depth one
      greater than the root's depth. */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling)
-    print_ast(child, depth + 1, lvl, sibl[lvl]);
+    print_ast(child, depth + 1, lvl, siblings[lvl]);
 
   if(root->node_type == SEQ_N){//} || root->node_type == FORMAL_PARAMS_N){
-    sibl[lvl]++;  // change sibling level after you're done printing all
+    siblings[lvl]++;  // change sibling level after you're done printing all
                       // subtrees, i.e., after done recursing.
   }
 
