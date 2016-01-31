@@ -10,10 +10,7 @@ line: 16 | error: redefinition of identifier b
 line: 17 | error: redefinition of identifier dd
 line: 18 | error: redefinition of identifier dd
 line: 22 | error: use of undeclared identifier zz
-
-No syntatical errors detected.
-
-Print hashtables (level-sibno) according to their hierachy
+Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)
   (1-0) contains:

@@ -112,7 +112,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   /* If ran out of space in array to track current sub-scope,
   reallocate more memory for it.
   */
-  if(arraylen <= lvl) {
+  if(arraylen == lvl) {
     arraylen = arraylen + DELTA;
     siblings = realloc(siblings, sizeof(int) * arraylen);
 

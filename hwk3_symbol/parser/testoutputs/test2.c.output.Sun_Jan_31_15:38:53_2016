@@ -6,10 +6,7 @@ test2.c BEGIN.
 line: 11 | error: redefinition of function my_func
 line: 26 | error: use of undeclared identifier input
 line: 36 | error: use of undeclared identifier qwert
-
-No syntatical errors detected.
-
-Print hashtables (level-sibno) according to their hierachy
+Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)
   FUNC_VOID your_func (0 params:)

@@ -22,4 +22,13 @@ void main(int a, int b, int c) {
 			}
 		}
 	}
+
+	{
+		int huehuehue;
+	}
+
+	{
+		int lolz, catz[100], haaa;
+
+	}
 }

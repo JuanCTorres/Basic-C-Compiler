@@ -412,7 +412,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       break;
   }
 
-  if(arraylen <= level) {
+  if(arraylen == level) {
     arraylen = arraylen + DELTA;
     siblings = realloc(siblings, sizeof(int) * arraylen);
 

@@ -3,10 +3,7 @@ Result of test done to parser.
 test4.c BEGIN.
 ===========================================================
 
-
-No syntatical errors detected.
-
-Print hashtables (level-sibno) according to their hierachy
+Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
   (1-0) contains:
@@ -28,6 +25,12 @@ Print hashtables (level-sibno) according to their hierachy
                 VAR_INT i
                 (8-0) contains:
                   VAR_INT j
+    (2-1) contains:
+      VAR_INT huehuehue
+    (2-2) contains:
+      VAR_INT haaa
+      VAR_ARRAY_INT catz
+      VAR_INT lolz
 
 
 ===========================================================

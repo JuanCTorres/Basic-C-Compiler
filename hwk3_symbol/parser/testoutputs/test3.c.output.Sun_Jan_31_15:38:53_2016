@@ -21,10 +21,7 @@ line: 29 | error: use of undeclared identifier e
 line: 29 | error: use of undeclared identifier f
 line: 34 | error: use of undeclared identifier d
 line: 36 | error: use of undeclared identifier a
-
-No syntatical errors detected.
-
-Print hashtables (level-sibno) according to their hierachy
+Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)
   FUNC_INT this_func (1 params: VAR_INT )
