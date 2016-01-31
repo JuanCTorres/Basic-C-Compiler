@@ -9,6 +9,8 @@
  * This file contains functions to create a node and to print out an
  * abstract syntax tree, for debugging.
  *
+ * Modified by Juan C. Torres, SeokJun Bing
+ *
  */
 
 #include "ast.h"
@@ -28,7 +30,7 @@
  */
  static int *siblings;
  static unsigned arraylen = 0;
- 
+
 
 /* Create a node with a given token type and return a pointer to the
    node. */

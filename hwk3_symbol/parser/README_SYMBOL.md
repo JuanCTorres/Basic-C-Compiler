@@ -94,10 +94,31 @@ The program traverses the syntax tree created in previous steps in a top-down ma
 
 - For each `symnode` containing a function declaration, we added an integer representing the number of parameters that the function takes, as well as an array containing the types of such parameters.
 
+### pretty_print
+
+Our function to print the contents of our symbol table is `pretty_print`, and it contains not only the identifiers defined in each scope and the scope names,  but also the hierarchical relations between different scopes. This is accomplished by indenting different scopes differently. For instance, in the following diagram, scope (0-1) is the parent of scope (1-0), which in turn is the parent of scope (2-0):
+
+```
+(0-1) contains
+...
+    (1-0) contains
+    ...
+        (2-0) contains
+        ...
+```
+
+
 ## Notes about the program
 
-1. We have assumed that the tree will be traversed using a preoder walk, and have tailored our tree so that code generation is easier on future steps. For instance, a for loop is created so that with a preorder walk we would see the initialization, test condition, and iteration stataments in that order, before moving to the body of the loop.
+1. We have assumed that the tree will be traversed using a pre-oder walk, and have tailored our tree so that code generation is easier on future steps. For instance, a for loop is created so that with a preorder walk we would see the initialization, test condition, and iteration stataments in that order, before moving to the body of the loop.
 
 2. We have decided to maintain some extra information in order to preserve condition 1 and make future code generation easier. For instance, a compound statement in our grammar requires that local variables be defined before other executable code (compound-statement -> local-declarations statement-list). In the case that no local variables are defined, we could have not created a node for local-declarations, but this would have made complying with condition 1 harder, as we would have had to handle a special case of pointer manipulation. We have, then, kept an empty node in here to facilitate future code generation easier, as well as facilitate our compliance with condition 1.
 
 ## Changes from previous programs
+
+
+- The `ast_node` structure used in our syntax tree has been changed to include a line number to be printed in error messages, for easier debugging.
+
+- Added a new `ast_node` type to identify function declarations, for easier error checking in our symbol tables.
+
+- Added a pointer from each `ast_node` to its corresponding `symnode`.
