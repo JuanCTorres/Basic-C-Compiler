@@ -92,6 +92,8 @@ The program traverses the syntax tree created in previous steps in a top-down ma
 
   - Scope `(3, 1)` is a child of scope `(2, 2)`, since scope `(2, 2)` is the latest scope of level 2 to be opened. Clearly, scopes `(2, 0)` and `(2, 1)` are already closed (since there is a scope with the same level and a higher sibling identifier), and could not have created scope `(3, 1)`.
 
+- For each `symnode` containing a function declaration, we added an integer representing the number of parameters that the function takes, as well as an array containing the types of such parameters.
+
 ## Notes about the program
 
 1. We have assumed that the tree will be traversed using a preoder walk, and have tailored our tree so that code generation is easier on future steps. For instance, a for loop is created so that with a preorder walk we would see the initialization, test condition, and iteration stataments in that order, before moving to the body of the loop.
@@ -99,5 +101,3 @@ The program traverses the syntax tree created in previous steps in a top-down ma
 2. We have decided to maintain some extra information in order to preserve condition 1 and make future code generation easier. For instance, a compound statement in our grammar requires that local variables be defined before other executable code (compound-statement -> local-declarations statement-list). In the case that no local variables are defined, we could have not created a node for local-declarations, but this would have made complying with condition 1 harder, as we would have had to handle a special case of pointer manipulation. We have, then, kept an empty node in here to facilitate future code generation easier, as well as facilitate our compliance with condition 1.
 
 ## Changes from previous programs
-
-- Fixed bug where parser would not see all the variables if the declarations contained an assignment. 

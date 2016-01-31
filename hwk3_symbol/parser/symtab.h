@@ -21,7 +21,7 @@ typedef struct scope {
 
 
 /* Added a bunch of tokens */
-typedef enum { 
+typedef enum {
   VAR_INT_T,
   VAR_ARRAY_INT_T,
   FUNC_INT_T,
@@ -29,12 +29,9 @@ typedef enum {
 } decl_type;
 
 
-
 /* Define a table of nd associated strings.  You
    should modify this table as appropriate.  The order of entries
    should match the order of enumerated values in var_type. */
-
-
 static val_name_pair decl_table[] = {
   { VAR_INT_T, "VAR_INT" },
   { VAR_ARRAY_INT_T, "VAR_ARRAY_INT"},
@@ -45,9 +42,6 @@ static val_name_pair decl_table[] = {
 
 #define TYPE_INDEX(X)    ( (X) - VAR_INT_T)
 #define TYPE_NAME(X)     ( decl_table[ TYPE_INDEX((X)) ].name)
-
-
-
 
 
 typedef struct symnode {
@@ -61,50 +55,51 @@ typedef struct symnode {
   /* Other attributes go here. */
 } symnode_t;
 
+
 /* Set the name in this node. */
 void set_node_name(symnode_t *node, char *name);
+
 
 /* Does the identifier in this node equal name? */
 int name_is_equal(symnode_t *node, char *name);
 
 
 /* Hash table for a given scope in a symbol table. */
-
 typedef struct symhashtable {
   char *name;
   int size;			/* size of hash table */
-  symnode_t **table;		/* hash table, array of pointers! */ 
+  symnode_t **table;		/* hash table, array of pointers! */
   int level;			/* level of scope, 0 is outermost */
   int sibno;                    /* 0 is leftmost */
   struct symhashtable *parent, *child, *rightsib;
-  
-} symhashtable_t;
 
+} symhashtable_t;
 
 
 /* Symbol table for all levels of scope. */
 typedef struct {
   symhashtable_t *root, *leaf;
-    
+
 } symboltable_t;
-
-
-
-
 
 
 /* Create an empty symbol table. */
 symboltable_t *create_symboltable();
 
+
 symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode);
+
+
 /* Insert an entry into the innermost scope of symbol table.  First
    make sure it's not already in that scope.  Return a pointer to the
    entry. */
 symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode);
 
+
 /* Lookup an entry in a symbol table.  If found return a pointer to it.
    Otherwise, return NULL */
 symnode_t *lookup_in_symboltable(symboltable_t *symtab, char *name);
+
 
 // /* Enter a new scope. */
 // void enter_scope(symboltable_t *symtab, int type, ast_node node);
@@ -112,16 +107,28 @@ symnode_t *lookup_in_symboltable(symboltable_t *symtab, char *name);
 // /* Leave a scope. */
 // void leave_scope(symboltable_t *symtab);
 
+
 /* print the table in a nice way */
 void print_symtab(symboltable_t *symtab);
 
+
+/* Creates a new hash table to insert into the symbol table. */
 symhashtable_t *create_symhashtable(int entries);
 
+
+/* Traverses the syntax tree, keeping track of the current scope
+ and its relations with other scopes. Adds new hashtables when it sees a new
+ scope, and inserts variable and function identifiers in the appropriate
+ hashtable for their scope, depending on their node type, which is contained
+ in the abstract syntax tree with pointer root*/
 void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab);
 
-void pretty_print(symhashtable_t *hash, int a);
 
-
+/* Prints a representation of the symbol table, including representations of
+hierarchical relations between different scopes, names of scopes, and variables
+defined within each scope.
+*/
+void pretty_print(symhashtable_t *hash, int depth);
 
 
 

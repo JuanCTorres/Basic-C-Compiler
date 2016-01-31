@@ -14,26 +14,21 @@
 #include "ast.h"
 #include "symtab.h"
 
+/* How much more space to allocate to the array to keep track of
+  current sub-scope for each level.
+*/
 #define DELTA 10
-#define MAX(x, y) (((x) > (y)) ? (x) : (y)) // For fixing one error in hash table creation
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
 //int sibl[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+/*
+  Array to keep track of current sub-scope for each level. For instance,
+  siblings[2] would contain the current sub-scope for level 2 in our tree. See
+  README for more information.
+ */
  static int *siblings;
  static unsigned arraylen = 0;
-
-//int table_size = 20;
-//int lvl = 0;
-// Assuming program will have at most 10 sublevels, for now
-
-// also, make more space in the init_tables array than in the sublevel array.
-//int [table_size][2] init_tables;
-
-// Initialize table to 0s
-//for(int i = 0; i < table_size; i++){
-//  for(int j = 0; j < 2; j++){
-//    table[i][j] = 0;
-//  }
-//}
-
+ 
 
 /* Create a node with a given token type and return a pointer to the
    node. */
@@ -43,15 +38,6 @@
   return new_node;
 }
 
-// int get_max_unused_index(int** table){
-//   //int max = 1;  // start at 1, as the first entry in array will always be for 0.0
-//   for(int i = 1; i < table_size; i++){
-//     if(table[i][0] == 0 && table[i][1] == 0){
-//       return i;
-//     }
-//   }
-//   return -1
-// }
 
 /* Print the contents of a subtree of an abstract syntax tree, given
    the root of the subtree and the depth of the subtree root. */
@@ -63,7 +49,6 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print the node type. */
   printf("%s ", NODE_NAME(root->node_type));
-
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
@@ -122,6 +107,9 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     break;
   }
 
+  /* If ran out of space in array to track current sub-scope,
+  reallocate more memory for it.
+  */
   if(arraylen <= lvl) {
     arraylen = arraylen + DELTA;
     siblings = realloc(siblings, sizeof(int) * arraylen);
@@ -133,6 +121,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     }
   }
 
+
+  // print out the syntax tree, along with scope number and parent of each child.
   // printf("[in scope: (%d,%d) | (child of %d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
 
   printf("\n");
@@ -148,14 +138,4 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     siblings[lvl]++;  // change sibling level after you're done printing all
                       // subtrees, i.e., after done recursing.
   }
-
 }
-
-
-
-
-
-
-
-
-

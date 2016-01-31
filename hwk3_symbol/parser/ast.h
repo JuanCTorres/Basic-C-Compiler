@@ -26,7 +26,7 @@
    wish. */
 
 /* Added a bunch of tokens */
-typedef enum { 
+typedef enum {
          ROOT_N,
 	       SEQ_N,
 	       OP_ASSIGN_N, OP_PLUS_N, OP_MINUS_N, OP_NEG_N, OP_TIMES_N, OP_DIVIDE_N,
@@ -73,8 +73,6 @@ typedef struct {
 /* Define a table of nd associated strings.  You
    should modify this table as appropriate.  The order of entries
    should match the order of enumerated values in ast_node_type. */
-
-
 static val_name_pair token_table[] = {
   { ROOT_N, "ROOT" },
   { SEQ_N, "SEQ" },
@@ -123,8 +121,6 @@ static val_name_pair token_table[] = {
 #define NODE_NAME(X)     ( token_table[ NODE_INDEX((X)) ].name)
 
 
-
-
 /* Structure for nodes of the abstract syntax tree.  Uses the
    left-child/right-sibling representation, so that each node can have
    a variable number of children.  You should add or remove fields as
@@ -144,13 +140,17 @@ struct ast_node_struct {
 
 };
 
-//int get_max_unused_index(int** table);
 
 /* Create a node with a given token type and return a pointer to the
    node. */
 ast_node create_ast_node(ast_node_type node_type);
 
+
+/*
+ * Assigns a variable type to the node representing an array or function declaration.
+ */
 void assign_var_type(ast_node root);
+
 
 /* Print the contents of a subtree of an abstract syntax tree, given
    the root of the subtree and the depth of the subtree root. */
