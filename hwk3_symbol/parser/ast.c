@@ -1,4 +1,4 @@
-    /* ast.c
+/* ast.c
  *
  * Written by THC for CS 57; massaged by SWS; modified by Seok Jun Bing and Juan Torres
  *
@@ -55,58 +55,58 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   /* Print attributes specific to node types. */
   switch (root->node_type) {
     case SEQ_N:     // change main level when see a new sequence
-    lvl++;
-    break;
+      lvl++;
+      break;
 
     case FORMAL_PARAMS_N:
-    lvl++;
-    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
-    break;
+      lvl++;
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      break;
 
     case ARRAY_TYPE_N:
-    printf("%s", root->value_string);
-    if(root->return_type != 0) {
-      printf(" (type: %s)", NODE_NAME(root->return_type));
-    }
-    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
-    break;
+      printf("%s", root->value_string);
+      if(root->return_type != 0) {
+        printf(" (type: %s)", NODE_NAME(root->return_type));
+      }
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      break;
 
     case FUNCTION_N:
-    printf("%s", root->value_string);
-    if(root->return_type != 0) {
-      printf(" (type: %s)", NODE_NAME(root->return_type));
-    }
-    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
-    break;
+      printf("%s", root->value_string);
+      if(root->return_type != 0) {
+        printf(" (type: %s)", NODE_NAME(root->return_type));
+      }
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      break;
 
     case STRING_LITERAL_N:
-    printf("%s", root->value_string);
-    break;
+      printf("%s", root->value_string);
+      break;
 
     case ID_N:			/* print the id */
-    printf("%s", root->value_string);
-    if(root->return_type != 0) {
-      printf(" (type: %s)", NODE_NAME(root->return_type));
-    }
-    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
-    break;
+      printf("%s", root->value_string);
+      if(root->return_type != 0) {
+        printf(" (type: %s)", NODE_NAME(root->return_type));
+      }
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      break;
 
     case INT_LITERAL_N:		/* print the int literal */
-    printf("%d", root->value_int);
-      //printf("test123\n");
-    break;
+      printf("%d", root->value_int);
+        //printf("test123\n");
+      break;
 
     case FUNC_DECLARATION_N:
-    printf("%s", root->value_string);
-    assert(root->return_type != 0);
-    if(root->return_type != 0) {
-      printf(" (type: %s)", NODE_NAME(root->return_type));
-    }
-    printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      printf("%s", root->value_string);
+      assert(root->return_type != 0);
+      if(root->return_type != 0) {
+        printf(" (type: %s)", NODE_NAME(root->return_type));
+      }
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
 
     default:
       //printf("at default of switch\n");
-    break;
+      break;
   }
 
   /* If ran out of space in array to track current sub-scope,

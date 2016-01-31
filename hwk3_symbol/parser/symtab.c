@@ -21,22 +21,6 @@
  static int *siblings;
  static unsigned arraylen = 0;
 
-/*
- * Functions for symnodes.
- */
-
-
-
-/*
- * Functions for symhashtables.
- */
-
-
-
-
-/*
- * Functions for symboltables.
- */
 
  static const int HASHSIZE = 211;
 

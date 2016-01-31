@@ -1,11 +1,11 @@
 /* symtab.h
- * Declarations for the symbol table.
- * Written by THC for CS 57.
- * You should extend the structs and functions as appropriate.
- *
- * extended and changed muchly by sean
- * Added to by SeokJun Bing, Juan C. Torres
- */
+* Declarations for the symbol table.
+* Written by THC for CS 57.
+* You should extend the structs and functions as appropriate.
+*
+* extended and changed muchly by sean
+* Added to by SeokJun Bing, Juan C. Torres
+*/
 
 #ifndef SYMTAB_H_
 #define SYMTAB_H_
@@ -31,15 +31,15 @@ typedef enum {
 
 
 /* Define a table of nd associated strings.  You
-   should modify this table as appropriate.  The order of entries
-   should match the order of enumerated values in var_type. */
+should modify this table as appropriate.  The order of entries
+should match the order of enumerated values in var_type. */
 static val_name_pair decl_table[] = {
   { VAR_INT_T, "VAR_INT" },
   { VAR_ARRAY_INT_T, "VAR_ARRAY_INT"},
   { FUNC_INT_T, "FUNC_INT" },
   { FUNC_VOID_T, "FUNC_VOID"},
   { 0, NULL}
- };
+};
 
 #define TYPE_INDEX(X)    ( (X) - VAR_INT_T)
 #define TYPE_NAME(X)     ( decl_table[ TYPE_INDEX((X)) ].name)
@@ -92,13 +92,13 @@ symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode)
 
 
 /* Insert an entry into the innermost scope of symbol table.  First
-   make sure it's not already in that scope.  Return a pointer to the
-   entry. */
+make sure it's not already in that scope.  Return a pointer to the
+entry. */
 symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode);
 
 
 /* Lookup an entry in a symbol table.  If found return a pointer to it.
-   Otherwise, return NULL */
+Otherwise, return NULL */
 symnode_t *lookup_in_symboltable(symboltable_t *symtab, char *name);
 
 
@@ -118,10 +118,10 @@ symhashtable_t *create_symhashtable(int entries);
 
 
 /* Traverses the syntax tree, keeping track of the current scope
- and its relations with other scopes. Adds new hashtables when it sees a new
- scope, and inserts variable and function identifiers in the appropriate
- hashtable for their scope, depending on their node type, which is contained
- in the abstract syntax tree with pointer root*/
+and its relations with other scopes. Adds new hashtables when it sees a new
+scope, and inserts variable and function identifiers in the appropriate
+hashtable for their scope, depending on their node type, which is contained
+in the abstract syntax tree with pointer root*/
 void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab);
 
 

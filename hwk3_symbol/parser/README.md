@@ -124,3 +124,5 @@ Our function to print the contents of our symbol table is `pretty_print`, and it
 - Added a new `ast_node` type to identify function declarations, for easier error checking in our symbol tables.
 
 - Added a pointer from each `ast_node` to its corresponding `symnode`.
+
+- Added to flex and bison files to track current line number.
