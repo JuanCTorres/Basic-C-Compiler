@@ -670,29 +670,8 @@ void infer_type(ast_node root, symboltable_t* symtab){
     if(root->left_child != NULL){ /* Check that node has children */
 
       if(root->left_child->right_sibling != NULL){ /* binary operator */
-        if(root->node_type == OP_ASSIGN_N ||
-           root->node_type == OP_PLUS_N ||
-           root->node_type == OP_MINUS_N ||
-           root->node_type == OP_TIMES_N ||
-           root->node_type == OP_DIVIDE_N ||
-           root->node_type == OP_EQUALS_N ||
-           root->node_type == OP_MODULUS_N ||
-           root->node_type == OP_LESS_THAN_N ||
-           root->node_type == OP_LESS_EQUAL_N ||
-           root->node_type == OP_GREATER_THAN_N ||
-           root->node_type == OP_GREATER_EQUAL_N ||
-           root->node_type == OP_NOT_EQUAL_N ||
-           root->node_type == OP_AND_N ||
-           root->node_type == OP_OR_N
-           //anything else?
-           )
-        {
-          // printf("BINARY! Operator %s, left child = (%s, %d), right sib = (%s, %d)\n",
-          // NODE_NAME(root->node_type), root->left_child->value_string, (root->left_child->value_int),
-          // root->left_child->right_sibling->value_string, root->left_child->right_sibling->value_int);
-          if(root->node_type == PRINT_N){
-            printf("Prrint node\n");
-          }
+
+        if(is_binary_operator(root)){
 
           /* Check that the type of the first operand is known */
           if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){
@@ -718,7 +697,7 @@ void infer_type(ast_node root, symboltable_t* symtab){
                 if(root->left_child->return_type == root->left_child->right_sibling->return_type){
                   root->return_type = root->left_child->return_type;
                 } else{
-                  printf("Error: Operation %s not supported between %s and %s\n",
+                  fprintf(stderr, "Error: Operation %s not supported between %s and %s\n",
                   NODE_NAME(root->node_type),
                   NODE_NAME(root->left_child->return_type),
                   NODE_NAME(root->left_child->right_sibling->return_type));
@@ -729,24 +708,19 @@ void infer_type(ast_node root, symboltable_t* symtab){
         //printf("Found a unary operator: %s\n", NODE_NAME(root->return_type));
         /* Already determined type for child; assign child type to parent */
         if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){ // For return vals
-          if(root->node_type == OP_NEG_N ||
-            root->node_type == OP_NOT_N ||
-            root->node_type == OP_INCREMENT_N ||
-            root->node_type == OP_DECREMENT_N )
-          {
+
+          if(is_unary_operator(root)){
             root->return_type = root->left_child->return_type;
           }
+
           root->return_type = root->left_child->return_type;
         } else{ /* Otherwise, recurse until you find out, then assign the type of
           child to parent */
-          if(root->node_type == OP_NEG_N ||
-             root->node_type == OP_NOT_N ||
-             root->node_type == OP_INCREMENT_N ||
-             root->node_type == OP_DECREMENT_N
-          ){
-          infer_type(root->left_child, symtab);
-          root->return_type = root->left_child->return_type;
-        }
+
+          if(is_unary_operator(root)){
+            infer_type(root->left_child, symtab);
+            root->return_type = root->left_child->return_type;
+          }
         }
       }
     }
@@ -756,4 +730,41 @@ void infer_type(ast_node root, symboltable_t* symtab){
   for(child = root->left_child; child != NULL; child = child->right_sibling){
     infer_type(child, symtab);
   }
+}
+
+
+int is_binary_operator(ast_node root){
+
+  if(root->node_type == OP_ASSIGN_N ||
+     root->node_type == OP_PLUS_N ||
+     root->node_type == OP_MINUS_N ||
+     root->node_type == OP_TIMES_N ||
+     root->node_type == OP_DIVIDE_N ||
+     root->node_type == OP_EQUALS_N ||
+     root->node_type == OP_MODULUS_N ||
+     root->node_type == OP_LESS_THAN_N ||
+     root->node_type == OP_LESS_EQUAL_N ||
+     root->node_type == OP_GREATER_THAN_N ||
+     root->node_type == OP_GREATER_EQUAL_N ||
+     root->node_type == OP_NOT_EQUAL_N ||
+     root->node_type == OP_AND_N ||
+     root->node_type == OP_OR_N
+     //anything else?
+   ){
+     return 1;
+   } else{
+     return 0;
+   }
+}
+
+
+int is_unary_operator(ast_node root){
+  if(root->node_type == OP_NEG_N ||
+     root->node_type == OP_NOT_N ||
+     root->node_type == OP_INCREMENT_N ||
+     root->node_type == OP_DECREMENT_N){
+       return 1;
+     } else{
+       return 0;
+     }
 }
