@@ -58,7 +58,7 @@ int main() {
 			//print_ast relies on data inserted from build_symbol_table above;
  			record_var_type_in_ast(root, symtab);
  			//printf("\n\n");
-			infer_type(root, symtab);
+			infer_type(root);
 			check_return(root, symtab);
       		print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
 			//print_ast relies on data inserted from build_symbol_table above;
