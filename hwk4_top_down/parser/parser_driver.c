@@ -44,7 +44,7 @@
  	// printf("\nNo syntatical errors detected.\n\n");
  	//}
  	if (!noRoot) {
- 		
+
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab);
  		printf("\n\nPrint hashtables (level-sibno) according to their hierarchy\n");
@@ -55,7 +55,8 @@
  		else {
  			record_var_type_in_ast(root, symtab);
  			printf("\n\n");
- 			print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
+      infer_type(root, symtab);
+      print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
 			//print_ast relies on data inserted from build_symbol_table above;
  		}
  	}

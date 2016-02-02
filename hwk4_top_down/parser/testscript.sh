@@ -90,6 +90,21 @@ printf "test6.c finished.\n" >> "${file}"
 
 
 
+file="./testoutputs/test7.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >> "${file}"
+
+printf "test7.c BEGIN.\n" >> "${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser < ./testinputs/test7.c >> "${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "test6.c finished.\n" >> "${file}"
+
+
+
+
+
 file="./testoutputs/test.error.c.output.`date +"%a_%b_%d_%T_%Y"`"
 printf "Result of test done to parser.\n\n" >>"${file}"
 
@@ -104,10 +119,6 @@ printf "test.error.c finished.\n" >>"${file}"
 
 
 
+
+
 make clean
-
-
-
-
-
-

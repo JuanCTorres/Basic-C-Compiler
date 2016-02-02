@@ -52,6 +52,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print the node type. */
   printf("%s ", NODE_NAME(root->node_type));
+  printf(" Return type: %s", NODE_NAME(root->return_type));
+  printf(" Node type: %s", NODE_NAME(root->node_type));
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
@@ -63,7 +65,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       // lvl++;
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      
+
       break;
 
     case ARRAY_TYPE_N:
@@ -119,7 +121,28 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     case RETURN_N:
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf(" Node type: %s", NODE_NAME(root->node_type));
       break;
+
+    // case OP_NEG_N:
+    //   printf(" Return type: %s", NODE_NAME(root->return_type));
+    //   printf(" Node type: %s", NODE_NAME(root->node_type));
+    //   break;
+    //
+    // case OP_NOT_N:
+    //   printf(" Return type: %s", NODE_NAME(root->return_type));
+    //   printf(" Node type: %s", NODE_NAME(root->node_type));
+    //   break;
+    //
+    // case OP_INCREMENT_N:
+    //   printf(" Return type: %s", NODE_NAME(root->return_type));
+    //   printf(" Node type: %s", NODE_NAME(root->node_type));
+    //   break;
+    //
+    // case OP_DECREMENT_N:
+    //   printf(" Return type: %s", NODE_NAME(root->return_type));
+    //   printf(" Node type: %s", NODE_NAME(root->node_type));
+    //   break;
 
     default:
       //printf("at default of switch\n");
