@@ -15,6 +15,7 @@ void your_func() {
 int main(void) {	//0
 					//1.2
 	int a, t, y, u, w, v, ppp;	//1.2
+	int fff[2];
 	a = t= y = -(4/5);
 
 	if(a > 10) { // 1.2
@@ -43,7 +44,7 @@ int main(void) {	//0
 
 	w = my_func(w, v, ppp); // 1.2
 	your_func();
-	my_func(w, v);						// 1.2
+	my_func(fff[1], v);						// 1.2
 
 
 	return 0;

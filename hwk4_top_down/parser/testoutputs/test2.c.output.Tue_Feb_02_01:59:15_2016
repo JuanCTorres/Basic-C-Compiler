@@ -4,7 +4,7 @@ test2.c BEGIN.
 ===========================================================
 
 
-Error: Number of parameters to function my_func at line 44 does not match the declaration at line 1
+Error: Number of parameters to function my_func at line 45 does not match the declaration at line 1
 
 
 Print hashtables (level-sibno) according to their hierarchy
@@ -26,6 +26,7 @@ Print hashtables (level-sibno) according to their hierarchy
     VAR_INT w
     VAR_INT y
     VAR_INT ppp
+    VAR_ARRAY_INT fff
     (2-0) contains:
       (3-0) contains:
         (4-0) contains:
@@ -69,6 +70,8 @@ ROOT
         ID w (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
         ID v (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
         ID ppp (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ARRAY_TYPE fff (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 18
+          INT_LITERAL 2 (type: INT_TYPE)
       STATEMENT_LIST 
         = 
           ID a (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
@@ -113,7 +116,7 @@ ROOT
           SEQ 
             LOCAL_DECLARATIONS 
               = 
-                ID qwert (type: INT_TYPE)[scope (2,1) <- (1,2)] declared at line 36
+                ID qwert (type: INT_TYPE)[scope (2,1) <- (1,2)] declared at line 37
                 INT_LITERAL 123 (type: INT_TYPE)
             STATEMENT_LIST 
               FOR 
@@ -151,7 +154,8 @@ ROOT
           FUNCTION your_func (type: VOID_TYPE)[scope (1,2) <- (0,0)] declared at line 6
         CALL 
           FUNCTION my_func (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 1
-            ID w (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+            ARRAY_TYPE fff (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 18
+              INT_LITERAL 1 (type: INT_TYPE)
             ID v (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
         RETURN [scope (1,2) <- (0,0)]
           INT_LITERAL 0 (type: INT_TYPE)
