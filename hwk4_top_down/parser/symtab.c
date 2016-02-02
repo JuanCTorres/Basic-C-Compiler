@@ -18,13 +18,13 @@
 #define DELTA 10
 
 extern int symtabError;
+extern int typeError;
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
- static int *siblings;
- static unsigned arraylen = 0;
+static int *siblings;
+static unsigned arraylen = 0;
 
-
- static const int HASHSIZE = 211;
+static const int HASHSIZE = 211;
 
 /* Create an empty symbol table. */
  symboltable_t  *create_symboltable() {
@@ -489,7 +489,7 @@ void pretty_print(symhashtable_t *root, int depth) {
   }
 
 void insert_scope_info(ast_node root, int curr_level, int curr_sib, int parent_level, int parent_sib) {
-  
+
   assert(root != NULL);
 
   root->curr_level = curr_level;
@@ -504,7 +504,7 @@ void insert_scope_info(ast_node root, int curr_level, int curr_sib, int parent_l
 void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
   symhashtable_t *hash = NULL;
   symnode_t *node = NULL;
-  
+
 
   /* Depending on node types, go deeper, create sibling scopes, add to hashtable,
    * or take other appropriate action.
@@ -539,7 +539,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
         root->line_declared = node->abnode->line_num;
       break;
 
-    case ID_N:   
+    case ID_N:
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
       for(;hash != NULL && node == NULL; hash = hash->parent) {
@@ -547,7 +547,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
         node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(node != NULL); //as hashtable was built prev, it must be found for ID_N
-              
+
       if(root->return_type == 0) {  // a zero value means that it is not a declaration, since only declarations
                                     // are assigned a return type when building the abstract syntax tree.
         if(node->type == VAR_INT_T) {
@@ -559,7 +559,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
 
     case ARRAY_TYPE_N:             // check for return types!
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
-      for(;hash != NULL && node == NULL; hash = hash->parent) {  
+      for(;hash != NULL && node == NULL; hash = hash->parent) {
         node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(node != NULL); //as hashtable was built prev, it must be found for array_typE_n
@@ -567,7 +567,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
         if(node->type == VAR_ARRAY_INT_T){
           root->return_type = INT_TYPE_N;
         }
-        
+
       }
       root->line_declared = node->abnode->line_num;
       break;
@@ -575,7 +575,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
     case INT_LITERAL_N:
       root->return_type = INT_TYPE_N;
       break;
-    
+
     case RETURN_N: //not sure if we deal with this here...
       assert(symtab->root != NULL);
       break;
@@ -614,7 +614,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
           //node is the original declaration stored in symbol table
         }
         assert(node != NULL); //as hashtable was built prev, it must be found for func_n
-        
+
         // assert(root->left_child != NULL);
         int i = 0;
         for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
@@ -650,7 +650,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
       assert(symtab->root != NULL);
       break;
 
-      
+
   }
 
   /* Recurse on each child of the subtree root, with a depth one
@@ -663,59 +663,42 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
 
 
-void infer_type(ast_node root, symboltable_t* symtab){
-  /* Don't infer the type for the node of the tree */
+void infer_type(ast_node root){
+
   if(root->return_type == 0){ /* Check this node doesn't yet have a return type */
 
     if(root->left_child != NULL){ /* Check that node has children */
 
-      if(root->left_child->right_sibling != NULL){ // binary operator
-        if(root->node_type == OP_ASSIGN_N ||
-           root->node_type == OP_PLUS_N ||
-           root->node_type == OP_MINUS_N ||
-           root->node_type == OP_TIMES_N ||
-           root->node_type == OP_DIVIDE_N ||
-           root->node_type == OP_EQUALS_N ||
-           root->node_type == OP_MODULUS_N ||
-           root->node_type == OP_LESS_THAN_N ||
-           root->node_type == OP_LESS_EQUAL_N ||
-           root->node_type == OP_GREATER_THAN_N ||
-           root->node_type == OP_GREATER_EQUAL_N ||
-           root->node_type == OP_NOT_EQUAL_N ||
-           root->node_type == OP_AND_N ||
-           root->node_type == OP_OR_N
-           //anything else?
-         )
-           {
-            //  printf("BINARY! Operator %s, left child = (%s, %d), right sib = (%s, %d)\n",
-            //   NODE_NAME(root->node_type), root->left_child->value_string, (root->left_child->value_int),
-            // root->left_child->right_sibling->value_string, root->left_child->right_sibling->value_int);
+      if(root->left_child->right_sibling != NULL){ /* binary operator */
+
+        if(is_binary_operator(root)){
 
           /* Check that the type of the first operand is known */
           if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){
-            //printf("FIRST TYPE KNOWN\n");
+
             /* Check that the type of the second operand is known */
-            if(root->left_child->right_sibling->return_type != 0 ||
-              root->left_child->right_sibling->node_type == INT_LITERAL_N){
-                //printf("SECOND TYPE KNONW\n");
-                if(root->left_child->return_type == root->left_child->right_sibling->return_type){
-                  root->return_type = root->left_child->return_type;
-                }
-              } else{ /* Type(2nd operand) unknown; find out */
-                infer_type(root->left_child->right_sibling, symtab); // both types known at this point
+            if(root->left_child->right_sibling->return_type == 0){
+                infer_type(root->left_child->right_sibling);
+              }
+
+              /* Both types are known at this point */
+              if(root->left_child->return_type == root->left_child->right_sibling->return_type){
+                root->return_type = root->left_child->return_type;
               }
             } else{ /* type(1st operand) unknown; find out */
-              infer_type(root->left_child, symtab);
+              infer_type(root->left_child);
               /* Check type(2nd operand) is known */
-              if(root->left_child->right_sibling->return_type != 0 ||
-                root->left_child->right_sibling->return_type == INT_LITERAL_N){
-                  infer_type(root->left_child->right_sibling, symtab);
+              if(root->left_child->right_sibling->return_type == 0)// ||
+                //root->left_child->right_sibling->return_type == INT_LITERAL_N){
+                {
+                    infer_type(root->left_child->right_sibling);
                 }
                 /* At this point, we know type(1st operand), type(2nd operand) are known */
                 if(root->left_child->return_type == root->left_child->right_sibling->return_type){
                   root->return_type = root->left_child->return_type;
                 } else{
-                  printf("Error: Operation %s not supported between %s and %s\n",
+                  typeError = 1;
+                  fprintf(stderr, "Error: Operation %s not supported between %s and %s\n",
                   NODE_NAME(root->node_type),
                   NODE_NAME(root->left_child->return_type),
                   NODE_NAME(root->left_child->right_sibling->return_type));
@@ -726,19 +709,19 @@ void infer_type(ast_node root, symboltable_t* symtab){
         //printf("Found a unary operator: %s\n", NODE_NAME(root->return_type));
         /* Already determined type for child; assign child type to parent */
         if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){ // For return vals
-          if(root->node_type == OP_NEG_N || /* Only unary operators? */
-            root->node_type == OP_NOT_N ||
-            root->node_type == OP_INCREMENT_N ||
-            root->node_type == OP_DECREMENT_N
-            // assign? Others?
-          ){
+
+          if(is_unary_operator(root)){
             root->return_type = root->left_child->return_type;
           }
+
           root->return_type = root->left_child->return_type;
         } else{ /* Otherwise, recurse until you find out, then assign the type of
           child to parent */
-          infer_type(root->left_child, symtab);
-          root->return_type = root->left_child->return_type;
+
+          if(is_unary_operator(root)){
+            infer_type(root->left_child);
+            root->return_type = root->left_child->return_type;
+          }
         }
       }
     }
@@ -746,7 +729,7 @@ void infer_type(ast_node root, symboltable_t* symtab){
   /* Recurse on the entire tree */
   ast_node child;
   for(child = root->left_child; child != NULL; child = child->right_sibling){
-    infer_type(child, symtab);
+    infer_type(child);
   }
 }
 
@@ -785,4 +768,38 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
     
 }
 
+int is_binary_operator(ast_node root){
 
+  if(root->node_type == OP_ASSIGN_N ||
+     root->node_type == OP_PLUS_N ||
+     root->node_type == OP_MINUS_N ||
+     root->node_type == OP_TIMES_N ||
+     root->node_type == OP_DIVIDE_N ||
+     root->node_type == OP_EQUALS_N ||
+     root->node_type == OP_MODULUS_N ||
+     root->node_type == OP_LESS_THAN_N ||
+     root->node_type == OP_LESS_EQUAL_N ||
+     root->node_type == OP_GREATER_THAN_N ||
+     root->node_type == OP_GREATER_EQUAL_N ||
+     root->node_type == OP_NOT_EQUAL_N ||
+     root->node_type == OP_AND_N ||
+     root->node_type == OP_OR_N
+     //anything else?
+   ){
+     return 1;
+   } else{
+     return 0;
+   }
+}
+
+
+int is_unary_operator(ast_node root){
+  if(root->node_type == OP_NEG_N ||
+     root->node_type == OP_NOT_N ||
+     root->node_type == OP_INCREMENT_N ||
+     root->node_type == OP_DECREMENT_N){
+       return 1;
+     } else{
+       return 0;
+     }
+}

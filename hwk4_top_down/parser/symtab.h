@@ -140,7 +140,16 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab);
 
 int check_function(ast_node root, symboltable_t *symtab);
 
-void infer_type(ast_node root, symboltable_t* symtab);
+/*  */
+void infer_type(ast_node root);
+
+
+/* Returns true is the root is a unary operator, depending on its node_type */
+int is_unary_operator(ast_node root);
+
+
+/* Returns true is the root is a binary operator, depending on its node_type */
+int is_binary_operator(ast_node root);
 
 void check_return(ast_node root, symboltable_t *symtab);
 
