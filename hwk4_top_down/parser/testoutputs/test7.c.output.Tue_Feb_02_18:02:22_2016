@@ -1,0 +1,29 @@
+Result of test done to parser.
+
+test7.c BEGIN.
+===========================================================
+
+Error: No return statement in function main at line 1
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  (1-0) contains:
+    VAR_INT a
+
+
+ROOT (type: INT_TYPE) 
+  FUNC_DECLARATION main  (0 params:)[scope (0,0) <- (0,0)] declared at line 1(type: INT_TYPE) 
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS (type: INT_TYPE) 
+        ID a [scope (1,0) <- (0,0)] declared at line 2(type: INT_TYPE) 
+      STATEMENT_LIST 
+        = (type: INT_TYPE) 
+          ID a [scope (1,0) <- (0,0)] declared at line 2(type: INT_TYPE) 
+          INT_LITERAL 3(type: INT_TYPE) 
+
+
+===========================================================
+test6.c finished.

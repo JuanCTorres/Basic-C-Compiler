@@ -155,5 +155,5 @@ void check_return(ast_node root, symboltable_t *symtab);
 
 void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode);
 
-
+void insert_implicit_return(ast_node root, symboltable_t *symtab);
 #endif

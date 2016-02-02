@@ -19,6 +19,8 @@
 
 extern int symtabError;
 extern int typeError;
+extern int returnError;
+extern int funcError;
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 static int *siblings;
@@ -626,15 +628,17 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
 
         if(node->num_parameters != i) {
-          symtabError = 1;
-          fprintf(stderr, "\nError: Number of parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
+          funcError = 1;
+          fprintf(stderr, "Error: Number of parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
         }
         else {
           int k = 0;
           for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
 
             if(!(anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T)) {
+              funcError = 1;
               //printf("\n\n  parm type is: %s return_type is: %s \n\n", TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type));
+              // fprintf(stderr, "\n\n %s return_type: %s but should be %s \n\n",anode->value_string ,NODE_NAME(anode->return_type), TYPE_NAME(node->parameters[k]));
               fprintf(stderr, "Error: Input parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
               return 1;
             }
@@ -742,14 +746,51 @@ void check_return(ast_node root, symboltable_t *symtab) {
   return;
 }
 
+
+
 void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode) {
+  ast_node child2;
 
     switch (root->node_type) {
-      case STATEMENT_LIST_N:
-        break;
-
       case FUNC_DECLARATION_N:
-        funcnode = root;
+        funcnode = root; //last function seen
+        child2 = root->left_child->right_sibling; //to SEQ_N
+        assert(child2->node_type == SEQ_N);
+        child2 = child2->left_child->right_sibling; // to STATEMENT_LIST_N
+        assert(child2->node_type == STATEMENT_LIST_N); 
+        // fprintf(stderr, "\n\n  before for %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
+        for (child2 = child2->left_child; 
+          child2 != NULL && child2->right_sibling != NULL; 
+          child2 = child2->right_sibling) {
+          // fprintf(stderr, "\n\n  child2 %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
+        }
+        
+        if((child2->node_type != RETURN_N)){
+          if(funcnode->return_type == INT_TYPE_N) {
+            returnError = 1;
+            fprintf(stderr, "Error: No return statement in function %s at line %d\n", funcnode->value_string, funcnode->line_num);
+          } 
+          else {
+            child2->right_sibling = create_ast_node(RETURN_N);
+            child2->right_sibling->return_type = VOID_TYPE_N;
+            // fprintf(stderr, "\nIMPLICIT RETURN\n");
+          }
+        }
+        else if( (child2->node_type == RETURN_N) && (funcnode->return_type == INT_TYPE_N) ) {
+          if(child2->left_child == NULL) {
+            
+              returnError = 1;
+              fprintf(stderr, "Error: Returning wrong type for function %s at line %d\n", funcnode->value_string, child2->line_num);
+            
+          } 
+          else {
+            if(child2->left_child->return_type != INT_TYPE_N) {
+              returnError = 1;
+              fprintf(stderr, "Error: Returning wrong type for function %s at line %d\n", funcnode->value_string, child2->line_num);
+            }
+          }
+        }
+
         break;
 
       case RETURN_N:

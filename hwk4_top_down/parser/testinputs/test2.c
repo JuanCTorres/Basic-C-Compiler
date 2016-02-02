@@ -44,8 +44,8 @@ int main(void) {	//0
 
 	w = my_func(w, v, ppp); // 1.2
 	your_func();
-	my_func(fff[1], v);						// 1.2
+	my_func(fff[1], v + (y * t *(v - ppp)));						// 1.2
 
 
-	return 0;
+	return ((a + w) / ((t * ppp) - y - u - w) );
 }

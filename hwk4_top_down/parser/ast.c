@@ -52,8 +52,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print the node type. */
   printf("%s ", NODE_NAME(root->node_type));
-  printf(" Return type: %s", NODE_NAME(root->return_type));
-  printf(" Node type: %s", NODE_NAME(root->node_type));
+  
+
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
@@ -69,9 +69,9 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       break;
 
     case ARRAY_TYPE_N:
-      printf("%s", root->value_string);
+      printf("%s ", root->value_string);
       if(root->return_type != 0) {
-        printf(" (type: %s)", NODE_NAME(root->return_type));
+        // printf(" (type: %s)", NODE_NAME(root->return_type));
       }
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
@@ -79,9 +79,9 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       break;
 
     case FUNCTION_N:
-      printf("%s", root->value_string);
+      printf("%s ", root->value_string);
       if(root->return_type != 0) {
-        printf(" (type: %s)", NODE_NAME(root->return_type));
+        // printf(" (type: %s)", NODE_NAME(root->return_type));
       }
       int i = 0;
       ast_node anode;
@@ -90,7 +90,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       }
       printf(" (%d params:", i);
       for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
-        printf(" %s ", TYPE_NAME(root->return_type));
+        printf(" %s", NODE_NAME(root->return_type));
       }
       printf(")");
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
@@ -99,13 +99,13 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       break;
 
     case STRING_LITERAL_N:
-      printf("%s", root->value_string);
+      printf("%s ", root->value_string);
       break;
 
     case ID_N:			/* print the id */
-      printf("%s", root->value_string);
+      printf("%s ", root->value_string);
       if(root->return_type != 0) {
-        printf(" (type: %s)", NODE_NAME(root->return_type));
+        // printf(" (type: %s)", NODE_NAME(root->return_type));
       }
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
@@ -114,14 +114,14 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
     case INT_LITERAL_N:		/* print the int literal */
       printf("%d", root->value_int);
-      printf(" (type: %s)", NODE_NAME(root->return_type));
+      // printf(" (type: %s)", NODE_NAME(root->return_type));
       break;
 
     case FUNC_DECLARATION_N:
-      printf("%s", root->value_string);
+      printf("%s ", root->value_string);
       assert(root->return_type != 0);
       // if(root->return_type != 0) {
-        printf(" (type: %s)", NODE_NAME(root->return_type));
+        // printf(" (type: %s)", NODE_NAME(root->return_type));
       // }
       printf(" (%d params:", root->snode->num_parameters);
       for(int k = 0; k < root->snode->num_parameters; k++) {
@@ -142,6 +142,10 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     default:
       //printf("at default of switch\n");
       break;
+  }
+
+  if(root->return_type != 0) {
+    printf("(type: %s) ", NODE_NAME(root->return_type));
   }
 
   /* If ran out of space in array to track current sub-scope,
