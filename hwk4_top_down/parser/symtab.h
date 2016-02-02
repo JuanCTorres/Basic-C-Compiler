@@ -138,6 +138,6 @@ void pretty_print(symhashtable_t *hash, int depth);
 
 void record_var_type_in_ast(ast_node root, symboltable_t *symtab);
 
-
+int check_function(ast_node root, symboltable_t *symtab);
 
 #endif

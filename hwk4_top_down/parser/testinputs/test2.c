@@ -42,7 +42,8 @@ int main(void) {	//0
 	}
 
 	w = my_func(w, v, ppp); // 1.2
-	your_func();						// 1.2
+	your_func();
+	my_func(w, v);						// 1.2
 
 
 	return 0;

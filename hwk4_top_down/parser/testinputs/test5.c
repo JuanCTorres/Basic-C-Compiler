@@ -1,5 +1,5 @@
-int myfunc(int b, int c){ // 0.0
-	b;                  // 1.0
+int myfunc(int g){ // 0.0
+	int b;                  // 1.0
 	{
 		int c;                // 2.0
 	}
@@ -23,7 +23,7 @@ int main(int uu, int ww){  // 0.0
 			yy = 123;
 		}
 	}
-
+	myfunc();
 	//mysterious_func(i);
 
 }

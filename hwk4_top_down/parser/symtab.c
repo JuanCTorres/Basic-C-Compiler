@@ -588,12 +588,78 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
   }
 
 
-
   /* Recurse on each child of the subtree root, with a depth one
      greater than the root's depth. */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling)
     record_var_type_in_ast(child, symtab);
-
-
 }
+
+
+
+/*declaration of func and identifiers is already checked during build build_symbol_table
+* so here, we just check for paramter inputs into functions
+*/
+int check_function(ast_node root, symboltable_t *symtab) {
+  symhashtable_t *hash = NULL;
+  symnode_t *node = NULL;
+  ast_node anode = NULL;
+
+  switch (root->node_type) {
+
+    case FUNCTION_N:
+        hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+        for(;hash != NULL && node == NULL; hash = hash->parent) {
+          node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+          //node is the original declaration stored in symbol table
+        }
+        assert(node != NULL); //as hashtable was built prev, it must be found for func_n
+        
+        // assert(root->left_child != NULL);
+        int i = 0;
+        for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
+          //if(anode->return_type == INT_TYPE_N)
+          i++;
+          //printf("node_name: %s return_type: %s i: %d\n", anode->value_string ,NODE_NAME(anode->return_type), i);
+        }
+
+
+
+        if(node->num_parameters != i) {
+          symtabError = 1;
+          fprintf(stderr, "\nError: Number of parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
+        }
+        else {
+          int k = 0;
+          for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
+
+            if(!(anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T)) {
+              //printf("\n\n  parm type is: %s return_type is: %s \n\n", TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type));
+              fprintf(stderr, "Error: Input parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
+              return 1;
+            }
+            k++;
+          }
+        }
+      break;
+
+
+
+    default:
+      // printf("at default of switch\n");
+      assert(symtab->root != NULL);
+      break;
+
+      
+  }
+
+  /* Recurse on each child of the subtree root, with a depth one
+     greater than the root's depth. */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    check_function(child, symtab);
+  return 0;
+}
+
+
+

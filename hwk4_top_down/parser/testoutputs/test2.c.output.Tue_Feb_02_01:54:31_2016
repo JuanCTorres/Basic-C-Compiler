@@ -1,0 +1,161 @@
+Result of test done to parser.
+
+test2.c BEGIN.
+===========================================================
+
+
+Error: Number of parameters to function my_func at line 44 does not match the declaration at line 1
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_VOID your_func (0 params:)
+  FUNC_INT my_func (2 params: VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT b
+    VAR_INT q
+  (1-1) contains:
+    VAR_INT ee
+    VAR_INT gg
+  (1-2) contains:
+    VAR_INT a
+    VAR_INT t
+    VAR_INT u
+    VAR_INT v
+    VAR_INT w
+    VAR_INT y
+    VAR_INT ppp
+    (2-0) contains:
+      (3-0) contains:
+        (4-0) contains:
+      (3-1) contains:
+    (2-1) contains:
+      VAR_INT qwert
+      (3-2) contains:
+
+
+ROOT 
+  FUNC_DECLARATION my_func (type: INT_TYPE))[scope (0,0) <- (0,0)] declared at line 1
+    FORMAL_PARAMS 
+      ID q (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+      ID b (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+        PRINT 
+          + 
+            ID q (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+            ID b (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+        RETURN [scope (1,0) <- (0,0)]
+          INT_LITERAL 12345 (type: INT_TYPE)
+  FUNC_DECLARATION your_func (type: VOID_TYPE))[scope (0,0) <- (0,0)] declared at line 6
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID gg (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 7
+        ID ee (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 7
+      STATEMENT_LIST 
+        PRINT 
+          STRING_LITERAL LOL!\n
+  FUNC_DECLARATION main (type: INT_TYPE))[scope (0,0) <- (0,0)] declared at line 15
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID a (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ID t (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ID y (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ID u (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ID w (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ID v (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        ID ppp (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+      STATEMENT_LIST 
+        = 
+          ID a (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+          = 
+            ID t (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+            = 
+              ID y (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+              - 
+                / 
+                  INT_LITERAL 4 (type: INT_TYPE)
+                  INT_LITERAL 5 (type: INT_TYPE)
+        IF_ELSE_STMT 
+          > 
+            ID a (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+            INT_LITERAL 10 (type: INT_TYPE)
+          SEQ 
+            LOCAL_DECLARATIONS 
+            STATEMENT_LIST 
+              IF_ELSE_STMT 
+                INT_LITERAL 1 (type: INT_TYPE)
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    DO_WHILE 
+                      != 
+                        / 
+                          * 
+                            ID a (type: INT_TYPE)[scope (3,0) <- (2,0)] declared at line 17
+                            - 
+                              ID t (type: INT_TYPE)[scope (3,0) <- (2,0)] declared at line 17
+                              ID u (type: INT_TYPE)[scope (3,0) <- (2,0)] declared at line 17
+                          ID w (type: INT_TYPE)[scope (3,0) <- (2,0)] declared at line 17
+                        INT_LITERAL 10 (type: INT_TYPE)
+                      SEQ 
+                        LOCAL_DECLARATIONS 
+                        STATEMENT_LIST 
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    PRINT 
+                      STRING_LITERAL not\n
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = 
+                ID qwert (type: INT_TYPE)[scope (2,1) <- (1,2)] declared at line 36
+                INT_LITERAL 123 (type: INT_TYPE)
+            STATEMENT_LIST 
+              FOR 
+                = 
+                  ID t (type: INT_TYPE)[scope (2,1) <- (1,2)] declared at line 17
+                  INT_LITERAL 0 (type: INT_TYPE)
+                < 
+                  ID t (type: INT_TYPE)[scope (2,1) <- (1,2)] declared at line 17
+                  INT_LITERAL 99 (type: INT_TYPE)
+                ++ 
+                  ID t (type: INT_TYPE)[scope (2,1) <- (1,2)] declared at line 17
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                  STATEMENT_LIST 
+                    = 
+                      ID a (type: INT_TYPE)[scope (3,2) <- (2,1)] declared at line 17
+                      = 
+                        ID y (type: INT_TYPE)[scope (3,2) <- (2,1)] declared at line 17
+                        ID u (type: INT_TYPE)[scope (3,2) <- (2,1)] declared at line 17
+                    = 
+                      ID y (type: INT_TYPE)[scope (3,2) <- (2,1)] declared at line 17
+                      = 
+                        ID a (type: INT_TYPE)[scope (3,2) <- (2,1)] declared at line 17
+                        ID w (type: INT_TYPE)[scope (3,2) <- (2,1)] declared at line 17
+                    PRINT 
+                      STRING_LITERAL in for loop\n
+        = 
+          ID w (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+          CALL 
+            FUNCTION my_func (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 1
+              ID w (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+              ID v (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+              ID ppp (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        CALL 
+          FUNCTION your_func (type: VOID_TYPE)[scope (1,2) <- (0,0)] declared at line 6
+        CALL 
+          FUNCTION my_func (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 1
+            ID w (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+            ID v (type: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 17
+        RETURN [scope (1,2) <- (0,0)]
+          INT_LITERAL 0 (type: INT_TYPE)
+
+
+===========================================================
+test2.c finished.

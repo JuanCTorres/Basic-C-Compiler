@@ -1,0 +1,105 @@
+Result of test done to parser.
+
+test4.c BEGIN.
+===========================================================
+
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT zzzz
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    (2-0) contains:
+      VAR_INT d
+      (3-0) contains:
+        VAR_INT e
+        (4-0) contains:
+          VAR_INT f
+          (5-0) contains:
+            VAR_INT g
+            (6-0) contains:
+              VAR_INT h
+              (7-0) contains:
+                VAR_INT i
+                (8-0) contains:
+                  VAR_INT j
+    (2-1) contains:
+      VAR_INT huehuehue
+    (2-2) contains:
+      VAR_INT haaa
+      VAR_ARRAY_INT catz
+      VAR_INT lolz
+
+
+ROOT 
+  FUNC_DECLARATION main (type: VOID_TYPE))[scope (0,0) <- (0,0)] declared at line 1
+    FORMAL_PARAMS 
+      ID a (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+      ID b (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+      ID c (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID zzzz (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2
+      STATEMENT_LIST 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            ID d (type: INT_TYPE)[scope (2,0) <- (1,0)] declared at line 4
+          STATEMENT_LIST 
+            SEQ 
+              LOCAL_DECLARATIONS 
+                ID e (type: INT_TYPE)[scope (3,0) <- (2,0)] declared at line 6
+              STATEMENT_LIST 
+                SEQ 
+                  LOCAL_DECLARATIONS 
+                    ID f (type: INT_TYPE)[scope (4,0) <- (3,0)] declared at line 8
+                  STATEMENT_LIST 
+                    IF_STMT 
+                      != 
+                        ID e (type: INT_TYPE)[scope (4,0) <- (3,0)] declared at line 6
+                        ID f (type: INT_TYPE)[scope (4,0) <- (3,0)] declared at line 8
+                      SEQ 
+                        LOCAL_DECLARATIONS 
+                          ID g (type: INT_TYPE)[scope (5,0) <- (4,0)] declared at line 10
+                        STATEMENT_LIST 
+                          SEQ 
+                            LOCAL_DECLARATIONS 
+                              ID h (type: INT_TYPE)[scope (6,0) <- (5,0)] declared at line 12
+                            STATEMENT_LIST 
+                              WHILE 
+                                != 
+                                  ID h (type: INT_TYPE)[scope (6,0) <- (5,0)] declared at line 12
+                                  INT_LITERAL 0 (type: INT_TYPE)
+                                SEQ 
+                                  LOCAL_DECLARATIONS 
+                                    ID i (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 14
+                                  STATEMENT_LIST 
+                                    FOR 
+                                      ID h (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 12
+                                      > 
+                                        ID h (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 12
+                                        INT_LITERAL 10 (type: INT_TYPE)
+                                      ++ 
+                                        ID h (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 12
+                                      SEQ 
+                                        LOCAL_DECLARATIONS 
+                                          ID j (type: INT_TYPE)[scope (8,0) <- (7,0)] declared at line 16
+                                        STATEMENT_LIST 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            ID huehuehue (type: INT_TYPE)[scope (2,1) <- (1,0)] declared at line 27
+          STATEMENT_LIST 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            ID lolz (type: INT_TYPE)[scope (2,2) <- (1,0)] declared at line 31
+            ARRAY_TYPE catz (type: INT_TYPE)[scope (2,2) <- (1,0)] declared at line 31
+              INT_LITERAL 100 (type: INT_TYPE)
+            ID haaa (type: INT_TYPE)[scope (2,2) <- (1,0)] declared at line 31
+          STATEMENT_LIST 
+
+
+===========================================================
+test4.c finished.
