@@ -21,6 +21,9 @@ line: 29 | error: use of undeclared identifier e
 line: 29 | error: use of undeclared identifier f
 line: 34 | error: use of undeclared identifier d
 line: 36 | error: use of undeclared identifier a
+WARNING: There were symtab creation errors. Halting!
+
+
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)

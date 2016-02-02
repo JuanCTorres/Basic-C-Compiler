@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -pedantic
+CFLAGS = -g -pedantic -ggdb3
 BISONFL = -d -v
 FLEXFLAGS = -ll
 

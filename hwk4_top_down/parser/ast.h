@@ -8,17 +8,19 @@
 *
 *
 */
-#include "symtab.h"
-#include <assert.h>
+// #include "symtab.h"
+
+
 
 #ifndef AST_H_
 #define AST_H_
-
+// struct symboltable_t;
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
-
+// struct symboltable_t;
 
 /* You should fill in the various AST node types.  The following are given
 to you to start with.  You may add or remove node types as you
@@ -136,6 +138,11 @@ struct ast_node_struct {
   int array_length;
   void *snode; //using void to avoid circular heaer issues
   int line_num;
+  int curr_level;
+  int curr_sib;
+  int parent_level;
+  int parent_sib;
+  int line_declared;
 
 };
 
@@ -154,5 +161,8 @@ void assign_var_type(ast_node root);
 /* Print the contents of a subtree of an abstract syntax tree, given
 the root of the subtree and the depth of the subtree root. */
 void print_ast(ast_node root, int depth, int lvl, int sublvl);
+
+void insert_scope_info(ast_node root, int curr_level, int curr_sib, int parent_level, int parent_sib);
+
 
 #endif

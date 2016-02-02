@@ -7,6 +7,7 @@
 * Added to by SeokJun Bing, Juan C. Torres
 */
 
+
 #ifndef SYMTAB_H_
 #define SYMTAB_H_
 
@@ -29,11 +30,15 @@ typedef enum {
   FUNC_VOID_T
 } decl_type;
 
+typedef struct {
+  int val;
+  char *name;
+} val_name_pair_2;
 
 /* Define a table of nd associated strings.  You
 should modify this table as appropriate.  The order of entries
 should match the order of enumerated values in var_type. */
-static val_name_pair decl_table[] = {
+static val_name_pair_2 decl_table[] = {
   { VAR_INT_T, "VAR_INT" },
   { VAR_ARRAY_INT_T, "VAR_ARRAY_INT"},
   { FUNC_INT_T, "FUNC_INT" },
@@ -52,7 +57,7 @@ typedef struct symnode {
   struct symhashtable *parent;
   decl_type *parameters;
   int num_parameters;
-  ast_node abnode;
+  struct ast_node_struct* abnode;
   /* Other attributes go here. */
 } symnode_t;
 
@@ -88,13 +93,13 @@ typedef struct {
 symboltable_t *create_symboltable();
 
 
-symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode);
+symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, struct ast_node_struct* astnode);
 
 
 /* Insert an entry into the innermost scope of symbol table.  First
 make sure it's not already in that scope.  Return a pointer to the
 entry. */
-symnode_t *insert_into_symboltable(symboltable_t *symtab, ast_node astnode);
+symnode_t *insert_into_symboltable(symboltable_t *symtab, struct ast_node_struct* astnode);
 
 
 /* Lookup an entry in a symbol table.  If found return a pointer to it.
@@ -122,7 +127,7 @@ and its relations with other scopes. Adds new hashtables when it sees a new
 scope, and inserts variable and function identifiers in the appropriate
 hashtable for their scope, depending on their node type, which is contained
 in the abstract syntax tree with pointer root*/
-void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symtab);
+void build_symbol_table(struct ast_node_struct* root, int level, int sibno, symboltable_t *symtab);
 
 
 /* Prints a representation of the symbol table, including representations of
@@ -130,6 +135,8 @@ hierarchical relations between different scopes, names of scopes, and variables
 defined within each scope.
 */
 void pretty_print(symhashtable_t *hash, int depth);
+
+void record_var_type_in_ast(ast_node root, symboltable_t *symtab);
 
 
 

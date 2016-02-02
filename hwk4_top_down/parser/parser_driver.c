@@ -16,8 +16,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "ast.h"
 #include "symtab.h"
+#include "ast.h"
+
+
+
 
 
  ast_node root = NULL;
@@ -25,6 +28,7 @@
  extern int yyparse();
  extern int yydebug;
  int parseError = 0;
+ int symtabError = 0;
 
 
  int main() {
@@ -40,11 +44,20 @@
  	// printf("\nNo syntatical errors detected.\n\n");
  	//}
  	if (!noRoot) {
- 		//print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations 		printf("Print the hashtables in their hierachical order:\n");
- 		symboltable_t *something = create_symboltable();
- 		build_symbol_table(root, 0, 0, something);
- 		printf("Print hashtables (level-sibno) according to their hierarchy\n");
- 		pretty_print(something->root, 0);
+ 		
+ 		symboltable_t *symtab = create_symboltable();
+ 		build_symbol_table(root, 0, 0, symtab);
+ 		printf("\n\nPrint hashtables (level-sibno) according to their hierarchy\n");
+ 		pretty_print(symtab->root, 0);
+ 		if(symtabError) {
+ 			fprintf(stderr, "WARNING: There were symtab creation errors. Halting!\n");
+ 		}
+ 		else {
+ 			record_var_type_in_ast(root, symtab);
+ 			printf("\n\n");
+ 			print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
+			//print_ast relies on data inserted from build_symbol_table above;
+ 		}
  	}
 
  	else

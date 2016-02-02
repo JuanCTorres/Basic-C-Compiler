@@ -1,0 +1,97 @@
+Result of test done to parser.
+
+test5.c BEGIN.
+===========================================================
+
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (2 params: VAR_INT  VAR_INT )
+  FUNC_INT myfunc (2 params: VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT b
+    VAR_INT c
+    (2-0) contains:
+      VAR_INT c
+  (1-1) contains:
+    VAR_INT uu
+    VAR_INT i
+    VAR_INT ww
+    (2-1) contains:
+      VAR_INT a
+    (2-2) contains:
+      VAR_INT z
+    (2-3) contains:
+      VAR_INT y
+      (3-0) contains:
+        VAR_INT yy
+
+
+ROOT 
+  FUNC_DECLARATION myfunc (type: INT_TYPE)[in scope: (0,0) | child of (0,0)] declared at line 1
+    FORMAL_PARAMS 
+      ID b (type: INT_TYPE)[in scope: (1,0) | child of (0,0)] declared at line 1
+      ID c (type: INT_TYPE)[in scope: (1,0) | child of (0,0)] declared at line 1
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+        ID b (type: INT_TYPE)[in scope: (1,0) | child of (0,0)] declared at line 1
+        SEQ 
+          LOCAL_DECLARATIONS 
+            ID c (type: INT_TYPE)[in scope: (2,0) | child of (1,0)] declared at line 4
+          STATEMENT_LIST 
+  FUNC_DECLARATION main (type: INT_TYPE)[in scope: (0,0) | child of (0,0)] declared at line 9
+    FORMAL_PARAMS 
+      ID uu (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 9
+      ID ww (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 9
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID i (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 10
+      STATEMENT_LIST 
+        FOR 
+          = 
+            ID i (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 10
+            INT_LITERAL 4 (type: INT_TYPE)
+          < 
+            ID i (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 10
+            INT_LITERAL 4 (type: INT_TYPE)
+          ++ 
+            ID i (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 10
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = 
+                ID a (type: INT_TYPE)[in scope: (2,1) | child of (1,1)] declared at line 12
+                INT_LITERAL 3 (type: INT_TYPE)
+            STATEMENT_LIST 
+        = 
+          ID i (type: INT_TYPE)[in scope: (1,1) | child of (0,0)] declared at line 10
+          INT_LITERAL 3 (type: INT_TYPE)
+        SEQ 
+          LOCAL_DECLARATIONS 
+            = 
+              ID z (type: INT_TYPE)[in scope: (2,2) | child of (1,1)] declared at line 16
+              INT_LITERAL 3 (type: INT_TYPE)
+          STATEMENT_LIST 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            = 
+              ID y (type: INT_TYPE)[in scope: (2,3) | child of (1,1)] declared at line 19
+              INT_LITERAL 5 (type: INT_TYPE)
+          STATEMENT_LIST 
+            = 
+              ID y (type: INT_TYPE)[in scope: (2,3) | child of (1,1)] declared at line 19
+              INT_LITERAL 4 (type: INT_TYPE)
+            SEQ 
+              LOCAL_DECLARATIONS 
+                = 
+                  ID yy (type: INT_TYPE)[in scope: (3,0) | child of (2,3)] declared at line 22
+                  INT_LITERAL 2 (type: INT_TYPE)
+              STATEMENT_LIST 
+                = 
+                  ID yy (type: INT_TYPE)[in scope: (3,0) | child of (2,3)] declared at line 22
+                  INT_LITERAL 123 (type: INT_TYPE)
+
+
+===========================================================
+test5.c finished.

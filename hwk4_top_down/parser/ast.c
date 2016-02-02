@@ -13,8 +13,9 @@
  *
  */
 
-#include "ast.h"
 #include "symtab.h"
+#include "ast.h"
+
 
 /* How much more space to allocate to the array to keep track of
   current sub-scope for each level.
@@ -55,12 +56,14 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
   /* Print attributes specific to node types. */
   switch (root->node_type) {
     case SEQ_N:     // change main level when see a new sequence
-      lvl++;
+      // lvl++;
       break;
 
     case FORMAL_PARAMS_N:
-      lvl++;
-      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // lvl++;
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      
       break;
 
     case ARRAY_TYPE_N:
@@ -68,7 +71,9 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
       }
-      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf(" declared at line %d", root->line_declared);
       break;
 
     case FUNCTION_N:
@@ -76,7 +81,9 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
       }
-      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf(" declared at line %d", root->line_declared);
       break;
 
     case STRING_LITERAL_N:
@@ -88,12 +95,14 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
       }
-      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf(" declared at line %d", root->line_declared);
       break;
 
     case INT_LITERAL_N:		/* print the int literal */
       printf("%d", root->value_int);
-        //printf("test123\n");
+      printf(" (type: %s)", NODE_NAME(root->return_type));
       break;
 
     case FUNC_DECLARATION_N:
@@ -102,11 +111,14 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
       }
-      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf(" declared at line %d", root->line_declared);
       break;
 
     case RETURN_N:
-      printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
       break;
 
     default:

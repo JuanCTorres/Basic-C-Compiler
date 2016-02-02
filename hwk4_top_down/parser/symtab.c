@@ -8,14 +8,16 @@
  */
 
 
-// #include <stdlib.h>
-// #include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
-// #include <assert.h>
+#include <assert.h>
 #include "symtab.h"
 
 #define NOHASHSLOT -1
 #define DELTA 10
+
+extern int symtabError;
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
  static int *siblings;
@@ -287,6 +289,7 @@ symhashtable_t *create_symhashtable(int entries) {
 
     /* If not found, variable or function is undeclared. */
     if(node == NULL) {
+      symtabError = 1;
       if(anode->node_type == FUNCTION_N) {
         fprintf(stderr, "line: %d | error: use of undeclared function %s\n", anode->line_num, anode->value_string);
       }
@@ -319,7 +322,7 @@ int check_if_redef(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
     if(node != NULL){
       /* If abstract syntax node has a type, it was previously defined */
       if(anode->return_type != ROOT_N) {
-
+        symtabError = 1;
         if(anode->node_type == FUNC_DECLARATION_N) {
           fprintf(stderr, "line: %d | error: redefinition of function %s\n", anode->line_num ,anode->value_string);
         }
@@ -327,12 +330,12 @@ int check_if_redef(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
           fprintf(stderr, "line: %d | error: redefinition of identifier %s\n", anode->line_num ,anode->value_string);
         }
 
-        return 1;
+        return 0;
       }
     }
   }
   /* Not found */
-  return 0;
+  return 1;
 }
 
 /*
@@ -345,7 +348,6 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
   //need function to take as input
   //printf("here \n");
   symhashtable_t *hash;
-  int check;
 
   /* Depending on node types, go deeper, create sibling scopes, add to hashtable,
    * or take other appropriate action.
@@ -357,6 +359,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
     case FORMAL_PARAMS_N:
       level++;
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       break;
 
     case FUNC_DECLARATION_N: // function declaraions
@@ -367,10 +370,12 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       }
       insert_into_symhashtable(hash, root); // will only insert if it is empty.
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       break;
 
     case FUNCTION_N:
       check_if_declared(root, symtab ,level, sibno);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       break;
 
     case ID_N:      /* print the id */
@@ -386,6 +391,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       else {  // don't know if previously declared
         check_if_declared(root, symtab , level, sibno);
       }
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       break;
 
     case ARRAY_TYPE_N:             // check for return types!
@@ -400,6 +406,11 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       else {
         check_if_declared(root, symtab , level, sibno);
       }
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      break;
+
+    case RETURN_N:
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       break;
 
     default:
@@ -409,6 +420,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       if(hash == NULL) {
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
       }
+      //note: cannot use insert_scope_info here because siblings[level - 1] causes invalid read as level-1 can go negative
       break;
   }
 
@@ -475,3 +487,113 @@ void pretty_print(symhashtable_t *root, int depth) {
       pretty_print(child, depth + 1);
 
   }
+
+void insert_scope_info(ast_node root, int curr_level, int curr_sib, int parent_level, int parent_sib) {
+  
+  assert(root != NULL);
+
+  root->curr_level = curr_level;
+  root->curr_sib = curr_sib;
+  root->parent_level = parent_level;
+  root->parent_sib = parent_sib;
+}
+
+/*
+* Works on an assumption that build hashtable as already been run. (i.e. no errors generated from building hashtable)
+*/
+void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
+  symhashtable_t *hash = NULL;
+  symnode_t *node = NULL;
+  
+
+  /* Depending on node types, go deeper, create sibling scopes, add to hashtable,
+   * or take other appropriate action.
+   */
+  switch (root->node_type) {
+
+    case FUNC_DECLARATION_N:
+        hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+        for(;hash != NULL && node == NULL; hash = hash->parent) {
+          node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+        }
+        assert(node != NULL); //as hashtable was built prev, it must be found for func_n
+        if(node->type == FUNC_VOID_T) {
+          root->return_type = VOID_TYPE_N;
+        } else if(node->type == FUNC_INT_T) {
+          root->return_type = INT_TYPE_N;
+        }
+        root->line_declared = node->abnode->line_num;
+      break;
+
+    case FUNCTION_N: //all function_n nodes are calls not declarations
+        hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+        for(;hash != NULL && node == NULL; hash = hash->parent) {
+          node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+        }
+        assert(node != NULL); //as hashtable was built prev, it must be found for func_n
+        if(node->type == FUNC_VOID_T) {
+          root->return_type = VOID_TYPE_N;
+        } else if(node->type == FUNC_INT_T) {
+          root->return_type = INT_TYPE_N;
+        }
+        root->line_declared = node->abnode->line_num;
+      break;
+
+    case ID_N:   
+      hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+      assert(hash != NULL);
+      for(;hash != NULL && node == NULL; hash = hash->parent) {
+          //printf("  \n\n value string is %s\n\n", root->value_string);
+        node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      }
+      assert(node != NULL); //as hashtable was built prev, it must be found for ID_N
+              
+      if(root->return_type == 0) {  // a zero value means that it is not a declaration, since only declarations
+                                    // are assigned a return type when building the abstract syntax tree.
+        if(node->type == VAR_INT_T) {
+          root->return_type = INT_TYPE_N;
+        }
+      }
+      root->line_declared = node->abnode->line_num;
+      break;
+
+    case ARRAY_TYPE_N:             // check for return types!
+      hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+      for(;hash != NULL && node == NULL; hash = hash->parent) {  
+        node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      }
+      assert(node != NULL); //as hashtable was built prev, it must be found for array_typE_n
+      if(root->return_type == 0) {
+        if(node->type == VAR_ARRAY_INT_T){
+          root->return_type = INT_TYPE_N;
+        }
+        
+      }
+      root->line_declared = node->abnode->line_num;
+      break;
+
+    case INT_LITERAL_N:
+      root->return_type = INT_TYPE_N;
+      break;
+    
+    case RETURN_N: //not sure if we deal with this here...
+      assert(symtab->root != NULL);
+      break;
+
+    default:
+      // printf("at default of switch\n");
+      assert(symtab->root != NULL);
+
+      break;
+  }
+
+
+
+  /* Recurse on each child of the subtree root, with a depth one
+     greater than the root's depth. */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    record_var_type_in_ast(child, symtab);
+
+
+}

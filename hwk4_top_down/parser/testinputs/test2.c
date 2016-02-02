@@ -8,9 +8,9 @@ void your_func() {
 	print "LOL!\n";
 }
 
-void my_func(int g) {
-	int mmm;
-}
+// void my_func(int g) {
+// 	int mmm;
+// }
 
 int main(void) {	//0
 					//1.2
@@ -23,7 +23,7 @@ int main(void) {	//0
 			//3
 			do { //3.0
 				//4
-				read input; //4
+				// read input; //4
 			} while (a * (t - u) / w != 10); //3.0
 		}
 		else{ //2.1
@@ -33,7 +33,7 @@ int main(void) {	//0
 	}
 	else { // 1.2
 		// 2.1
-		qwert = 123; //2.1
+		int qwert = 123; //2.1
 		for(t = 0; t < 99; ++t) { // 2.1
 			a = y = u; // 3.2
 			y = a = w;
