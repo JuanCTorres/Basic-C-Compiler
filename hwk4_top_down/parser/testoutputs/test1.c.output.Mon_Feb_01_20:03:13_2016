@@ -1,0 +1,42 @@
+Result of test done to parser.
+
+test1.c BEGIN.
+===========================================================
+
+line: 10 | error: redefinition of identifier a
+line: 10 | error: redefinition of identifier b
+line: 15 | error: redefinition of identifier a
+line: 16 | error: redefinition of identifier b
+line: 17 | error: redefinition of identifier dd
+line: 18 | error: redefinition of identifier dd
+line: 22 | error: use of undeclared identifier zz
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  (1-0) contains:
+    VAR_ARRAY_INT dd
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    VAR_INT d
+    VAR_INT e
+    VAR_INT f
+    VAR_INT h
+    VAR_INT i
+    VAR_ARRAY_INT cc
+    (2-0) contains:
+      VAR_INT zz
+    (2-1) contains:
+      VAR_INT tt
+      VAR_ARRAY_INT uu
+    (2-2) contains:
+      VAR_INT dsa
+      VAR_INT asd
+    (2-3) contains:
+      VAR_INT x
+    (2-4) contains:
+      VAR_INT y
+
+
+===========================================================
+test1.c finished.
