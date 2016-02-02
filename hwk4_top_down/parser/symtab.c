@@ -470,11 +470,11 @@ void pretty_print(symhashtable_t *root, int depth) {
 
       if(node->type == FUNC_VOID_T || node->type == FUNC_INT_T) {
         printf(" (%d params:", node->num_parameters);
-          for(int k = 0; k < node->num_parameters; k++) {
-            printf(" %s ", TYPE_NAME(node->parameters[k]));
-          }
-          printf(")");
+        for(int k = 0; k < node->num_parameters; k++) {
+          printf(" %s ", TYPE_NAME(node->parameters[k]));
         }
+          printf(")");
+      }
 
         printf("\n");
       }

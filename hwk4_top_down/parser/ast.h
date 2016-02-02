@@ -15,6 +15,7 @@
 #ifndef AST_H_
 #define AST_H_
 // struct symboltable_t;
+// struct symnode_t;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -137,12 +138,12 @@ struct ast_node_struct {
   ast_node_type return_type; /* for declarations */
   int array_length;
   void *snode; //using void to avoid circular heaer issues
-  int line_num;
+  int line_num; //when the token occurred in the input test file
   int curr_level;
   int curr_sib;
   int parent_level;
   int parent_sib;
-  int line_declared;
+  int line_declared; //line num of original declaration
 
 };
 

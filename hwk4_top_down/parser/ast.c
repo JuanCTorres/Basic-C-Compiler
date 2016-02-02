@@ -108,9 +108,14 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     case FUNC_DECLARATION_N:
       printf("%s", root->value_string);
       assert(root->return_type != 0);
-      if(root->return_type != 0) {
+      // if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
-      }
+      // }
+      // printf(" (%d params:", root->(symnode_t *)snode->num_parameters);
+      // for(int k = 0; k < root->snode->num_parameters; k++) {
+      //   printf(" %s ", TYPE_NAME(root->snode->parameters[k]));
+      // }
+      printf(")");
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
       printf(" declared at line %d", root->line_declared);

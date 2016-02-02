@@ -1,0 +1,10 @@
+Result of test done to parser.
+
+test3.c BEGIN.
+===========================================================
+
+./testscript.sh: line 43: ./parser: No such file or directory
+
+
+===========================================================
+test3.c finished.
