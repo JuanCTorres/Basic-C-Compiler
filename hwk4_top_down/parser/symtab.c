@@ -18,13 +18,13 @@
 #define DELTA 10
 
 extern int symtabError;
+extern int typeError;
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
- static int *siblings;
- static unsigned arraylen = 0;
+static int *siblings;
+static unsigned arraylen = 0;
 
-
- static const int HASHSIZE = 211;
+static const int HASHSIZE = 211;
 
 /* Create an empty symbol table. */
  symboltable_t  *create_symboltable() {
@@ -663,7 +663,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
 
 
-void infer_type(ast_node root, symboltable_t* symtab){
+void infer_type(ast_node root){
 
   if(root->return_type == 0){ /* Check this node doesn't yet have a return type */
 
@@ -678,7 +678,7 @@ void infer_type(ast_node root, symboltable_t* symtab){
 
             /* Check that the type of the second operand is known */
             if(root->left_child->right_sibling->return_type == 0){
-                infer_type(root->left_child->right_sibling, symtab);
+                infer_type(root->left_child->right_sibling);
               }
 
               /* Both types are known at this point */
@@ -686,17 +686,18 @@ void infer_type(ast_node root, symboltable_t* symtab){
                 root->return_type = root->left_child->return_type;
               }
             } else{ /* type(1st operand) unknown; find out */
-              infer_type(root->left_child, symtab);
+              infer_type(root->left_child);
               /* Check type(2nd operand) is known */
               if(root->left_child->right_sibling->return_type == 0)// ||
                 //root->left_child->right_sibling->return_type == INT_LITERAL_N){
                 {
-                    infer_type(root->left_child->right_sibling, symtab);
+                    infer_type(root->left_child->right_sibling);
                 }
                 /* At this point, we know type(1st operand), type(2nd operand) are known */
                 if(root->left_child->return_type == root->left_child->right_sibling->return_type){
                   root->return_type = root->left_child->return_type;
                 } else{
+                  typeError = 1;
                   fprintf(stderr, "Error: Operation %s not supported between %s and %s\n",
                   NODE_NAME(root->node_type),
                   NODE_NAME(root->left_child->return_type),
@@ -718,7 +719,7 @@ void infer_type(ast_node root, symboltable_t* symtab){
           child to parent */
 
           if(is_unary_operator(root)){
-            infer_type(root->left_child, symtab);
+            infer_type(root->left_child);
             root->return_type = root->left_child->return_type;
           }
         }
@@ -728,7 +729,7 @@ void infer_type(ast_node root, symboltable_t* symtab){
   /* Recurse on the entire tree */
   ast_node child;
   for(child = root->left_child; child != NULL; child = child->right_sibling){
-    infer_type(child, symtab);
+    infer_type(child);
   }
 }
 
