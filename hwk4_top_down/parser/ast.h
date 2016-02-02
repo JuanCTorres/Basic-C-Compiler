@@ -137,13 +137,15 @@ struct ast_node_struct {
   int value_int;		/* for INT_LITERAL */
   ast_node_type return_type; /* for declarations */
   int array_length;
-  void *snode; //using void to avoid circular heaer issues
+  struct symnode *snode; //using void to avoid circular heaer issues
   int line_num; //when the token occurred in the input test file
   int curr_level;
   int curr_sib;
   int parent_level;
   int parent_sib;
   int line_declared; //line num of original declaration
+  ast_node return_to;
+
 
 };
 

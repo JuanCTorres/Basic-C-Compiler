@@ -1,0 +1,105 @@
+Result of test done to parser.
+
+test4.c BEGIN.
+===========================================================
+
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT zzzz
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    (2-0) contains:
+      VAR_INT d
+      (3-0) contains:
+        VAR_INT e
+        (4-0) contains:
+          VAR_INT f
+          (5-0) contains:
+            VAR_INT g
+            (6-0) contains:
+              VAR_INT h
+              (7-0) contains:
+                VAR_INT i
+                (8-0) contains:
+                  VAR_INT j
+    (2-1) contains:
+      VAR_INT huehuehue
+    (2-2) contains:
+      VAR_INT haaa
+      VAR_ARRAY_INT catz
+      VAR_INT lolz
+
+
+ROOT  Return type: VOID_TYPE Node type: ROOT
+  FUNC_DECLARATION  Return type: VOID_TYPE Node type: FUNC_DECLARATIONmain (type: VOID_TYPE) (3 params: VAR_INT  VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 1
+    FORMAL_PARAMS  Return type: ROOT Node type: FORMAL_PARAMS
+      ID  Return type: INT_TYPE Node type: IDa (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+      ID  Return type: INT_TYPE Node type: IDb (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+      ID  Return type: INT_TYPE Node type: IDc (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+    SEQ  Return type: ROOT Node type: SEQ
+      LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+        ID  Return type: INT_TYPE Node type: IDzzzz (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2
+      STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        SEQ  Return type: ROOT Node type: SEQ
+          LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+            ID  Return type: INT_TYPE Node type: IDd (type: INT_TYPE)[scope (2,0) <- (1,0)] declared at line 4
+          STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+            SEQ  Return type: ROOT Node type: SEQ
+              LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                ID  Return type: INT_TYPE Node type: IDe (type: INT_TYPE)[scope (3,0) <- (2,0)] declared at line 6
+              STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+                SEQ  Return type: ROOT Node type: SEQ
+                  LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                    ID  Return type: INT_TYPE Node type: IDf (type: INT_TYPE)[scope (4,0) <- (3,0)] declared at line 8
+                  STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+                    IF_STMT  Return type: ROOT Node type: IF_STMT
+                      !=  Return type: INT_TYPE Node type: !=
+                        ID  Return type: INT_TYPE Node type: IDe (type: INT_TYPE)[scope (4,0) <- (3,0)] declared at line 6
+                        ID  Return type: INT_TYPE Node type: IDf (type: INT_TYPE)[scope (4,0) <- (3,0)] declared at line 8
+                      SEQ  Return type: ROOT Node type: SEQ
+                        LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                          ID  Return type: INT_TYPE Node type: IDg (type: INT_TYPE)[scope (5,0) <- (4,0)] declared at line 10
+                        STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+                          SEQ  Return type: ROOT Node type: SEQ
+                            LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                              ID  Return type: INT_TYPE Node type: IDh (type: INT_TYPE)[scope (6,0) <- (5,0)] declared at line 12
+                            STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+                              WHILE  Return type: ROOT Node type: WHILE
+                                !=  Return type: INT_TYPE Node type: !=
+                                  ID  Return type: INT_TYPE Node type: IDh (type: INT_TYPE)[scope (6,0) <- (5,0)] declared at line 12
+                                  INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL0 (type: INT_TYPE)
+                                SEQ  Return type: ROOT Node type: SEQ
+                                  LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                                    ID  Return type: INT_TYPE Node type: IDi (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 14
+                                  STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+                                    FOR  Return type: ROOT Node type: FOR
+                                      ID  Return type: INT_TYPE Node type: IDh (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 12
+                                      >  Return type: INT_TYPE Node type: >
+                                        ID  Return type: INT_TYPE Node type: IDh (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 12
+                                        INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL10 (type: INT_TYPE)
+                                      ++  Return type: INT_TYPE Node type: ++
+                                        ID  Return type: INT_TYPE Node type: IDh (type: INT_TYPE)[scope (7,0) <- (6,0)] declared at line 12
+                                      SEQ  Return type: ROOT Node type: SEQ
+                                        LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                                          ID  Return type: INT_TYPE Node type: IDj (type: INT_TYPE)[scope (8,0) <- (7,0)] declared at line 16
+                                        STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        SEQ  Return type: ROOT Node type: SEQ
+          LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+            ID  Return type: INT_TYPE Node type: IDhuehuehue (type: INT_TYPE)[scope (2,1) <- (1,0)] declared at line 27
+          STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        SEQ  Return type: ROOT Node type: SEQ
+          LOCAL_DECLARATIONS  Return type: ROOT Node type: LOCAL_DECLARATIONS
+            ID  Return type: INT_TYPE Node type: IDlolz (type: INT_TYPE)[scope (2,2) <- (1,0)] declared at line 31
+            ARRAY_TYPE  Return type: INT_TYPE Node type: ARRAY_TYPEcatz (type: INT_TYPE)[scope (2,2) <- (1,0)] declared at line 31
+              INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL100 (type: INT_TYPE)
+            ID  Return type: INT_TYPE Node type: IDhaaa (type: INT_TYPE)[scope (2,2) <- (1,0)] declared at line 31
+          STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+
+
+===========================================================
+test4.c finished.

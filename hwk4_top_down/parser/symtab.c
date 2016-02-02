@@ -750,5 +750,39 @@ void infer_type(ast_node root, symboltable_t* symtab){
   }
 }
 
+void check_return(ast_node root, symboltable_t *symtab) {
+  
+  ast_node funcnode = NULL;
+  check_return_helper(root, symtab, funcnode);
+
+  return;
+}
+
+void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode) {
+
+    switch (root->node_type) {
+
+      case FUNC_DECLARATION_N:
+        funcnode = root;
+        break;
+
+      case RETURN_N:
+        assert(root != NULL);
+        assert(funcnode != NULL);
+        root->return_to = funcnode;
+        // fprintf(stderr,"\nreturn to %s at line %d\n", root->return_to->value_string, root->return_to->line_declared);
+        break;
+      
+      default:
+        break;
+    }
+
+    ast_node child;
+    for (child = root->left_child; child != NULL; child = child->right_sibling)
+      check_return_helper(child, symtab, funcnode);
+
+
+    
+}
 
 
