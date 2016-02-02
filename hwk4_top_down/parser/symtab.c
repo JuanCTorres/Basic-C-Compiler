@@ -698,7 +698,8 @@ void infer_type(ast_node root){
                   root->return_type = root->left_child->return_type;
                 } else{
                   typeError = 1;
-                  fprintf(stderr, "Error: Operation %s not supported between %s and %s\n",
+                  fprintf(stderr, "Error at line %d: Operation %s not supported between %s and %s\n",
+                  root->line_num,
                   NODE_NAME(root->node_type),
                   NODE_NAME(root->left_child->return_type),
                   NODE_NAME(root->left_child->right_sibling->return_type));
