@@ -744,6 +744,8 @@ void check_return(ast_node root, symboltable_t *symtab) {
 void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode) {
 
     switch (root->node_type) {
+      case STATEMENT_LIST_N:
+        break;
 
       case FUNC_DECLARATION_N:
         funcnode = root;
