@@ -1,0 +1,100 @@
+Result of test done to parser.
+
+test5.c BEGIN.
+===========================================================
+
+
+Error: Number of parameters to function myfunc at line 26 does not match the declaration at line 1
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (2 params: VAR_INT  VAR_INT )
+  FUNC_INT myfunc (1 params: VAR_INT )
+  (1-0) contains:
+    VAR_INT b
+    VAR_INT g
+    (2-0) contains:
+      VAR_INT c
+  (1-1) contains:
+    VAR_INT uu
+    VAR_INT i
+    VAR_INT ww
+    (2-1) contains:
+      VAR_INT a
+    (2-2) contains:
+      VAR_INT z
+    (2-3) contains:
+      VAR_INT y
+      (3-0) contains:
+        VAR_INT yy
+
+
+ROOT  Return type: ROOT Node type: ROOT
+  FUNC_DECLARATION  Return type: INT_TYPE Node type: FUNC_DECLARATIONmyfunc (type: INT_TYPE) (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 1
+    FORMAL_PARAMS  Return type: INT_TYPE Node type: FORMAL_PARAMS
+      ID  Return type: INT_TYPE Node type: IDg (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 1
+    SEQ  Return type: ROOT Node type: SEQ
+      LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+        ID  Return type: INT_TYPE Node type: IDb (type: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2
+      STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        SEQ  Return type: ROOT Node type: SEQ
+          LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+            ID  Return type: INT_TYPE Node type: IDc (type: INT_TYPE)[scope (2,0) <- (1,0)] declared at line 4
+          STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+  FUNC_DECLARATION  Return type: INT_TYPE Node type: FUNC_DECLARATIONmain (type: INT_TYPE) (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 9
+    FORMAL_PARAMS  Return type: ROOT Node type: FORMAL_PARAMS
+      ID  Return type: INT_TYPE Node type: IDuu (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 9
+      ID  Return type: INT_TYPE Node type: IDww (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 9
+    SEQ  Return type: ROOT Node type: SEQ
+      LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+        ID  Return type: INT_TYPE Node type: IDi (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 10
+      STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        FOR  Return type: ROOT Node type: FOR
+          =  Return type: INT_TYPE Node type: =
+            ID  Return type: INT_TYPE Node type: IDi (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 10
+            INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL4 (type: INT_TYPE)
+          <  Return type: INT_TYPE Node type: <
+            ID  Return type: INT_TYPE Node type: IDi (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 10
+            INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL4 (type: INT_TYPE)
+          ++  Return type: INT_TYPE Node type: ++
+            ID  Return type: INT_TYPE Node type: IDi (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 10
+          SEQ  Return type: ROOT Node type: SEQ
+            LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+              =  Return type: INT_TYPE Node type: =
+                ID  Return type: INT_TYPE Node type: IDa (type: INT_TYPE)[scope (2,1) <- (1,1)] declared at line 12
+                INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL3 (type: INT_TYPE)
+            STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        =  Return type: INT_TYPE Node type: =
+          ID  Return type: INT_TYPE Node type: IDi (type: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 10
+          INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL3 (type: INT_TYPE)
+        SEQ  Return type: ROOT Node type: SEQ
+          LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+            =  Return type: INT_TYPE Node type: =
+              ID  Return type: INT_TYPE Node type: IDz (type: INT_TYPE)[scope (2,2) <- (1,1)] declared at line 16
+              INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL3 (type: INT_TYPE)
+          STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+        SEQ  Return type: ROOT Node type: SEQ
+          LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+            =  Return type: INT_TYPE Node type: =
+              ID  Return type: INT_TYPE Node type: IDy (type: INT_TYPE)[scope (2,3) <- (1,1)] declared at line 19
+              INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL5 (type: INT_TYPE)
+          STATEMENT_LIST  Return type: ROOT Node type: STATEMENT_LIST
+            =  Return type: INT_TYPE Node type: =
+              ID  Return type: INT_TYPE Node type: IDy (type: INT_TYPE)[scope (2,3) <- (1,1)] declared at line 19
+              INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL4 (type: INT_TYPE)
+            SEQ  Return type: ROOT Node type: SEQ
+              LOCAL_DECLARATIONS  Return type: INT_TYPE Node type: LOCAL_DECLARATIONS
+                =  Return type: INT_TYPE Node type: =
+                  ID  Return type: INT_TYPE Node type: IDyy (type: INT_TYPE)[scope (3,0) <- (2,3)] declared at line 22
+                  INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL2 (type: INT_TYPE)
+              STATEMENT_LIST  Return type: INT_TYPE Node type: STATEMENT_LIST
+                =  Return type: INT_TYPE Node type: =
+                  ID  Return type: INT_TYPE Node type: IDyy (type: INT_TYPE)[scope (3,0) <- (2,3)] declared at line 22
+                  INT_LITERAL  Return type: INT_TYPE Node type: INT_LITERAL123 (type: INT_TYPE)
+        CALL  Return type: INT_TYPE Node type: CALL
+          FUNCTION  Return type: INT_TYPE Node type: FUNCTIONmyfunc (type: INT_TYPE) (0 params:)[scope (1,1) <- (0,0)] declared at line 1
+
+
+===========================================================
+test5.c finished.

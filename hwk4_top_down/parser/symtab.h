@@ -151,4 +151,9 @@ int is_unary_operator(ast_node root);
 /* Returns true is the root is a binary operator, depending on its node_type */
 int is_binary_operator(ast_node root);
 
+void check_return(ast_node root, symboltable_t *symtab);
+
+void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode);
+
+
 #endif

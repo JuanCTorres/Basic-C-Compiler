@@ -83,6 +83,16 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
       }
+      int i = 0;
+      ast_node anode;
+      for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
+        i++;
+      }
+      printf(" (%d params:", i);
+      for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
+        printf(" %s ", TYPE_NAME(root->return_type));
+      }
+      printf(")");
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
       printf(" declared at line %d", root->line_declared);
@@ -113,10 +123,10 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       // if(root->return_type != 0) {
         printf(" (type: %s)", NODE_NAME(root->return_type));
       // }
-      // printf(" (%d params:", root->(symnode_t *)snode->num_parameters);
-      // for(int k = 0; k < root->snode->num_parameters; k++) {
-      //   printf(" %s ", TYPE_NAME(root->snode->parameters[k]));
-      // }
+      printf(" (%d params:", root->snode->num_parameters);
+      for(int k = 0; k < root->snode->num_parameters; k++) {
+        printf(" %s ", TYPE_NAME(root->snode->parameters[k]));
+      }
       printf(")");
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
@@ -126,6 +136,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     case RETURN_N:
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf("return to %s at line %d", root->return_to->value_string, root->return_to->line_declared);
       break;
 
     default:
