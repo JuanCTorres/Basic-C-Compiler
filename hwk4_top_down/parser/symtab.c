@@ -667,79 +667,79 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
 
 
-void infer_type(ast_node root){
-
-  if(root->return_type == 0){ /* Check this node doesn't yet have a return type */
-
-    if(root->left_child != NULL){ /* Check that node has children */
-
-      if(root->left_child->right_sibling != NULL){ /* binary operator */
-
-        if(is_binary_operator(root)){
-
-          /* Check that the type of the first operand is known */
-          if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){
-
-            /* Check that the type of the second operand is known */
-            if(root->left_child->right_sibling->return_type == 0){
-                infer_type(root->left_child->right_sibling);
-              }
-
-              /* Both types are known at this point */
-              if(root->left_child->return_type == root->left_child->right_sibling->return_type){
-                root->return_type = root->left_child->return_type;
-              }
-            } else{ /* type(1st operand) unknown; find out */
-              infer_type(root->left_child);
-              /* Check type(2nd operand) is known */
-              if(root->left_child->right_sibling->return_type == 0)// ||
-                //root->left_child->right_sibling->return_type == INT_LITERAL_N){
-                {
-                    infer_type(root->left_child->right_sibling);
-                }
-                /* At this point, we know type(1st operand), type(2nd operand) are known */
-                if(root->left_child->return_type == root->left_child->right_sibling->return_type){
-                  root->return_type = root->left_child->return_type;
-                } else{
-                  typeError = 1;
-                  fprintf(stderr, "Error at line %d: Operation %s not supported between %s and %s\n",
-                  root->line_num,
-                  NODE_NAME(root->node_type),
-                  NODE_NAME(root->left_child->return_type),
-                  NODE_NAME(root->left_child->right_sibling->return_type));
-                }
-              }
-            }
-          } else{  /* Unary operator */
-        //printf("Found a unary operator: %s\n", NODE_NAME(root->return_type));
-        /* Already determined type for child; assign child type to parent */
-        if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){ // For return vals
-
-          if(is_unary_operator(root)){
-            root->return_type = root->left_child->return_type;
-          }
-
-          root->return_type = root->left_child->return_type;
-        } else{ /* Otherwise, recurse until you find out, then assign the type of
-          child to parent */
-
-          if(is_unary_operator(root)){
-            infer_type(root->left_child);
-            root->return_type = root->left_child->return_type;
-          }
-        }
-      }
-    }
-  }
-  /* Recurse on the entire tree */
-  ast_node child;
-  for(child = root->left_child; child != NULL; child = child->right_sibling){
-    infer_type(child);
-  }
-}
+// void infer_type(ast_node root){
+//
+//   if(root->return_type == 0){ /* Check this node doesn't yet have a return type */
+//
+//     if(root->left_child != NULL){ /* Check that node has children */
+//
+//       if(root->left_child->right_sibling != NULL){ /* binary operator */
+//
+//         if(is_binary_operator(root)){
+//
+//           /* Check that the type of the first operand is known */
+//           if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){
+//
+//             /* Check that the type of the second operand is known */
+//             if(root->left_child->right_sibling->return_type == 0){
+//                 infer_type(root->left_child->right_sibling);
+//               }
+//
+//               /* Both types are known at this point */
+//               if(root->left_child->return_type == root->left_child->right_sibling->return_type){
+//                 root->return_type = root->left_child->return_type;
+//               }
+//             } else{ /* type(1st operand) unknown; find out */
+//               infer_type(root->left_child);
+//               /* Check type(2nd operand) is known */
+//               if(root->left_child->right_sibling->return_type == 0)// ||
+//                 //root->left_child->right_sibling->return_type == INT_LITERAL_N){
+//                 {
+//                     infer_type(root->left_child->right_sibling);
+//                 }
+//                 /* At this point, we know type(1st operand), type(2nd operand) are known */
+//                 if(root->left_child->return_type == root->left_child->right_sibling->return_type){
+//                   root->return_type = root->left_child->return_type;
+//                 } else{
+//                   typeError = 1;
+//                   fprintf(stderr, "Error at line %d: Operation %s not supported between %s and %s\n",
+//                   root->line_num,
+//                   NODE_NAME(root->node_type),
+//                   NODE_NAME(root->left_child->return_type),
+//                   NODE_NAME(root->left_child->right_sibling->return_type));
+//                 }
+//               }
+//             }
+//           } else{  /* Unary operator */
+//         //printf("Found a unary operator: %s\n", NODE_NAME(root->return_type));
+//         /* Already determined type for child; assign child type to parent */
+//         if(root->left_child->return_type != 0 || root->left_child->node_type == INT_LITERAL_N){ // For return vals
+//
+//           if(is_unary_operator(root)){
+//             root->return_type = root->left_child->return_type;
+//           }
+//
+//           root->return_type = root->left_child->return_type;
+//         } else{ /* Otherwise, recurse until you find out, then assign the type of
+//           child to parent */
+//
+//           if(is_unary_operator(root)){
+//             infer_type(root->left_child);
+//             root->return_type = root->left_child->return_type;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   /* Recurse on the entire tree */
+//   ast_node child;
+//   for(child = root->left_child; child != NULL; child = child->right_sibling){
+//     infer_type(child);
+//   }
+// }
 
 void check_return(ast_node root, symboltable_t *symtab) {
-  
+
   ast_node funcnode = NULL;
   check_return_helper(root, symtab, funcnode);
 
@@ -757,19 +757,19 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         child2 = root->left_child->right_sibling; //to SEQ_N
         assert(child2->node_type == SEQ_N);
         child2 = child2->left_child->right_sibling; // to STATEMENT_LIST_N
-        assert(child2->node_type == STATEMENT_LIST_N); 
+        assert(child2->node_type == STATEMENT_LIST_N);
         // fprintf(stderr, "\n\n  before for %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
-        for (child2 = child2->left_child; 
-          child2 != NULL && child2->right_sibling != NULL; 
+        for (child2 = child2->left_child;
+          child2 != NULL && child2->right_sibling != NULL;
           child2 = child2->right_sibling) {
           // fprintf(stderr, "\n\n  child2 %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
         }
-        
+
         if((child2->node_type != RETURN_N)){
           if(funcnode->return_type == INT_TYPE_N) {
             returnError = 1;
             fprintf(stderr, "Error: No return statement in function %s at line %d\n", funcnode->value_string, funcnode->line_num);
-          } 
+          }
           else {
             child2->right_sibling = create_ast_node(RETURN_N);
             child2->right_sibling->return_type = VOID_TYPE_N;
@@ -778,11 +778,11 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         }
         else if( (child2->node_type == RETURN_N) && (funcnode->return_type == INT_TYPE_N) ) {
           if(child2->left_child == NULL) {
-            
+
               returnError = 1;
               fprintf(stderr, "Error: Returning wrong type for function %s at line %d\n", funcnode->value_string, child2->line_num);
-            
-          } 
+
+          }
           else {
             if(child2->left_child->return_type != INT_TYPE_N) {
               returnError = 1;
@@ -799,7 +799,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         root->return_to = funcnode;
         // fprintf(stderr,"\nreturn to %s at line %d\n", root->return_to->value_string, root->return_to->line_declared);
         break;
-      
+
       default:
         break;
     }
@@ -809,8 +809,82 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
       check_return_helper(child, symtab, funcnode);
 
 
-    
+
 }
+
+
+// void infer_type(ast_node root){
+//   /* Check that this isn't a leaf */
+//   if(root->left_child != NULL){
+//     ast_node child = root->left_child;
+//     //fprintf(stderr, "Currently infering type for %s\n", TYPE_NAME(root->node_type));
+//     //fprintf(stderr, "Child is: (%s, %d)\n", child->value_string, child->value_int);
+//     /* Post-order walk: first infer children's types */
+//     //for(child = root->left_child; child != NULL; child = child->right_sibling){
+//     //  infer_type(child);
+//     //}
+//
+//     /* Then, do the calculations for this node */
+//     if(root->return_type != 0){ // Only assign return type if node doesn't have one already
+//       if(is_unary_operator(root)){
+//         root->return_type = root->left_child->return_type;
+//         fprintf(stderr, "Assigned type to unary operator %s\n", TYPE_NAME(root->node_type));
+//       } else if(is_binary_operator(root)){ // Need to check types are equal
+//         if(root->left_child->return_type == root->left_child->right_sibling->return_type){
+//           root->return_type = root->left_child->return_type;
+//           fprintf(stderr, "Assigned type to binary operator %s\n", TYPE_NAME(root->node_type));
+//         }
+//       }
+//     }
+//
+//   }
+// }
+
+// void postorder_traverse(ast_node root){
+//   if(root->left_child != NULL){
+//     ast_node child;// = root;
+//     for(child = root->left_child; child != NULL; child = child->right_sibling){
+//       postorder_traverse(child);
+//     }
+//     if(root != NULL)
+//     fprintf(stderr, "NOW TRAVERSING (%d, %s)\n", root->value_int,
+//       TYPE_NAME(root->node_type));
+//   }
+// }
+
+void infer_type(ast_node root){
+
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling){
+    postorder_traverse(child);
+  }
+
+  //fprintf(stderr, "Now traversing (%s, %d, %s)\n", root->value_string, root->value_int,
+  //NODE_NAME(root->node_type));
+  if(root->return_type == 0){
+    fprintf(stderr, "Node (%s, %d, %s) has no return type\n", root->value_string, root->value_int,
+  NODE_NAME(root->node_type));
+    if(is_unary_operator(root)){
+      root->return_type = root->left_child->return_type;
+      fprintf(stderr, "Assigned type to unary operator %s\n", TYPE_NAME(root->node_type));
+    } else if(is_binary_operator(root)){
+      fprintf(stderr, "Node (%s, %d, %s) is a binary operator\n", root->value_string, root->value_int,
+      NODE_NAME(root->node_type));
+      if(root->left_child->return_type == root->left_child->right_sibling->return_type){
+        fprintf(stderr, "type(%s, %d, %s) == type(%s, %d, %s)\n", root->left_child->value_string, root->left_child->value_int,
+        NODE_NAME(root->left_child->node_type), root->left_child->right_sibling->value_string, root->left_child->right_sibling->value_int,
+      NODE_NAME(root->left_child->right_sibling->return_type));
+        root->return_type = root->left_child->return_type;
+      }
+      fprintf(stderr, "Assigned type to binary operator %s\n", NODE_NAME(root->node_type));
+    }
+  } else{
+    fprintf(stderr, "Node (%s, %d, %s) has return type %s\n", root->value_string, root->value_int,
+  NODE_NAME(root->node_type), NODE_NAME(root->return_type));
+  }
+}
+
+
 
 int is_binary_operator(ast_node root){
 

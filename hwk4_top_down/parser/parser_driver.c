@@ -54,17 +54,18 @@ int main() {
  		}
  		else {
 	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table
-	 		
+
 	 		printf("\n\n");
 	 		//print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
 			//print_ast relies on data inserted from build_symbol_table above;
  			record_var_type_in_ast(root, symtab);
- 			
+
  			//printf("\n\n");
 			infer_type(root); //must come after record_var_type_in_ast
+      //postorder_traverse(root);
 			check_function(root, symtab); //must come after record_var_type_in_ast
 			check_return(root, symtab); //must be after infer
-      		print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
+    	print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
  		}
