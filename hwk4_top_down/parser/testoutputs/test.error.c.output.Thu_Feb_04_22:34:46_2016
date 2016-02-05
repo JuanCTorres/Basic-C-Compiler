@@ -9,8 +9,8 @@ syntax error at line 14	 yytext = 'broken'
 syntax error at line 19	 yytext = ';'
 syntax error at line 22	 yytext = 'int'
 syntax error at line 23	 yytext = 'b'
-WARNING: There were parse errors.
-Parse tree may be ill-formed.
+
+WARNING: There were parse errors. Parse tree may be ill-formed.
 
 Error: NO root!
 

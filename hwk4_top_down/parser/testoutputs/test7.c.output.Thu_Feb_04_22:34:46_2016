@@ -3,7 +3,9 @@ Result of test done to parser.
 test7.c BEGIN.
 ===========================================================
 
-Error: No return statement in function main at line 1
+line: 1 | Error: No return statement in function main
+
+WARNING: There were return errors. Data structure may be ill-formed.
 
 
 Print hashtables (level-sibno) according to their hierarchy
@@ -26,4 +28,4 @@ ROOT (type: INT_TYPE)
 
 
 ===========================================================
-test6.c finished.
+test7.c finished.

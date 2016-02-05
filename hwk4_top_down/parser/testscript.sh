@@ -99,7 +99,7 @@ printf "===========================================================\n\n" >> "${f
 ./parser < ./testinputs/test7.c >> "${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
-printf "test6.c finished.\n" >> "${file}"
+printf "test7.c finished.\n" >> "${file}"
 
 
 

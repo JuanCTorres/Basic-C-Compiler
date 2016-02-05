@@ -3,9 +3,14 @@ Result of test done to parser.
 test5.c BEGIN.
 ===========================================================
 
-Error: Number of parameters to function myfunc at line 26 does not match the declaration at line 1
-Error: No return statement in function myfunc at line 1
-Error: No return statement in function main at line 9
+line: 1 | Error: Number of parameters to function myfunc at line 26 does not match the declaration
+
+WARNING: There were function errors. Data structure may be ill-formed.
+
+line: 1 | Error: No return statement in function myfunc
+line: 9 | Error: No return statement in function main
+
+WARNING: There were return errors. Data structure may be ill-formed.
 
 
 Print hashtables (level-sibno) according to their hierarchy

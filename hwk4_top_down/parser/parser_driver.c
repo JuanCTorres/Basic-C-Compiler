@@ -37,7 +37,7 @@ int main() {
  	noRoot = yyparse();
 
  	if (parseError)	{
- 		fprintf(stderr, "WARNING: There were parse errors.\nParse tree may be ill-formed.\n\n");
+ 		fprintf(stderr, "\nWARNING: There were parse errors. Parse tree may be ill-formed.\n\n");
  	}
  	// else {
  	// printf("\nNo syntatical errors detected.\n\n");
@@ -47,26 +47,38 @@ int main() {
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab);
 
- 		printf("\n\nPrint hashtables (level-sibno) according to their hierarchy\n");
+ 		printf("\nPrint hashtables (level-sibno) according to their hierarchy\n");
  		pretty_print(symtab->root, 0);
  		if(symtabError) {
- 			fprintf(stderr, "WARNING: There were symtab creation errors. Halting!\n");
+ 			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");
  		}
  		else {
 	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table
-	 		
+
 	 		printf("\n\n");
 	 		//print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
 			//print_ast relies on data inserted from build_symbol_table above;
- 			record_var_type_in_ast(root, symtab);
  			
  			//printf("\n\n");
 			infer_type(root); //must come after record_var_type_in_ast
+			if(typeError ) {
+				fprintf(stderr, "\nWARNING: There were type inconsistency errors. Data structure may be ill-formed.\n\n");
+			}
 			check_function(root, symtab); //must come after record_var_type_in_ast
+			if(funcError) {
+				fprintf(stderr, "\nWARNING: There were function errors. Data structure may be ill-formed.\n\n");
+			}
 			check_return(root, symtab); //must be after infer
-      		print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
+			if(returnError) {
+				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
+			}
+      		//print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
+
+			
+			
+			
  		}
  	}
 

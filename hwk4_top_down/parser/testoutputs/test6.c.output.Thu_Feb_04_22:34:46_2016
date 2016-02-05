@@ -23,8 +23,8 @@ line: 33 | error: use of undeclared identifier h
 line: 33 | error: use of undeclared identifier i
 line: 38 | error: use of undeclared identifier j
 line: 40 | error: use of undeclared identifier k
-WARNING: There were symtab creation errors. Halting!
 
+WARNING: There were symtab creation errors. Halting!
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
