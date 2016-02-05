@@ -75,7 +75,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       }
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      printf(" declared at line %d", root->line_declared);
+      printf(" declared at line %d ", root->line_declared);
       break;
 
     case FUNCTION_N:
@@ -95,7 +95,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       printf(")");
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      printf(" declared at line %d", root->line_declared);
+      printf(" declared at line %d ", root->line_declared);
       break;
 
     case STRING_LITERAL_N:
@@ -109,7 +109,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       }
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      printf(" declared at line %d", root->line_declared);
+      printf(" declared at line %d ", root->line_declared);
       break;
 
     case INT_LITERAL_N:		/* print the int literal */
@@ -130,13 +130,13 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       printf(")");
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      printf(" declared at line %d", root->line_declared);
+      printf(" declared at line %d ", root->line_declared);
       break;
 
     case RETURN_N:
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      printf("return to %s at line %d", root->return_to->value_string, root->return_to->line_declared);
+      printf("return to %s at line %d ", root->return_to->value_string, root->return_to->line_declared);
       break;
 
     default:

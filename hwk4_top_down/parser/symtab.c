@@ -645,7 +645,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
         if(node->num_parameters != i) {
           funcError = 1;
-          fprintf(stderr, "line: %d | Error: Number of parameters to function %s at line %d does not match the declaration\n", root->line_declared, root->value_string, root->line_num);
+          fprintf(stderr, "line: %d | Error: Number of parameters to function %s does not match the declaration at line %d\n",root->line_num, root->value_string, root->line_declared);
         }
         else {
           int k = 0;
@@ -655,7 +655,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
               funcError = 1;
               //printf("\n\n  parm type is: %s return_type is: %s \n\n", TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type));
               // fprintf(stderr, "\n\n %s return_type: %s but should be %s \n\n",anode->value_string ,NODE_NAME(anode->return_type), TYPE_NAME(node->parameters[k]));
-              fprintf(stderr, "line: %d | Error: Input parameters to function %s at line %d does not match the declaration\n", root->line_declared, root->value_string, root->line_num);
+              fprintf(stderr, "line: %d | Error: Input parameters to function %s does not match the declaration at line %d\n", root->line_num, root->value_string, root->line_declared);
               return 1;
             }
             k++;
@@ -709,7 +709,13 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           // fprintf(stderr, "\n\n  child2 %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
         }
 
-        if((child2->node_type != RETURN_N)){
+      // assert(child2 != NULL);
+        if(child2 == NULL && funcnode->return_type == INT_TYPE_N) { //child2 is null is the func is empty
+          returnError = 1;
+          fprintf(stderr, "Error: Returning wrong type for function %s declared at line %d\n", funcnode->value_string, funcnode->line_declared);
+        }
+        else if (child2 == NULL) {} //need this! don't delete this line or else having empty funcs will gen error
+        else if((child2->node_type != RETURN_N)){
           if(funcnode->return_type == INT_TYPE_N) {
             returnError = 1;
             fprintf(stderr, "line: %d | Error: No return statement in function %s\n", funcnode->line_num, funcnode->value_string);
@@ -730,10 +736,19 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           else {
             if(child2->left_child->return_type != INT_TYPE_N) {
               returnError = 1;
-              fprintf(stderr, "line: %d | Error: Returning wrong type for function %s", child2->line_num, funcnode->value_string);
+              fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
             }
           }
         }
+        else if( (child2->node_type == RETURN_N) && (funcnode->return_type == VOID_TYPE_N) ) {
+          if(child2->left_child != NULL) { //returning something
+            returnError = 1;
+            fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
+          }
+
+        }
+
+
 
         break;
 

@@ -1,4 +1,6 @@
+void this_func() {
+}
+
+
 int main(){
-  int a;
-  a = 3;
 }

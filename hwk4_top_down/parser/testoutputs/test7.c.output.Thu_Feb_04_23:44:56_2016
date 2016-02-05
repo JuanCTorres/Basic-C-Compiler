@@ -1,0 +1,33 @@
+Result of test done to parser.
+
+test7.c BEGIN.
+===========================================================
+
+Error: Returning wrong type for function main declared at line 5
+
+WARNING: There were return errors. Data structure may be ill-formed.
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_VOID this_func (0 params:)
+  (1-0) contains:
+  (1-1) contains:
+
+
+ROOT 
+  FUNC_DECLARATION this_func  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: VOID_TYPE) 
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+  FUNC_DECLARATION main  (0 params:)[scope (0,0) <- (0,0)] declared at line 5 (type: INT_TYPE) 
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+      STATEMENT_LIST 
+
+
+===========================================================
+test7.c finished.

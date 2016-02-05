@@ -1,0 +1,276 @@
+Result of test done to parser.
+
+test1.c BEGIN.
+===========================================================
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  (1-0) contains:
+    VAR_ARRAY_INT dd
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    VAR_INT d
+    VAR_INT e
+    VAR_INT f
+    VAR_INT h
+    VAR_INT i
+    VAR_ARRAY_INT cc
+    (2-0) contains:
+      VAR_INT zz
+    (2-1) contains:
+      VAR_INT tt
+      VAR_ARRAY_INT uu
+    (2-2) contains:
+      VAR_INT dsa
+      VAR_INT asd
+    (2-3) contains:
+      VAR_INT x
+    (2-4) contains:
+      VAR_INT y
+
+
+ROOT 
+  FUNC_DECLARATION main  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        ID d [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        ID e [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        ID f [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID h [scope (1,0) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          INT_LITERAL 2(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID i [scope (1,0) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          INT_LITERAL 3(type: INT_TYPE) 
+        ARRAY_TYPE cc [scope (1,0) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+          INT_LITERAL 12(type: INT_TYPE) 
+        ARRAY_TYPE dd [scope (1,0) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+          INT_LITERAL 5(type: INT_TYPE) 
+      STATEMENT_LIST 
+        = (type: INT_TYPE) 
+          ARRAY_TYPE cc [scope (1,0) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+            * (type: INT_TYPE) 
+              ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+              ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        PRINT 
+          STRING_LITERAL test basics!\n 
+        READ 
+          ID f [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            INT_LITERAL 1(type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          + (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL 1(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            INT_LITERAL 5(type: INT_TYPE) 
+            INT_LITERAL 5(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (type: INT_TYPE) 
+            INT_LITERAL 1(type: INT_TYPE) 
+            INT_LITERAL -6(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            INT_LITERAL -2(type: INT_TYPE) 
+            INT_LITERAL 9(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          + (type: INT_TYPE) 
+            INT_LITERAL 1(type: INT_TYPE) 
+            INT_LITERAL 7(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            INT_LITERAL 1(type: INT_TYPE) 
+            INT_LITERAL -10(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            INT_LITERAL 22(type: INT_TYPE) 
+            INT_LITERAL -88(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            - (type: INT_TYPE) 
+              ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          + (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          / (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          % (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          < (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          <= (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          > (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          >= (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          == (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          != (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          && (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          || (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          ! (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          ++ (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          -- (type: INT_TYPE) 
+            ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          % (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL 5(type: INT_TYPE) 
+        = (type: INT_TYPE) 
+          ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          INT_LITERAL -23(type: INT_TYPE) 
+        FOR 
+          = (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL 100(type: INT_TYPE) 
+          < (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL 200(type: INT_TYPE) 
+          ++ (type: INT_TYPE) 
+            ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = (type: INT_TYPE) 
+                ID zz [scope (2,0) <- (1,0)] declared at line 57 (type: INT_TYPE) 
+                INT_LITERAL -100(type: INT_TYPE) 
+            STATEMENT_LIST 
+              + (type: INT_TYPE) 
+                ID a [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
+                ID b [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
+              = (type: INT_TYPE) 
+                ID c [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
+                + (type: INT_TYPE) 
+                  ID e [scope (2,0) <- (1,0)] declared at line 9 (type: INT_TYPE) 
+                  ID f [scope (2,0) <- (1,0)] declared at line 9 (type: INT_TYPE) 
+        WHILE 
+          == (type: INT_TYPE) 
+            - (type: INT_TYPE) 
+              / (type: INT_TYPE) 
+                ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+                INT_LITERAL 5(type: INT_TYPE) 
+              + (type: INT_TYPE) 
+                INT_LITERAL -3(type: INT_TYPE) 
+                INT_LITERAL -8(type: INT_TYPE) 
+            INT_LITERAL 100(type: INT_TYPE) 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID tt [scope (2,1) <- (1,0)] declared at line 63 (type: INT_TYPE) 
+              ARRAY_TYPE uu [scope (2,1) <- (1,0)] declared at line 63 (type: INT_TYPE) 
+                INT_LITERAL 10(type: INT_TYPE) 
+            STATEMENT_LIST 
+              PRINT 
+                * (type: INT_TYPE) 
+                  INT_LITERAL 12(type: INT_TYPE) 
+                  INT_LITERAL 21(type: INT_TYPE) 
+        DO_WHILE 
+          INT_LITERAL 1(type: INT_TYPE) 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID asd [scope (2,2) <- (1,0)] declared at line 69 (type: INT_TYPE) 
+              ID dsa [scope (2,2) <- (1,0)] declared at line 70 (type: INT_TYPE) 
+            STATEMENT_LIST 
+              = (type: INT_TYPE) 
+                ID asd [scope (2,2) <- (1,0)] declared at line 69 (type: INT_TYPE) 
+                ID dsa [scope (2,2) <- (1,0)] declared at line 70 (type: INT_TYPE) 
+        IF_ELSE_STMT 
+          == (type: INT_TYPE) 
+            * (type: INT_TYPE) 
+              ID a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+              ID b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID x [scope (2,3) <- (1,0)] declared at line 75 (type: INT_TYPE) 
+            STATEMENT_LIST 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              ID y [scope (2,4) <- (1,0)] declared at line 78 (type: INT_TYPE) 
+            STATEMENT_LIST 
+        RETURN [scope (1,0) <- (0,0)]return to main at line 1 
+          INT_LITERAL 0(type: INT_TYPE) 
+
+
+===========================================================
+test1.c finished.
