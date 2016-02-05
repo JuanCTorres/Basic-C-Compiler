@@ -756,7 +756,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
 
 void check_return(ast_node root, symboltable_t *symtab) {
-  
+
   ast_node funcnode = NULL;
   check_return_helper(root, symtab, funcnode);
 
@@ -774,19 +774,19 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         child2 = root->left_child->right_sibling; //to SEQ_N
         assert(child2->node_type == SEQ_N);
         child2 = child2->left_child->right_sibling; // to STATEMENT_LIST_N
-        assert(child2->node_type == STATEMENT_LIST_N); 
+        assert(child2->node_type == STATEMENT_LIST_N);
         // fprintf(stderr, "\n\n  before for %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
-        for (child2 = child2->left_child; 
-          child2 != NULL && child2->right_sibling != NULL; 
+        for (child2 = child2->left_child;
+          child2 != NULL && child2->right_sibling != NULL;
           child2 = child2->right_sibling) {
           // fprintf(stderr, "\n\n  child2 %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
         }
-        
+
         if((child2->node_type != RETURN_N)){
           if(funcnode->return_type == INT_TYPE_N) {
             returnError = 1;
             fprintf(stderr, "line: %d | Error: No return statement in function %s\n", funcnode->line_num, funcnode->value_string);
-          } 
+          }
           else {
             child2->right_sibling = create_ast_node(RETURN_N);
             child2->right_sibling->return_type = VOID_TYPE_N;
@@ -795,11 +795,11 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         }
         else if( (child2->node_type == RETURN_N) && (funcnode->return_type == INT_TYPE_N) ) {
           if(child2->left_child == NULL) {
-            
+
               returnError = 1;
               fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
-            
-          } 
+
+          }
           else {
             if(child2->left_child->return_type != INT_TYPE_N) {
               returnError = 1;
@@ -816,7 +816,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         root->return_to = funcnode;
         // fprintf(stderr,"\nreturn to %s at line %d\n", root->return_to->value_string, root->return_to->line_declared);
         break;
-      
+
       default:
         break;
     }
@@ -826,7 +826,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
       check_return_helper(child, symtab, funcnode);
 
 
-    
+
 }
 
 
@@ -873,7 +873,7 @@ void infer_type(ast_node root){
 
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling){
-    postorder_traverse(child);
+    infer_type(child);
   }
 
   //fprintf(stderr, "Now traversing (%s, %d, %s)\n", root->value_string, root->value_int,
