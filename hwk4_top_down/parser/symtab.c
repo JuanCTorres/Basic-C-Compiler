@@ -340,6 +340,20 @@ int check_if_redef(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
   return 1;
 }
 
+
+/*
+* Returns appropriate sibling number
+*/
+int getSibling(int level) {
+  if(level == 0) {
+    return 0;
+  }
+  else {
+    return siblings[level - 1];
+  }
+}
+
+
 /*
  * Builds the symbol table, creating scopes as needed, and linking them together.
  * Adds variable and function identifiers to scopes appropriately.
@@ -361,7 +375,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
     case FORMAL_PARAMS_N:
       level++;
-      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       break;
 
     case FUNC_DECLARATION_N: // function declaraions
@@ -369,15 +383,17 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       check_if_redef(root, symtab ,level, sibno);
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash == NULL) {
-        hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+        //hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+        hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
+
       }
       insert_into_symhashtable(hash, root); // will only insert if it is empty.
-      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       break;
 
     case FUNCTION_N:
       check_if_declared(root, symtab ,level, sibno);
-      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       break;
 
     case ID_N:      /* print the id */
@@ -386,14 +402,14 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
                                     // are assigned a return type when building the abstract syntax tree.
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
-          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
         }
         insert_into_symhashtable(hash, root);
       }
       else {  // don't know if previously declared
         check_if_declared(root, symtab , level, sibno);
       }
-      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       break;
 
     case ARRAY_TYPE_N:             // check for return types!
@@ -401,18 +417,18 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       if(root->return_type != 0) {
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
-          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+          hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
           }
         insert_into_symhashtable(hash, root);
       }
       else {
         check_if_declared(root, symtab , level, sibno);
       }
-      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       break;
 
     case RETURN_N:
-      insert_scope_info(root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+      insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       break;
 
     default:
@@ -420,7 +436,7 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       assert(symtab->root != NULL);
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash == NULL) {
-        hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
+        hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
       }
       //note: cannot use insert_scope_info here because siblings[level - 1] causes invalid read as level-1 can go negative
       break;
@@ -629,7 +645,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
 
         if(node->num_parameters != i) {
           funcError = 1;
-          fprintf(stderr, "Error: Number of parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
+          fprintf(stderr, "line: %d | Error: Number of parameters to function %s at line %d does not match the declaration\n", root->line_declared, root->value_string, root->line_num);
         }
         else {
           int k = 0;
@@ -639,7 +655,7 @@ int check_function(ast_node root, symboltable_t *symtab) {
               funcError = 1;
               //printf("\n\n  parm type is: %s return_type is: %s \n\n", TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type));
               // fprintf(stderr, "\n\n %s return_type: %s but should be %s \n\n",anode->value_string ,NODE_NAME(anode->return_type), TYPE_NAME(node->parameters[k]));
-              fprintf(stderr, "Error: Input parameters to function %s at line %d does not match the declaration at line %d\n", root->value_string, root->line_num, root->line_declared);
+              fprintf(stderr, "line: %d | Error: Input parameters to function %s at line %d does not match the declaration\n", root->line_declared, root->value_string, root->line_num);
               return 1;
             }
             k++;
@@ -738,8 +754,9 @@ int check_function(ast_node root, symboltable_t *symtab) {
 //   }
 // }
 
-void check_return(ast_node root, symboltable_t *symtab) {
 
+void check_return(ast_node root, symboltable_t *symtab) {
+  
   ast_node funcnode = NULL;
   check_return_helper(root, symtab, funcnode);
 
@@ -757,19 +774,19 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         child2 = root->left_child->right_sibling; //to SEQ_N
         assert(child2->node_type == SEQ_N);
         child2 = child2->left_child->right_sibling; // to STATEMENT_LIST_N
-        assert(child2->node_type == STATEMENT_LIST_N);
+        assert(child2->node_type == STATEMENT_LIST_N); 
         // fprintf(stderr, "\n\n  before for %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
-        for (child2 = child2->left_child;
-          child2 != NULL && child2->right_sibling != NULL;
+        for (child2 = child2->left_child; 
+          child2 != NULL && child2->right_sibling != NULL; 
           child2 = child2->right_sibling) {
           // fprintf(stderr, "\n\n  child2 %s at line %d \n\n", NODE_NAME(child2->node_type), child2->line_num);
         }
-
+        
         if((child2->node_type != RETURN_N)){
           if(funcnode->return_type == INT_TYPE_N) {
             returnError = 1;
-            fprintf(stderr, "Error: No return statement in function %s at line %d\n", funcnode->value_string, funcnode->line_num);
-          }
+            fprintf(stderr, "line: %d | Error: No return statement in function %s\n", funcnode->line_num, funcnode->value_string);
+          } 
           else {
             child2->right_sibling = create_ast_node(RETURN_N);
             child2->right_sibling->return_type = VOID_TYPE_N;
@@ -778,15 +795,15 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         }
         else if( (child2->node_type == RETURN_N) && (funcnode->return_type == INT_TYPE_N) ) {
           if(child2->left_child == NULL) {
-
+            
               returnError = 1;
-              fprintf(stderr, "Error: Returning wrong type for function %s at line %d\n", funcnode->value_string, child2->line_num);
-
-          }
+              fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
+            
+          } 
           else {
             if(child2->left_child->return_type != INT_TYPE_N) {
               returnError = 1;
-              fprintf(stderr, "Error: Returning wrong type for function %s at line %d\n", funcnode->value_string, child2->line_num);
+              fprintf(stderr, "line: %d | Error: Returning wrong type for function %s", child2->line_num, funcnode->value_string);
             }
           }
         }
@@ -799,7 +816,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         root->return_to = funcnode;
         // fprintf(stderr,"\nreturn to %s at line %d\n", root->return_to->value_string, root->return_to->line_declared);
         break;
-
+      
       default:
         break;
     }
@@ -809,7 +826,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
       check_return_helper(child, symtab, funcnode);
 
 
-
+    
 }
 
 

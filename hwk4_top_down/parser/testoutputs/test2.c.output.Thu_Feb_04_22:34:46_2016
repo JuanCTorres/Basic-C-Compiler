@@ -3,7 +3,9 @@ Result of test done to parser.
 test2.c BEGIN.
 ===========================================================
 
-Error: Number of parameters to function my_func at line 45 does not match the declaration at line 1
+line: 1 | Error: Number of parameters to function my_func at line 45 does not match the declaration
+
+WARNING: There were function errors. Data structure may be ill-formed.
 
 
 Print hashtables (level-sibno) according to their hierarchy

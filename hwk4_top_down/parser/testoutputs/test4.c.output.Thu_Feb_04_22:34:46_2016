@@ -4,7 +4,6 @@ test4.c BEGIN.
 ===========================================================
 
 
-
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )

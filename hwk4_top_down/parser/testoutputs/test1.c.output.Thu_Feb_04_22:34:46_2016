@@ -4,7 +4,6 @@ test1.c BEGIN.
 ===========================================================
 
 
-
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)
