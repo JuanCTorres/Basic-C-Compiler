@@ -771,17 +771,28 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
 
 }
 
-
+/* Infers the type of operations with return types. For unary operators, such as
+! and unary minus, the operator is assigned the return type of its child.
+For binary operators, the operator is assigned the return type of its
+children, only if both children have the same return type.
+ */
 void infer_type(ast_node root){
 
+  /* Note: post-order traversal, unlike most other traversals */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling){
     infer_type(child);
   }
+
+  /* Only assign a return type to nodes withouth one already */
   if(root->return_type == 0){
+
     if(is_unary_operator(root)){
       root->return_type = root->left_child->return_type;
+
     } else if(is_binary_operator(root)){
+      /* Check that the types of both children are equal */
+      /* Assignment operator is also checked here, since it is a binary operator */
       if(root->left_child->return_type == root->left_child->right_sibling->return_type){
         root->return_type = root->left_child->return_type;
       }
