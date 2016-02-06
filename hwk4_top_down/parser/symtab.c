@@ -779,20 +779,28 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
 
 }
 
-
+/* Infers the type of operations with return types. For unary operators, such as
+! and unary minus, the operator is assigned the return type of its child.
+For binary operators, the operator is assigned the return type of its
+children, only if both children have the same return type.
+ */
 void infer_type(ast_node root){
 
+  /* Note: post-order traversal, unlike most other traversals */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling){
     infer_type(child);
   }
 
-  //fprintf(stderr, "Now traversing (%s, %d, %s)\n", root->value_string, root->value_int,
-  //NODE_NAME(root->node_type));
+  /* Only assign a return type to nodes withouth one already */
   if(root->return_type == 0){
+
     if(is_unary_operator(root)){
       root->return_type = root->left_child->return_type;
+
     } else if(is_binary_operator(root)){
+      /* Check that the types of both children are equal */
+      /* Assignment operator is also checked here, since it is a binary operator */
       if(root->left_child->return_type == root->left_child->right_sibling->return_type){
         root->return_type = root->left_child->return_type;
       }
@@ -802,7 +810,7 @@ void infer_type(ast_node root){
 }
 
 
-
+/* Returns 1 is the root is a binary operator, depending on its node_type */
 int is_binary_operator(ast_node root){
 
   if(root->node_type == OP_ASSIGN_N ||
@@ -819,7 +827,6 @@ int is_binary_operator(ast_node root){
      root->node_type == OP_NOT_EQUAL_N ||
      root->node_type == OP_AND_N ||
      root->node_type == OP_OR_N
-     //anything else?
    ){
      return 1;
    } else{
@@ -827,7 +834,7 @@ int is_binary_operator(ast_node root){
    }
 }
 
-
+/* Returns 1 if the root is a unary operator, depending on its node_type */
 int is_unary_operator(ast_node root){
   if(root->node_type == OP_NEG_N ||
      root->node_type == OP_NOT_N ||
