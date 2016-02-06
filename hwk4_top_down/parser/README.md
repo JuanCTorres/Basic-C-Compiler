@@ -82,6 +82,12 @@ For instance, without type inference, the type of the parameter passed
 to `my_func(5 + 6)` is unclear, as is the type of the return value for
 `return 3 + 2 + 4`.*
 
+#### Function return checking
+
+For each `return` statement, it is recorded what function the returned value goes to.
+
+For `void` functions, if the function does not have a `return` statement, an empty
+one is inserted.
 
 ## Changes from previous programs
 
