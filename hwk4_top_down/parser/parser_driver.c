@@ -45,32 +45,31 @@ int main() {
  	if (!noRoot) {
 
  		symboltable_t *symtab = create_symboltable();
- 		build_symbol_table(root, 0, 0, symtab);
+ 		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
 
  		printf("\nPrint hashtables (level-sibno) according to their hierarchy\n");
- 		pretty_print(symtab->root, 0);
- 		if(symtabError) {
+ 		pretty_print(symtab->root, 0);	//prints symbol table nicely
+ 		if(symtabError) {	//when we get var/func use without declaration, we cannot progress any further as we cannot build the sym table which later funcs depend on
  			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");
  		}
  		else {
-	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table
+	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table, records all variable types by using symbol table
 
 	 		printf("\n\n");
  			
- 			//printf("\n\n");
-			infer_type(root); //must come after record_var_type_in_ast
+			infer_type(root); //must come after record_var_type_in_ast, infers types for OP and assign
 			if(typeError ) {
 				fprintf(stderr, "\nWARNING: There were type inconsistency errors. Data structure may be ill-formed.\n\n");
 			}
-			check_function(root, symtab); //must come after record_var_type_in_ast
+			check_function(root, symtab); //must come after record_var_type_in_ast, checks for appriate function calls (no. of params, type of each param)
 			if(funcError) {
 				fprintf(stderr, "\nWARNING: There were function errors. Data structure may be ill-formed.\n\n");
 			}
-			check_return(root, symtab); //must be after infer
+			check_return(root, symtab); //must be after infer, checks whether the return is a valid one for a function. implicit inserts return at the end of void 
 			if(returnError) {
 				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
 			}
-      		print_ast(root, 0, 0, 0);	//uncomment to print the ast structure and the scope relations
+      		print_ast(root, 0, 0, 0);
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
 
