@@ -778,9 +778,6 @@ void infer_type(ast_node root){
   for (child = root->left_child; child != NULL; child = child->right_sibling){
     infer_type(child);
   }
-
-  //fprintf(stderr, "Now traversing (%s, %d, %s)\n", root->value_string, root->value_int,
-  //NODE_NAME(root->node_type));
   if(root->return_type == 0){
     if(is_unary_operator(root)){
       root->return_type = root->left_child->return_type;
@@ -811,7 +808,6 @@ int is_binary_operator(ast_node root){
      root->node_type == OP_NOT_EQUAL_N ||
      root->node_type == OP_AND_N ||
      root->node_type == OP_OR_N
-     //anything else?
    ){
      return 1;
    } else{
