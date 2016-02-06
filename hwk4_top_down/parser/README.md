@@ -91,10 +91,4 @@ one is inserted.
 
 ## Changes from previous programs
 
-- The `ast_node` structure used in our syntax tree has been changed to include a line number to be printed in error messages, for easier debugging.
-
-- Added a new `ast_node` type to identify function declarations, for easier error checking in our symbol tables.
-
-- Added a pointer from each `ast_node` to its corresponding `symnode`.
-
-- Added to flex and bison files to track current line number.
+- Added a `retun_type` to `ast_node` in order to make type inference easier.
