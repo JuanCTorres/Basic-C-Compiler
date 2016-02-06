@@ -155,12 +155,18 @@ int is_unary_operator(ast_node root);
 /* Returns 1 is the root is a binary operator, depending on its node_type */
 int is_binary_operator(ast_node root);
 
-
+/* calls check_return_helper */
 void check_return(ast_node root, symboltable_t *symtab);
 
-
+/*Checks that there is appropriate return for functions
+* Inserts an implicit return for void type functions
+* For every return statement, records to which function it returns to 
+*/
 void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode);
 
 
+void insert_implicit_return(ast_node root, symboltable_t *symtab);
+
+/* returns appropriate sibling number */
 int getSibling(int level);
 #endif

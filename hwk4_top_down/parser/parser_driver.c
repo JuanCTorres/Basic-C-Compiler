@@ -69,7 +69,7 @@ int main() {
 			if(returnError) {
 				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
 			}
-      		print_ast(root, 0, 0, 0);
+      		print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
 
