@@ -1,6 +1,6 @@
-# Symbols and types: Top-down
+# Symbols and types: Bottom-up traversal
 
-In this part of our compiler, we traverse the syntax tree created in previous steps of our project, and start creating symbol tables to store declared variable and function names, so that we know in the future whether a particular name has been defined.
+In this part of our compiler, we traverse the syntax tree created in previous steps of our project, and with the help of the symbol table created in previous steps, start catching errors when, for instance, users try to use an undefined variable or call a function with the wrong number of arguments.
 
 ## Authors
 - SeokJun Bing
@@ -10,114 +10,80 @@ Some code provided by Sean W. Smith, some originally written by Thomas Cormen.
 
 ## How to build and run
 
-- Execute make to build the program, make clean to delete object files and other executable files.
+- Execute `make` to build the program, `make clean` to delete object files and other executable files.
 
-- Execute make test to build the program and run relevant tests. The folder testinputs contains several example programs written in our C grammar, a subset of the full C grammar. Our test script should produce one file {testfile}.output.{date} with the results of each test.
+- Execute make test to build the program and run relevant tests. The folder `./testinputs` contains several example programs written in our C grammar, a subset of the full C grammar. Our test script should produce several files `{testfile}.output.{date}` with the results of each test.
 
 ## Program execution
 
-- symtab.c and symtab.h define the data structures and functions required to build the symbol tables.
+*For descriptions of previous parts of this compiler, please see previous folders.*
 
-- parser.l is a flex specification so that flex returns the next token from the input stream and returns other relevant information to the creation of a parse tree, such as string and int values.
+- `symtab.c` and `symtab.h` define the data structures and functions required to build the symbol tables, as well as the functions to check for errors related to such symbol table,
+e.g., checking that a variable has been defined before it is used.
 
-- parser.y is a bison file, including a grammar and executable code. Each production in the grammar is accompanied by some code used to build a parse tree.
+- `parser.l` is a flex specification so that flex returns the next token from the input stream and returns other relevant information to the creation of a parse tree, such as string and int values.
 
-- ast.c and ast.h define the relevant data structures and functions needed to build a parse tree.
+- `parser.y` is a bison file, including a grammar and executable code. Each production in the grammar is accompanied by some code used to build a parse tree.
 
+- `ast.c` and `ast.h` define the relevant data structures and functions needed to build a parse tree.
 
-The program traverses the syntax tree created in previous steps in a top-down manner. Starting at the root, it uses a pre-order walk to discover function and variable declarations, and adds them to the appropriate scope. The scope that a particular symbol belongs is defined as follows:
+The program traverses the syntax tree created in previous steps, assuming that there have been no errors until this point (if there were, the program halts).
 
-- Any particular scope is identified by a tuple of two numbers: (*n*, *m*), defined as follows:
-	- *n* is defined as the level of any particular scope, 0 being the global level. Subsequent levels increase by one. Any scope that is contained by another scope will have a higher level number. For instance, if a function *my_func* is defined in the global scope (level 0), the variables inside such function would be in level 1. If, then, there is another scope inside *my_func*, the variables inside that scope would be in level 2.
+### Type Inference
 
-	- *m* is defined as the sibling identifier, and is used to differentiate between different scopes on the same level. For instance, if two different *if* statements are found inside a function at level (1, 0), two new scopes would be defined with levels (2, *s*), (2, *s + 1*).
+First, the program begins by recording a `return_type` for the nodes that can be returned
+and whose return_type is known, such as `int`s and function definitions.
 
+*Note: `return_type` is different from `node_type` in that `return_type` is only assigned
+to values that can be returned. Even though the abstract syntax tree created for the input
+file contains all sorts of node, such as nodes for keeping track of the creation of scopes,
+these nodes cannot be returned, and therefore don't have a `return_type`.*
 
-- The particular tuple of new scopes is determined as follows:
+After this, the program tries to infer the return type of unary and binary operators by traversing the tree in post-order. By doing so, children nodes are visited before
+parent nodes, an important feature since `return_type` is a synthesized attribute for
+operators, i.e., the `return_type` of a `+` node will depend on the `return_type` of its children.
 
-	- When a compound statement is found in our program (as defined in our grammar, though it could be understood as basically any statement inside braces), the level *n* is increased by 1. This because any identifiers found inside the compound statement will be local to that compound statement. They can't be accessed outside the compound statement, but they can access the identifiers defined in any parent scopes.
-	- After a compound statement is found, the sibling identifier *m* is also increased. This to make sure that if any more compound statements are found on the same level, they will create different scopes. For instance:
+#### Unary operators
 
-	```
-		int func_one(){
-			...    // scope (m, n)
-		}
-		int func_two(){
-			...    // scope (m, n + 1)
-		}
-	```
+For binary operators, such as `!` or unary minus, the `return_type` of the operation
+is the `return_type` of its only child.
 
-- It is important to keep in mind that the particular identifier of a scope does not determine its children or its parent. For instance, the two following diagrams illustrate two different possible scope hierarchies that use the same scope identifiers:
-  ```
-  Diagram 1
+#### Binary operators
 
-         ...
-    /          \
- (1, 0)        (1, 1)
-  /   \           |
-(2, 0) (2, 1)    (2, 2)
+For binary operators, such as `+`, `=`, or `==`, the `return_type` of the operation
+is the `return_type` of both of its children, if the `return_type`s of its children
+are equal.
 
-  ```
-  ```
-  Diagram 2
+It is especially important to check the assignment operator `=`, as the type of
+the variable on the left value is explicitly specified by the user program
+and stored in the symbol table.
 
-        ...
-    /         \     
-(1, 0)      (1, 1)
-   |         /     \
-(2, 0)   (2, 1)  (2, 2)
-```
+### Function Checking
 
-- In order to determine the hierarchical relations between different scopes, we build a tree that specifies these relations, as follows:
+After inferring the type of operations, calls to functions are checked to make
+sure the types of parameters and values returned agree with those specified in the
+function declaration.
+#### Function parameter type checking
 
-  - As a scope (*m*, *n*) is created, it is linked to its parent, identified as the scope whose level is *m - 1* (any scope with level 2 will have to be linked to a scope with level 1), and whose sibling identifier is the maximum of the sibling identifiers for its parent level. For instance, if we have the scopes
-  `{..., (2, 0), (2, 1), (2, 2), (3, 0)}`
-  and we create a new scope `(3, 1)`, its parent would be the scope `(2, 2)`, as scopes `(2, 0)` and `(2, 1)` are already closed and it is clear that our scope is a sub-scope of the latest scope with level 2 to be opened. See the following annotated code for clarification:
-  ```
-  for(...){
-       ...       // scope (2, 0)
-  }
-  while(...){
-       ...       // scope (2, 1)
-       for(...){
-          ...    // scope (3, 0)
-        }
-  }
-  if(...){
-       ...      // scope (2, 2)
-       if(...){ // scope (3, 1)
-       }
-  }
-    ```
+This is done by checking that the number and type of parameters match those stored
+previously in the symbol table.
 
-  - Scope `(3, 1)` is a child of scope `(2, 2)`, since scope `(2, 2)` is the latest scope of level 2 to be opened. Clearly, scopes `(2, 0)` and `(2, 1)` are already closed (since there is a scope with the same level and a higher sibling identifier), and could not have created scope `(3, 1)`.
+#### Function return type checking
 
-- For each `symnode` containing a function declaration, we added an integer representing the number of parameters that the function takes, as well as an array containing the types of such parameters.
+This is done by checking that non-`void` functions return a value, and that `void`
+functions do not.
 
-### pretty_print
+The types of the values returned by each function are compared to the types
+returned by the function, as stored in the symbol table.
 
-Our function to print the contents of our symbol table is `pretty_print`, and it contains not only the identifiers defined in each scope and the scope names,  but also the hierarchical relations between different scopes. This is accomplished by indenting different scopes differently. For instance, in the following diagram, scope (0-0) is the parent of scope (1-0), which in turn is the parent of scope (2-0):
+*Note: It is important that checking come after type inference, as sometimes it
+is unclear what the type of a parameter or a return value is.
+For instance, without type inference, the type of the parameter passed
+to `my_func(5 + 6)` is unclear, as is the type of the return value for
+`return 3 + 2 + 4`.*
 
-```
-(0-0) contains
-...
-    (1-0) contains
-    ...
-        (2-0) contains
-        ...
-    (1-1) contains
-		...
-```
-
-
-## Notes about the program
-
-1. We have assumed that the tree will be traversed using a pre-oder walk, and have tailored our tree so that code generation is easier on future steps. For instance, a for loop is created so that with a preorder walk we would see the initialization, test condition, and iteration stataments in that order, before moving to the body of the loop.
-
-2. We have decided to maintain some extra information in order to preserve condition 1 and make future code generation easier. For instance, a compound statement in our grammar requires that local variables be defined before other executable code (compound-statement -> local-declarations statement-list). In the case that no local variables are defined, we could have not created a node for local-declarations, but this would have made complying with condition 1 harder, as we would have had to handle a special case of pointer manipulation. We have, then, kept an empty node in here to facilitate future code generation easier, as well as facilitate our compliance with condition 1.
 
 ## Changes from previous programs
-
 
 - The `ast_node` structure used in our syntax tree has been changed to include a line number to be printed in error messages, for easier debugging.
 
