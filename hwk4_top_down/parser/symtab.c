@@ -791,7 +791,7 @@ void infer_type(ast_node root){
 }
 
 
-
+/* Returns 1 is the root is a binary operator, depending on its node_type */
 int is_binary_operator(ast_node root){
 
   if(root->node_type == OP_ASSIGN_N ||
@@ -815,7 +815,7 @@ int is_binary_operator(ast_node root){
    }
 }
 
-
+/* Returns 1 if the root is a unary operator, depending on its node_type */
 int is_unary_operator(ast_node root){
   if(root->node_type == OP_NEG_N ||
      root->node_type == OP_NOT_N ||
