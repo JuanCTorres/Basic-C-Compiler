@@ -615,7 +615,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
 
 
 
-/*declaration of func and identifiers is already checked during build build_symbol_table
+/*declaration of func and identifiers is already checked during  build_symbol_table
 * so here, we just check for paramter inputs into functions
 */
 int check_function(ast_node root, symboltable_t *symtab) {
@@ -681,7 +681,9 @@ int check_function(ast_node root, symboltable_t *symtab) {
   return 0;
 }
 
-
+/*
+* calls check_return_helper()
+*/
 void check_return(ast_node root, symboltable_t *symtab) {
 
   ast_node funcnode = NULL;
@@ -691,7 +693,11 @@ void check_return(ast_node root, symboltable_t *symtab) {
 }
 
 
-
+/*
+* Checks that there is appropriate return for functions
+* Inserts an implicit return for void type functions
+* For every return statement, records to which function it returns to
+*/
 void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode) {
   ast_node child2;
 
@@ -710,7 +716,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         }
 
       // assert(child2 != NULL);
-        if(child2 == NULL && funcnode->return_type == INT_TYPE_N) { //child2 is null is the func is empty
+        if(child2 == NULL && funcnode->return_type == INT_TYPE_N) { //child2 is null when the func is empty
           returnError = 1;
           fprintf(stderr, "Error: Returning wrong type for function %s declared at line %d\n", funcnode->value_string, funcnode->line_declared);
         }
@@ -721,12 +727,13 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
             fprintf(stderr, "line: %d | Error: No return statement in function %s\n", funcnode->line_num, funcnode->value_string);
           }
           else {
-            child2->right_sibling = create_ast_node(RETURN_N);
+            child2->right_sibling = create_ast_node(RETURN_N); //insert implicit return for void functions
             child2->right_sibling->return_type = VOID_TYPE_N;
             // fprintf(stderr, "\nIMPLICIT RETURN\n");
           }
         }
         else if( (child2->node_type == RETURN_N) && (funcnode->return_type == INT_TYPE_N) ) {
+          //fprintf(stderr, "detected return! and int main\n");
           if(child2->left_child == NULL) {
 
               returnError = 1;
@@ -741,6 +748,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           }
         }
         else if( (child2->node_type == RETURN_N) && (funcnode->return_type == VOID_TYPE_N) ) {
+          //fprintf(stderr, "detected return! and void main\n");
           if(child2->left_child != NULL) { //returning something
             returnError = 1;
             fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);

@@ -112,7 +112,7 @@ printf "Result of test done to parser.\n\n" >> "${file}"
 printf "test8.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser < ./testinputs/test7.c >> "${file}" 2>&1
+./parser < ./testinputs/test8.c >> "${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test8.c finished.\n" >> "${file}"
