@@ -33,6 +33,7 @@ parser_driver.o : parser_driver.c
 clean :
 	rm -f parser lex.yy.o parser.tab.o parser_driver.o ast.o \
 	parser.tab.h parser.tab.c lex.yy.c *~ parser.output symtab.o
+	rm -rf *.dSYM
 
 depend :
 	makedepend -- $(CFLAGS) -- parser_driver.c
