@@ -1,0 +1,106 @@
+Result of test done to parser.
+
+test5.c BEGIN.
+===========================================================
+
+line: 26 | Error: Number of parameters to function myfunc does not match the declaration at line 1
+
+WARNING: There were function errors. Data structure may be ill-formed.
+
+line: 1 | Error: No return statement in function myfunc
+line: 9 | Error: No return statement in function main
+
+WARNING: There were return errors. Data structure may be ill-formed.
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (2 params: VAR_INT  VAR_INT )
+  FUNC_INT myfunc (1 params: VAR_INT )
+  (1-0) contains:
+    VAR_INT b
+    VAR_INT g
+    (2-0) contains:
+      VAR_INT c
+  (1-1) contains:
+    VAR_INT uu
+    VAR_INT i
+    VAR_INT ww
+    (2-1) contains:
+      VAR_INT a
+    (2-2) contains:
+      VAR_INT z
+    (2-3) contains:
+      VAR_INT y
+      (3-0) contains:
+        VAR_INT yy
+
+
+ROOT 
+  FUNC_DECLARATION myfunc  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS 
+      ID g [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID b [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+      STATEMENT_LIST 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            ID c [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+          STATEMENT_LIST 
+  FUNC_DECLARATION main  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    FORMAL_PARAMS 
+      ID uu [scope (1,1) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+      ID ww [scope (1,1) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    SEQ 
+      LOCAL_DECLARATIONS 
+        ID i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST 
+        FOR 
+          = (type: INT_TYPE) 
+            ID i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            INT_LITERAL 4(type: INT_TYPE) 
+          < (type: INT_TYPE) 
+            ID i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            INT_LITERAL 4(type: INT_TYPE) 
+          ++ (type: INT_TYPE) 
+            ID i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          SEQ 
+            LOCAL_DECLARATIONS 
+              = (type: INT_TYPE) 
+                ID a [scope (2,1) <- (1,1)] declared at line 12 (type: INT_TYPE) 
+                INT_LITERAL 3(type: INT_TYPE) 
+            STATEMENT_LIST 
+        = (type: INT_TYPE) 
+          ID i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          INT_LITERAL 3(type: INT_TYPE) 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            = (type: INT_TYPE) 
+              ID z [scope (2,2) <- (1,1)] declared at line 16 (type: INT_TYPE) 
+              INT_LITERAL 3(type: INT_TYPE) 
+          STATEMENT_LIST 
+        SEQ 
+          LOCAL_DECLARATIONS 
+            = (type: INT_TYPE) 
+              ID y [scope (2,3) <- (1,1)] declared at line 19 (type: INT_TYPE) 
+              INT_LITERAL 5(type: INT_TYPE) 
+          STATEMENT_LIST 
+            = (type: INT_TYPE) 
+              ID y [scope (2,3) <- (1,1)] declared at line 19 (type: INT_TYPE) 
+              INT_LITERAL 4(type: INT_TYPE) 
+            SEQ 
+              LOCAL_DECLARATIONS 
+                = (type: INT_TYPE) 
+                  ID yy [scope (3,0) <- (2,3)] declared at line 22 (type: INT_TYPE) 
+                  INT_LITERAL 2(type: INT_TYPE) 
+              STATEMENT_LIST 
+                = (type: INT_TYPE) 
+                  ID yy [scope (3,0) <- (2,3)] declared at line 22 (type: INT_TYPE) 
+                  INT_LITERAL 123(type: INT_TYPE) 
+        CALL 
+          FUNCTION myfunc  (0 params:)[scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+
+
+===========================================================
+test5.c finished.
