@@ -27,7 +27,8 @@ typedef enum {
   VAR_INT_T,
   VAR_ARRAY_INT_T,
   FUNC_INT_T,
-  FUNC_VOID_T
+  FUNC_VOID_T,
+  STRING_T
 } decl_type;
 
 typedef struct {
@@ -43,6 +44,7 @@ static val_name_pair_2 decl_table[] = {
   { VAR_ARRAY_INT_T, "VAR_ARRAY_INT"},
   { FUNC_INT_T, "FUNC_INT" },
   { FUNC_VOID_T, "FUNC_VOID"},
+  { STRING_T, "STRING"},
   { 0, NULL}
 };
 
@@ -51,7 +53,8 @@ static val_name_pair_2 decl_table[] = {
 
 
 typedef struct symnode {
-  char *name;	                    /* name in this symnode */
+  char *name;	                /* name in this symnode */
+  int num_val;
   decl_type type;
   struct symnode  *next;	    /* next symnode in list */
   struct symhashtable *parent;
@@ -84,7 +87,7 @@ typedef struct symhashtable {
 
 /* Symbol table for all levels of scope. */
 typedef struct {
-  symhashtable_t *root, *leaf;
+  symhashtable_t *root, *leaf, *literal_collection;
 
 } symboltable_t;
 
@@ -160,13 +163,17 @@ void check_return(ast_node root, symboltable_t *symtab);
 
 /*Checks that there is appropriate return for functions
 * Inserts an implicit return for void type functions
-* For every return statement, records to which function it returns to 
+* For every return statement, records to which function it returns to
 */
 void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode);
 
 
 void insert_implicit_return(ast_node root, symboltable_t *symtab);
 
-/* returns appropriate sibling number */
+/* Returns appropriate sibling number */
 int getSibling(int level);
+
+/* Assumes a previous traversal confirmed variables are correctly declared */
+void collect_literals(ast_node root, symboltable_t *symtab);
+
 #endif

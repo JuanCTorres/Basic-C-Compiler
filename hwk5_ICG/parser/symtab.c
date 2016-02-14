@@ -17,6 +17,7 @@
 #define NOHASHSLOT -1
 #define DELTA 10
 
+
 extern int symtabError;
 extern int typeError;
 extern int returnError;
@@ -27,6 +28,8 @@ static int *siblings;
 static unsigned arraylen = 0;
 
 static const int HASHSIZE = 211;
+//static const int MAXINTSIZE = 4;  // for now
+static const int DEFAULTSTRSIZE = 100;
 
 /* Create an empty symbol table. */
  symboltable_t  *create_symboltable() {
@@ -37,6 +40,10 @@ static const int HASHSIZE = 211;
   assert(hashtable != NULL);
   hashtable->level = 0;
   hashtable->name = "0";
+
+  symhashtable_t *collection = create_symhashtable(HASHSIZE);
+  assert(collection != NULL);
+  symtab->literal_collection = collection;
 
   symtab->root = hashtable;
   symtab->leaf = hashtable;
@@ -73,7 +80,7 @@ void set_node_name(symnode_t *node, char *name) {
 /* Create an empty symhashtable and return a pointer to it.  The
    parameter entries gives the initial size of the table. */
 symhashtable_t *create_symhashtable(int entries) {
-  symhashtable_t *hashtable = calloc(sizeof(symhashtable_t),1);
+  symhashtable_t *hashtable = calloc(sizeof(symhashtable_t), 1);
   assert(hashtable);
   hashtable->size = entries;
   hashtable->table = calloc(entries, sizeof(symnode_t *));
@@ -121,7 +128,8 @@ symhashtable_t *create_symhashtable(int entries) {
    already present. Return*/
   symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, ast_node astnode) {
 
-    char *name = astnode->value_string;
+    char* name = astnode->value_string;
+
     assert(hashtable);
 
     int slot = hashPJW(name, hashtable->size);
@@ -132,8 +140,17 @@ symhashtable_t *create_symhashtable(int entries) {
     if (node == NULL) {
 
       node = create_symnode(name, hashtable);
+
       node->abnode = astnode;
       astnode->snode = node;
+
+      if(astnode->node_type == INT_LITERAL_N){
+        node->num_val = astnode->value_int;
+      }
+
+      if(astnode->node_type == STRING_LITERAL_N){
+        node->type = STRING_T;
+      }
 
       if(astnode->node_type == FUNC_DECLARATION_N) {
       //printf("FUNC_DEC detected!");
@@ -493,6 +510,9 @@ void pretty_print(symhashtable_t *root, int depth) {
         }
           printf(")");
       }
+      if(node->type == VAR_INT_T){
+        printf(" (val: %d)", node->num_val);
+      }
 
         printf("\n");
       }
@@ -809,6 +829,83 @@ void infer_type(ast_node root){
   }
 }
 
+
+void collect_literals(ast_node root, symboltable_t *symtab){
+
+  ast_node child;
+  symnode_t *node;
+  symhashtable_t *collection = symtab->literal_collection;
+  assert(collection != NULL);
+  char* name;
+  int slot = 0;
+
+  /* Recursively call the function to traverse the tree in a preorder way */
+  for(child = root->left_child; child != NULL; child = child->right_sibling){
+    collect_literals(child, symtab);
+  }
+
+  switch (root->node_type) {
+    case STRING_LITERAL_N:
+      name = root->value_string;
+
+      //symhashtable_t *hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+
+      //symnode_t *node = lookup_symhashtable(hash, name, NOHASHSLOT);
+
+      // Should be true since otherwise we would have caught a variable not being
+      // declared in a previous step.
+      //assert(node != NULL);
+
+
+
+      // Calculate slot for this node, try to find the current node in the symbol table
+      slot = hashPJW(name, collection->size);
+      node = lookup_symhashtable(collection, name, slot);
+
+      if(node == NULL){
+        insert_into_symhashtable(collection, root);
+      }
+      //insert_into_symhashtable(collection, name, root);
+
+      // if(node == NULL){     /* Literal not in collection. Add it. */
+      //   insert_into_symhashtable(collection, name, root);
+      // } else{   /* There is a node in the collection with the same name. Only
+      //              add root to collection if scopes are different */
+      //   //if(node->abnode->curr_level != root->curr_level ||
+      //   //   node->abnode->curr_sibling != root->curr_sibling)
+      //   insert_into_symhashtable(collection, name, root); // won't insert w/ same hash
+      // }
+      break;
+
+    /* Need to hash the value differently so as to not to mistake strings and
+    ints, (e.g. 1 vs "1") */
+    case INT_LITERAL_N:
+      //name = calloc(1, DEFAULTSTRSIZE);
+      name = calloc(DEFAULTSTRSIZE, sizeof(char));
+      //fprintf(stderr, "SIZE OF NAME IS %lu\n", sizeof(name));
+      sprintf(name, "__%d", root->value_int);
+      root->value_string = strdup(name);
+
+      //fprintf(stderr, "JUST ASSIGNED %s, strlen %lu\n", name, strlen(name));
+      //fprintf(stderr, "Collection size is %d", collection->size);
+
+      slot = hashPJW(name, collection->size);
+
+      node = lookup_symhashtable(collection, name, slot);
+
+      if(node == NULL){
+        fprintf(stderr, "NODE NOT FOUND\n");
+        insert_into_symhashtable(collection, root);
+      }
+      break;
+
+    default:
+      break;
+  }
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 /* Returns 1 is the root is a binary operator, depending on its node_type */
 int is_binary_operator(ast_node root){
