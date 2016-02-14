@@ -1,0 +1,514 @@
+Result of test done to parser.
+
+test1.c BEGIN.
+===========================================================
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  (1-0) contains:
+    VAR_ARRAY_INT dd
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    VAR_INT d
+    VAR_INT e
+    VAR_INT f
+    VAR_INT h
+    VAR_INT i
+    VAR_ARRAY_INT cc
+    (2-0) contains:
+      VAR_INT zz
+    (2-1) contains:
+      VAR_INT tt
+      VAR_ARRAY_INT uu
+    (2-2) contains:
+      VAR_INT dsa
+      VAR_INT asd
+    (2-3) contains:
+      VAR_INT x
+    (2-4) contains:
+      VAR_INT y
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+    SEQ (uid: N3) 
+      LOCAL_DECLARATIONS (uid: N4) 
+        ID (uid: N5) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        ID (uid: N7) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        ID (uid: N8) d [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        ID (uid: N9) e [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        ID (uid: N10) f [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        = (uid: N11) (type: INT_TYPE) 
+          ID (uid: N12) h [scope (1,0) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          INT_LITERAL (uid: N13) 2(type: INT_TYPE) 
+        = (uid: N14) (type: INT_TYPE) 
+          ID (uid: N15) i [scope (1,0) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          INT_LITERAL (uid: N16) 3(type: INT_TYPE) 
+        ARRAY_TYPE (uid: N17) cc [scope (1,0) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+          INT_LITERAL (uid: N18) 12(type: INT_TYPE) 
+        ARRAY_TYPE (uid: N19) dd [scope (1,0) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+          INT_LITERAL (uid: N20) 5(type: INT_TYPE) 
+      STATEMENT_LIST (uid: N21) 
+        = (uid: N22) (type: INT_TYPE) 
+          ARRAY_TYPE (uid: N23) cc [scope (1,0) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+            * (uid: N24) (type: INT_TYPE) 
+              ID (uid: N25) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+              ID (uid: N26) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (uid: N27) (type: INT_TYPE) 
+            ID (uid: N28) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N29) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        PRINT (uid: N30) 
+          STRING_LITERAL (uid: N31) test basics!\n 
+        READ (uid: N32) 
+          ID (uid: N33) f [scope (1,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+        = (uid: N34) (type: INT_TYPE) 
+          ID (uid: N35) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N36) (type: INT_TYPE) 
+            INT_LITERAL (uid: N37) 1(type: INT_TYPE) 
+            ID (uid: N38) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N39) (type: INT_TYPE) 
+          ID (uid: N40) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          + (uid: N41) (type: INT_TYPE) 
+            ID (uid: N42) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL (uid: N43) 1(type: INT_TYPE) 
+        = (uid: N44) (type: INT_TYPE) 
+          ID (uid: N45) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N46) (type: INT_TYPE) 
+            INT_LITERAL (uid: N47) 5(type: INT_TYPE) 
+            INT_LITERAL (uid: N48) 5(type: INT_TYPE) 
+        = (uid: N49) (type: INT_TYPE) 
+          ID (uid: N50) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (uid: N51) (type: INT_TYPE) 
+            INT_LITERAL (uid: N52) 1(type: INT_TYPE) 
+            INT_LITERAL (uid: N53) -6(type: INT_TYPE) 
+        = (uid: N54) (type: INT_TYPE) 
+          ID (uid: N55) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N56) (type: INT_TYPE) 
+            INT_LITERAL (uid: N57) -2(type: INT_TYPE) 
+            INT_LITERAL (uid: N58) 9(type: INT_TYPE) 
+        = (uid: N59) (type: INT_TYPE) 
+          ID (uid: N60) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          + (uid: N61) (type: INT_TYPE) 
+            INT_LITERAL (uid: N62) 1(type: INT_TYPE) 
+            INT_LITERAL (uid: N63) 7(type: INT_TYPE) 
+        = (uid: N64) (type: INT_TYPE) 
+          ID (uid: N65) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N66) (type: INT_TYPE) 
+            INT_LITERAL (uid: N67) 1(type: INT_TYPE) 
+            INT_LITERAL (uid: N68) -10(type: INT_TYPE) 
+        = (uid: N69) (type: INT_TYPE) 
+          ID (uid: N70) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N71) (type: INT_TYPE) 
+            INT_LITERAL (uid: N72) 22(type: INT_TYPE) 
+            INT_LITERAL (uid: N73) -88(type: INT_TYPE) 
+        = (uid: N74) (type: INT_TYPE) 
+          ID (uid: N75) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (uid: N76) (type: INT_TYPE) 
+            ID (uid: N77) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            - (uid: N78) (type: INT_TYPE) 
+              ID (uid: N79) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N80) (type: INT_TYPE) 
+          ID (uid: N81) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          + (uid: N82) (type: INT_TYPE) 
+            ID (uid: N83) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N84) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N85) (type: INT_TYPE) 
+          ID (uid: N86) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N87) (type: INT_TYPE) 
+            ID (uid: N88) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N89) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N90) (type: INT_TYPE) 
+          ID (uid: N91) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          * (uid: N92) (type: INT_TYPE) 
+            ID (uid: N93) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N94) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N95) (type: INT_TYPE) 
+          ID (uid: N96) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          / (uid: N97) (type: INT_TYPE) 
+            ID (uid: N98) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N99) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N100) (type: INT_TYPE) 
+          ID (uid: N101) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          % (uid: N102) (type: INT_TYPE) 
+            ID (uid: N103) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N104) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N105) (type: INT_TYPE) 
+          ID (uid: N106) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          < (uid: N107) (type: INT_TYPE) 
+            ID (uid: N108) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N109) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N110) (type: INT_TYPE) 
+          ID (uid: N111) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          <= (uid: N112) (type: INT_TYPE) 
+            ID (uid: N113) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N114) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N115) (type: INT_TYPE) 
+          ID (uid: N116) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          > (uid: N117) (type: INT_TYPE) 
+            ID (uid: N118) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N119) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N120) (type: INT_TYPE) 
+          ID (uid: N121) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          >= (uid: N122) (type: INT_TYPE) 
+            ID (uid: N123) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N124) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N125) (type: INT_TYPE) 
+          ID (uid: N126) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          == (uid: N127) (type: INT_TYPE) 
+            ID (uid: N128) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N129) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N130) (type: INT_TYPE) 
+          ID (uid: N131) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          != (uid: N132) (type: INT_TYPE) 
+            ID (uid: N133) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N134) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N135) (type: INT_TYPE) 
+          ID (uid: N136) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          && (uid: N137) (type: INT_TYPE) 
+            ID (uid: N138) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N139) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N140) (type: INT_TYPE) 
+          ID (uid: N141) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          || (uid: N142) (type: INT_TYPE) 
+            ID (uid: N143) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N144) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N145) (type: INT_TYPE) 
+          ID (uid: N146) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          ! (uid: N147) (type: INT_TYPE) 
+            ID (uid: N148) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N149) (type: INT_TYPE) 
+          ID (uid: N150) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          - (uid: N151) (type: INT_TYPE) 
+            ID (uid: N152) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N153) (type: INT_TYPE) 
+          ID (uid: N154) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          ++ (uid: N155) (type: INT_TYPE) 
+            ID (uid: N156) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N157) (type: INT_TYPE) 
+          ID (uid: N158) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          -- (uid: N159) (type: INT_TYPE) 
+            ID (uid: N160) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+        = (uid: N161) (type: INT_TYPE) 
+          ID (uid: N162) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          % (uid: N163) (type: INT_TYPE) 
+            ID (uid: N164) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL (uid: N165) 5(type: INT_TYPE) 
+        = (uid: N166) (type: INT_TYPE) 
+          ID (uid: N167) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          INT_LITERAL (uid: N168) -23(type: INT_TYPE) 
+        FOR (uid: N169) 
+          = (uid: N170) (type: INT_TYPE) 
+            ID (uid: N171) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL (uid: N172) 100(type: INT_TYPE) 
+          < (uid: N173) (type: INT_TYPE) 
+            ID (uid: N174) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            INT_LITERAL (uid: N175) 200(type: INT_TYPE) 
+          ++ (uid: N176) (type: INT_TYPE) 
+            ID (uid: N177) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          SEQ (uid: N178) 
+            LOCAL_DECLARATIONS (uid: N179) 
+              = (uid: N180) (type: INT_TYPE) 
+                ID (uid: N181) zz [scope (2,0) <- (1,0)] declared at line 57 (type: INT_TYPE) 
+                INT_LITERAL (uid: N182) -100(type: INT_TYPE) 
+            STATEMENT_LIST (uid: N183) 
+              + (uid: N184) (type: INT_TYPE) 
+                ID (uid: N185) a [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
+                ID (uid: N186) b [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
+              = (uid: N187) (type: INT_TYPE) 
+                ID (uid: N188) c [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
+                + (uid: N189) (type: INT_TYPE) 
+                  ID (uid: N190) e [scope (2,0) <- (1,0)] declared at line 9 (type: INT_TYPE) 
+                  ID (uid: N191) f [scope (2,0) <- (1,0)] declared at line 9 (type: INT_TYPE) 
+        WHILE (uid: N192) 
+          == (uid: N193) (type: INT_TYPE) 
+            - (uid: N194) (type: INT_TYPE) 
+              / (uid: N195) (type: INT_TYPE) 
+                ID (uid: N196) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+                INT_LITERAL (uid: N197) 5(type: INT_TYPE) 
+              + (uid: N198) (type: INT_TYPE) 
+                INT_LITERAL (uid: N199) -3(type: INT_TYPE) 
+                INT_LITERAL (uid: N200) -8(type: INT_TYPE) 
+            INT_LITERAL (uid: N201) 100(type: INT_TYPE) 
+          SEQ (uid: N202) 
+            LOCAL_DECLARATIONS (uid: N203) 
+              ID (uid: N204) tt [scope (2,1) <- (1,0)] declared at line 63 (type: INT_TYPE) 
+              ARRAY_TYPE (uid: N205) uu [scope (2,1) <- (1,0)] declared at line 63 (type: INT_TYPE) 
+                INT_LITERAL (uid: N206) 10(type: INT_TYPE) 
+            STATEMENT_LIST (uid: N207) 
+              PRINT (uid: N208) 
+                * (uid: N209) (type: INT_TYPE) 
+                  INT_LITERAL (uid: N210) 12(type: INT_TYPE) 
+                  INT_LITERAL (uid: N211) 21(type: INT_TYPE) 
+        DO_WHILE (uid: N212) 
+          INT_LITERAL (uid: N213) 1(type: INT_TYPE) 
+          SEQ (uid: N214) 
+            LOCAL_DECLARATIONS (uid: N215) 
+              ID (uid: N216) asd [scope (2,2) <- (1,0)] declared at line 69 (type: INT_TYPE) 
+              ID (uid: N217) dsa [scope (2,2) <- (1,0)] declared at line 70 (type: INT_TYPE) 
+            STATEMENT_LIST (uid: N218) 
+              = (uid: N219) (type: INT_TYPE) 
+                ID (uid: N220) asd [scope (2,2) <- (1,0)] declared at line 69 (type: INT_TYPE) 
+                ID (uid: N221) dsa [scope (2,2) <- (1,0)] declared at line 70 (type: INT_TYPE) 
+        IF_ELSE_STMT (uid: N222) 
+          == (uid: N223) (type: INT_TYPE) 
+            * (uid: N224) (type: INT_TYPE) 
+              ID (uid: N225) a [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+              ID (uid: N226) b [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+            ID (uid: N227) c [scope (1,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+          SEQ (uid: N228) 
+            LOCAL_DECLARATIONS (uid: N229) 
+              ID (uid: N230) x [scope (2,3) <- (1,0)] declared at line 75 (type: INT_TYPE) 
+            STATEMENT_LIST (uid: N231) 
+          SEQ (uid: N232) 
+            LOCAL_DECLARATIONS (uid: N233) 
+              ID (uid: N234) y [scope (2,4) <- (1,0)] declared at line 78 (type: INT_TYPE) 
+            STATEMENT_LIST (uid: N235) 
+        RETURN (uid: N236) [scope (1,0) <- (0,0)]return to main at line 1 
+          INT_LITERAL (uid: N237) 0(type: INT_TYPE) 
+FORMAL_PARAMS (uid: N2) 
+ID (uid: N5) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N7) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N8) d [scope (1,0) <- (0,0)] declared at line 9 
+ID (uid: N9) e [scope (1,0) <- (0,0)] declared at line 9 
+ID (uid: N10) f [scope (1,0) <- (0,0)] declared at line 9 
+ID (uid: N12) h [scope (1,0) <- (0,0)] declared at line 10 
+INT_LITERAL (uid: N13) 2
+= (uid: N11) 
+ID (uid: N15) i [scope (1,0) <- (0,0)] declared at line 10 
+INT_LITERAL (uid: N16) 3
+= (uid: N14) 
+INT_LITERAL (uid: N18) 12
+ARRAY_TYPE (uid: N17) cc [scope (1,0) <- (0,0)] declared at line 11 
+INT_LITERAL (uid: N20) 5
+ARRAY_TYPE (uid: N19) dd [scope (1,0) <- (0,0)] declared at line 11 
+LOCAL_DECLARATIONS (uid: N4) 
+ID (uid: N25) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N26) b [scope (1,0) <- (0,0)] declared at line 8 
+* (uid: N24) 
+ARRAY_TYPE (uid: N23) cc [scope (1,0) <- (0,0)] declared at line 11 
+ID (uid: N28) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N29) b [scope (1,0) <- (0,0)] declared at line 8 
+* (uid: N27) 
+= (uid: N22) 
+STRING_LITERAL (uid: N31) test basics!\n 
+PRINT (uid: N30) 
+ID (uid: N33) f [scope (1,0) <- (0,0)] declared at line 9 
+READ (uid: N32) 
+ID (uid: N35) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N37) 1
+ID (uid: N38) b [scope (1,0) <- (0,0)] declared at line 8 
+- (uid: N36) 
+= (uid: N34) 
+ID (uid: N40) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N42) b [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N43) 1
++ (uid: N41) 
+= (uid: N39) 
+ID (uid: N45) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N47) 5
+INT_LITERAL (uid: N48) 5
+- (uid: N46) 
+= (uid: N44) 
+ID (uid: N50) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N52) 1
+INT_LITERAL (uid: N53) -6
+* (uid: N51) 
+= (uid: N49) 
+ID (uid: N55) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N57) -2
+INT_LITERAL (uid: N58) 9
+- (uid: N56) 
+= (uid: N54) 
+ID (uid: N60) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N62) 1
+INT_LITERAL (uid: N63) 7
++ (uid: N61) 
+= (uid: N59) 
+ID (uid: N65) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N67) 1
+INT_LITERAL (uid: N68) -10
+- (uid: N66) 
+= (uid: N64) 
+ID (uid: N70) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N72) 22
+INT_LITERAL (uid: N73) -88
+- (uid: N71) 
+= (uid: N69) 
+ID (uid: N75) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N77) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N79) b [scope (1,0) <- (0,0)] declared at line 8 
+- (uid: N78) 
+* (uid: N76) 
+= (uid: N74) 
+ID (uid: N81) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N83) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N84) b [scope (1,0) <- (0,0)] declared at line 8 
++ (uid: N82) 
+= (uid: N80) 
+ID (uid: N86) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N88) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N89) b [scope (1,0) <- (0,0)] declared at line 8 
+- (uid: N87) 
+= (uid: N85) 
+ID (uid: N91) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N93) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N94) b [scope (1,0) <- (0,0)] declared at line 8 
+* (uid: N92) 
+= (uid: N90) 
+ID (uid: N96) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N98) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N99) b [scope (1,0) <- (0,0)] declared at line 8 
+/ (uid: N97) 
+= (uid: N95) 
+ID (uid: N101) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N103) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N104) b [scope (1,0) <- (0,0)] declared at line 8 
+% (uid: N102) 
+= (uid: N100) 
+ID (uid: N106) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N108) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N109) b [scope (1,0) <- (0,0)] declared at line 8 
+< (uid: N107) 
+= (uid: N105) 
+ID (uid: N111) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N113) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N114) b [scope (1,0) <- (0,0)] declared at line 8 
+<= (uid: N112) 
+= (uid: N110) 
+ID (uid: N116) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N118) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N119) b [scope (1,0) <- (0,0)] declared at line 8 
+> (uid: N117) 
+= (uid: N115) 
+ID (uid: N121) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N123) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N124) b [scope (1,0) <- (0,0)] declared at line 8 
+>= (uid: N122) 
+= (uid: N120) 
+ID (uid: N126) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N128) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N129) b [scope (1,0) <- (0,0)] declared at line 8 
+== (uid: N127) 
+= (uid: N125) 
+ID (uid: N131) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N133) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N134) b [scope (1,0) <- (0,0)] declared at line 8 
+!= (uid: N132) 
+= (uid: N130) 
+ID (uid: N136) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N138) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N139) b [scope (1,0) <- (0,0)] declared at line 8 
+&& (uid: N137) 
+= (uid: N135) 
+ID (uid: N141) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N143) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N144) b [scope (1,0) <- (0,0)] declared at line 8 
+|| (uid: N142) 
+= (uid: N140) 
+ID (uid: N146) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N148) b [scope (1,0) <- (0,0)] declared at line 8 
+! (uid: N147) 
+= (uid: N145) 
+ID (uid: N150) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N152) b [scope (1,0) <- (0,0)] declared at line 8 
+- (uid: N151) 
+= (uid: N149) 
+ID (uid: N154) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N156) b [scope (1,0) <- (0,0)] declared at line 8 
+++ (uid: N155) 
+= (uid: N153) 
+ID (uid: N158) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N160) b [scope (1,0) <- (0,0)] declared at line 8 
+-- (uid: N159) 
+= (uid: N157) 
+ID (uid: N162) c [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N164) a [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N165) 5
+% (uid: N163) 
+= (uid: N161) 
+ID (uid: N167) c [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N168) -23
+= (uid: N166) 
+ID (uid: N171) a [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N172) 100
+= (uid: N170) 
+ID (uid: N174) a [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N175) 200
+< (uid: N173) 
+ID (uid: N177) a [scope (1,0) <- (0,0)] declared at line 8 
+++ (uid: N176) 
+ID (uid: N181) zz [scope (2,0) <- (1,0)] declared at line 57 
+INT_LITERAL (uid: N182) -100
+= (uid: N180) 
+LOCAL_DECLARATIONS (uid: N179) 
+ID (uid: N185) a [scope (2,0) <- (1,0)] declared at line 8 
+ID (uid: N186) b [scope (2,0) <- (1,0)] declared at line 8 
++ (uid: N184) 
+ID (uid: N188) c [scope (2,0) <- (1,0)] declared at line 8 
+ID (uid: N190) e [scope (2,0) <- (1,0)] declared at line 9 
+ID (uid: N191) f [scope (2,0) <- (1,0)] declared at line 9 
++ (uid: N189) 
+= (uid: N187) 
+STATEMENT_LIST (uid: N183) 
+SEQ (uid: N178) 
+FOR (uid: N169) 
+ID (uid: N196) a [scope (1,0) <- (0,0)] declared at line 8 
+INT_LITERAL (uid: N197) 5
+/ (uid: N195) 
+INT_LITERAL (uid: N199) -3
+INT_LITERAL (uid: N200) -8
++ (uid: N198) 
+- (uid: N194) 
+INT_LITERAL (uid: N201) 100
+== (uid: N193) 
+ID (uid: N204) tt [scope (2,1) <- (1,0)] declared at line 63 
+INT_LITERAL (uid: N206) 10
+ARRAY_TYPE (uid: N205) uu [scope (2,1) <- (1,0)] declared at line 63 
+LOCAL_DECLARATIONS (uid: N203) 
+INT_LITERAL (uid: N210) 12
+INT_LITERAL (uid: N211) 21
+* (uid: N209) 
+PRINT (uid: N208) 
+STATEMENT_LIST (uid: N207) 
+SEQ (uid: N202) 
+WHILE (uid: N192) 
+INT_LITERAL (uid: N213) 1
+ID (uid: N216) asd [scope (2,2) <- (1,0)] declared at line 69 
+ID (uid: N217) dsa [scope (2,2) <- (1,0)] declared at line 70 
+LOCAL_DECLARATIONS (uid: N215) 
+ID (uid: N220) asd [scope (2,2) <- (1,0)] declared at line 69 
+ID (uid: N221) dsa [scope (2,2) <- (1,0)] declared at line 70 
+= (uid: N219) 
+STATEMENT_LIST (uid: N218) 
+SEQ (uid: N214) 
+DO_WHILE (uid: N212) 
+ID (uid: N225) a [scope (1,0) <- (0,0)] declared at line 8 
+ID (uid: N226) b [scope (1,0) <- (0,0)] declared at line 8 
+* (uid: N224) 
+ID (uid: N227) c [scope (1,0) <- (0,0)] declared at line 8 
+== (uid: N223) 
+ID (uid: N230) x [scope (2,3) <- (1,0)] declared at line 75 
+LOCAL_DECLARATIONS (uid: N229) 
+STATEMENT_LIST (uid: N231) 
+SEQ (uid: N228) 
+ID (uid: N234) y [scope (2,4) <- (1,0)] declared at line 78 
+LOCAL_DECLARATIONS (uid: N233) 
+STATEMENT_LIST (uid: N235) 
+SEQ (uid: N232) 
+IF_ELSE_STMT (uid: N222) 
+INT_LITERAL (uid: N237) 0
+RETURN (uid: N236) [scope (1,0) <- (0,0)]return to main at line 1 
+STATEMENT_LIST (uid: N21) 
+SEQ (uid: N3) 
+FUNC_DECLARATION (uid: N1) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 
+ROOT (uid: N0) 
+
+
+===========================================================
+test1.c finished.

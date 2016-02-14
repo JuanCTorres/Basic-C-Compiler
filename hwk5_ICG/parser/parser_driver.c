@@ -18,6 +18,7 @@
 #include <assert.h>
 #include "symtab.h"
 #include "ast.h"
+#include "quad.h"
 
 
 ast_node root = NULL;
@@ -76,11 +77,20 @@ int main() {
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
 
+      		quad_type quad_array[1024*5];
+
+      		CG(root);
+
+
+
  		}
  	}
 
- 	else
+ 	else {
  		fprintf(stderr,"Error: NO root!\n");
+ 	}
+
+
 
  	return 0;
  }

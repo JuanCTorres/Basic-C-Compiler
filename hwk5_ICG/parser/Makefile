@@ -10,8 +10,8 @@ FLEXFLAGS = -ll
 .cc.o:
 	$(CC) $(CFLAGS) -c $<
 
-parser : lex.yy.o parser.tab.o parser_driver.o ast.o symtab.o 
-	$(CC) -o $@ $(CFLAGS) lex.yy.o parser.tab.o parser_driver.o ast.o symtab.o $(FLEXFLAGS)
+parser : lex.yy.o parser.tab.o parser_driver.o ast.o symtab.o quad.o
+	$(CC) -o $@ $(CFLAGS) lex.yy.o parser.tab.o parser_driver.o ast.o symtab.o quad.o $(FLEXFLAGS)
 
 lex.yy.o : lex.yy.c
 	$(CC) -c $(CFLAGS) $<
@@ -32,7 +32,8 @@ parser_driver.o : parser_driver.c
 
 clean :
 	rm -f parser lex.yy.o parser.tab.o parser_driver.o ast.o \
-	parser.tab.h parser.tab.c lex.yy.c *~ parser.output symtab.o
+	parser.tab.h parser.tab.c lex.yy.c *~ parser.output symtab.o \
+    quad.o
 	rm -rf *.dSYM
 
 depend :

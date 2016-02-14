@@ -119,6 +119,18 @@ printf "test8.c finished.\n" >> "${file}"
 
 
 
+file="./testoutputs/test9c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "test9.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser < ./testinputs/test9.c >>"${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "test9.c finished.\n" >>"${file}"
+
+
 
 
 file="./testoutputs/test.error.c.output.`date +"%a_%b_%d_%T_%Y"`"

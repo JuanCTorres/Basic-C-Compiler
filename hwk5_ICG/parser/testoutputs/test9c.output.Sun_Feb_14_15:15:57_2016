@@ -1,0 +1,89 @@
+Result of test done to parser.
+
+test9.c BEGIN.
+===========================================================
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  (1-0) contains:
+    VAR_INT a
+    VAR_INT b
+    VAR_INT c
+    VAR_INT d
+    VAR_INT e
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+    SEQ (uid: N3) 
+      LOCAL_DECLARATIONS (uid: N4) 
+        ID (uid: N5) a [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+        ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+        ID (uid: N7) c [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+        ID (uid: N8) d [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+        ID (uid: N9) e [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N10) 
+        = (uid: N11) (type: INT_TYPE) 
+          ID (uid: N12) b [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N13) 1(type: INT_TYPE) 
+        = (uid: N14) (type: INT_TYPE) 
+          ID (uid: N15) c [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N16) 2(type: INT_TYPE) 
+        = (uid: N17) (type: INT_TYPE) 
+          ID (uid: N18) d [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N19) 3(type: INT_TYPE) 
+        = (uid: N20) (type: INT_TYPE) 
+          ID (uid: N21) e [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N22) 4(type: INT_TYPE) 
+        = (uid: N23) (type: INT_TYPE) 
+          ID (uid: N24) a [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          + (uid: N25) (type: INT_TYPE) 
+            + (uid: N26) (type: INT_TYPE) 
+              + (uid: N27) (type: INT_TYPE) 
+                ID (uid: N28) b [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+                ID (uid: N29) c [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+              ID (uid: N30) d [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+            ID (uid: N31) e [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+        RETURN (uid: N32) [scope (1,0) <- (0,0)]return to main at line 2 
+          INT_LITERAL (uid: N33) 0(type: INT_TYPE) 
+FORMAL_PARAMS (uid: N2) 
+ID (uid: N5) a [scope (1,0) <- (0,0)] declared at line 4 
+ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 4 
+ID (uid: N7) c [scope (1,0) <- (0,0)] declared at line 4 
+ID (uid: N8) d [scope (1,0) <- (0,0)] declared at line 4 
+ID (uid: N9) e [scope (1,0) <- (0,0)] declared at line 4 
+LOCAL_DECLARATIONS (uid: N4) 
+ID (uid: N12) b [scope (1,0) <- (0,0)] declared at line 4 
+INT_LITERAL (uid: N13) 1
+= (uid: N11) 
+ID (uid: N15) c [scope (1,0) <- (0,0)] declared at line 4 
+INT_LITERAL (uid: N16) 2
+= (uid: N14) 
+ID (uid: N18) d [scope (1,0) <- (0,0)] declared at line 4 
+INT_LITERAL (uid: N19) 3
+= (uid: N17) 
+ID (uid: N21) e [scope (1,0) <- (0,0)] declared at line 4 
+INT_LITERAL (uid: N22) 4
+= (uid: N20) 
+ID (uid: N24) a [scope (1,0) <- (0,0)] declared at line 4 
+ID (uid: N28) b [scope (1,0) <- (0,0)] declared at line 4 
+ID (uid: N29) c [scope (1,0) <- (0,0)] declared at line 4 
++ (uid: N27) 
+ID (uid: N30) d [scope (1,0) <- (0,0)] declared at line 4 
++ (uid: N26) 
+ID (uid: N31) e [scope (1,0) <- (0,0)] declared at line 4 
++ (uid: N25) 
+= (uid: N23) 
+INT_LITERAL (uid: N33) 0
+RETURN (uid: N32) [scope (1,0) <- (0,0)]return to main at line 2 
+STATEMENT_LIST (uid: N10) 
+SEQ (uid: N3) 
+FUNC_DECLARATION (uid: N1) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 2 
+ROOT (uid: N0) 
+
+
+===========================================================
+test9.c finished.

@@ -1,5 +1,10 @@
- 
- 
+ #include "ast.h"
+
+
+
+#ifndef QUAD_H_
+#define QUAD_H_
+
  char* NewLabel(int node_num, char *text);
  
  
@@ -35,3 +40,9 @@
      temp_type src1;
      temp_type src2;
  } quad_type;
+
+
+void CG(ast_node root);
+
+
+#endif

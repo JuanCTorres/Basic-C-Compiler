@@ -1,0 +1,170 @@
+Result of test done to parser.
+
+test5.c BEGIN.
+===========================================================
+
+line: 26 | Error: Number of parameters to function myfunc does not match the declaration at line 1
+
+WARNING: There were function errors. Data structure may be ill-formed.
+
+line: 1 | Error: No return statement in function myfunc
+line: 9 | Error: No return statement in function main
+
+WARNING: There were return errors. Data structure may be ill-formed.
+
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (2 params: VAR_INT  VAR_INT )
+  FUNC_INT myfunc (1 params: VAR_INT )
+  (1-0) contains:
+    VAR_INT b
+    VAR_INT g
+    (2-0) contains:
+      VAR_INT c
+  (1-1) contains:
+    VAR_INT uu
+    VAR_INT i
+    VAR_INT ww
+    (2-1) contains:
+      VAR_INT a
+    (2-2) contains:
+      VAR_INT z
+    (2-3) contains:
+      VAR_INT y
+      (3-0) contains:
+        VAR_INT yy
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) myfunc  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+      ID (uid: N3) g [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    SEQ (uid: N4) 
+      LOCAL_DECLARATIONS (uid: N5) 
+        ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N7) 
+        SEQ (uid: N8) 
+          LOCAL_DECLARATIONS (uid: N9) 
+            ID (uid: N10) c [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+          STATEMENT_LIST (uid: N11) 
+  FUNC_DECLARATION (uid: N12) main  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N13) 
+      ID (uid: N14) uu [scope (1,1) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+      ID (uid: N15) ww [scope (1,1) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    SEQ (uid: N16) 
+      LOCAL_DECLARATIONS (uid: N17) 
+        ID (uid: N18) i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N19) 
+        FOR (uid: N20) 
+          = (uid: N21) (type: INT_TYPE) 
+            ID (uid: N22) i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            INT_LITERAL (uid: N23) 4(type: INT_TYPE) 
+          < (uid: N24) (type: INT_TYPE) 
+            ID (uid: N25) i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            INT_LITERAL (uid: N26) 4(type: INT_TYPE) 
+          ++ (uid: N27) (type: INT_TYPE) 
+            ID (uid: N28) i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          SEQ (uid: N29) 
+            LOCAL_DECLARATIONS (uid: N30) 
+              = (uid: N31) (type: INT_TYPE) 
+                ID (uid: N32) a [scope (2,1) <- (1,1)] declared at line 12 (type: INT_TYPE) 
+                INT_LITERAL (uid: N33) 3(type: INT_TYPE) 
+            STATEMENT_LIST (uid: N34) 
+        = (uid: N35) (type: INT_TYPE) 
+          ID (uid: N36) i [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          INT_LITERAL (uid: N37) 3(type: INT_TYPE) 
+        SEQ (uid: N38) 
+          LOCAL_DECLARATIONS (uid: N39) 
+            = (uid: N40) (type: INT_TYPE) 
+              ID (uid: N41) z [scope (2,2) <- (1,1)] declared at line 16 (type: INT_TYPE) 
+              INT_LITERAL (uid: N42) 3(type: INT_TYPE) 
+          STATEMENT_LIST (uid: N43) 
+        SEQ (uid: N44) 
+          LOCAL_DECLARATIONS (uid: N45) 
+            = (uid: N46) (type: INT_TYPE) 
+              ID (uid: N47) y [scope (2,3) <- (1,1)] declared at line 19 (type: INT_TYPE) 
+              INT_LITERAL (uid: N48) 5(type: INT_TYPE) 
+          STATEMENT_LIST (uid: N49) 
+            = (uid: N50) (type: INT_TYPE) 
+              ID (uid: N51) y [scope (2,3) <- (1,1)] declared at line 19 (type: INT_TYPE) 
+              INT_LITERAL (uid: N52) 4(type: INT_TYPE) 
+            SEQ (uid: N53) 
+              LOCAL_DECLARATIONS (uid: N54) 
+                = (uid: N55) (type: INT_TYPE) 
+                  ID (uid: N56) yy [scope (3,0) <- (2,3)] declared at line 22 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N57) 2(type: INT_TYPE) 
+              STATEMENT_LIST (uid: N58) 
+                = (uid: N59) (type: INT_TYPE) 
+                  ID (uid: N60) yy [scope (3,0) <- (2,3)] declared at line 22 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N61) 123(type: INT_TYPE) 
+        CALL (uid: N62) 
+          FUNCTION (uid: N63) myfunc  (0 params:)[scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+ID (uid: N3) g [scope (1,0) <- (0,0)] declared at line 1 
+FORMAL_PARAMS (uid: N2) 
+ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 2 
+LOCAL_DECLARATIONS (uid: N5) 
+ID (uid: N10) c [scope (2,0) <- (1,0)] declared at line 4 
+LOCAL_DECLARATIONS (uid: N9) 
+STATEMENT_LIST (uid: N11) 
+SEQ (uid: N8) 
+STATEMENT_LIST (uid: N7) 
+SEQ (uid: N4) 
+FUNC_DECLARATION (uid: N1) myfunc  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 
+ID (uid: N14) uu [scope (1,1) <- (0,0)] declared at line 9 
+ID (uid: N15) ww [scope (1,1) <- (0,0)] declared at line 9 
+FORMAL_PARAMS (uid: N13) 
+ID (uid: N18) i [scope (1,1) <- (0,0)] declared at line 10 
+LOCAL_DECLARATIONS (uid: N17) 
+ID (uid: N22) i [scope (1,1) <- (0,0)] declared at line 10 
+INT_LITERAL (uid: N23) 4
+= (uid: N21) 
+ID (uid: N25) i [scope (1,1) <- (0,0)] declared at line 10 
+INT_LITERAL (uid: N26) 4
+< (uid: N24) 
+ID (uid: N28) i [scope (1,1) <- (0,0)] declared at line 10 
+++ (uid: N27) 
+ID (uid: N32) a [scope (2,1) <- (1,1)] declared at line 12 
+INT_LITERAL (uid: N33) 3
+= (uid: N31) 
+LOCAL_DECLARATIONS (uid: N30) 
+STATEMENT_LIST (uid: N34) 
+SEQ (uid: N29) 
+FOR (uid: N20) 
+ID (uid: N36) i [scope (1,1) <- (0,0)] declared at line 10 
+INT_LITERAL (uid: N37) 3
+= (uid: N35) 
+ID (uid: N41) z [scope (2,2) <- (1,1)] declared at line 16 
+INT_LITERAL (uid: N42) 3
+= (uid: N40) 
+LOCAL_DECLARATIONS (uid: N39) 
+STATEMENT_LIST (uid: N43) 
+SEQ (uid: N38) 
+ID (uid: N47) y [scope (2,3) <- (1,1)] declared at line 19 
+INT_LITERAL (uid: N48) 5
+= (uid: N46) 
+LOCAL_DECLARATIONS (uid: N45) 
+ID (uid: N51) y [scope (2,3) <- (1,1)] declared at line 19 
+INT_LITERAL (uid: N52) 4
+= (uid: N50) 
+ID (uid: N56) yy [scope (3,0) <- (2,3)] declared at line 22 
+INT_LITERAL (uid: N57) 2
+= (uid: N55) 
+LOCAL_DECLARATIONS (uid: N54) 
+ID (uid: N60) yy [scope (3,0) <- (2,3)] declared at line 22 
+INT_LITERAL (uid: N61) 123
+= (uid: N59) 
+STATEMENT_LIST (uid: N58) 
+SEQ (uid: N53) 
+STATEMENT_LIST (uid: N49) 
+SEQ (uid: N44) 
+FUNCTION (uid: N63) myfunc  (0 params:)[scope (1,1) <- (0,0)] declared at line 1 
+CALL (uid: N62) 
+STATEMENT_LIST (uid: N19) 
+SEQ (uid: N16) 
+FUNC_DECLARATION (uid: N12) main  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 9 
+ROOT (uid: N0) 
+
+
+===========================================================
+test5.c finished.
