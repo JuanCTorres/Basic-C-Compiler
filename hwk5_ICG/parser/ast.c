@@ -38,7 +38,7 @@
 /* Create a node with a given token type and return a pointer to the
    node. */
  ast_node create_ast_node(ast_node_type node_type) {
-  ast_node new_node = calloc(1,sizeof(struct ast_node_struct));  // for zeros
+  ast_node new_node = calloc(1, sizeof(struct ast_node_struct));  // for zeros
   new_node->node_type = node_type;
   return new_node;
 }

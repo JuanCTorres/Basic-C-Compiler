@@ -52,6 +52,8 @@ int main() {
 
  		printf("\nPrint hashtables (level-sibno) according to their hierarchy\n");
  		pretty_print(symtab->root, 0);	//prints symbol table nicely
+
+
  		if(symtabError) {	//when we get var/func use without declaration, we cannot progress any further as we cannot build the sym table which later funcs depend on
  			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");
  		}
@@ -75,6 +77,12 @@ int main() {
       		print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
+
+      // Must come after the symbol table is built, as it relies on information
+      // stored there
+      collect_literals(root, symtab);
+
+      pretty_print(symtab->literal_collection, 0);
 
  		}
  	}
