@@ -62,7 +62,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     printf("  ");
 
   /* Print the node type. */
-  printf("%s (uid: %d) ", NODE_NAME(root->node_type), root->node_no);
+  printf("%s (uid: N%d) ", NODE_NAME(root->node_type), root->node_no);
 
 
 
