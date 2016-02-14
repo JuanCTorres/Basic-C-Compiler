@@ -144,6 +144,7 @@ struct ast_node_struct {
   int parent_level;
   int parent_sib;
   int line_declared; //line num of original declaration
+  int node_no;
   ast_node return_to;
 
 
@@ -166,6 +167,9 @@ the root of the subtree and the depth of the subtree root. */
 void print_ast(ast_node root, int depth, int lvl, int sublvl);
 
 void insert_scope_info(ast_node root, int curr_level, int curr_sib, int parent_level, int parent_sib);
+
+/* Assigns a unique identifier to every node in the ast */
+void label_nodes(ast_node root);
 
 
 #endif

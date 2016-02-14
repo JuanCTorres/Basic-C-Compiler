@@ -32,6 +32,8 @@
  static int *siblings;
  static unsigned arraylen = 0;
 
+ int curr_number = 0;
+
 
 /* Create a node with a given token type and return a pointer to the
    node. */
@@ -39,6 +41,15 @@
   ast_node new_node = calloc(1,sizeof(struct ast_node_struct));  // for zeros
   new_node->node_type = node_type;
   return new_node;
+}
+
+void label_nodes(ast_node root){
+  root->node_no = curr_number++;
+  ast_node child;
+
+  for(child = root->left_child; child != NULL; child = child->right_sibling){
+    label_nodes(child);
+  }
 }
 
 
@@ -51,8 +62,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
     printf("  ");
 
   /* Print the node type. */
-  printf("%s ", NODE_NAME(root->node_type));
-  
+  printf("%s (uid: %d) ", NODE_NAME(root->node_type), root->node_no);
+
 
 
   /* Print attributes specific to node types. */
@@ -65,7 +76,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       // lvl++;
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
-      
+
       break;
 
     case ARRAY_TYPE_N:

@@ -22,6 +22,7 @@
 
 ast_node root = NULL;
 
+/* Globals, externs*/
 extern int yyparse();
 extern int yydebug;
 int parseError = 0;
@@ -29,6 +30,7 @@ int symtabError = 0;
 int typeError = 0;
 int returnError = 0;
 int funcError = 0;
+
 
 int main() {
  int noRoot = 0;		/* 0 means we will have a root */
@@ -43,6 +45,7 @@ int main() {
  	// printf("\nNo syntatical errors detected.\n\n");
  	//}
  	if (!noRoot) {
+    label_nodes(root);
 
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
@@ -56,7 +59,7 @@ int main() {
 	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table, records all variable types by using symbol table
 
 	 		printf("\n\n");
- 			
+
 			infer_type(root); //must come after record_var_type_in_ast, infers types for OP and assign
 			if(typeError ) {
 				fprintf(stderr, "\nWARNING: There were type inconsistency errors. Data structure may be ill-formed.\n\n");
@@ -65,7 +68,7 @@ int main() {
 			if(funcError) {
 				fprintf(stderr, "\nWARNING: There were function errors. Data structure may be ill-formed.\n\n");
 			}
-			check_return(root, symtab); //must be after infer, checks whether the return is a valid one for a function. implicit inserts return at the end of void 
+			check_return(root, symtab); //must be after infer, checks whether the return is a valid one for a function. implicit inserts return at the end of void
 			if(returnError) {
 				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
 			}
