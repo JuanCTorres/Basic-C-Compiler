@@ -10,7 +10,10 @@ int temp_counter = 0;
 int quad_index = 0;
 extern quad_type *quad_array[1024*5];
 
-/* a label is a symnode with the label name, it is inserted into specified hashtable */
+/* a label is a symnode with the label name, it is inserted into specified hashtable 
+    label name takes a form of "__L_%d + text" where %d is from the node_no var in the ast node
+    and text is any input string. 
+*/
  symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable) {
      char *label_name = calloc(sizeof(char), 100);
      sprintf(label_name, "__L_%d_", anode->node_no);
@@ -32,7 +35,9 @@ extern quad_type *quad_array[1024*5];
      
      return snode;
  }
- /* returns a temp with name determined by global counter. it is also inserted into the specified hashtable */
+ /* returns a temp with name determined by global counter. it is also inserted into the specified hashtable 
+    name takes a form of "__T%d" where %d is the global temp counter
+ */
  symnode_t* NewTemp(symhashtable_t *hashtable) {
      char *temp_name = calloc(sizeof(char), 100);
      sprintf(temp_name, "__T%d", temp_counter);
@@ -48,7 +53,7 @@ extern quad_type *quad_array[1024*5];
  }
  
  
- 
+ /* makes a quad and then inserts into the quad array. uses global quad arrya and index*/
  void make_insert_quad(quad_op_type op, symnode_t *dest, symnode_t *src1, symnode_t *src2) {
      quad_type *quad = calloc(sizeof(quad_type), 1);
      assert(quad != NULL);
@@ -62,23 +67,19 @@ extern quad_type *quad_array[1024*5];
      quad_index++;
  }
  
- 
+ /*pretty print the quad array*/
  void print_quad_array(quad_type **array) {
-     
      printf("There are %d entries\n",quad_index);
      for(int i=0; i < quad_index; i++) {
          printf("%d: ", i);
          printf("(%s, %s, %s, %s)\n",OP_NAME(array[i]->op), array[i]->dest->name, array[i]->src1->name, array[i]->src2->name);
      }
-     
  }
  
  
  
  
 void preorder_print(ast_node root) {
-  
-
   if (root != NULL) {
     ast_node y = root->left_child;
     while (y != NULL) {
