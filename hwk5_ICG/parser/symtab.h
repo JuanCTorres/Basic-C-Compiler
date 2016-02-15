@@ -177,4 +177,6 @@ int getSibling(int level);
 /* Assumes a previous traversal confirmed variables are correctly declared */
 void collect_literals(ast_node root, symboltable_t *symtab);
 
+void link_ast_to_symnode(ast_node root, symboltable_t *symtab);
+
 #endif

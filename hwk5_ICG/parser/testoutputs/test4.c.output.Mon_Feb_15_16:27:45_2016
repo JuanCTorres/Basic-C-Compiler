@@ -84,10 +84,7 @@ ROOT (uid: N0)
                                       ++ (uid: N47) (type: INT_TYPE) 
                                         ID (uid: N48) h [scope (7,0) <- (6,0)] declared at line 12 (type: INT_TYPE) 
                                       SEQ (uid: N49) 
-               NODE NOT FOUND
-NODE NOT FOUND
-NODE NOT FOUND
-                         LOCAL_DECLARATIONS (uid: N50) 
+                                        LOCAL_DECLARATIONS (uid: N50) 
                                           ID (uid: N51) j [scope (8,0) <- (7,0)] declared at line 16 (type: INT_TYPE) 
                                         STATEMENT_LIST (uid: N52) 
         SEQ (uid: N53) 
@@ -106,71 +103,7 @@ NODE NOT FOUND
   VAR_INT __100 (val: 100)
   VAR_INT __10 (val: 10)
   VAR_INT __0 (val: 0)
-ID (uid: N3) a [scope (1,0) <- (0,0)] declared at line 1 
-ID (uid: N4) b [scope (1,0) <- (0,0)] declared at line 1 
-ID (uid: N5) c [scope (1,0) <- (0,0)] declared at line 1 
-FORMAL_PARAMS (uid: N2) 
-ID (uid: N8) zzzz [scope (1,0) <- (0,0)] declared at line 2 
-LOCAL_DECLARATIONS (uid: N7) 
-ID (uid: N12) d [scope (2,0) <- (1,0)] declared at line 4 
-LOCAL_DECLARATIONS (uid: N11) 
-ID (uid: N16) e [scope (3,0) <- (2,0)] declared at line 6 
-LOCAL_DECLARATIONS (uid: N15) 
-ID (uid: N20) f [scope (4,0) <- (3,0)] declared at line 8 
-LOCAL_DECLARATIONS (uid: N19) 
-ID (uid: N24) e [scope (4,0) <- (3,0)] declared at line 6 
-ID (uid: N25) f [scope (4,0) <- (3,0)] declared at line 8 
-!= (uid: N23) 
-ID (uid: N28) g [scope (5,0) <- (4,0)] declared at line 10 
-LOCAL_DECLARATIONS (uid: N27) 
-ID (uid: N32) h [scope (6,0) <- (5,0)] declared at line 12 
-LOCAL_DECLARATIONS (uid: N31) 
-ID (uid: N36) h [scope (6,0) <- (5,0)] declared at line 12 
-INT_LITERAL (uid: N37) 0
-!= (uid: N35) 
-ID (uid: N40) i [scope (7,0) <- (6,0)] declared at line 14 
-LOCAL_DECLARATIONS (uid: N39) 
-ID (uid: N43) h [scope (7,0) <- (6,0)] declared at line 12 
-ID (uid: N45) h [scope (7,0) <- (6,0)] declared at line 12 
-INT_LITERAL (uid: N46) 10
-> (uid: N44) 
-ID (uid: N48) h [scope (7,0) <- (6,0)] declared at line 12 
-++ (uid: N47) 
-ID (uid: N51) j [scope (8,0) <- (7,0)] declared at line 16 
-LOCAL_DECLARATIONS (uid: N50) 
-STATEMENT_LIST (uid: N52) 
-SEQ (uid: N49) 
-FOR (uid: N42) 
-STATEMENT_LIST (uid: N41) 
-SEQ (uid: N38) 
-WHILE (uid: N34) 
-STATEMENT_LIST (uid: N33) 
-SEQ (uid: N30) 
-STATEMENT_LIST (uid: N29) 
-SEQ (uid: N26) 
-IF_STMT (uid: N22) 
-STATEMENT_LIST (uid: N21) 
-SEQ (uid: N18) 
-STATEMENT_LIST (uid: N17) 
-SEQ (uid: N14) 
-STATEMENT_LIST (uid: N13) 
-SEQ (uid: N10) 
-ID (uid: N55) huehuehue [scope (2,1) <- (1,0)] declared at line 27 
-LOCAL_DECLARATIONS (uid: N54) 
-STATEMENT_LIST (uid: N56) 
-SEQ (uid: N53) 
-ID (uid: N59) lolz [scope (2,2) <- (1,0)] declared at line 31 
-INT_LITERAL (uid: N61) 100
-ARRAY_TYPE (uid: N60) catz [scope (2,2) <- (1,0)] declared at line 31 
-ID (uid: N62) haaa [scope (2,2) <- (1,0)] declared at line 31 
-LOCAL_DECLARATIONS (uid: N58) 
-STATEMENT_LIST (uid: N63) 
-SEQ (uid: N57) 
-RETURN (uid: N0) [scope (0,0) <- (0,0)]return to main at line 1 
-STATEMENT_LIST (uid: N9) 
-SEQ (uid: N6) 
-FUNC_DECLARATION (uid: N1) main  (3 params: VAR_INT  VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 
-ROOT (uid: N0) 
+There are 0 entries
 
 
 ===========================================================

@@ -73,10 +73,10 @@ symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable);
  } quad_type;
 
 void print_quad_array(quad_type **array);
- symnode_t* NewTemp(symhashtable_t *hashtable);
-void CG(ast_node root);
+symnode_t* NewTemp(symhashtable_t *hashtable);
+symnode_t *CG(ast_node root);
 void preorder_print(ast_node root);
- void make_insert_quad(quad_op_type op, symnode_t *dest, symnode_t *src1, symnode_t *src2);
- 
+void make_insert_quad(quad_op_type op, symnode_t *dest, symnode_t *src1, symnode_t *src2);
+void add_temps_to_ast(ast_node root, symhashtable_t *hashtable);
 
 #endif

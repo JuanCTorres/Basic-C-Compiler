@@ -28,17 +28,7 @@ ROOT (uid: N0)
       LOCAL_DECLARATIONS (uid: N9) 
       STATEMENT_LIST (uid: N10) 
 (0-0) contains:
-FORMAL_PARAMS (uid: N2) 
-LOCAL_DECLARATIONS (uid: N4) 
-STATEMENT_LIST (uid: N5) 
-SEQ (uid: N3) 
-FUNC_DECLARATION (uid: N1) this_func  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 
-FORMAL_PARAMS (uid: N7) 
-LOCAL_DECLARATIONS (uid: N9) 
-STATEMENT_LIST (uid: N10) 
-SEQ (uid: N8) 
-FUNC_DECLARATION (uid: N6) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 5 
-ROOT (uid: N0) 
+There are 0 entries
 
 
 ===========================================================

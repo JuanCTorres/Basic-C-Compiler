@@ -71,102 +71,210 @@ extern quad_type *quad_array[1024*5];
  void print_quad_array(quad_type **array) {
      printf("There are %d entries\n",quad_index);
      for(int i=0; i < quad_index; i++) {
-         printf("%d: ", i);
-         printf("(%s, %s, %s, %s)\n",OP_NAME(array[i]->op), array[i]->dest->name, array[i]->src1->name, array[i]->src2->name);
+        assert(array[i] != NULL);
+        assert(array[i]->dest != NULL);
+        printf("%d: ", i);
+        printf("(%s, %s, ",OP_NAME(array[i]->op), array[i]->dest->name);
+        if (array[i]->src1 != NULL)
+          printf("%s, ",array[i]->src1->name);
+        else
+          printf("-, ");
+        if (array[i]->src2 != NULL)
+          printf("%s)\n", array[i]->src2->name);
+        else
+          printf("-)\n");
      }
  }
  
+void add_temps_to_ast(ast_node root, symhashtable_t *hashtable) {
+
+  /* add temps */
+  switch (root->node_type) {
+    case OP_ASSIGN_N: 
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_PLUS_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_MINUS_N:   
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_NEG_N:
+        root->temp_node = NewTemp(hashtable); 
+        break;
+    case OP_TIMES_N: 
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_DIVIDE_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_EQUALS_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_MODULUS_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_LESS_THAN_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_LESS_EQUAL_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_GREATER_THAN_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_GREATER_EQUAL_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_NOT_EQUAL_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_AND_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_OR_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_NOT_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_INCREMENT_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    case OP_DECREMENT_N:
+        root->temp_node = NewTemp(hashtable);
+        break;
+    default:
+        break;
+  }
+
+
+  /* Recurse on each child of the subtree root, with a depth one
+     greater than the root's depth. */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    add_temps_to_ast(child, hashtable);
+        
+} 
+
  
+symnode_t *CG(ast_node root) {
  
-symnode_t CG(ast_node root) {
- 
- switch (root->node_type) { 
-  case ROOT_N:
-    break;
-  case SEQ_N:
-    break;
-  case OP_ASSIGN_N: 
-    break;
-  case OP_PLUS_N:
-    break;
-  case OP_MINUS_N:   
-    break;
-  case OP_NEG_N: 
-    break;
-  case OP_TIMES_N: 
-    break;
-  case OP_DIVIDE_N:
-    break;
-  case OP_EQUALS_N:
-    break;
-  case IF_STMT_N:
-    break;
-  case IF_ELSE_STMT_N:
-    break;
-  case ID_N:
-    break;
-  case INT_LITERAL_N:
-    break;
-  case OP_MODULUS_N:
-    break;
-  case OP_LESS_THAN_N:
-    break;
-  case OP_LESS_EQUAL_N:
-    break;
-  case OP_GREATER_THAN_N:
-    break;
-  case OP_GREATER_EQUAL_N:
-    break;
-  case OP_NOT_EQUAL_N:
-    break;
-  case OP_AND_N:
-    break;
-  case OP_OR_N:
-    break;
-  case OP_NOT_N:
-    break;
-  case OP_INCREMENT_N:
-    break;
-  case OP_DECREMENT_N:
-    break;
-  case WHILE_N:
-    break;
-  case DO_WHILE_N:
-    break;
-  case PRINT_N:
-    break;
-  case STRING_LITERAL_N:
-    break;
-  case INT_TYPE_N:
-    break;
-  case VOID_TYPE_N:
-    break;
-  case ARRAY_TYPE_N:
-    break;
-  case FUNCTION_N:
-    break;
-  case FORMAL_PARAMS_N:
-    break;
-  case RETURN_N:
-    break;
-  case READ_N:
-    break;
-  case FOR_N:
-    break;
-  case FOR_HEADER_EMPTY_N:
-    break;
-  case STATEMENT_LIST_N:
-    break;
-  case LOCAL_DECLARATIONS_N:
-    break;
-  case CALL_N:
-    break;
-  case FUNC_DECLARATION_N:
-   break;
-  default:
-   break;
- }  
+ if (root != NULL) {
     
+    ast_node y = root->left_child;
+    
+    while (y != NULL) {
+    //generate code to prepare for y;
+      CG(y);
+      y = y->right_sibling;
+    }
+ 
+    switch (root->node_type) { 
+      case ROOT_N:
+          break;
+      case SEQ_N:
+          break;
+      case OP_ASSIGN_N: 
+          break;
+      case OP_PLUS_N:
+        if(root->left_child->node_type == ID_N && root->left_child->right_sibling->node_type == ID_N) {
+          assert(root->left_child->snode != NULL);
+          assert(root->left_child->right_sibling->snode != NULL);
+          assert(root->temp_node != NULL);
+          make_insert_quad(Q_ADD, root->temp_node, root->left_child->snode, root->left_child->right_sibling->snode);
+        }
+          break;
+      case OP_MINUS_N:
+        if(root->left_child->node_type == ID_N && root->left_child->right_sibling->node_type == ID_N) {
+          assert(root->temp_node != NULL);
+          make_insert_quad(Q_SUB, root->temp_node, root->left_child->snode, root->left_child->right_sibling->snode);  
+        } 
+          break;
+      case OP_NEG_N: 
+          break;
+      case OP_TIMES_N:
+        if(root->left_child->node_type == ID_N && root->left_child->right_sibling->node_type == ID_N) {
+          //printf("\nassert fails at node %s (type: %s) at line %d\n",root->left_child->value_string, NODE_NAME(root->left_child->node_type),root->left_child->line_num);
+          assert(root->left_child->snode != NULL);
+          assert(root->left_child->right_sibling->snode != NULL);
+          assert(root->temp_node != NULL);
+          make_insert_quad(Q_MULT, root->temp_node, root->left_child->snode, root->left_child->right_sibling->snode); 
+        }
+          break;
+      case OP_DIVIDE_N:
+          break;
+      case OP_EQUALS_N:
+          break;
+      case IF_STMT_N:
+          break;
+      case IF_ELSE_STMT_N:
+          break;
+      case ID_N:
+          break;
+      case INT_LITERAL_N:
+          break;
+      case OP_MODULUS_N:
+          break;
+      case OP_LESS_THAN_N:
+          break;
+      case OP_LESS_EQUAL_N:
+          break;
+      case OP_GREATER_THAN_N:
+          break;
+      case OP_GREATER_EQUAL_N:
+          break;
+      case OP_NOT_EQUAL_N:
+          break;
+      case OP_AND_N:
+          break;
+      case OP_OR_N:
+          break;
+      case OP_NOT_N:
+          break;
+      case OP_INCREMENT_N:
+          break;
+      case OP_DECREMENT_N:
+          break;
+      case WHILE_N:
+          break;
+      case DO_WHILE_N:
+          break;
+      case PRINT_N:
+          break;
+      case STRING_LITERAL_N:
+          break;
+      case INT_TYPE_N:
+          break;
+      case VOID_TYPE_N:
+          break;
+      case ARRAY_TYPE_N:
+          break;
+      case FUNCTION_N:
+          break;
+      case FORMAL_PARAMS_N:
+          break;
+      case RETURN_N:
+          break;
+      case READ_N:
+          break;
+      case FOR_N:
+          break;
+      case FOR_HEADER_EMPTY_N:
+          break;
+      case STATEMENT_LIST_N:
+          break;
+      case LOCAL_DECLARATIONS_N:
+          break;
+      case CALL_N:
+          break;
+      case FUNC_DECLARATION_N:
+        break;
+      default:
+        break;
+    }  
+ }
+  return NULL;
 } 
  
  

@@ -84,11 +84,16 @@ int main() {
       // stored there
       collect_literals(root, symtab);
 
+      link_ast_to_symnode(root, symtab);
+
       pretty_print(symtab->literal_collection, 0);
 
-	  
+	  add_temps_to_ast(root, symtab->literal_collection);
 
-      preorder_print(root);
+	  CG(root);
+
+	  print_quad_array(quad_array);
+      // preorder_print(root);
 
  		}
  	}

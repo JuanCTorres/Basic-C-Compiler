@@ -151,6 +151,7 @@ struct ast_node_struct {
   int line_declared; //line num of original declaration
   int node_no;
   ast_node return_to;
+  struct symnode *temp_node;
 
   
 };

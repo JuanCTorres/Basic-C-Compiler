@@ -137,8 +137,7 @@ symhashtable_t *create_symhashtable(int entries) {
     symnode_t *node = lookup_symhashtable(hashtable, name, slot);
 
   /* error check if node already existed! */
-
-    if (node == NULL) {
+   if (node == NULL) {
 
       node = create_symnode(name, hashtable);
 
@@ -895,7 +894,7 @@ void collect_literals(ast_node root, symboltable_t *symtab){
       node = lookup_symhashtable(collection, name, slot);
 
       if(node == NULL){
-        fprintf(stderr, "NODE NOT FOUND\n");
+        //fprintf(stderr, "NODE NOT FOUND\n");
         insert_into_symhashtable(collection, root);
       }
       break;
@@ -904,6 +903,64 @@ void collect_literals(ast_node root, symboltable_t *symtab){
       break;
   }
 }
+
+
+void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
+  symhashtable_t *hash = NULL;
+
+  /* Depending on node types, go deeper, create sibling scopes, add to hashtable,
+   * or take other appropriate action.
+   */
+  switch (root->node_type) {
+    case SEQ_N:     // change main level when see a new sequence
+      break;
+
+    case FORMAL_PARAMS_N:
+      break;
+
+    case FUNC_DECLARATION_N: // function declaraions
+
+      break;
+
+    case FUNCTION_N:
+
+      break;
+
+    case ID_N:      /* print the id */
+      hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+      assert(hash != NULL);
+      symnode_t *snode = NULL;
+      for(;hash != NULL && snode == NULL; hash = hash->parent) {
+        snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      }
+      assert(snode != NULL);
+      root->snode = snode;
+
+      break;
+
+    case ARRAY_TYPE_N:             // check for return types!
+
+      break;
+
+    case RETURN_N:
+
+      break;
+
+    default:
+
+      break;
+  }
+
+
+
+
+/* Recurse on each child of the subtree root, with a depth one
+     greater than the root's depth. */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    link_ast_to_symnode(child, symtab);
+}
+
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
