@@ -78,6 +78,99 @@ extern quad_type *quad_array[1024*5];
  
  
  
+symnode_t CG(ast_node root) {
+ 
+ switch (root->node_type) { 
+  case ROOT_N:
+    break;
+  case SEQ_N:
+    break;
+  case OP_ASSIGN_N: 
+    break;
+  case OP_PLUS_N:
+    break;
+  case OP_MINUS_N:   
+    break;
+  case OP_NEG_N: 
+    break;
+  case OP_TIMES_N: 
+    break;
+  case OP_DIVIDE_N:
+    break;
+  case OP_EQUALS_N:
+    break;
+  case IF_STMT_N:
+    break;
+  case IF_ELSE_STMT_N:
+    break;
+  case ID_N:
+    break;
+  case INT_LITERAL_N:
+    break;
+  case OP_MODULUS_N:
+    break;
+  case OP_LESS_THAN_N:
+    break;
+  case OP_LESS_EQUAL_N:
+    break;
+  case OP_GREATER_THAN_N:
+    break;
+  case OP_GREATER_EQUAL_N:
+    break;
+  case OP_NOT_EQUAL_N:
+    break;
+  case OP_AND_N:
+    break;
+  case OP_OR_N:
+    break;
+  case OP_NOT_N:
+    break;
+  case OP_INCREMENT_N:
+    break;
+  case OP_DECREMENT_N:
+    break;
+  case WHILE_N:
+    break;
+  case DO_WHILE_N:
+    break;
+  case PRINT_N:
+    break;
+  case STRING_LITERAL_N:
+    break;
+  case INT_TYPE_N:
+    break;
+  case VOID_TYPE_N:
+    break;
+  case ARRAY_TYPE_N:
+    break;
+  case FUNCTION_N:
+    break;
+  case FORMAL_PARAMS_N:
+    break;
+  case RETURN_N:
+    break;
+  case READ_N:
+    break;
+  case FOR_N:
+    break;
+  case FOR_HEADER_EMPTY_N:
+    break;
+  case STATEMENT_LIST_N:
+    break;
+  case LOCAL_DECLARATIONS_N:
+    break;
+  case CALL_N:
+    break;
+  case FUNC_DECLARATION_N:
+   break;
+  default:
+   break;
+ }  
+    
+} 
+ 
+ 
+ 
  
 void preorder_print(ast_node root) {
   if (root != NULL) {

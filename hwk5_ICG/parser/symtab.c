@@ -112,6 +112,7 @@ symhashtable_t *create_symhashtable(int entries) {
     return node;
   }
 
+/* hashtable input is for the symnode to point back to */
   symnode_t *create_symnode(char *name, symhashtable_t *hashtable) {
     symnode_t *node = calloc(1, sizeof(symnode_t));
     assert(node != NULL);
