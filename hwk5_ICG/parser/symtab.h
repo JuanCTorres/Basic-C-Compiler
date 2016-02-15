@@ -14,6 +14,7 @@
 #include "ast.h"
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define NOHASHSLOT -1
 
 typedef struct scope {
   int level;
@@ -94,7 +95,7 @@ typedef struct {
 
 /* Create an empty symbol table. */
 symboltable_t *create_symboltable();
-
+symnode_t *create_symnode(char *name, symhashtable_t *hashtable);
 
 symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, struct ast_node_struct* astnode);
 
@@ -124,7 +125,7 @@ void print_symtab(symboltable_t *symtab);
 /* Creates a new hash table to insert into the symbol table. */
 symhashtable_t *create_symhashtable(int entries);
 
-
+symnode_t *lookup_symhashtable(symhashtable_t *hashtable, char *name, int slot);
 /* Traverses the syntax tree, keeping track of the current scope
 and its relations with other scopes. Adds new hashtables when it sees a new
 scope, and inserts variable and function identifiers in the appropriate

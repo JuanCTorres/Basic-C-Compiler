@@ -1,13 +1,13 @@
 
 int main(){
 
-	int a, b, c, d, e;
+	int a, b, c, d;
 	b = 1;
 	c = 2;
 	d = 3;
-	e = 4;
 
-	a = b + c + d + e;
+
+	a = b + c + d;
 
 
 

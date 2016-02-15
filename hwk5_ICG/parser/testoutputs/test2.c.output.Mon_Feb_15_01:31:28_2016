@@ -14,26 +14,26 @@ Print hashtables (level-sibno) according to their hierarchy
   FUNC_VOID your_func (0 params:)
   FUNC_INT my_func (2 params: VAR_INT  VAR_INT )
   (1-0) contains:
-    VAR_INT b
-    VAR_INT q
+    VAR_INT b (val: 0)
+    VAR_INT q (val: 0)
   (1-1) contains:
-    VAR_INT ee
-    VAR_INT gg
+    VAR_INT ee (val: 0)
+    VAR_INT gg (val: 0)
   (1-2) contains:
-    VAR_INT a
-    VAR_INT t
-    VAR_INT u
-    VAR_INT v
-    VAR_INT w
-    VAR_INT y
-    VAR_INT ppp
+    VAR_INT a (val: 0)
+    VAR_INT t (val: 0)
+    VAR_INT u (val: 0)
+    VAR_INT v (val: 0)
+    VAR_INT w (val: 0)
+    VAR_INT y (val: 0)
+    VAR_INT ppp (val: 0)
     VAR_ARRAY_INT fff
     (2-0) contains:
       (3-0) contains:
         (4-0) contains:
       (3-1) contains:
     (2-1) contains:
-      VAR_INT qwert
+      VAR_INT qwert (val: 0)
       (3-2) contains:
 
 
@@ -157,7 +157,16 @@ ROOT (uid: N0)
         CALL (uid: N116) 
           FUNCTION (uid: N117) my_func  (2 params: INT_TYPE INT_TYPE)[scope (1,2) <- (0,0)] declared at line 1 (type: INT_TYPE) 
             ARRAY_TYPE (uid: N118) fff [scope (1,2) <- (0,0)] declared at line 18 (type: INT_TYPE) 
-              INT_LITERAL (uid: N119) 1(type: INT_TYPE) 
+              INT_LITNODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+ERAL (uid: N119) 1(type: INT_TYPE) 
             + (uid: N120) (type: INT_TYPE) 
               ID (uid: N121) v [scope (1,2) <- (0,0)] declared at line 17 (type: INT_TYPE) 
               * (uid: N122) (type: INT_TYPE) 
@@ -181,6 +190,19 @@ ROOT (uid: N0)
                   ID (uid: N140) y [scope (1,2) <- (0,0)] declared at line 17 (type: INT_TYPE) 
                 ID (uid: N141) u [scope (1,2) <- (0,0)] declared at line 17 (type: INT_TYPE) 
               ID (uid: N142) w [scope (1,2) <- (0,0)] declared at line 17 (type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __99 (val: 99)
+  STRING LOL!\n
+  VAR_INT __12345 (val: 12345)
+  VAR_INT __10 (val: 10)
+  VAR_INT __123 (val: 123)
+  STRING in for loop\n
+  VAR_INT __0 (val: 0)
+  STRING not\n
+  VAR_INT __1 (val: 1)
+  VAR_INT __2 (val: 2)
+  VAR_INT __4 (val: 4)
+  VAR_INT __5 (val: 5)
 ID (uid: N3) q [scope (1,0) <- (0,0)] declared at line 1 
 ID (uid: N4) b [scope (1,0) <- (0,0)] declared at line 1 
 FORMAL_PARAMS (uid: N2) 

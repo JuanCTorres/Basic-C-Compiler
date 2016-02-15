@@ -62,7 +62,9 @@ typedef enum {
   STATEMENT_LIST_N,
   LOCAL_DECLARATIONS_N,
   CALL_N,
-  FUNC_DECLARATION_N
+  FUNC_DECLARATION_N,
+  LABEL_N,
+  TEMP_N
 } ast_node_type;
 
 
@@ -117,7 +119,10 @@ static val_name_pair token_table[] = {
   { LOCAL_DECLARATIONS_N, "LOCAL_DECLARATIONS"},
   { CALL_N, "CALL"},
   { FUNC_DECLARATION_N, "FUNC_DECLARATION"},
-  { 0, NULL} };
+  { LABEL_N, "LABEL"},
+  { TEMP_N, "TEMP"},
+  { 0, NULL} 
+};
 
 #define NODE_INDEX(X)    ( (X) - ROOT_N)
 #define NODE_NAME(X)     ( token_table[ NODE_INDEX((X)) ].name)

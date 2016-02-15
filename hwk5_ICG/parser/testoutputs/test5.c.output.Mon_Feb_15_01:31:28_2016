@@ -12,28 +12,33 @@ line: 9 | Error: No return statement in function main
 
 WARNING: There were return errors. Data structure may be ill-formed.
 
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (2 params: VAR_INT  VAR_INT )
   FUNC_INT myfunc (1 params: VAR_INT )
   (1-0) contains:
-    VAR_INT b
-    VAR_INT g
+    VAR_INT b (val: 0)
+    VAR_INT g (val: 0)
     (2-0) contains:
-      VAR_INT c
+      VAR_INT c (val: 0)
   (1-1) contains:
-    VAR_INT uu
-    VAR_INT i
-    VAR_INT ww
+    VAR_INT uu (val: 0)
+    VAR_INT i (val: 0)
+    VAR_INT ww (val: 0)
     (2-1) contains:
-      VAR_INT a
+      VAR_INT a (val: 0)
     (2-2) contains:
-      VAR_INT z
+      VAR_INT z (val: 0)
     (2-3) contains:
-      VAR_INT y
+      VAR_INT y (val: 0)
       (3-0) contains:
-        VAR_INT yy
+        VAR_INT yy (val: 0)
 
 
 ROOT (uid: N0) 
@@ -100,6 +105,12 @@ ROOT (uid: N0)
                   INT_LITERAL (uid: N61) 123(type: INT_TYPE) 
         CALL (uid: N62) 
           FUNCTION (uid: N63) myfunc  (0 params:)[scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __123 (val: 123)
+  VAR_INT __2 (val: 2)
+  VAR_INT __3 (val: 3)
+  VAR_INT __4 (val: 4)
+  VAR_INT __5 (val: 5)
 ID (uid: N3) g [scope (1,0) <- (0,0)] declared at line 1 
 FORMAL_PARAMS (uid: N2) 
 ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 2 

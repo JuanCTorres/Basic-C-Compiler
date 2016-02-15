@@ -1,11 +1,15 @@
- #include "ast.h"
-
+#include "ast.h"
 
 
 #ifndef QUAD_H_
 #define QUAD_H_
 
- char* NewLabel(int node_num, char *text);
+symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable);
+ 
+ typedef struct {
+  int val;
+  char *name;
+} val_name_pair3;
  
  
  typedef enum{
@@ -29,6 +33,33 @@
   Q_LTEQ
  } quad_op_type;
  
+ static val_name_pair3 token_table3[] = {
+    {Q_ASSIGN, "ASSIGN"},
+    {Q_ADD, "ADD"},
+    {Q_SUB, "SUB"},
+    {Q_MULT, "MULT"},
+    {Q_DIV, "DIV"},
+    {Q_INC, "INC"},
+    {Q_DEC, "DEC"},
+    {Q_IFF, "IFF"},
+    {Q_GOTO, "GOTO"},
+    {Q_LABEL, "LABEL"},
+    {Q_READ, "READ"},
+    {Q_PRINT, "PRINT"},
+    {Q_HALT, "HALT"},
+    {Q_EQ, "EQ"},
+    {Q_GT, "GT"},
+    {Q_LT, "LT"},
+    {Q_GTEQ, "GTEQ"},
+    {Q_LTEQ, "LTEQ"},
+    {0, NULL}
+     
+     
+ };
+ 
+ #define OP_INDEX(X)    ( (X) - Q_ASSIGN)
+#define OP_NAME(X)     ( token_table3[ OP_INDEX((X)) ].name)
+ 
  typedef struct temp {
      int id;
      int other;
@@ -36,13 +67,16 @@
  
  typedef struct quad {
      quad_op_type op;
-     temp_type dest;
-     temp_type src1;
-     temp_type src2;
+     symnode_t *dest;
+     symnode_t *src1;
+     symnode_t *src2;
  } quad_type;
 
-
+void print_quad_array(quad_type **array);
+ symnode_t* NewTemp(symhashtable_t *hashtable);
 void CG(ast_node root);
-
+void preorder_print(ast_node root);
+ void make_insert_quad(quad_op_type op, symnode_t *dest, symnode_t *src1, symnode_t *src2);
+ 
 
 #endif

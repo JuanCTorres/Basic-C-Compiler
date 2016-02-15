@@ -8,30 +8,30 @@ Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
   (1-0) contains:
-    VAR_INT zzzz
-    VAR_INT a
-    VAR_INT b
-    VAR_INT c
+    VAR_INT zzzz (val: 0)
+    VAR_INT a (val: 0)
+    VAR_INT b (val: 0)
+    VAR_INT c (val: 0)
     (2-0) contains:
-      VAR_INT d
+      VAR_INT d (val: 0)
       (3-0) contains:
-        VAR_INT e
+        VAR_INT e (val: 0)
         (4-0) contains:
-          VAR_INT f
+          VAR_INT f (val: 0)
           (5-0) contains:
-            VAR_INT g
+            VAR_INT g (val: 0)
             (6-0) contains:
-              VAR_INT h
+              VAR_INT h (val: 0)
               (7-0) contains:
-                VAR_INT i
+                VAR_INT i (val: 0)
                 (8-0) contains:
-                  VAR_INT j
+                  VAR_INT j (val: 0)
     (2-1) contains:
-      VAR_INT huehuehue
+      VAR_INT huehuehue (val: 0)
     (2-2) contains:
-      VAR_INT haaa
+      VAR_INT haaa (val: 0)
       VAR_ARRAY_INT catz
-      VAR_INT lolz
+      VAR_INT lolz (val: 0)
 
 
 ROOT (uid: N0) 
@@ -84,7 +84,10 @@ ROOT (uid: N0)
                                       ++ (uid: N47) (type: INT_TYPE) 
                                         ID (uid: N48) h [scope (7,0) <- (6,0)] declared at line 12 (type: INT_TYPE) 
                                       SEQ (uid: N49) 
-                                        LOCAL_DECLARATIONS (uid: N50) 
+               NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+                         LOCAL_DECLARATIONS (uid: N50) 
                                           ID (uid: N51) j [scope (8,0) <- (7,0)] declared at line 16 (type: INT_TYPE) 
                                         STATEMENT_LIST (uid: N52) 
         SEQ (uid: N53) 
@@ -99,6 +102,10 @@ ROOT (uid: N0)
             ID (uid: N62) haaa [scope (2,2) <- (1,0)] declared at line 31 (type: INT_TYPE) 
           STATEMENT_LIST (uid: N63) 
         RETURN (uid: N0) [scope (0,0) <- (0,0)]return to main at line 1 (type: VOID_TYPE) 
+(0-0) contains:
+  VAR_INT __100 (val: 100)
+  VAR_INT __10 (val: 10)
+  VAR_INT __0 (val: 0)
 ID (uid: N3) a [scope (1,0) <- (0,0)] declared at line 1 
 ID (uid: N4) b [scope (1,0) <- (0,0)] declared at line 1 
 ID (uid: N5) c [scope (1,0) <- (0,0)] declared at line 1 

@@ -31,6 +31,7 @@ int symtabError = 0;
 int typeError = 0;
 int returnError = 0;
 int funcError = 0;
+quad_type *quad_array[1024*5];
 
 
 int main() {
@@ -85,9 +86,9 @@ int main() {
 
       pretty_print(symtab->literal_collection, 0);
 
-		quad_type quad_array[1024*5];
+	  
 
-      CG(root);
+      preorder_print(root);
 
  		}
  	}
@@ -95,7 +96,9 @@ int main() {
  	else {
  		fprintf(stderr,"Error: NO root!\n");
  	}
-
+     
+     
+    
 
 
  	return 0;

@@ -14,7 +14,7 @@
 #include <assert.h>
 #include "symtab.h"
 
-#define NOHASHSLOT -1
+
 #define DELTA 10
 
 

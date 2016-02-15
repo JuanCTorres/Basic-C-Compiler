@@ -9,27 +9,27 @@ Print hashtables (level-sibno) according to their hierarchy
   FUNC_INT main (0 params:)
   (1-0) contains:
     VAR_ARRAY_INT dd
-    VAR_INT a
-    VAR_INT b
-    VAR_INT c
-    VAR_INT d
-    VAR_INT e
-    VAR_INT f
-    VAR_INT h
-    VAR_INT i
+    VAR_INT a (val: 0)
+    VAR_INT b (val: 0)
+    VAR_INT c (val: 0)
+    VAR_INT d (val: 0)
+    VAR_INT e (val: 0)
+    VAR_INT f (val: 0)
+    VAR_INT h (val: 0)
+    VAR_INT i (val: 0)
     VAR_ARRAY_INT cc
     (2-0) contains:
-      VAR_INT zz
+      VAR_INT zz (val: 0)
     (2-1) contains:
-      VAR_INT tt
+      VAR_INT tt (val: 0)
       VAR_ARRAY_INT uu
     (2-2) contains:
-      VAR_INT dsa
-      VAR_INT asd
+      VAR_INT dsa (val: 0)
+      VAR_INT asd (val: 0)
     (2-3) contains:
-      VAR_INT x
+      VAR_INT x (val: 0)
     (2-4) contains:
-      VAR_INT y
+      VAR_INT y (val: 0)
 
 
 ROOT (uid: N0) 
@@ -215,7 +215,28 @@ ROOT (uid: N0)
               = (uid: N180) (type: INT_TYPE) 
                 ID (uid: N181) zz [scope (2,0) <- (1,0)] declared at line 57 (type: INT_TYPE) 
                 INT_LITERAL (uid: N182) -100(type: INT_TYPE) 
-            STATEMENT_LIST (uid: N183) 
+            STATEMENNODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+NODE NOT FOUND
+T_LIST (uid: N183) 
               + (uid: N184) (type: INT_TYPE) 
                 ID (uid: N185) a [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
                 ID (uid: N186) b [scope (2,0) <- (1,0)] declared at line 8 (type: INT_TYPE) 
@@ -270,6 +291,29 @@ ROOT (uid: N0)
             STATEMENT_LIST (uid: N235) 
         RETURN (uid: N236) [scope (1,0) <- (0,0)]return to main at line 1 
           INT_LITERAL (uid: N237) 0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __-88 (val: -88)
+  VAR_INT __-2 (val: -2)
+  VAR_INT __-3 (val: -3)
+  VAR_INT __-6 (val: -6)
+  VAR_INT __-8 (val: -8)
+  VAR_INT __100 (val: 100)
+  VAR_INT __-100 (val: -100)
+  VAR_INT __10 (val: 10)
+  VAR_INT __12 (val: 12)
+  VAR_INT __200 (val: 200)
+  VAR_INT __-10 (val: -10)
+  VAR_INT __21 (val: 21)
+  VAR_INT __22 (val: 22)
+  VAR_INT __-23 (val: -23)
+  VAR_INT __0 (val: 0)
+  VAR_INT __1 (val: 1)
+  VAR_INT __2 (val: 2)
+  VAR_INT __3 (val: 3)
+  VAR_INT __5 (val: 5)
+  VAR_INT __7 (val: 7)
+  VAR_INT __9 (val: 9)
+  STRING test basics!\n
 FORMAL_PARAMS (uid: N2) 
 ID (uid: N5) a [scope (1,0) <- (0,0)] declared at line 8 
 ID (uid: N6) b [scope (1,0) <- (0,0)] declared at line 8 

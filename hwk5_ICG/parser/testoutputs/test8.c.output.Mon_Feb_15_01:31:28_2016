@@ -1,12 +1,9 @@
 Result of test done to parser.
 
-test7.c BEGIN.
+test8.c BEGIN.
 ===========================================================
 
-Error: Returning wrong type for function main declared at line 5
-
-WARNING: There were return errors. Data structure may be ill-formed.
-
+NODE NOT FOUND
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
@@ -27,6 +24,10 @@ ROOT (uid: N0)
     SEQ (uid: N8) 
       LOCAL_DECLARATIONS (uid: N9) 
       STATEMENT_LIST (uid: N10) 
+        RETURN (uid: N11) [scope (1,1) <- (0,0)]return to main at line 5 
+          INT_LITERAL (uid: N12) 0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __0 (val: 0)
 FORMAL_PARAMS (uid: N2) 
 LOCAL_DECLARATIONS (uid: N4) 
 STATEMENT_LIST (uid: N5) 
@@ -34,6 +35,8 @@ SEQ (uid: N3)
 FUNC_DECLARATION (uid: N1) this_func  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 
 FORMAL_PARAMS (uid: N7) 
 LOCAL_DECLARATIONS (uid: N9) 
+INT_LITERAL (uid: N12) 0
+RETURN (uid: N11) [scope (1,1) <- (0,0)]return to main at line 5 
 STATEMENT_LIST (uid: N10) 
 SEQ (uid: N8) 
 FUNC_DECLARATION (uid: N6) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 5 
@@ -41,4 +44,4 @@ ROOT (uid: N0)
 
 
 ===========================================================
-test7.c finished.
+test8.c finished.

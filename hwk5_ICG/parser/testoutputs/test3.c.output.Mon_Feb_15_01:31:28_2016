@@ -29,16 +29,16 @@ Print hashtables (level-sibno) according to their hierarchy
   FUNC_INT main (0 params:)
   FUNC_INT this_func (1 params: VAR_INT )
   (1-0) contains:
-    VAR_INT g
+    VAR_INT g (val: 0)
   (1-1) contains:
     (2-0) contains:
-      VAR_INT b
+      VAR_INT b (val: 0)
     (2-1) contains:
-      VAR_INT a
+      VAR_INT a (val: 0)
     (2-2) contains:
-      VAR_INT aaa
+      VAR_INT aaa (val: 0)
       (3-0) contains:
-        VAR_INT qwe
+        VAR_INT qwe (val: 0)
         VAR_ARRAY_INT av
     (2-3) contains:
       (3-1) contains:
