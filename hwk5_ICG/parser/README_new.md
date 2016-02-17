@@ -31,6 +31,7 @@ e.g., checking that a variable has been defined before it is used.
 
 The program traverses the syntax tree created in previous steps, assuming that there have been no errors until this point (if there were, the program halts).
 
+
 ### Generating a collection of literals
 
 We begin by generating a collection of literals, stored as a hash table in the main symbol table in the `->literal_collection` field. Here we collect the strings and integer literals found in the source file to compile. Each of them is a symbol node (`symnode`), which we will use in the following step.
@@ -47,11 +48,36 @@ Different types of `symnode` symbol nodes are named differently to preserve the 
 
 ### Generating three-address instructions, or quads
 
-These are four-tuples or quads, specifying one destination, and up to two sources, for the operations we define. For instance, `(ADD, t1, c, d)` adds `c` and `d`, and stores the result in `t1`.
+These are four-tuples or quads, specifying one destination, and up to two sources, for the operations we define. For instance, `(ADD, t1, c, d)` adds `c` and `d`, and stores the result in `t1`.Â
 
 Not all instructions need to use three addresses: `(GOTO, a, -, -)`, which makes the execution of our program jump, only needs access to one address.
 
 The resulting quads are stored in an array in the order they should be executed. They are created by traversing the abstract syntax tree created in previous steps in a post-order way (visiting all children before visiting the parent node), with some exceptions.
+
+#### Generating labels
+
+This function takes as a parameter an input string, an `ast_node`, and a pointer to the collection of literals. It creates a `symnode` with the name `__L_` concatenated with the node number, concatenated with an input string. An example of a label is `__L_23_DO_WHILE`.
+
+#### Function prologue and epilogues
+
+Since we are at this stage generating intermediate code, function prologues and epilogues are by necessity high-level.
+In a function prologue, a caller pushes all the arguments to the function, then transfers control to the function.
+
+Function prologues are, at the moment, just placeholders.
+
+Both of these are handled by the caller.
+
+An example for the function call `my_func(b + 3 + d, c)` follows:
+
+```
+60: (LABEL, __L_121_FUNC_PROLOGUE_BEGIN, -, -)
+61: (ADD, __T46, b, __3)
+62: (ADD, __T47, __T46, d)
+63: (PUSH, __T47, -, -)
+64: (PUSH, c, -, -)
+65: (CALL, my_func, -, -)
+66: (LABEL, __L_121_FUNC_EPILOGUE, -, -)
+```
 
 
 #### Quad generation examples for selected cases
@@ -67,6 +93,25 @@ The resulting quads are stored in an array in the order they should be executed.
 24: (LABEL, __L_48_DONE, -, -)
 ```
 
+#####	Do while
+```
+do{
+  a = 3;
+} while(b == 3);
+```
+generates the following quads
+```
+38: (LABEL, __L_84_DO_WHILE_BEGIN, -, -)
+39: (ASSIGN, a, __3, -)
+40: (EQ, __T43, b, __3)
+41: (ifTrue, __L_85_TRUE, __T43, -)
+42: (ASSIGN, __T43, __0, -)
+43: (GOTO, __L_85_DONE, -, -)
+44: (LABEL, __L_85_TRUE, -, -)
+45: (ASSIGN, __T43, __1, -)
+46: (LABEL, __L_85_DONE, -, -)
+47: (ifTrue, __L_84_DO_WHILE_BEGIN, __T43, -)
+```
 
 
 

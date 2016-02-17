@@ -932,7 +932,6 @@ void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
       break;
 
     case ID_N:      /* print the id */
-      printf("%s\n", root->value_string);
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
       for(;hash != NULL && snode == NULL; hash = hash->parent) {

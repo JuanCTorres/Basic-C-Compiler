@@ -111,6 +111,11 @@ void CG(ast_node x, symhashtable_t *hashtable) {
     ast_node z;
     symnode_t *temp, *temp2, *temp3, *temp4;
 
+    if(!strcmp(true_n->name, "__4")){
+      printf("KIK YES\n");
+    }
+
+
     /* Recursion pattern depends on the node type
     because sometimes (such as when you see an ifStmt),
     you need to do some things in a weird order (test, come back to if to insert jxx,
@@ -861,10 +866,10 @@ void set_constants(symhashtable_t *hashtable){
   name = calloc(100, sizeof(char));
   sprintf(name, "__%d", ELEMSIZE);
   node2->value_string = name;
-  node2->value_int = ELEMSIZE;
+  node2->value_int = ELEMSIZE * 2;
   elem_size_n = lookup_symhashtable(hashtable, name, NOHASHSLOT);
   if(elem_size_n == NULL){
-    true_n = insert_into_symhashtable(hashtable, node2);
+    elem_size_n = insert_into_symhashtable(hashtable, node2);
   }
 
 }
