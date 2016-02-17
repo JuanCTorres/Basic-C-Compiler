@@ -71,7 +71,7 @@ do {
 	asd = dsa;
 } while(1);
 
-if(a*b == c) {
+if(a*b == d) {
 	int x;
 
 } else {

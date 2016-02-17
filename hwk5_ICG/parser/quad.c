@@ -712,7 +712,9 @@ void CG(ast_node x, symhashtable_t *hashtable) {
       case FUNCTION_N:
         // Push arguments
         for(z = x->left_child; z != NULL; z = z->right_sibling){
-         make_insert_quad(Q_PUSH, z->snode, NULL, NULL);
+          temp = NewTemp(hashtable);
+          make_insert_quad(Q_ASSIGN, temp, z->snode, NULL);
+          make_insert_quad(Q_PUSH, temp, NULL, NULL);
         }
         // Function call
         make_insert_quad(Q_CALL, x->snode, NULL, NULL);
