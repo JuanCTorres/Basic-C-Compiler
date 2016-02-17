@@ -76,21 +76,28 @@ int main() {
 			if(returnError) {
 				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
 			}
-      		print_ast(root, 0, 0, 0); //print ast tree with added information
+      print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
+
+      if(parseError || symtabError || typeError || returnError || funcError){
+        printf("Halting\n");
+        return 1;
+      }
 
       // Must come after the symbol table is built, as it relies on information
       // stored there
       collect_literals(root, symtab);
 
+      set_constants(symtab->literal_collection);
+
       link_ast_to_symnode(root, symtab);
 
       pretty_print(symtab->literal_collection, 0);
 
-	  add_temps_to_ast(root, symtab->literal_collection);
+	  //add_temps_to_ast(root, symtab->literal_collection);
 
-	  CG(root);
+	  CG(root, symtab->literal_collection);
 
 	  print_quad_array(quad_array);
       // preorder_print(root);
@@ -101,9 +108,9 @@ int main() {
  	else {
  		fprintf(stderr,"Error: NO root!\n");
  	}
-     
-     
-    
+
+
+
 
 
  	return 0;

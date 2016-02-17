@@ -83,7 +83,7 @@ static val_name_pair token_table[] = {
   { OP_ASSIGN_N, "=" },
   { OP_PLUS_N, "+" },
   { OP_MINUS_N, "-" },
-  { OP_NEG_N, "-" },
+  { OP_NEG_N, "UNARY -" },
   { OP_TIMES_N, "*" },
   { OP_DIVIDE_N, "/" },
   { OP_EQUALS_N, "==" },
@@ -121,7 +121,7 @@ static val_name_pair token_table[] = {
   { FUNC_DECLARATION_N, "FUNC_DECLARATION"},
   { LABEL_N, "LABEL"},
   { TEMP_N, "TEMP"},
-  { 0, NULL} 
+  { 0, NULL}
 };
 
 #define NODE_INDEX(X)    ( (X) - ROOT_N)
@@ -153,7 +153,7 @@ struct ast_node_struct {
   ast_node return_to;
   struct symnode *temp_node;
 
-  
+
 };
 
 

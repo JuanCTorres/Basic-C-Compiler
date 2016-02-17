@@ -23,7 +23,10 @@ int main(void) {	//0
 		if(1) { //2.0
 			//3
 			do { //3.0
-				//4
+				a = 3;
+				a = 4;
+				t = 3;
+				a * t;
 				// read input; //4
 			} while (a * (t - u) / w != 10); //3.0
 		}
@@ -42,7 +45,7 @@ int main(void) {	//0
 		}
 	}
 
-	w = my_func(w, v, ppp); // 1.2
+	w = my_func(w, v); // 1.2
 	your_func();
 	my_func(fff[1], v + (y * t *(v - ppp)));						// 1.2
 

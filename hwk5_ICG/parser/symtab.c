@@ -749,6 +749,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           else {
             child2->right_sibling = create_ast_node(RETURN_N); //insert implicit return for void functions
             child2->right_sibling->return_type = VOID_TYPE_N;
+            child2->right_sibling->left_child = create_ast_node(VOID_TYPE_N);
             // fprintf(stderr, "\nIMPLICIT RETURN\n");
           }
         }
@@ -848,16 +849,6 @@ void collect_literals(ast_node root, symboltable_t *symtab){
     case STRING_LITERAL_N:
       name = root->value_string;
 
-      //symhashtable_t *hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
-
-      //symnode_t *node = lookup_symhashtable(hash, name, NOHASHSLOT);
-
-      // Should be true since otherwise we would have caught a variable not being
-      // declared in a previous step.
-      //assert(node != NULL);
-
-
-
       // Calculate slot for this node, try to find the current node in the symbol table
       slot = hashPJW(name, collection->size);
       node = lookup_symhashtable(collection, name, slot);
@@ -865,40 +856,48 @@ void collect_literals(ast_node root, symboltable_t *symtab){
       if(node == NULL){
         insert_into_symhashtable(collection, root);
       }
-      //insert_into_symhashtable(collection, name, root);
 
-      // if(node == NULL){     /* Literal not in collection. Add it. */
-      //   insert_into_symhashtable(collection, name, root);
-      // } else{   /* There is a node in the collection with the same name. Only
-      //              add root to collection if scopes are different */
-      //   //if(node->abnode->curr_level != root->curr_level ||
-      //   //   node->abnode->curr_sibling != root->curr_sibling)
-      //   insert_into_symhashtable(collection, name, root); // won't insert w/ same hash
-      // }
       break;
 
     /* Need to hash the value differently so as to not to mistake strings and
     ints, (e.g. 1 vs "1") */
     case INT_LITERAL_N:
-      //name = calloc(1, DEFAULTSTRSIZE);
+
       name = calloc(DEFAULTSTRSIZE, sizeof(char));
-      //fprintf(stderr, "SIZE OF NAME IS %lu\n", sizeof(name));
       sprintf(name, "__%d", root->value_int);
       root->value_string = strdup(name);
 
-      //fprintf(stderr, "JUST ASSIGNED %s, strlen %lu\n", name, strlen(name));
-      //fprintf(stderr, "Collection size is %d", collection->size);
-
       slot = hashPJW(name, collection->size);
-
       node = lookup_symhashtable(collection, name, slot);
 
       if(node == NULL){
-        //fprintf(stderr, "NODE NOT FOUND\n");
         insert_into_symhashtable(collection, root);
       }
       break;
 
+    case RETURN_N:
+      // Empty return. Create a new symnode to add to
+      // the collection because otherwise it will give us
+      // trouble later when trying to create quads, since
+      // the function to create quads takes symnodes and there
+      // is currently no symnode for this empty return.
+
+      if(root->left_child != NULL){
+        if(root->left_child->node_type == VOID_TYPE_N){
+          name = calloc(DEFAULTSTRSIZE, sizeof(char));
+          sprintf(name, "__%s", "void");
+
+          root->left_child->value_string = calloc(DEFAULTSTRSIZE, sizeof(char));
+          strcpy(root->left_child->value_string, name);
+
+          slot = hashPJW(name, collection->size);
+          node = lookup_symhashtable(collection, name, slot);
+
+          if(node == NULL){
+            insert_into_symhashtable(collection, root->left_child);
+          }
+        }
+      }
     default:
       break;
   }
@@ -907,6 +906,7 @@ void collect_literals(ast_node root, symboltable_t *symtab){
 
 void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
   symhashtable_t *hash = NULL;
+  symnode_t *snode = NULL;
 
   /* Depending on node types, go deeper, create sibling scopes, add to hashtable,
    * or take other appropriate action.
@@ -919,38 +919,76 @@ void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
       break;
 
     case FUNC_DECLARATION_N: // function declaraions
-
       break;
 
     case FUNCTION_N:
-
-      break;
-
-    case ID_N:      /* print the id */
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
-      symnode_t *snode = NULL;
       for(;hash != NULL && snode == NULL; hash = hash->parent) {
         snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(snode != NULL);
       root->snode = snode;
+      break;
 
+    case ID_N:      /* print the id */
+      printf("%s\n", root->value_string);
+      hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+      assert(hash != NULL);
+      for(;hash != NULL && snode == NULL; hash = hash->parent) {
+        snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      }
+      assert(snode != NULL);
+      root->snode = snode;
       break;
 
     case ARRAY_TYPE_N:             // check for return types!
+      hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
+      assert(hash != NULL);
+      for(;hash != NULL && snode == NULL; hash = hash->parent) {
+        snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      }
+      assert(snode != NULL);
+      root->snode = snode;
+      break;
 
+    case INT_LITERAL_N:
+      hash = symtab->literal_collection;
+      assert(hash != NULL);
+      assert(root->value_string != NULL);
+      snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      root->snode = snode;
+      break;
+
+    case STRING_LITERAL_N:
+      hash = symtab->literal_collection;
+      assert(hash != NULL);
+      assert(root->value_string != NULL);
+      snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
+      root->snode = snode;
       break;
 
     case RETURN_N:
 
+      hash = symtab->literal_collection;
+      assert(hash != NULL);
+
+      // if(root->left_child != NULL){
+      //   printf("NOT NULL\n\n\n\n");
+      //   ast_node wut = root->left_child;
+      //   printf("wut = %s\n", wut->value_string);
+      // }
+      // //assert(root->value_string != NULL);
+      if(root->left_child->node_type == VOID_TYPE_N){
+        snode = lookup_symhashtable(hash, root->left_child->value_string, NOHASHSLOT);
+        root->left_child->snode = snode;
+      }
       break;
+
 
     default:
-
       break;
   }
-
 
 
 
@@ -1000,3 +1038,37 @@ int is_unary_operator(ast_node root){
        return 0;
      }
 }
+
+// void insert_true_false(symboltable_t *symtab){
+//   symnode_t * snode;
+//
+//   ast_node true_n = create_ast_node(INT_LITERAL_N);
+//   ast_node false_n = create_ast_node(INT_LITERAL_N);
+//
+//   char *true_name = calloc(DEFAULTSTRSIZE, sizeof(char));
+//   char *false_name = calloc(DEFAULTSTRSIZE, sizeof(char));
+//
+//   true_n->value_int = 1;
+//   false_n->value_int = 0;
+//
+//   sprintf(true_name, "__%d", true_n->value_int);
+//   sprintf(false_name, "__%d", false_n->value_int);
+//
+//   strcpy(true_n->value_string, true_name);
+//   strcpy(false_n->value_string, false_name);
+//
+//   assert(true_n->value_string != NULL);
+//   assert(false_n->value_string != NULL);
+//
+//   symhashtable_t *hash = symtab->literal_collection;
+//   assert(hash != NULL);
+//
+//   snode = lookup_symhashtable(hash, true_n->value_string, NOHASHSLOT);
+//   if(snode == NULL){
+//     insert_into_symhashtable(hash, true_n);
+//   }
+//   true_n->snode = snode;
+//
+//   snode = lookup_symhashtable(hash, false_n->value_string, NOHASHSLOT);
+//   false_n->snode = snode;
+// }

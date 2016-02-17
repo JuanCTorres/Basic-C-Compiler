@@ -150,6 +150,10 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
       printf("return to %s at line %d ", root->return_to->value_string, root->return_to->line_declared);
       break;
 
+    case FOR_HEADER_EMPTY_N:
+      printf("EMPTY FOR HEADER");
+      break;
+
     default:
       //printf("at default of switch\n");
       break;

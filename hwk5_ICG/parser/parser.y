@@ -385,6 +385,7 @@ forStatement : FOR_T '(' forHeaderExpression ';' forHeaderExpression ';' forHead
 forHeaderExpression : expression  { $$ = $1; }
 |  /* empty */ {
     ast_node t = create_ast_node(FOR_HEADER_EMPTY_N);
+    $$ = t;
   }
 ;
 

@@ -15,6 +15,7 @@
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define NOHASHSLOT -1
+#define ELEMSIZE 4  // For now, only ints in our arrays
 
 typedef struct scope {
   int level;
@@ -29,7 +30,8 @@ typedef enum {
   VAR_ARRAY_INT_T,
   FUNC_INT_T,
   FUNC_VOID_T,
-  STRING_T
+  STRING_T,
+  VOID_RET_T,
 } decl_type;
 
 typedef struct {
@@ -46,6 +48,7 @@ static val_name_pair_2 decl_table[] = {
   { FUNC_INT_T, "FUNC_INT" },
   { FUNC_VOID_T, "FUNC_VOID"},
   { STRING_T, "STRING"},
+  { VOID_RET_T, "VOID_RETURN"},
   { 0, NULL}
 };
 
