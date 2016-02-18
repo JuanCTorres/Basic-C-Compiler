@@ -19,6 +19,7 @@
 #include "symtab.h"
 #include "ast.h"
 #include "quad.h"
+#include "targetcode.h"
 
 
 ast_node root = NULL;
@@ -34,7 +35,12 @@ int funcError = 0;
 quad_type *quad_array[1024*5];
 
 
-int main() {
+int main(int argc, char *argv[]) {
+ 
+if(argc != 2) {
+	fprintf(stderr, "Please input the ourput file name\n");
+}
+
  int noRoot = 0;		/* 0 means we will have a root */
 
   //yydebug = 1; 	//uncomment to enable tracing
@@ -101,6 +107,8 @@ int main() {
 
 	  print_quad_array(quad_array);
       // preorder_print(root);
+
+      gen_target_code (quad_array, argv[1]);
 
  		}
  	}
