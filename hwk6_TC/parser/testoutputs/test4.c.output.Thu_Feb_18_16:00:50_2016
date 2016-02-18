@@ -3,6 +3,7 @@ Result of test done to parser.
 test4.c BEGIN.
 ===========================================================
 
+Please input the ourput file name
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
@@ -84,69 +85,7 @@ ROOT (uid: N0)
                                       ++ (uid: N47) (type: INT_TYPE) 
                                         ID (uid: N48) h [scope (7,0) <- (6,0)] declared at line 12 (type: INT_TYPE) 
                                       SEQ (uid: N49) 
-                                        LOCAL_DECLARATIONS (uid: N50) 
-                                          ID (uid: N51) j [scope (8,0) <- (7,0)] declared at line 16 (type: INT_TYPE) 
-                                        STATEMENT_LIST (uid: N52) 
-        SEQ (uid: N53) 
-          LOCAL_DECLARATIONS (uid: N54) 
-            ID (uid: N55) huehuehue [scope (2,1) <- (1,0)] declared at line 27 (type: INT_TYPE) 
-          STATEMENT_LIST (uid: N56) 
-        SEQ (uid: N57) 
-          LOCAL_DECLARATIONS (uid: N58) 
-            ID (uid: N59) lolz [scope (2,2) <- (1,0)] declared at line 31 (type: INT_TYPE) 
-            ARRAY_TYPE (uid: N60) catz [scope (2,2) <- (1,0)] declared at line 31 (type: INT_TYPE) 
-              INT_LITERAL (uid: N61) 100(type: INT_TYPE) 
-            ID (uid: N62) haaa [scope (2,2) <- (1,0)] declared at line 31 (type: INT_TYPE) 
-          STATEMENT_LIST (uid: N63) 
-        RETURN (uid: N0) [scope (0,0) <- (0,0)]return to main at line 1 (type: VOID_TYPE) 
-          VOID_TYPE (uid: N0) 
-(0-0) contains:
-  VAR_INT __void (val: 0)
-  VAR_INT __100 (val: 100)
-  VAR_INT __10 (val: 10)
-  VAR_INT __0 (val: 0)
-  VAR_INT __1 (val: 1)
-  VAR_INT __4 (val: 8)
-There are 38 entries
-0: (LABEL, main, -, -)
-1: (NEQ, __T3, e, f)
-2: (ifTrue, __L_23_TRUE, __T3, -)
-3: (ASSIGN, __T3, __0, -)
-4: (GOTO, __L_23_DONE, -, -)
-5: (LABEL, __L_23_TRUE, -, -)
-6: (ASSIGN, __T3, __1, -)
-7: (LABEL, __L_23_DONE, -, -)
-8: (ASSIGN, __L_22_FI, __T3, -)
-9: (ifFalse, __L_22_FI, __T0, -)
-10: (LABEL, __L_34_WHILE_BEGIN, -, -)
-11: (NEQ, __T6, h, __0)
-12: (ifTrue, __L_35_TRUE, __T6, -)
-13: (ASSIGN, __T6, __0, -)
-14: (GOTO, __L_35_DONE, -, -)
-15: (LABEL, __L_35_TRUE, -, -)
-16: (ASSIGN, __T6, __1, -)
-17: (LABEL, __L_35_DONE, -, -)
-18: (ifFalse, __L_34_WHILE_END, __T6, -)
-19: (LABEL, __L_42_FOR_BEGIN, -, -)
-20: (GT, __T9, h, __10)
-21: (ifTrue, __L_44_TRUE, __T9, -)
-22: (ASSIGN, __T9, __0, -)
-23: (GOTO, __L_44_DONE, -, -)
-24: (LABEL, __L_44_TRUE, -, -)
-25: (ASSIGN, __T9, __1, -)
-26: (LABEL, __L_44_DONE, -, -)
-27: (ifFalse, __L_42_FOR_END, __T9, -)
-28: (INC, __T10, h, -)
-29: (GOTO, __L_42_FOR_BEGIN, -, -)
-30: (LABEL, __L_42_FOR_END, -, -)
-31: (GOTO, __L_34_WHILE_BEGIN, -, -)
-32: (LABEL, __L_22_FI, -, -)
-33: (MULT, __T11, __100, __4)
-34: (ADDR, __T12, catz, -)
-35: (ADD, __T13, __T11, __T12)
-36: (DEREF, __T14, __T13, -)
-37: (RETURN, __void, -, -)
-
+               
 
 ===========================================================
 test4.c finished.

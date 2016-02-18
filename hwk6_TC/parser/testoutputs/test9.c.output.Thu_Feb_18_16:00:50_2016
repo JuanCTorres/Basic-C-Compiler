@@ -3,6 +3,7 @@ Result of test done to parser.
 test9.c BEGIN.
 ===========================================================
 
+Please input the ourput file name
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
@@ -273,19 +274,7 @@ There are 92 entries
 77: (GOTO, __L_135_DONE, -, -)
 78: (LABEL, __L_135_TRUE, -, -)
 79: (ASSIGN, __T24, __1, -)
-80: (LABEL, __L_135_DONE, -, -)
-81: (MULT, __T25, __3, __4)
-82: (ADDR, __T26, b, -)
-83: (ADD, __T27, __T25, __T26)
-84: (DEREF, __T28, __T27, -)
-85: (ADD, __T29, a, __T28)
-86: (MULT, __T30, __5, __4)
-87: (ADDR, __T31, b, -)
-88: (ADD, __T32, __T30, __T31)
-89: (DEREF, __T33, __T32, -)
-90: (ADD, __T34, a, __T33)
-91: (RETURN, __0, -, -)
-
+80: (LABEL, __L_1
 
 ===========================================================
 test9.c finished.

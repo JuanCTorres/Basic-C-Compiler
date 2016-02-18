@@ -2,16 +2,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 #include "targetcode.h"
+=======
+
+>>>>>>> e1de1a9d588e8f41e6f5dc58cf4145e54d72c085
 
 int gen_target_code (quad_type **array, char argv[]) {
 
 
 	char *filename = calloc(sizeof(char), 100);
-	if(NULL == strcat(filename, "./ys/")) {
-		assert(0);
-	}
-
 	if(NULL == strcat(filename, &argv[1])) {
 		assert(0);
 	}
@@ -21,20 +21,24 @@ int gen_target_code (quad_type **array, char argv[]) {
 
 	FILE *ofile = fopen(filename, "w");
 
+<<<<<<< HEAD
 	fprintf(ofile, "sadsdsad");
+=======
+>>>>>>> e1de1a9d588e8f41e6f5dc58cf4145e54d72c085
 
 	// switch() {
 
 	// 	case
 	// 	break
-
-
-
-
 	// }
+<<<<<<< HEAD
 
 
 	return 0;
 }
 
 
+=======
+	return 0;
+}
+>>>>>>> e1de1a9d588e8f41e6f5dc58cf4145e54d72c085

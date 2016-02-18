@@ -3,6 +3,7 @@ Result of test done to parser.
 test5.c BEGIN.
 ===========================================================
 
+Please input the ourput file name
 line: 26 | Error: Number of parameters to function myfunc does not match the declaration at line 1
 
 WARNING: There were function errors. Data structure may be ill-formed.

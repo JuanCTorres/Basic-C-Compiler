@@ -3,6 +3,7 @@ Result of test done to parser.
 test.error.c BEGIN.
 ===========================================================
 
+Please input the ourput file name
 syntax error at line 11	 yytext = 'hello\n'
 syntax error at line 13	 yytext = ')'
 syntax error at line 14	 yytext = 'broken'

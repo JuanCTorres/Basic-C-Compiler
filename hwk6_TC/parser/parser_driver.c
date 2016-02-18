@@ -39,6 +39,7 @@ int main(int argc, char *argv[]) {
  
 if(argc != 2) {
 	fprintf(stderr, "Please input the ourput file name\n");
+	return 1;
 }
 
  int noRoot = 0;		/* 0 means we will have a root */

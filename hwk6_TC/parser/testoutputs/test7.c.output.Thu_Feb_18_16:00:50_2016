@@ -3,6 +3,7 @@ Result of test done to parser.
 test7.c BEGIN.
 ===========================================================
 
+Please input the ourput file name
 Error: Returning wrong type for function main declared at line 5
 
 WARNING: There were return errors. Data structure may be ill-formed.
