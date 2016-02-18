@@ -27,8 +27,7 @@ ROOT (uid: N0)
     SEQ (uid: N8) 
       LOCAL_DECLARATIONS (uid: N9) 
       STATEMENT_LIST (uid: N10) 
-(0-0) contains:
-There are 0 entries
+Halting
 
 
 ===========================================================

@@ -100,13 +100,7 @@ ROOT (uid: N0)
                   INT_LITERAL (uid: N61) 123(type: INT_TYPE) 
         CALL (uid: N62) 
           FUNCTION (uid: N63) myfunc  (0 params:)[scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
-(0-0) contains:
-  VAR_INT __123 (val: 123)
-  VAR_INT __2 (val: 2)
-  VAR_INT __3 (val: 3)
-  VAR_INT __4 (val: 4)
-  VAR_INT __5 (val: 5)
-There are 0 entries
+Halting
 
 
 ===========================================================
