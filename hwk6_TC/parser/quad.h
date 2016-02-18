@@ -1,5 +1,3 @@
-
-
 #ifndef QUAD_H_
 #define QUAD_H_
 
