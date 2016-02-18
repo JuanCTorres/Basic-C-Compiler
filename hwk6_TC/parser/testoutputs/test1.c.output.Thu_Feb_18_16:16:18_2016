@@ -3,7 +3,6 @@ Result of test done to parser.
 test1.c BEGIN.
 ===========================================================
 
-Please input the ourput file name
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
@@ -445,7 +444,45 @@ There are 187 entries
 146: (ADD, __T67, e, f)
 147: (ASSIGN, c, __T67, -)
 148: (INC, __T68, a, -)
-149: (GOTO, __L_169_FOR_
+149: (GOTO, __L_169_FOR_BEGIN, -, -)
+150: (LABEL, __L_169_FOR_END, -, -)
+151: (LABEL, __L_192_WHILE_BEGIN, -, -)
+152: (DIV, __T69, a, __5)
+153: (ADD, __T70, __-3, __-8)
+154: (SUB, __T71, __T69, __T70)
+155: (EQ, __T74, __T71, __100)
+156: (ifTrue, __L_193_TRUE, __T74, -)
+157: (ASSIGN, __T74, __0, -)
+158: (GOTO, __L_193_DONE, -, -)
+159: (LABEL, __L_193_TRUE, -, -)
+160: (ASSIGN, __T74, __1, -)
+161: (LABEL, __L_193_DONE, -, -)
+162: (ifFalse, __L_192_WHILE_END, __T74, -)
+163: (MULT, __T75, __10, __4)
+164: (ADDR, __T76, uu, -)
+165: (ADD, __T77, __T75, __T76)
+166: (DEREF, __T78, __T77, -)
+167: (MULT, __T79, __12, __21)
+168: (PRINT, __T80, __T79, -)
+169: (GOTO, __L_192_WHILE_BEGIN, -, -)
+170: (LABEL, __L_212_DO_WHILE_BEGIN, -, -)
+171: (ASSIGN, asd, dsa, -)
+172: (ifTrue, __L_212_DO_WHILE_BEGIN, __1, -)
+173: (ASSIGN, __T81, -, -)
+174: (MULT, __T82, a, b)
+175: (EQ, __T85, __T82, d)
+176: (ifTrue, __L_223_TRUE, __T85, -)
+177: (ASSIGN, __T85, __0, -)
+178: (GOTO, __L_223_DONE, -, -)
+179: (LABEL, __L_223_TRUE, -, -)
+180: (ASSIGN, __T85, __1, -)
+181: (LABEL, __L_223_DONE, -, -)
+182: (ifFalse, __L_222_ELSE, __T81, -)
+183: (GOTO, __L_222_FI, -, -)
+184: (LABEL, __L_222_ELSE, -, -)
+185: (LABEL, __L_222_FI, -, -)
+186: (RETURN, __0, -, -)
+
 
 ===========================================================
 test1.c finished.

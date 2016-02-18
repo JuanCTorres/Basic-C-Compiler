@@ -3,7 +3,6 @@ Result of test done to parser.
 test6.c BEGIN.
 ===========================================================
 
-Please input the ourput file name
 line: 16 | error: use of undeclared identifier i
 line: 16 | error: use of undeclared identifier i
 line: 16 | error: use of undeclared identifier i

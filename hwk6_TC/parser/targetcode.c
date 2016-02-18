@@ -12,7 +12,7 @@ int gen_target_code (quad_type **array, char argv[]) {
 		assert(0);
 	}
 
-	if(NULL == strcat(filename, &argv[1])) {
+	if(NULL == strcat(filename, argv)) {
 		assert(0);
 	}
 	if(NULL == strcat(filename, ".ys")) {
