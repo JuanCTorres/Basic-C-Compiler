@@ -8,13 +8,11 @@
 #include <stdlib.h>
 
 
-
-
 int gen_target_code (quad_type **array, char argv[]) {
 
 
 	char *filename = calloc(sizeof(char), 100);
-	if(NULL == strcat(filename, argv[1])) {
+	if(NULL == strcat(filename, &argv[1])) {
 		assert(0);
 	}
 	if(NULL == strcat(filename, ".ys")) {
@@ -23,15 +21,11 @@ int gen_target_code (quad_type **array, char argv[]) {
 
 	FILE *ofile = fopen(filename, "w");
 
-	fprintf(ofile, "sadsdsad")
 
 	// switch() {
 
 	// 	case
 	// 	break
-
-
-
-
 	// }
+	return 0;
 }
