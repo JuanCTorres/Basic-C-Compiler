@@ -1,8 +1,10 @@
-#include "ast.h"
 
 
 #ifndef QUAD_H_
 #define QUAD_H_
+
+#include "ast.h"
+#include "symtab.h"
 
 symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable);
 
