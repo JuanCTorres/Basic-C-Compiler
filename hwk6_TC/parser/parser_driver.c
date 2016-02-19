@@ -36,7 +36,7 @@ quad_type *quad_array[1024*5];
 
 
 int main(int argc, char *argv[]) {
- 
+
 if(argc != 2) {
 	fprintf(stderr, "Please input the ourput file name\n");
 	return 1;
@@ -109,7 +109,7 @@ if(argc != 2) {
 	  print_quad_array(quad_array);
       // preorder_print(root);
 
-      gen_target_code (quad_array, argv[1]);
+      //gen_target_code (quad_array, argv[1]);
 
  		}
  	}
