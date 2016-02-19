@@ -65,6 +65,7 @@ typedef struct symnode {
   decl_type *parameters;
   int num_parameters;
   struct ast_node_struct* abnode;
+  int addr;
   /* Other attributes go here. */
 } symnode_t;
 

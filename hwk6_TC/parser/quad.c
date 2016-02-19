@@ -339,9 +339,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           label2 = NewLabel(x, "FI", hashtable);
           temp = NewTemp(hashtable);
 
-          make_insert_quad(Q_ASSIGN, temp, x->left_child->snode, NULL);
           // test
           CG(x->left_child, hashtable);
+          make_insert_quad(Q_ASSIGN, temp, x->left_child->snode, NULL);
+
           make_insert_quad(Q_IFF, label1, temp, NULL);
           // if
           CG(x->left_child->right_sibling, hashtable);
