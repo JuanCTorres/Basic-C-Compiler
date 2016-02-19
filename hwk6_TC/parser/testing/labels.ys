@@ -1,0 +1,11 @@
+.pos 0x0
+
+irmovl array, %eax
+
+
+
+
+.pos 0x100
+array: .long 0xDEADCAFE
+
+
