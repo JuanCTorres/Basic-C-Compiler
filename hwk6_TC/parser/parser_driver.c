@@ -98,15 +98,15 @@ if(argc != 2) {
 
       pretty_print(symtab->literal_collection, 0);
 
-	  //add_temps_to_ast(root, symtab->literal_collection);
+	  	//add_temps_to_ast(root, symtab->literal_collection);
 
-	  CG(root, symtab->literal_collection);
+	  	CG(root, symtab->literal_collection);
 
-	  print_quad_array(quad_array);
+	  	print_quad_array(quad_array);
       // preorder_print(root);
 
-      //gen_target_code (quad_array, argv[1]);
-      calculate_var_offsets(symtab->root);
+			//calculate_var_offsets(symtab->root);
+      gen_target_code (quad_array, argv[1], symtab);
       printf("\nPrint hashtables (level-sibno) according to their hierarchy\n");
       pretty_print(symtab->root, 0);	//prints symbol table nicely, print after calculate_var_offsets()
 

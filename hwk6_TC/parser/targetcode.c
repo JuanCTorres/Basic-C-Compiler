@@ -14,8 +14,7 @@ int endofstr;
 FILE *ofile = NULL;
 
 
-int gen_target_code (quad_type **array, char argv[]) {
-
+int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable) {
 
 	char *filename = calloc(sizeof(char), 100);
 	if(NULL == strcat(filename, "./ys/")) {
@@ -31,46 +30,48 @@ int gen_target_code (quad_type **array, char argv[]) {
 
 	ofile = fopen(filename, "w");
 
+	assert(ofile != NULL);
+
+	calculate_var_offsets(symboltable->root);
+	calculate_string_addrs(symboltable->root);
+
+
 	for(int i = 0; i < quad_index; i++){
-    	
+
 		int type1;
-	    int type2;
-		
+		int type2;
+
 		switch(array[i]->op){
 			case Q_ASSIGN:
 
 				break;
 
 			case Q_ADD:
-				
-				type1 = get_symnode_type(array[i]->src1);
-        		type2 = get_symnode_type(array[i]->src1);
 
-		        // Move first operand into %eax
-        		if(type1 == INT_SYMNODE){
-          			fprintf(ofile, "irmovl %08x, %%eax\n", array[i]->src1->num_val);
-		        } else if(type1 == TEMP_SYMNODE){
+				type1 = get_symnode_type(array[i]->src1);
+				type2 = get_symnode_type(array[i]->src1);
+
+				// Move first operand into %eax
+				if(type1 == INT_SYMNODE){
+					fprintf(ofile, "irmovl %08x, %%eax\n", array[i]->src1->num_val);
+				} else if(type1 == TEMP_SYMNODE){
 					fprintf(ofile, "mrmovl %d, %%eax\n", get_temp_addr(array[i]->src1));
 				} else{ // var
 					if(is_var_global(array[i]->src1)){
 						//fprintf(ofile, "mrmovl %d", );
-          			} else{
-          				//fprintf(ofile, "mrmovl %d(%%ebp), %%eax\n", array[i]->src1->offset);
+					} else{
+						//fprintf(ofile, "mrmovl %d(%%ebp), %%eax\n", array[i]->src1->offset);
 					}
-        		}
+				}
 
-        // Move first operand into %ecx
-        if(type2 == INT_SYMNODE){
-          fprintf(ofile, "irmovl %d, %%ecx\n", array[i]->src2->num_val);
-        } else if(type2 == INT_SYMNODE){
-          fprintf(ofile, "mrmovl %d, %%ecx\n", get_temp_addr(array[i]->src2));
-        } else{ // var
-          //fprintf(ofile, "mrmovl %d(%%ebp), %%ecx");
-        }
-
-
-				
-
+				// Move first operand into %ecx
+				if(type2 == INT_SYMNODE){
+					fprintf(ofile, "irmovl %d, %%ecx\n", array[i]->src2->num_val);
+				} else if(type2 == INT_SYMNODE){
+					fprintf(ofile, "mrmovl %d, %%ecx\n", get_temp_addr(array[i]->src2));
+				} else{ // var
+					//fprintf(ofile, "mrmovl %d(%%ebp), %%ecx");
+				}
 				break;
 
 			case Q_SUB:
@@ -197,32 +198,16 @@ int gen_target_code (quad_type **array, char argv[]) {
 				break;
 		}
 	}
+
+	put_strings_in_mem(symboltable->root);
+	print_global_vars(symboltable);
+
 	return 0;
 }
 
 
 /*~~~~~~~~~~~~~~~~~~~~ Helper functions ~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-/* Allocates space for all the variables in the symbol table */
-// int calculate_var_addrs(symhashtable* symtable){
-
-// 	for(int j = 0; j < HASHSIZE; j++ ) {
-// 		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
-// 			if(node->type == VAR_INT_T){
-// 				fprintf(ofile, "%s\n", node->name);
-// 				// Create a label scope_sibling_name for each variable.
-// 				fprintf(ofile, "\t.long %d_%d_%s\n", node->abnode->current_level,
-// 				 node->abnode->current_sibling, node->name);
-// 			}
-// 		}
-// 	}
-
-// 	/* Recurse on each child of the subtree hashtable */
-// 	symhashtable_t *child;
-// 	for (child = hashtable->child; child != NULL; child = child->rightsib)
-// 	pretty_print(child);
-
-// }
 
 int offset = -8;
 
@@ -239,25 +224,24 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 				assert(node->abnode->left_child->right_sibling != NULL); //SEQ
 				assert(node->abnode->left_child->right_sibling->left_child != NULL); //LOCAL_DECLARATIONS
 				// assert(node->abnode->left_child->right_sibling->left_child->left_child);
-				
-				
+
+
 				if(node->abnode->left_child->left_child != NULL) {
 					hash = node->abnode->left_child->left_child->snode->parent; //param
 					// printf("\nLOLZ HERE!\n");
 					calculate_var_offsets_helper(hash);
-				}	
+				}
 
 				else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
-							
+
 					hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
 					calculate_var_offsets_helper(hash); //offset starts at eight
-				}		
+				}
 
 			}
 		}
-	}	
+	}
 	return 0;
-
 }
 
 
@@ -270,7 +254,7 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable){
 				node->offset = offset;
 				offset -= 4;
 				printf("%s %d\n", node->name,offset);
-			} 
+			}
 			else if(node->type == VAR_ARRAY_INT_T) {
 				node->offset = offset;
 				offset = offset - 4 * node->abnode->array_length;
@@ -287,15 +271,47 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable){
 
 
 /* Allocates space for all the variables in the symbol table */
-void calculate_var_addrs(symhashtable_t *symtable){
+void calculate_global_var_addrs(symboltable_t *symboltable){
+	int global_var_offset = 0;
+	symhashtable_t *hashtable = symboltable->root;
 
-	// for(int j = 0; j < HASHSIZE; j++ ) {
-	// 	for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
-	// 		if(node->type == VAR_INT_T){
-  //
-	// 		}
-	// 	}
-	// }
+  for(int j = 0; j < HASHSIZE; j++) {
+    for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
+
+      if(node->type == VAR_INT_T){
+				node->addr = endofstr + global_var_offset;
+				global_var_offset += 4;
+      }
+
+			if(node->type == VAR_ARRAY_INT_T) {
+				node->addr = global_var_offset;
+				global_var_offset += (node->abnode->array_length * 4);
+			}
+    }
+  }
+}
+
+
+/* Print the global variables into the file */
+void print_global_vars(symboltable_t *symboltable){
+	symhashtable_t *hashtable = symboltable->root;
+
+	fprintf(ofile, ".pos 0x%x\n", endofstr);
+
+	for(int j = 0; j < HASHSIZE; j++) {
+    for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
+
+      if(node->type == VAR_INT_T){
+				fprintf(ofile, ".long 0x%08x\n", node->num_val);
+      }
+
+			if(node->type == VAR_ARRAY_INT_T) {
+				for(int i = 0; i < node->abnode->array_length; i++){
+					fprintf(ofile, ".long 0x%08x\n", 0);
+				}
+			}
+    }
+  }
 }
 
 
@@ -323,33 +339,32 @@ int get_temp_addr(symnode_t* temp){
 
 /* Calculates the location of strings in memory and stores that location in the
  symnode for the particular string */
-/* Calculates the location of strings in memory and stores that location in the
- symnode for the particular string */
 void calculate_string_addrs(symhashtable_t* hashtable){
-
-	endoftemp = temp_counter * 4 + ENDOFPROG + 4; // Where in memory the strings should start
-	                                              // +4 because that's the space for the last quad.
+	endoftemp = (temp_counter * 4 + ENDOFPROG + 4); // Where in memory the strings should start
+	// +4 because that's the space for the last quad.
 	int str_offset = 0;	// str_offset
 
 	// Traverse the hashtable looking for strings (we have to put them in
 	// memory).
 	for(int j = 0; j < HASHSIZE; j++ ) {
-    	for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
+		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
 			if(node->type == STRING_T){
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
 				str_offset += round_str_addr(node->name);
 			}
-    	}
+		}
 	}
-  endofstr = str_offset + 4;
+	endofstr = str_offset + 4;
 }
 
 
 /*
 */
 void put_strings_in_mem(symhashtable_t* hashtable){
+
+	assert(ofile != NULL);
 
 	fprintf(ofile, ".pos 0x%x\n", endoftemp);
 
