@@ -1,3 +1,8 @@
+int a = 0;
+int b;
+int c = 23;
+//int asdf[10];
+
 int main (void) {
 /* ignore these!
 	this too

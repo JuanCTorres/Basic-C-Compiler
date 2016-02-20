@@ -75,10 +75,8 @@ typedef struct symnode {
 /* Set the name in this node. */
 void set_node_name(symnode_t *node, char *name);
 
-
 /* Does the identifier in this node equal name? */
 int name_is_equal(symnode_t *node, char *name);
-
 
 /* Hash table for a given scope in a symbol table. */
 typedef struct symhashtable {
@@ -95,12 +93,12 @@ typedef struct symhashtable {
 /* Symbol table for all levels of scope. */
 typedef struct {
   symhashtable_t *root, *leaf, *literal_collection;
-
+  
 } symboltable_t;
-
 
 /* Create an empty symbol table. */
 symboltable_t *create_symboltable();
+
 symnode_t *create_symnode(char *name, symhashtable_t *hashtable);
 
 symnode_t *insert_into_symhashtable(symhashtable_t *hashtable, struct ast_node_struct* astnode);

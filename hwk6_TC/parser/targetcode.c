@@ -33,7 +33,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 	assert(ofile != NULL);
 
 	calculate_var_offsets(symboltable->root);
-	calculate_string_addrs(symboltable->root);
+	calculate_string_addrs(symboltable->literal_collection);
 
 
 	for(int i = 0; i < quad_index; i++){
@@ -199,7 +199,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 		}
 	}
 
-	put_strings_in_mem(symboltable->root);
+	put_strings_in_mem(symboltable->literal_collection);
 	print_global_vars(symboltable);
 
 	return 0;
@@ -296,18 +296,19 @@ void calculate_global_var_addrs(symboltable_t *symboltable){
 void print_global_vars(symboltable_t *symboltable){
 	symhashtable_t *hashtable = symboltable->root;
 
-	fprintf(ofile, ".pos 0x%x\n", endofstr);
+	fprintf(ofile, "\n.pos 0x%x   # Start of global var space \n", endofstr);
 
 	for(int j = 0; j < HASHSIZE; j++) {
     for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
       if(node->type == VAR_INT_T){
-				fprintf(ofile, ".long 0x%08x\n", node->num_val);
+				fprintf(ofile, "\t.long 0x%08x\n", node->num_val);
+				fprintf(ofile, "for var %s, the val of ast node is %d\n", node->name, node->abnode->value_int);
       }
 
 			if(node->type == VAR_ARRAY_INT_T) {
 				for(int i = 0; i < node->abnode->array_length; i++){
-					fprintf(ofile, ".long 0x%08x\n", 0);
+					fprintf(ofile, "\t.long 0x%08x\n", 0);
 				}
 			}
     }
@@ -349,14 +350,16 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 	for(int j = 0; j < HASHSIZE; j++ ) {
 		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
+
 			if(node->type == STRING_T){
+				fprintf(ofile, "Found a string: %s\n", node->name);
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
 				str_offset += round_str_addr(node->name);
 			}
 		}
 	}
-	endofstr = str_offset + 4;
+	endofstr = endoftemp + str_offset + 4;
 }
 
 
@@ -366,7 +369,8 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 
 	assert(ofile != NULL);
 
-	fprintf(ofile, ".pos 0x%x\n", endoftemp);
+
+	fprintf(ofile, ".pos 0x%x    #Start of string space\n", endoftemp);
 
 	// Traverse the hashtable looking for strings (we have to put them in
 	// memory).
@@ -379,7 +383,7 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 				int len = strlen(node->name);
 				for(int counter = 0; counter < len; counter++){
 					if(counter % 4 == 0){
-						fprintf(ofile, "\n.long \t0x");
+						fprintf(ofile, "\n\t.long \t0x");
 					}
 					fprintf(ofile, "%x", node->name[counter]);
 				}
