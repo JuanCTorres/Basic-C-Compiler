@@ -72,7 +72,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\t mull %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tmull %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
@@ -92,10 +92,8 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			/*~~~~~~~~~ Unary operations ~~~~~~~~~*/
 
 			case Q_INC:
-				//move_to_reg_un(array[i]);
 				// move to %eax
 				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-//				fprintf(ofile, "I AM NOW IN INC\n");
 				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
 				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				if(assign(array[i]->src1) == 0){
@@ -434,7 +432,10 @@ int get_symnode_type(symnode_t *snode){
   if(strcmp(substr1, "__T") == 0){
     free(substr1);
     return TEMP_SYMNODE;
-  } else{
+	} else if(strcmp(substr1, "__R") == 0){
+		free(substr1);
+		return RET_SYMNODE;
+	} else{
     free(substr1);
     return INT_SYMNODE;
   }
@@ -471,62 +472,11 @@ void print_quad(quad_type *quad){
   Moves the operands of a quad containing a binary operation into %eax and %ecx.
 	The left operand is moved into %eax, while the right one is moved into %ecx.
 */
-// void move_to_reg_bin(quad_type *quad){
-// 	int type1 = get_symnode_type(quad->src1);
-// 	int type2 = get_symnode_type(quad->src2);
-//
-// 	fprintf(ofile, "\n\t");
-// 	if(type1 == INT_SYMNODE){
-// 		fprintf(ofile, "irmovl %x, %%eax\n", quad->src1->num_val);
-// 	} else if(type1 == TEMP_SYMNODE){
-// 		fprintf(ofile, "mrmovl %d, %%eax\n", get_temp_addr(quad->src1));
-// 	} else{ // var
-// 		if(is_var_global(quad->src1)){
-// 			fprintf(ofile, "mrmovl %d, %%eax\n", quad->src1->addr);
-// 		} else{
-// 			fprintf(ofile, "mrmovl %d(%%ebp), %%eax\n", quad->src1->offset);
-// 		}
-// 	}
-//
-// 	fprintf(ofile, "\t");
-// 	// Move first operand into %ecx
-// 	if(type2 == INT_SYMNODE){
-// 		fprintf(ofile, "irmovl %x, %%ecx\n", quad->src2->num_val);
-// 	} else if(type2 == TEMP_SYMNODE){
-// 		fprintf(ofile, "mrmovl %d, %%ecx\n", get_temp_addr(quad->src2));
-// 	} else{ // var
-// 		if(is_var_global(quad->src2)){
-// 			fprintf(ofile, "mrmovl %d, %%ecx\n", quad->src2->addr);
-// 		} else{
-// 			fprintf(ofile, "mrmovl %d(%%ebp), %%ecx\n", quad->src2->offset);
-// 		}
-// 	}
-//}
-
 void move_to_reg_bin(quad_type *quad){
 	move_to_reg(quad->src1, LEFT_OPERAND_REG);
 	move_to_reg(quad->src2, RIGHT_OPERAND_REG);
 }
 
-/*
-  Moves a unary operand into %eax.
-*/
-// void move_to_reg_un(quad_type *quad){
-// 	int type = get_symnode_type(quad->src1);
-//
-// 	fprintf(ofile, "\n\t");
-// 	if(type == INT_SYMNODE){
-// 		fprintf(ofile, "irmovl %x, %%eax\n", quad->src1->num_val);
-// 	} else if(type == TEMP_SYMNODE){
-// 		fprintf(ofile, "mrmovl %d, %%eax\n", get_temp_addr(quad->src1));
-// 	} else{ // var
-// 		if(is_var_global(quad->src1)){
-// 			fprintf(ofile, "mrmovl %d, %%eax\n", quad->src1->addr);
-// 		} else{
-// 			fprintf(ofile, "mrmovl %d(%%ebp), %%eax\n", quad->src1->offset);
-// 		}
-// 	}
-// }
 
 /*
   Moves a unary operand into %eax.
@@ -539,8 +489,8 @@ void move_to_reg_un(quad_type *quad){
 /*
    Handles register and memory moves to assign a value to a particular variable
 	 or temp.
-	 Uses %edx to store the right value, then moves it as appropriate.
-	 Returns 1 if successful, 0 if unsuccessful (when trying to assign to an int)
+	 Returns 1 if successful, 0 if unsuccessful (when trying to assign to an int
+   or a register used for returning values)
 */
 int assign(symnode_t *left_val){
 	assert(left_val != NULL);
@@ -549,7 +499,8 @@ int assign(symnode_t *left_val){
 	int left_type = get_symnode_type(left_val);
 	//int right_type = get_symnode_type(right_val);
 
-	if(left_type == INT_SYMNODE){ // Can't assign to right value.
+	// Can't assign to right value (int or return register from function)
+	if(left_type == INT_SYMNODE || left_type == RET_SYMNODE){
 		return 0;
 	} else{
 		if(left_type == TEMP_SYMNODE){
@@ -570,44 +521,23 @@ int assign(symnode_t *left_val){
    Moves the right hand side of an assignment operation into %eax (since assign moves
    whatever is located in %eax into memory)
 */
-void move_to_reg_rhs(quad_type *quad){
-	int type = get_symnode_type(quad->src2);
-	fprintf(ofile, "\t");
-
-	if(type == INT_SYMNODE){
-		fprintf(ofile, "irmovl %x, %s\n", quad->src2->num_val, LEFT_OPERAND_REG);
-	} else if(type == TEMP_SYMNODE){
-		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(quad->src2), LEFT_OPERAND_REG);
-	} else{ // var
-		if(is_var_global(quad->src2)){
-			fprintf(ofile, "mrmovl %d, %s\n", quad->src2->addr, LEFT_OPERAND_REG);
-		} else{
-			fprintf(ofile, "mrmovl %d(%s), %s\n", quad->src2->offset, BASE_PTR, LEFT_OPERAND_REG);
-		}
-	}
-}
-
-
-// /*
-//    Moves the right hand side of an assignment operation into %eax (since assign moves
-//    whatever is located in %eax into memory)
-// */
-// void move_to_assign_reg(symnode_t *operand){
-// 	int type = get_symnode_type(operand);
-//
+// void move_to_reg_rhs(quad_type *quad){
+// 	int type = get_symnode_type(quad->src2);
 // 	fprintf(ofile, "\t");
+//
 // 	if(type == INT_SYMNODE){
-// 		fprintf(ofile, "irmovl %x, %s\n", operand->num_val, LEFT_OPERAND_REG);
+// 		fprintf(ofile, "irmovl %x, %s\n", quad->src2->num_val, LEFT_OPERAND_REG);
 // 	} else if(type == TEMP_SYMNODE){
-// 		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(operand), LEFT_OPERAND_REG);
+// 		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(quad->src2), LEFT_OPERAND_REG);
 // 	} else{ // var
-// 		if(is_var_global(operand)){
-// 			fprintf(ofile, "mrmovl %d, %s\n", operand->addr, LEFT_OPERAND_REG);
+// 		if(is_var_global(quad->src2)){
+// 			fprintf(ofile, "mrmovl %d, %s\n", quad->src2->addr, LEFT_OPERAND_REG);
 // 		} else{
-// 			fprintf(ofile, "mrmovl %d(%s), %s\n", operand->offset, BASE_PTR, LEFT_OPERAND_REG);
+// 			fprintf(ofile, "mrmovl %d(%s), %s\n", quad->src2->offset, BASE_PTR, LEFT_OPERAND_REG);
 // 		}
 // 	}
 // }
+
 
 void move_to_reg(symnode_t *operand, char *reg){
 	int type = get_symnode_type(operand);
@@ -617,6 +547,8 @@ void move_to_reg(symnode_t *operand, char *reg){
 		fprintf(ofile, "irmovl %x, %s\n", operand->num_val, reg);
 	} else if(type == TEMP_SYMNODE){
 		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(operand),reg);
+	} else if(type == RET_SYMNODE){
+		fprintf(ofile, "rrmovl %s %s\n", RETURN_REG, reg);
 	} else{ // var
 		if(is_var_global(operand)){
 			fprintf(ofile, "mrmovl %d, %s\n", operand->addr, reg);

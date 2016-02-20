@@ -708,6 +708,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Function epilogue
         label2 = NewLabel(x, "FUNC_EPILOGUE", hashtable);
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
+        x->snode = create_symnode("__RET_INT", NULL);
         break;
 
       case FUNCTION_N:

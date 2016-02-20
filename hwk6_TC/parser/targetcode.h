@@ -18,6 +18,7 @@ extern int quad_index;
 #define VAR_SYMNODE 0
 #define TEMP_SYMNODE 1
 #define INT_SYMNODE 2
+#define RET_SYMNODE 3
 
 /*
    Macros for the registers, which we plan to use for specific operations.
