@@ -63,7 +63,7 @@ void move_to_reg_bin(quad_type *quad);
 
 void move_to_reg_un(quad_type *quad);
 
-void move_to_assign_reg(symnode_t *operand);
+void move_to_reg(symnode_t *operand, char *reg);
 
 int assign(symnode_t *left_val);
 
