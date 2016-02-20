@@ -22,5 +22,7 @@ void put_strings_in_mem(symhashtable_t* hashtable);
 void calculate_string_addrs(symhashtable_t* hashtable);
 
 int round_str_addr(char* str);
+void calculate_var_offsets_helper(symhashtable_t* hashtable);
+int calculate_var_offsets(symhashtable_t* hashtable);
 
 #endif

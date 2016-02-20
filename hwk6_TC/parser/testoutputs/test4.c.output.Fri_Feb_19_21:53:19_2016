@@ -4,35 +4,6 @@ test4.c BEGIN.
 ===========================================================
 
 
-Print hashtables (level-sibno) according to their hierarchy
-(0-0) contains:
-  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
-  (1-0) contains:
-    VAR_INT zzzz (val: 0)
-    VAR_INT a (val: 0)
-    VAR_INT b (val: 0)
-    VAR_INT c (val: 0)
-    (2-0) contains:
-      VAR_INT d (val: 0)
-      (3-0) contains:
-        VAR_INT e (val: 0)
-        (4-0) contains:
-          VAR_INT f (val: 0)
-          (5-0) contains:
-            VAR_INT g (val: 0)
-            (6-0) contains:
-              VAR_INT h (val: 0)
-              (7-0) contains:
-                VAR_INT i (val: 0)
-                (8-0) contains:
-                  VAR_INT j (val: 0)
-    (2-1) contains:
-      VAR_INT huehuehue (val: 0)
-    (2-2) contains:
-      VAR_INT haaa (val: 0)
-      VAR_ARRAY_INT catz
-      VAR_INT lolz (val: 0)
-
 
 ROOT (uid: N0) 
   FUNC_DECLARATION (uid: N1) main  (3 params: VAR_INT  VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: VOID_TYPE) 
@@ -101,12 +72,12 @@ ROOT (uid: N0)
         RETURN (uid: N0) [scope (0,0) <- (0,0)]return to main at line 1 (type: VOID_TYPE) 
           VOID_TYPE (uid: N0) 
 (0-0) contains:
-  VAR_INT __void (val: 0)
-  VAR_INT __100 (val: 100)
-  VAR_INT __10 (val: 10)
-  VAR_INT __0 (val: 0)
-  VAR_INT __1 (val: 1)
-  VAR_INT __4 (val: 8)
+  VAR_INT __void (val: 0, offset: 0)
+  VAR_INT __100 (val: 100, offset: 0)
+  VAR_INT __10 (val: 10, offset: 0)
+  VAR_INT __0 (val: 0, offset: 0)
+  VAR_INT __1 (val: 1, offset: 0)
+  VAR_INT __4 (val: 8, offset: 0)
 There are 38 entries
 0: (LABEL, main, -, -)
 1: (NEQ, __T3, e, f)
@@ -146,6 +117,49 @@ There are 38 entries
 35: (ADD, __T13, __T11, __T12)
 36: (DEREF, __T14, __T13, -)
 37: (RETURN, __void, -, -)
+zzzz -12
+a -16
+b -20
+c -24
+d -28
+e -32
+f -36
+g -40
+h -44
+i -48
+j -52
+huehuehue -56
+haaa -60
+lolz -464
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT zzzz (val: 0, offset: -8)
+    VAR_INT a (val: 0, offset: -12)
+    VAR_INT b (val: 0, offset: -16)
+    VAR_INT c (val: 0, offset: -20)
+    (2-0) contains:
+      VAR_INT d (val: 0, offset: -24)
+      (3-0) contains:
+        VAR_INT e (val: 0, offset: -28)
+        (4-0) contains:
+          VAR_INT f (val: 0, offset: -32)
+          (5-0) contains:
+            VAR_INT g (val: 0, offset: -36)
+            (6-0) contains:
+              VAR_INT h (val: 0, offset: -40)
+              (7-0) contains:
+                VAR_INT i (val: 0, offset: -44)
+                (8-0) contains:
+                  VAR_INT j (val: 0, offset: -48)
+    (2-1) contains:
+      VAR_INT huehuehue (val: 0, offset: -52)
+    (2-2) contains:
+      VAR_INT haaa (val: 0, offset: -56)
+      VAR_ARRAY_INT catz (length: 100, offset: -60)
+      VAR_INT lolz (val: 0, offset: -460)
 
 
 ===========================================================

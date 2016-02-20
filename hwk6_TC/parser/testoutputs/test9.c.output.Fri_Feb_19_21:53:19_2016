@@ -4,31 +4,6 @@ test9.c BEGIN.
 ===========================================================
 
 
-Print hashtables (level-sibno) according to their hierarchy
-(0-0) contains:
-  FUNC_INT main (0 params:)
-  FUNC_VOID my_new_f (0 params:)
-  FUNC_VOID my_func (2 params: VAR_INT  VAR_INT )
-  (1-0) contains:
-    VAR_INT a (val: 0)
-    VAR_INT d (val: 0)
-    VAR_INT e (val: 0)
-    VAR_INT f (val: 0)
-    VAR_INT g (val: 0)
-    VAR_INT h (val: 0)
-  (1-1) contains:
-    VAR_INT e (val: 0)
-  (1-2) contains:
-    VAR_INT a (val: 0)
-    VAR_INT b (val: 0)
-    VAR_INT c (val: 0)
-    VAR_INT d (val: 0)
-    (2-0) contains:
-    (2-1) contains:
-    (2-2) contains:
-    (2-3) contains:
-    (2-4) contains:
-
 
 ROOT (uid: N0) 
   FUNC_DECLARATION (uid: N1) my_func  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: VOID_TYPE) 
@@ -184,14 +159,14 @@ ROOT (uid: N0)
           INT_LITERAL (uid: N149) 0(type: INT_TYPE) 
 (0-0) contains:
   STRING alygljkglkug
-  VAR_INT __void (val: 0)
-  VAR_INT __0 (val: 0)
-  VAR_INT __1 (val: 1)
-  VAR_INT __2 (val: 2)
-  VAR_INT __3 (val: 3)
-  VAR_INT __4 (val: 4)
-  VAR_INT __5 (val: 5)
-  VAR_INT __7 (val: 7)
+  VAR_INT __void (val: 0, offset: 0)
+  VAR_INT __0 (val: 0, offset: 0)
+  VAR_INT __1 (val: 1, offset: 0)
+  VAR_INT __2 (val: 2, offset: 0)
+  VAR_INT __3 (val: 3, offset: 0)
+  VAR_INT __4 (val: 4, offset: 0)
+  VAR_INT __5 (val: 5, offset: 0)
+  VAR_INT __7 (val: 7, offset: 0)
 There are 92 entries
 0: (LABEL, my_func, -, -)
 1: (ADD, __T0, f, __4)
@@ -213,14 +188,14 @@ There are 92 entries
 17: (ifFalse, __L_41_FI, __T1, -)
 18: (ASSIGN, b, __1, -)
 19: (LABEL, __L_41_FI, -, -)
-20: (ASSIGN, __T5, -, -)
-21: (EQ, __T8, b, __1)
-22: (ifTrue, __L_52_TRUE, __T8, -)
-23: (ASSIGN, __T8, __0, -)
-24: (GOTO, __L_52_DONE, -, -)
-25: (LABEL, __L_52_TRUE, -, -)
-26: (ASSIGN, __T8, __1, -)
-27: (LABEL, __L_52_DONE, -, -)
+20: (EQ, __T8, b, __1)
+21: (ifTrue, __L_52_TRUE, __T8, -)
+22: (ASSIGN, __T8, __0, -)
+23: (GOTO, __L_52_DONE, -, -)
+24: (LABEL, __L_52_TRUE, -, -)
+25: (ASSIGN, __T8, __1, -)
+26: (LABEL, __L_52_DONE, -, -)
+27: (ASSIGN, __T5, __T8, -)
 28: (ifFalse, __L_51_ELSE, __T5, -)
 29: (ASSIGN, c, __2, -)
 30: (ASSIGN, d, __4, -)
@@ -285,6 +260,42 @@ There are 92 entries
 89: (DEREF, __T33, __T32, -)
 90: (ADD, __T34, a, __T33)
 91: (RETURN, __0, -, -)
+a -12
+b -16
+c -20
+d -24
+e -12
+a -12
+d -16
+e -20
+f -24
+g -28
+h -32
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_VOID my_new_f (0 params:)
+  FUNC_VOID my_func (2 params: VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT a (val: 0, offset: -8)
+    VAR_INT d (val: 0, offset: -12)
+    VAR_INT e (val: 0, offset: -16)
+    VAR_INT f (val: 0, offset: -20)
+    VAR_INT g (val: 0, offset: -24)
+    VAR_INT h (val: 0, offset: -28)
+  (1-1) contains:
+    VAR_INT e (val: 0, offset: -8)
+  (1-2) contains:
+    VAR_INT a (val: 0, offset: -8)
+    VAR_INT b (val: 0, offset: -12)
+    VAR_INT c (val: 0, offset: -16)
+    VAR_INT d (val: 0, offset: -20)
+    (2-0) contains:
+    (2-1) contains:
+    (2-2) contains:
+    (2-3) contains:
+    (2-4) contains:
 
 
 ===========================================================
