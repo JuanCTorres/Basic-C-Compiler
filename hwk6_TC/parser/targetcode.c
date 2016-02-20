@@ -303,7 +303,6 @@ void print_global_vars(symboltable_t *symboltable){
 
       if(node->type == VAR_INT_T){
 				fprintf(ofile, "\t.long 0x%08x\n", node->num_val);
-				fprintf(ofile, "for var %s, the val of ast node is %d\n", node->name, node->abnode->value_int);
       }
 
 			if(node->type == VAR_ARRAY_INT_T) {
