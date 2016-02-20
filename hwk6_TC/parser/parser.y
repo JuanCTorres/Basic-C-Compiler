@@ -432,6 +432,7 @@ expression : var '=' expression {
     ast_node t = create_ast_node(OP_ASSIGN_N);
     t->left_child = $1;
     t->left_child->right_sibling = $3;
+    t->line_num = num_lines;
     $$ = t;
   }
 |  rValue {$$ = $1; }
@@ -467,85 +468,102 @@ ast_node t = create_ast_node(OP_PLUS_N);
   }
 |  expression '-' expression  {
   ast_node t = create_ast_node(OP_MINUS_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression '*' expression  {
   ast_node t = create_ast_node(OP_TIMES_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression '/' expression  {
   ast_node t = create_ast_node(OP_DIVIDE_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression '%' expression  {
   ast_node t = create_ast_node(OP_MODULUS_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression '<' expression  {
   ast_node t = create_ast_node(OP_LESS_THAN_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression LESS_EQUAL_T expression  {
   ast_node t = create_ast_node(OP_LESS_EQUAL_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression '>' expression  {
   ast_node t = create_ast_node(OP_GREATER_THAN_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression GREATER_EQUAL_T expression  {
   ast_node t = create_ast_node(OP_GREATER_EQUAL_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression ISEQUAL_T expression  {
   ast_node t = create_ast_node(OP_EQUALS_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression NOTEQUAL_T expression  {
   ast_node t = create_ast_node(OP_NOT_EQUAL_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression AND_T expression  {
   ast_node t = create_ast_node(OP_AND_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  expression OR_T expression  {
   ast_node t = create_ast_node(OP_OR_N);
+  t->line_num = num_lines;
   t->left_child = $1;
   t->left_child->right_sibling = $3;
   $$ = t; }
 |  '!' expression  {
   ast_node t = create_ast_node(OP_NOT_N);
+  t->line_num = num_lines;
   t->left_child = $2;
   $$ = t; }
 |  '-' expression %prec UMINUS_T {
   ast_node t = create_ast_node(OP_NEG_N);
+  t->line_num = num_lines;
   t->left_child = $2;
   $$ = t; }
 |  var  { $$ = $1; }
 |  INCREMENT_T var  {
   ast_node t = create_ast_node(OP_INCREMENT_N);
+  t->line_num = num_lines;
   t->left_child = $2;
   $$ = t; }
 |  DECREMENT_T var  {
   ast_node t = create_ast_node(OP_DECREMENT_N);
+  t->line_num = num_lines;
   t->left_child = $2;
   $$ = t; }
 |  '(' expression ')'  { $$ = $2; }
 |  call  { $$ = $1; }
 |  INTCONST_T  {
   ast_node t = create_ast_node(INT_LITERAL_N);
+  t->line_num = num_lines;
   t->value_int = atoi(savedLiteralText);
   $$ = t;
 

@@ -1,0 +1,3 @@
+.pos 0x18    #Start of string space
+
+.pos 0x1c   # Start of global var space 

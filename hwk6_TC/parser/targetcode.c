@@ -362,7 +362,7 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 
 
 			if(node->type == STRING_T){
-				fprintf(ofile, "Found a string: %s\n", node->name);
+				// fprintf(ofile, "Found a string: %s\n", node->name);
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
 				str_offset += round_str_addr(node->name);
