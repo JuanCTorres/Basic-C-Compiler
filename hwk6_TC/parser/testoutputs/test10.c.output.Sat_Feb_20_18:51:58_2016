@@ -73,7 +73,7 @@ There are 31 entries
 16: (PUSH, __T5, -, -)
 17: (CALL, recurr, -, -)
 18: (LABEL, __L_23_FUNC_EPILOGUE, -, -)
-19: (MULT, __T6, a, -)
+19: (MULT, __T6, a, __RET_INT)
 20: (RETURN, __T6, -, -)
 21: (LABEL, __L_8_FI, -, -)
 22: (RETURN, b, -, -)
@@ -83,7 +83,7 @@ There are 31 entries
 26: (PUSH, __T7, -, -)
 27: (CALL, recurr, -, -)
 28: (LABEL, __L_38_FUNC_EPILOGUE, -, -)
-29: (ASSIGN, answer, -, -)
+29: (ASSIGN, answer, __RET_INT, -)
 30: (RETURN, answer, -, -)
 answer -12
 a -12

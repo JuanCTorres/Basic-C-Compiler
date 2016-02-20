@@ -117,6 +117,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_IFT:
+				if(array[i-1]->op == Q_EQ) {
+					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
+				}
 
 				break;
 
@@ -136,12 +139,10 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 				break;
 
-			case Q_HALT:
-
-				break;
-
 			case Q_EQ:
-
+				move_to_reg_bin(array[i]);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				break;
 
 			case Q_GT:
@@ -177,26 +178,6 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_RETURN:
-
-				break;
-
-			case Q_JEQ:
-
-				break;
-
-			case Q_JGT:
-
-				break;
-
-			case Q_JGEQ:
-
-				break;
-
-			case Q_JLT:
-
-				break;
-
-			case Q_JLE:
 
 				break;
 
