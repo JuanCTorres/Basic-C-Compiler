@@ -32,6 +32,7 @@ int symtabError = 0;
 int typeError = 0;
 int returnError = 0;
 int funcError = 0;
+int exprTypeError = 0;
 quad_type *quad_array[1024*5];
 
 
@@ -79,11 +80,15 @@ if(argc != 2) {
 			if(returnError) {
 				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
 			}
+			check_types_in_expr(root); 
+			if(exprTypeError) {
+				fprintf(stderr, "\nWARNING: There were type disagreement in expressions. Data structure may be ill-formed.\n\n");
+			}
       print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
 
-      if(parseError || symtabError || typeError || returnError || funcError){
+      if(parseError || symtabError || typeError || returnError || funcError || exprTypeError){
         printf("Halting\n");
         return 1;
       }

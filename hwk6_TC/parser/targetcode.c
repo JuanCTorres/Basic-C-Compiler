@@ -352,7 +352,7 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 
 
 			if(node->type == STRING_T){
-				fprintf(ofile, "Found a string: %s\n", node->name);
+				// fprintf(ofile, "Found a string: %s\n", node->name);
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
 				str_offset += round_str_addr(node->name);
@@ -414,7 +414,7 @@ int get_symnode_type(symnode_t *snode){
   }
   free(substr2);
 
-  if(strcmp(substr1, "__T")){
+  if(strcmp(substr1, "__T") == 0){
     free(substr1);
     return TEMP_SYMNODE;
   } else{

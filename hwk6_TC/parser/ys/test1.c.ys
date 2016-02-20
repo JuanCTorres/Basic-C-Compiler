@@ -1,1 +1,21 @@
-sadsdsad
+mrmovl 1136, %eax
+mrmovl 1152, %eax
+mrmovl 1172, %eax
+irmovl 00000001, %eax
+irmovl 7, %ecx
+irmovl fffffffd, %eax
+irmovl -8, %ecx
+mrmovl 1436, %eax
+.pos 0x5cc    #Start of string space
+
+	.long 	0x74657374
+	.long 	0x20626173
+	.long 	0x69637321
+	.long 	0x5c6e
+.pos 0x5e0   # Start of global var space 
+	.long 0x00000000
+for var a, the val of ast node is 0
+	.long 0x00000000
+for var b, the val of ast node is 0
+	.long 0x00000000
+for var c, the val of ast node is 0

@@ -1,1 +1,13 @@
-sadsdsad
+mrmovl 632, %eax
+mrmovl 736, %eax
+.pos 0x324    #Start of string space
+
+	.long 	0x4c4f4c21
+	.long 	0x5c6e
+	.long 	0x696e2066
+	.long 	0x6f72206c
+	.long 	0x6f6f705c
+	.long 	0x6e
+	.long 	0x6e6f745c
+	.long 	0x6e
+.pos 0x348   # Start of global var space 

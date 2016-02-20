@@ -22,6 +22,7 @@ extern int symtabError;
 extern int typeError;
 extern int returnError;
 extern int funcError;
+extern int exprTypeError;
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 static int *siblings;
@@ -1074,3 +1075,156 @@ int is_unary_operator(ast_node root){
 //   snode = lookup_symhashtable(hash, false_n->value_string, NOHASHSLOT);
 //   false_n->snode = snode;
 // }
+
+void check_binary(ast_node root) {
+    assert(root->left_child != NULL);
+    assert(root->left_child->right_sibling != NULL);
+    // if (root->left_child->return_type != root->left_child->right_sibling->return_type) {
+    //   exprTypeError = 1;
+    // }
+    if(root->left_child->return_type == VOID_TYPE_N || root->left_child->right_sibling->return_type == VOID_TYPE_N) {
+      exprTypeError = 1;
+      fprintf(stderr, "line: %d | Error: Type disagreement of variable(s) used with binary operator\n", root->line_num);
+      fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+    }
+    if(root->left_child->node_type == CALL_N) {
+      if(root->left_child->left_child->return_type == VOID_TYPE_N){
+        exprTypeError = 1;
+        fprintf(stderr, "line: %d | Error: Type disagreement of variable(s) used with binary operator\n", root->line_num);
+        fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+      }
+    }
+    if(root->left_child->right_sibling->node_type == CALL_N) {
+      if(root->left_child->right_sibling->left_child->return_type == VOID_TYPE_N){
+        exprTypeError = 1;
+        fprintf(stderr, "line: %d | Error: Type disagreement of variable(s) used with binary operator\n", root->line_num);
+        fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+      }
+    }
+}
+
+void check_unary(ast_node root) {
+  //assert(root->left_child != NULL);
+  if(root->node_type == RETURN_N) {
+      if(root->left_child != NULL && root->left_child->node_type == CALL_N) {
+        if(root->left_child->left_child->return_type == VOID_TYPE_N){
+          exprTypeError = 1;
+          fprintf(stderr, "line: %d | Error: Returning wrong type\n", root->line_num);
+                fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+
+      }
+  }
+  }
+  else if (root->left_child->return_type == VOID_TYPE_N) {
+fprintf(stderr, "line: %d | Error: Type disagreement of variable used with unary operator\n", root->line_num);
+      fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+
+    exprTypeError = 1;
+  }
+  else if(root->left_child->node_type == CALL_N) {
+      if(root->left_child->left_child->return_type == VOID_TYPE_N){
+    fprintf(stderr, "line: %d | Error: Type disagreement of variable used with unary operator\n", root->line_num);
+      fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+
+        exprTypeError = 1;
+      }
+  }
+
+}
+
+int check_types_in_expr(ast_node root) {
+  symhashtable_t *hash = NULL;
+  symnode_t *node = NULL;
+  ast_node anode = NULL;
+
+  switch (root->node_type) {
+    case OP_ASSIGN_N:
+    check_binary(root);
+    break;
+    
+    case OP_PLUS_N:
+    check_binary(root);
+    break;
+    
+    case OP_MINUS_N:
+    check_binary(root);   
+    break;
+    
+    case OP_NEG_N:
+    check_unary(root);
+    break;
+    
+    case OP_TIMES_N:
+        check_binary(root);
+    break;
+    
+    case OP_DIVIDE_N:
+        check_binary(root);
+    break;
+    
+    case OP_EQUALS_N:
+        check_binary(root);
+    break;
+    
+    case OP_INCREMENT_N:
+        check_unary(root);
+    break;
+    
+    case OP_DECREMENT_N:
+        check_unary(root);
+    break;
+
+    case OP_MODULUS_N:
+        check_binary(root);
+    break;
+
+    case OP_LESS_THAN_N:
+        check_binary(root);
+    break;
+    
+    case OP_LESS_EQUAL_N:
+        check_binary(root);
+    break;
+    
+    case OP_GREATER_THAN_N:
+        check_binary(root);
+    break;
+    
+    case OP_GREATER_EQUAL_N:
+        check_binary(root);
+    break;
+    
+    case OP_NOT_EQUAL_N:
+        check_binary(root);
+    break;
+    
+    case OP_AND_N:
+        check_binary(root);
+    break;
+    
+    case OP_OR_N:
+        check_binary(root);
+    break;
+    
+    case OP_NOT_N:
+        check_unary(root);
+    break;
+
+    case RETURN_N:
+        check_unary(root);
+    break;
+
+    default:
+      // printf("at default of switch\n");
+      break;
+
+
+  }
+
+  /* Recurse on each child of the subtree root, with a depth one
+     greater than the root's depth. */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    check_types_in_expr(child);
+  return 0;
+}

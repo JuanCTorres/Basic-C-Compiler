@@ -1,6 +1,6 @@
 Result of test done to parser.
 
-test8.c BEGIN.
+test7.c BEGIN.
 ===========================================================
 
 
@@ -36,4 +36,4 @@ Print hashtables (level-sibno) according to their hierarchy
 
 
 ===========================================================
-test8.c finished.
+test7.c finished.
