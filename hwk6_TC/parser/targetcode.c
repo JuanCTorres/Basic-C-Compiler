@@ -60,33 +60,32 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			/*~~~~~~~~~ Binary operations ~~~~~~~~~*/
 			case Q_ADD:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\taddl %%ecx, %%eax\n");
+				fprintf(ofile, "\taddl %s %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_SUB:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tsubl %%ecx, %%eax\n");
+				fprintf(ofile, "\tsubl %s %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tmull %%ecx, %%eax\n");
+				fprintf(ofile, "\t mull %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_DIV:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "NOW PRINTING DIVISION\n");
-				fprintf(ofile, "\tdivl %%ecx, %%eax\n");
+				fprintf(ofile, "\t divl %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 
 			case Q_MOD:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tmodl %%ecx, %%eax\n");
+				fprintf(ofile, "\t modl %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
