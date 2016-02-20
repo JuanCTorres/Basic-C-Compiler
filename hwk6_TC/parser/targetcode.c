@@ -96,7 +96,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				// move to %eax
 				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 //				fprintf(ofile, "I AM NOW IN INC\n");
-				fprintf(ofile, "\tirmovl 1, %%ecx\n");
+				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
 				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				if(assign(array[i]->src1) == 0){
 					fprintf(ofile, "ERROR. TRYING TO ASSIGN VALUE TO INT\n");
@@ -105,7 +105,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_DEC:
 				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-				fprintf(ofile, "\tirmovl 1, %%ecx\n");
+				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 
 				if(!assign(array[i]->src1)){
