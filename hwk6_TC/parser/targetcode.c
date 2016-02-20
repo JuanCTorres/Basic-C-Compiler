@@ -32,29 +32,32 @@ int gen_target_code (quad_type **array, char argv[]) {
 	ofile = fopen(filename, "w");
 
 	for(int i = 0; i < quad_index; i++){
-    int type1;
-    int type2;
-
+    	
+		int type1;
+	    int type2;
+		
 		switch(array[i]->op){
 			case Q_ASSIGN:
 
 				break;
 
 			case Q_ADD:
-        type1 = get_symnode_type(array[i]->src1);
-        type2 = get_symnode_type(array[i]->src1);
+				
+				type1 = get_symnode_type(array[i]->src1);
+        		type2 = get_symnode_type(array[i]->src1);
 
-        // Move first operand into %eax
-        if(type1 == INT_SYMNODE){
-          fprintf(ofile, "irmovl %08x, %%eax\n", array[i]->src1->num_val);
-        } else if(type1 == TEMP_SYMNODE){
-          fprintf(ofile, "mrmovl %d, %%eax\n", get_temp_addr(array[i]->src1));
-        } else{ // var
-          if(is_var_global(array[i]->src1)){
-            //fprintf(ofile, "mrmovl %d", );
-          }
-          //fprintf(ofile, "mrmovl %d(%%ebp), %%eax\n", array[i]->src1->offset);
-        }
+		        // Move first operand into %eax
+        		if(type1 == INT_SYMNODE){
+          			fprintf(ofile, "irmovl %08x, %%eax\n", array[i]->src1->num_val);
+		        } else if(type1 == TEMP_SYMNODE){
+					fprintf(ofile, "mrmovl %d, %%eax\n", get_temp_addr(array[i]->src1));
+				} else{ // var
+					if(is_var_global(array[i]->src1)){
+						//fprintf(ofile, "mrmovl %d", );
+          			} else{
+          				//fprintf(ofile, "mrmovl %d(%%ebp), %%eax\n", array[i]->src1->offset);
+					}
+        		}
 
         // Move first operand into %ecx
         if(type2 == INT_SYMNODE){
@@ -64,6 +67,9 @@ int gen_target_code (quad_type **array, char argv[]) {
         } else{ // var
           //fprintf(ofile, "mrmovl %d(%%ebp), %%ecx");
         }
+
+
+				
 
 				break;
 
@@ -190,26 +196,95 @@ int gen_target_code (quad_type **array, char argv[]) {
 			default:
 				break;
 		}
-    return 0;
 	}
-//
-//
-// 	// switch() {
-//
-// 	// 	case
-// 	// 	break
-//
-//
-//
-//
-// 	// }
-//
-//
 	return 0;
 }
-//
-//
+
+
 /*~~~~~~~~~~~~~~~~~~~~ Helper functions ~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/* Allocates space for all the variables in the symbol table */
+// int calculate_var_addrs(symhashtable* symtable){
+
+// 	for(int j = 0; j < HASHSIZE; j++ ) {
+// 		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
+// 			if(node->type == VAR_INT_T){
+// 				fprintf(ofile, "%s\n", node->name);
+// 				// Create a label scope_sibling_name for each variable.
+// 				fprintf(ofile, "\t.long %d_%d_%s\n", node->abnode->current_level,
+// 				 node->abnode->current_sibling, node->name);
+// 			}
+// 		}
+// 	}
+
+// 	/* Recurse on each child of the subtree hashtable */
+// 	symhashtable_t *child;
+// 	for (child = hashtable->child; child != NULL; child = child->rightsib)
+// 	pretty_print(child);
+
+// }
+
+int offset = -8;
+
+int calculate_var_offsets(symhashtable_t* hashtable) {
+	symhashtable_t *hash = NULL;
+	for(int j = 0; j < HASHSIZE; j++ ) { //every index in hash
+		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) { //every linked list at an index
+			offset = -8;
+			if(node->type == FUNC_INT_T || node->type == FUNC_VOID_T) {
+
+				assert(node != NULL);
+				assert(node->abnode != NULL); //ast_node
+				assert(node->abnode->left_child != NULL); //formal_params
+				assert(node->abnode->left_child->right_sibling != NULL); //SEQ
+				assert(node->abnode->left_child->right_sibling->left_child != NULL); //LOCAL_DECLARATIONS
+				// assert(node->abnode->left_child->right_sibling->left_child->left_child);
+				
+				
+				if(node->abnode->left_child->left_child != NULL) {
+					hash = node->abnode->left_child->left_child->snode->parent; //param
+					// printf("\nLOLZ HERE!\n");
+					calculate_var_offsets_helper(hash);
+				}	
+
+				else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
+							
+					hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
+					calculate_var_offsets_helper(hash); //offset starts at eight
+				}		
+
+			}
+		}
+	}	
+	return 0;
+
+}
+
+
+
+void calculate_var_offsets_helper(symhashtable_t* hashtable){
+
+	for(int j = 0; j < HASHSIZE; j++ ) {
+		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
+			if(node->type == VAR_INT_T){
+				node->offset = offset;
+				offset -= 4;
+				printf("%s %d\n", node->name,offset);
+			} 
+			else if(node->type == VAR_ARRAY_INT_T) {
+				node->offset = offset;
+				offset = offset - 4 * node->abnode->array_length;
+			}
+		}
+	}
+
+	/* Recurse on each child of the subtree hashtable */
+	symhashtable_t *child;
+	for (child = hashtable->child; child != NULL; child = child->rightsib)
+		calculate_var_offsets_helper(child);
+
+}
+
 
 /* Allocates space for all the variables in the symbol table */
 void calculate_var_addrs(symhashtable_t *symtable){
@@ -240,11 +315,14 @@ int get_global_addr(symnode_t *var){
 }
 
 
+
 int get_temp_addr(symnode_t* temp){
 	return temp->num_val * 4 + ENDOFPROG;
 }
 
 
+/* Calculates the location of strings in memory and stores that location in the
+ symnode for the particular string */
 /* Calculates the location of strings in memory and stores that location in the
  symnode for the particular string */
 void calculate_string_addrs(symhashtable_t* hashtable){
@@ -256,14 +334,14 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 	// Traverse the hashtable looking for strings (we have to put them in
 	// memory).
 	for(int j = 0; j < HASHSIZE; j++ ) {
-    for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
+    	for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
 			if(node->type == STRING_T){
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
 				str_offset += round_str_addr(node->name);
 			}
-    }
+    	}
 	}
   endofstr = str_offset + 4;
 }
@@ -296,10 +374,8 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 }
 
 
-/*
-  Takes a str, and returns the amount of bytes it will need in memory (a multiple
-  of 4), since addresses must be aligned in 4-byte boundaries.
-*/
+/* Takes a str, and returns the amount of bytes it will need in memory (a multiple
+   of 4), since addresses must be aligned in 4-byte boundaries. */
 int round_str_addr(char* str){
 	int len = strlen(str);
 	return len + 4 - (len % 4);

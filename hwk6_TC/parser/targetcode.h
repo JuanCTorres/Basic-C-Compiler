@@ -34,6 +34,8 @@ int get_temp_addr(symnode_t* temp);
 int is_var_global(symnode_t *var);
 
 int round_str_addr(char* str);
+void calculate_var_offsets_helper(symhashtable_t* hashtable);
+int calculate_var_offsets(symhashtable_t* hashtable);
 
 char *substring(char *str, int len);
 

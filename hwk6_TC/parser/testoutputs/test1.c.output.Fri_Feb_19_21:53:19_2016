@@ -4,33 +4,6 @@ test1.c BEGIN.
 ===========================================================
 
 
-Print hashtables (level-sibno) according to their hierarchy
-(0-0) contains:
-  FUNC_INT main (0 params:)
-  (1-0) contains:
-    VAR_ARRAY_INT dd
-    VAR_INT a (val: 0)
-    VAR_INT b (val: 0)
-    VAR_INT c (val: 0)
-    VAR_INT d (val: 0)
-    VAR_INT e (val: 0)
-    VAR_INT f (val: 0)
-    VAR_INT h (val: 0)
-    VAR_INT i (val: 0)
-    VAR_ARRAY_INT cc
-    (2-0) contains:
-      VAR_INT zz (val: 0)
-    (2-1) contains:
-      VAR_INT tt (val: 0)
-      VAR_ARRAY_INT uu
-    (2-2) contains:
-      VAR_INT dsa (val: 0)
-      VAR_INT asd (val: 0)
-    (2-3) contains:
-      VAR_INT x (val: 0)
-    (2-4) contains:
-      VAR_INT y (val: 0)
-
 
 ROOT (uid: N0) 
   FUNC_DECLARATION (uid: N1) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
@@ -271,28 +244,28 @@ ROOT (uid: N0)
         RETURN (uid: N236) [scope (1,0) <- (0,0)]return to main at line 1 
           INT_LITERAL (uid: N237) 0(type: INT_TYPE) 
 (0-0) contains:
-  VAR_INT __-88 (val: -88)
-  VAR_INT __-2 (val: -2)
-  VAR_INT __-3 (val: -3)
-  VAR_INT __-6 (val: -6)
-  VAR_INT __-8 (val: -8)
-  VAR_INT __100 (val: 100)
-  VAR_INT __-100 (val: -100)
-  VAR_INT __10 (val: 10)
-  VAR_INT __12 (val: 12)
-  VAR_INT __200 (val: 200)
-  VAR_INT __-10 (val: -10)
-  VAR_INT __21 (val: 21)
-  VAR_INT __22 (val: 22)
-  VAR_INT __-23 (val: -23)
-  VAR_INT __0 (val: 0)
-  VAR_INT __1 (val: 1)
-  VAR_INT __2 (val: 2)
-  VAR_INT __3 (val: 3)
-  VAR_INT __4 (val: 8)
-  VAR_INT __5 (val: 5)
-  VAR_INT __7 (val: 7)
-  VAR_INT __9 (val: 9)
+  VAR_INT __-88 (val: -88, offset: 0)
+  VAR_INT __-2 (val: -2, offset: 0)
+  VAR_INT __-3 (val: -3, offset: 0)
+  VAR_INT __-6 (val: -6, offset: 0)
+  VAR_INT __-8 (val: -8, offset: 0)
+  VAR_INT __100 (val: 100, offset: 0)
+  VAR_INT __-100 (val: -100, offset: 0)
+  VAR_INT __10 (val: 10, offset: 0)
+  VAR_INT __12 (val: 12, offset: 0)
+  VAR_INT __200 (val: 200, offset: 0)
+  VAR_INT __-10 (val: -10, offset: 0)
+  VAR_INT __21 (val: 21, offset: 0)
+  VAR_INT __22 (val: 22, offset: 0)
+  VAR_INT __-23 (val: -23, offset: 0)
+  VAR_INT __0 (val: 0, offset: 0)
+  VAR_INT __1 (val: 1, offset: 0)
+  VAR_INT __2 (val: 2, offset: 0)
+  VAR_INT __3 (val: 3, offset: 0)
+  VAR_INT __4 (val: 8, offset: 0)
+  VAR_INT __5 (val: 5, offset: 0)
+  VAR_INT __7 (val: 7, offset: 0)
+  VAR_INT __9 (val: 9, offset: 0)
   STRING test basics!\n
 There are 187 entries
 0: (LABEL, main, -, -)
@@ -468,20 +441,61 @@ There are 187 entries
 170: (LABEL, __L_212_DO_WHILE_BEGIN, -, -)
 171: (ASSIGN, asd, dsa, -)
 172: (ifTrue, __L_212_DO_WHILE_BEGIN, __1, -)
-173: (ASSIGN, __T81, -, -)
-174: (MULT, __T82, a, b)
-175: (EQ, __T85, __T82, d)
-176: (ifTrue, __L_223_TRUE, __T85, -)
-177: (ASSIGN, __T85, __0, -)
-178: (GOTO, __L_223_DONE, -, -)
-179: (LABEL, __L_223_TRUE, -, -)
-180: (ASSIGN, __T85, __1, -)
-181: (LABEL, __L_223_DONE, -, -)
+173: (MULT, __T82, a, b)
+174: (EQ, __T85, __T82, d)
+175: (ifTrue, __L_223_TRUE, __T85, -)
+176: (ASSIGN, __T85, __0, -)
+177: (GOTO, __L_223_DONE, -, -)
+178: (LABEL, __L_223_TRUE, -, -)
+179: (ASSIGN, __T85, __1, -)
+180: (LABEL, __L_223_DONE, -, -)
+181: (ASSIGN, __T81, __T85, -)
 182: (ifFalse, __L_222_ELSE, __T81, -)
 183: (GOTO, __L_222_FI, -, -)
 184: (LABEL, __L_222_ELSE, -, -)
 185: (LABEL, __L_222_FI, -, -)
 186: (RETURN, __0, -, -)
+a -32
+b -36
+c -40
+d -44
+e -48
+f -52
+h -56
+i -60
+zz -112
+tt -116
+dsa -160
+asd -164
+x -168
+y -172
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  (1-0) contains:
+    VAR_ARRAY_INT dd (length: 5, offset: -8)
+    VAR_INT a (val: 0, offset: -28)
+    VAR_INT b (val: 0, offset: -32)
+    VAR_INT c (val: 0, offset: -36)
+    VAR_INT d (val: 0, offset: -40)
+    VAR_INT e (val: 0, offset: -44)
+    VAR_INT f (val: 0, offset: -48)
+    VAR_INT h (val: 0, offset: -52)
+    VAR_INT i (val: 0, offset: -56)
+    VAR_ARRAY_INT cc (length: 12, offset: -60)
+    (2-0) contains:
+      VAR_INT zz (val: 0, offset: -108)
+    (2-1) contains:
+      VAR_INT tt (val: 0, offset: -112)
+      VAR_ARRAY_INT uu (length: 10, offset: -116)
+    (2-2) contains:
+      VAR_INT dsa (val: 0, offset: -156)
+      VAR_INT asd (val: 0, offset: -160)
+    (2-3) contains:
+      VAR_INT x (val: 0, offset: -164)
+    (2-4) contains:
+      VAR_INT y (val: 0, offset: -168)
 
 
 ===========================================================

@@ -1,15 +1,12 @@
 Result of test done to parser.
 
-test8.c BEGIN.
+test7.c BEGIN.
 ===========================================================
 
+Error: Returning wrong type for function main declared at line 5
 
-Print hashtables (level-sibno) according to their hierarchy
-(0-0) contains:
-  FUNC_INT main (0 params:)
-  FUNC_VOID this_func (0 params:)
-  (1-0) contains:
-  (1-1) contains:
+WARNING: There were return errors. Data structure may be ill-formed.
+
 
 
 ROOT (uid: N0) 
@@ -23,17 +20,8 @@ ROOT (uid: N0)
     SEQ (uid: N8) 
       LOCAL_DECLARATIONS (uid: N9) 
       STATEMENT_LIST (uid: N10) 
-        RETURN (uid: N11) [scope (1,1) <- (0,0)]return to main at line 5 
-          INT_LITERAL (uid: N12) 0(type: INT_TYPE) 
-(0-0) contains:
-  VAR_INT __0 (val: 0)
-  VAR_INT __1 (val: 1)
-  VAR_INT __4 (val: 8)
-There are 3 entries
-0: (LABEL, this_func, -, -)
-1: (LABEL, main, -, -)
-2: (RETURN, __0, -, -)
+Halting
 
 
 ===========================================================
-test8.c finished.
+test7.c finished.

@@ -4,34 +4,6 @@ test2.c BEGIN.
 ===========================================================
 
 
-Print hashtables (level-sibno) according to their hierarchy
-(0-0) contains:
-  FUNC_INT main (0 params:)
-  FUNC_VOID your_func (0 params:)
-  FUNC_INT my_func (2 params: VAR_INT  VAR_INT )
-  (1-0) contains:
-    VAR_INT b (val: 0)
-    VAR_INT q (val: 0)
-  (1-1) contains:
-    VAR_INT ee (val: 0)
-    VAR_INT gg (val: 0)
-  (1-2) contains:
-    VAR_INT a (val: 0)
-    VAR_INT t (val: 0)
-    VAR_INT u (val: 0)
-    VAR_INT v (val: 0)
-    VAR_INT w (val: 0)
-    VAR_INT y (val: 0)
-    VAR_INT ppp (val: 0)
-    VAR_ARRAY_INT fff
-    (2-0) contains:
-      (3-0) contains:
-        (4-0) contains:
-      (3-1) contains:
-    (2-1) contains:
-      VAR_INT qwert (val: 0)
-      (3-2) contains:
-
 
 ROOT (uid: N0) 
   FUNC_DECLARATION (uid: N1) my_func  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
@@ -190,20 +162,20 @@ ROOT (uid: N0)
                 ID (uid: N152) u [scope (1,2) <- (0,0)] declared at line 17 (type: INT_TYPE) 
               ID (uid: N153) w [scope (1,2) <- (0,0)] declared at line 17 (type: INT_TYPE) 
 (0-0) contains:
-  VAR_INT __99 (val: 99)
-  VAR_INT __void (val: 0)
+  VAR_INT __99 (val: 99, offset: 0)
+  VAR_INT __void (val: 0, offset: 0)
   STRING LOL!\n
-  VAR_INT __12345 (val: 12345)
-  VAR_INT __10 (val: 10)
-  VAR_INT __123 (val: 123)
+  VAR_INT __12345 (val: 12345, offset: 0)
+  VAR_INT __10 (val: 10, offset: 0)
+  VAR_INT __123 (val: 123, offset: 0)
   STRING in for loop\n
-  VAR_INT __0 (val: 0)
+  VAR_INT __0 (val: 0, offset: 0)
   STRING not\n
-  VAR_INT __1 (val: 1)
-  VAR_INT __2 (val: 2)
-  VAR_INT __3 (val: 3)
-  VAR_INT __4 (val: 4)
-  VAR_INT __5 (val: 5)
+  VAR_INT __1 (val: 1, offset: 0)
+  VAR_INT __2 (val: 2, offset: 0)
+  VAR_INT __3 (val: 3, offset: 0)
+  VAR_INT __4 (val: 4, offset: 0)
+  VAR_INT __5 (val: 5, offset: 0)
 There are 103 entries
 0: (LABEL, my_func, -, -)
 1: (ADD, __T0, q, b)
@@ -222,14 +194,14 @@ There are 103 entries
 14: (ASSIGN, y, __T8, -)
 15: (ASSIGN, t, y, -)
 16: (ASSIGN, a, t, -)
-17: (ASSIGN, __T9, -, -)
-18: (GT, __T12, a, __10)
-19: (ifTrue, __L_48_TRUE, __T12, -)
-20: (ASSIGN, __T12, __0, -)
-21: (GOTO, __L_48_DONE, -, -)
-22: (LABEL, __L_48_TRUE, -, -)
-23: (ASSIGN, __T12, __1, -)
-24: (LABEL, __L_48_DONE, -, -)
+17: (GT, __T12, a, __10)
+18: (ifTrue, __L_48_TRUE, __T12, -)
+19: (ASSIGN, __T12, __0, -)
+20: (GOTO, __L_48_DONE, -, -)
+21: (LABEL, __L_48_TRUE, -, -)
+22: (ASSIGN, __T12, __1, -)
+23: (LABEL, __L_48_DONE, -, -)
+24: (ASSIGN, __T9, __T12, -)
 25: (ifFalse, __L_47_ELSE, __T9, -)
 26: (ASSIGN, __T13, __1, -)
 27: (ifFalse, __L_54_ELSE, __T13, -)
@@ -308,6 +280,46 @@ There are 103 entries
 100: (SUB, __T43, __T42, w)
 101: (DIV, __T44, __T39, __T43)
 102: (RETURN, __T44, -, -)
+a -12
+t -16
+u -20
+v -24
+w -28
+y -32
+ppp -36
+qwert -48
+ee -12
+gg -16
+b -12
+q -16
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)
+  FUNC_VOID your_func (0 params:)
+  FUNC_INT my_func (2 params: VAR_INT  VAR_INT )
+  (1-0) contains:
+    VAR_INT b (val: 0, offset: -8)
+    VAR_INT q (val: 0, offset: -12)
+  (1-1) contains:
+    VAR_INT ee (val: 0, offset: -8)
+    VAR_INT gg (val: 0, offset: -12)
+  (1-2) contains:
+    VAR_INT a (val: 0, offset: -8)
+    VAR_INT t (val: 0, offset: -12)
+    VAR_INT u (val: 0, offset: -16)
+    VAR_INT v (val: 0, offset: -20)
+    VAR_INT w (val: 0, offset: -24)
+    VAR_INT y (val: 0, offset: -28)
+    VAR_INT ppp (val: 0, offset: -32)
+    VAR_ARRAY_INT fff (length: 2, offset: -36)
+    (2-0) contains:
+      (3-0) contains:
+        (4-0) contains:
+      (3-1) contains:
+    (2-1) contains:
+      VAR_INT qwert (val: 0, offset: -44)
+      (3-2) contains:
 
 
 ===========================================================

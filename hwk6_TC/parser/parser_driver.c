@@ -59,10 +59,6 @@ if(argc != 2) {
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
 
- 		printf("\nPrint hashtables (level-sibno) according to their hierarchy\n");
- 		pretty_print(symtab->root, 0);	//prints symbol table nicely
-
-
  		if(symtabError) {	//when we get var/func use without declaration, we cannot progress any further as we cannot build the sym table which later funcs depend on
  			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");
  		}
@@ -110,6 +106,9 @@ if(argc != 2) {
       // preorder_print(root);
 
       //gen_target_code (quad_array, argv[1]);
+      calculate_var_offsets(symtab->root);
+      printf("\nPrint hashtables (level-sibno) according to their hierarchy\n");
+      pretty_print(symtab->root, 0);	//prints symbol table nicely, print after calculate_var_offsets()
 
  		}
  	}

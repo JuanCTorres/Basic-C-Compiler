@@ -13,6 +13,7 @@ void main(){               // main: (0, 0)
       {
 
         int eeee = 113;// (4, 0)
+        int i, banana,a;
         for(i = 3; i < 4; ++i){ // i inside the condition should be in (4, 0)
 
           banana = 3;          // (5, 0)
