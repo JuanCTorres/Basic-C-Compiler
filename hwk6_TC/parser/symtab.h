@@ -93,7 +93,7 @@ typedef struct symhashtable {
 /* Symbol table for all levels of scope. */
 typedef struct {
   symhashtable_t *root, *leaf, *literal_collection;
-  
+
 } symboltable_t;
 
 /* Create an empty symbol table. */

@@ -19,6 +19,21 @@ extern int quad_index;
 #define TEMP_SYMNODE 1
 #define INT_SYMNODE 2
 
+/*
+   Macros for the registers, which we plan to use for specific operations.
+   Defining a macro allows us to change this later without having to change
+   them one by one.
+   Not escaping them because when printing them, the escaping character also
+   gets printed.
+*/
+#define LEFT_OPERAND_REG "%eax"    // Also used to store the result of operations
+                                    // (e.g., irmovl %ecx, %eax)
+#define RIGHT_OPERAND_REG "%ecx"
+#define ASSIGN_REG "%edx"
+#define STACK_PTR "%esp"
+#define BASE_PTR "%ebp"
+#define RETURN_REG "%edi"
+
 
 int gen_target_code (quad_type **array, char argv[], symboltable_t *symboltable);
 
@@ -41,5 +56,15 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable);
 int calculate_var_offsets(symhashtable_t* hashtable);
 
 char *substring(char *str, int len);
+
+void print_quad(quad_type *quad);
+
+void move_to_reg_bin(quad_type *quad);
+
+void move_to_reg_un(quad_type *quad);
+
+void move_to_assign_reg(symnode_t *operand);
+
+int assign(symnode_t *left_val);
 
 #endif
