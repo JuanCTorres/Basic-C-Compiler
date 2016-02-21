@@ -550,16 +550,28 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 			if(node->type == STRING_T){
 				// Allocate memory for it
 
+				int len = strlen(node->name);
+				// node->name[len] = ' ';
 				node->name = unescape(node->name);
 
 				int counter = 0;
-				int len = strlen(node->name);
+				
 				for(int counter = 0; counter < len; counter++){
-					if(counter % 4 == 0){
-						fprintf(ofile, "\n\t.long \t0x");
-					}
+					//if(counter % 4 == 0){
+						fprintf(ofile, "\n\t.byte \t0x");
+					//}
 					fprintf(ofile, "%x", node->name[counter]);
 				}
+
+
+				// for(int counter = len-4; counter >= 0; counter--){
+				// 	if(counter % 4 == 0){
+				// 		fprintf(ofile, "\n\t.long \t0x");
+
+				// 	}
+				// 	fprintf(ofile, "%x", node->name[counter]);
+					
+				// }
 			}
     }
 	}

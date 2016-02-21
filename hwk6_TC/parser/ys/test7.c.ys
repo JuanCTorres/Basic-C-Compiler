@@ -1,0 +1,25 @@
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+this_func:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+main:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x74    #Start of string space
+
+.pos 0x78   # Start of global var space 
+.pos 0x0000FFFC
+stack:

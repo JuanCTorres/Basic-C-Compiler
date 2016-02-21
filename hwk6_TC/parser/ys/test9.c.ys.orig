@@ -267,18 +267,9 @@ L_143_DONE:
 	ret
 .pos 0xc0c    #Start of string space
 
-	.byte 	0x61
-	.byte 	0x6c
-	.byte 	0x79
-	.byte 	0x67
-	.byte 	0x6c
-	.byte 	0x6a
-	.byte 	0x6b
-	.byte 	0x67
-	.byte 	0x6c
-	.byte 	0x6b
-	.byte 	0x75
-	.byte 	0x67
+	.long 	0x616c7967
+	.long 	0x6c6a6b67
+	.long 	0x6c6b7567
 .pos 0xc20   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000

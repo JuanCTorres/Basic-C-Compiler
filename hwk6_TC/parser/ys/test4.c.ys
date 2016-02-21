@@ -1,0 +1,109 @@
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+main:
+
+	irmovl 464, %ecx
+	subl %ecx, %esp
+	mrmovl 4(%ebp), %eax
+	rmmovl %eax, -8(%ebp)
+	mrmovl 8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
+	mrmovl 12(%ebp), %eax
+	rmmovl %eax, -16(%ebp)
+	mrmovl 1176, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_23_TRUE
+	irmovl 0, %eax
+	rmmovl %eax, 1176
+	jmp L_23_DONE
+L_23_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 1176
+L_23_DONE:
+
+	mrmovl 1176, %eax
+	mrmovl 1164, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_22_FI
+L_34_WHILE_BEGIN:
+
+	mrmovl 1188, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_35_TRUE
+	irmovl 0, %eax
+	rmmovl %eax, 1188
+	jmp L_35_DONE
+L_35_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 1188
+L_35_DONE:
+
+	mrmovl 1188, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_34_WHILE_END
+L_42_FOR_BEGIN:
+
+	mrmovl -40(%ebp), %eax
+	irmovl 10, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1200
+	jg L_44_TRUE
+	irmovl 0, %eax
+	rmmovl %eax, 1200
+	jmp L_44_DONE
+L_44_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 1200
+L_44_DONE:
+
+	mrmovl 1200, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_42_FOR_END
+	mrmovl -40(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -40(%ebp)
+	jmp L_42_FOR_BEGIN
+L_42_FOR_END:
+
+	jmp L_34_WHILE_BEGIN
+L_22_FI:
+
+	irmovl 100, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1208
+
+	irmovl -60, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1212
+	mrmovl 1208, %eax
+	mrmovl 1212, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1216
+
+	mrmovl 1216, %eax
+	rmmovl %eax, 1220
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x4cc    #Start of string space
+
+.pos 0x4d0   # Start of global var space 
+.pos 0x0000FFFC
+stack:

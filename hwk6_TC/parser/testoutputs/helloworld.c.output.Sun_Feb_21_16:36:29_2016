@@ -12,17 +12,17 @@ ROOT (uid: N0)
       LOCAL_DECLARATIONS (uid: N4) 
       STATEMENT_LIST (uid: N5) 
         PRINT (uid: N6) 
-          STRING_LITERAL (uid: N7) HelloWorld 
+          STRING_LITERAL (uid: N7) Hello World! - From Jun & Juan <3 
         RETURN (uid: N8) [scope (1,0) <- (0,0)]return to main at line 1 
           INT_LITERAL (uid: N9) 2(type: INT_TYPE) 
 (0-0) contains:
-  STRING HelloWorld
+  STRING Hello World! - From Jun & Juan <3
   VAR_INT __1 (offset: 0 or addr: 0)
   VAR_INT __2 (offset: 0 or addr: 0)
   VAR_INT __4 (offset: 0 or addr: 0)
 There are 3 entries
 0: (LABEL, main, -, -)
-1: (PRINT, HelloWorld, -, -)
+1: (PRINT, Hello World! - From Jun & Juan <3, -, -)
 2: (RETURN, __2, -, -)
 
 Print hashtables (level-sibno) according to their hierarchy

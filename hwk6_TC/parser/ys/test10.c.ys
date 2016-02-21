@@ -1,0 +1,104 @@
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+recurr:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+	mrmovl 4(%ebp), %eax
+	rmmovl %eax, -8(%ebp)
+	mrmovl -8(%ebp), %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 996
+	je L_8_TRUE
+	irmovl 0, %eax
+	rmmovl %eax, 996
+	jmp L_8_DONE
+L_8_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 996
+L_8_DONE:
+
+	mrmovl 996, %eax
+	rmmovl %eax, 984
+	mrmovl 984, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_7_ELSE
+	irmovl 1, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+	jmp L_7_FI
+L_7_ELSE:
+
+	mrmovl -8(%ebp), %eax
+	irmovl 1, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1000
+
+	mrmovl 1000, %eax
+	rmmovl %eax, 1004
+	mrmovl 1004, %eax
+	pushl %eax
+	pushl %ebp
+	rrmovl %esp, %ebp
+	call recurr
+	irmovl 16, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+	mrmovl -8(%ebp), %eax
+	rrmovl %edi, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1008
+
+	mrmovl 1008, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+L_7_FI:
+
+	irmovl 1, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+main:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+	irmovl 6, %eax
+	rmmovl %eax, 1012
+	mrmovl 1012, %eax
+	pushl %eax
+	pushl %ebp
+	rrmovl %esp, %ebp
+	call recurr
+	irmovl 16, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+	rrmovl %edi, %eax
+	rmmovl %eax, -8(%ebp)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+	mrmovl -8(%ebp), %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x3fc    #Start of string space
+
+.pos 0x400   # Start of global var space 
+.pos 0x0000FFFC
+stack:
