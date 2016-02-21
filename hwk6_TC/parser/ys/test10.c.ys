@@ -31,6 +31,8 @@ L_9_DONE:
 	subl %ecx, %eax
 	je L_8_ELSE
 	irmovl 1, %edi
+	rrmovl %ebp, %esp
+	ret
 	jmp L_8_FI
 L_8_ELSE:
 
@@ -39,6 +41,7 @@ L_23_FUNC_PROLOGUE_BEGIN:
 	mrmovl -8(%ebp), %eax
 	irmovl 1, %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 968
 
 	mrmovl 968, %eax
 	rmmovl %eax, 972
@@ -50,11 +53,16 @@ L_23_FUNC_EPILOGUE:
 
 	mrmovl -8(%ebp), %eax
 	rrmovl %edi, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 976
+
 	mrmovl 976, %edi
+	rrmovl %ebp, %esp
+	ret
 L_8_FI:
 
 	mrmovl -12(%ebp), %edi
+	rrmovl %ebp, %esp
+	ret
 main:
 
 	rrmovl %esp, %ebp
@@ -62,7 +70,7 @@ main:
 	subl %ecx, %esp
 L_38_FUNC_PROLOGUE_BEGIN:
 
-	irmovl a, %eax
+	irmovl 10, %eax
 	rmmovl %eax, 980
 	mrmovl 980, %eax
 	pushl %eax
@@ -73,6 +81,8 @@ L_38_FUNC_EPILOGUE:
 	rrmovl %edi, %eax
 	rmmovl %eax, -8(%ebp)
 	mrmovl -8(%ebp), %edi
+	rrmovl %ebp, %esp
+	ret
 .pos 0x3dc    #Start of string space
 
 .pos 0x3e0   # Start of global var space 

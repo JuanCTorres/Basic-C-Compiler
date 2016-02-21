@@ -10,13 +10,18 @@ my_func:
 	subl %ecx, %esp
 	mrmovl 4(%ebp), %eax
 	rmmovl %eax, -8(%ebp)
+	mrmovl 8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
 	mrmovl -12(%ebp), %eax
 	mrmovl -8(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 2752
 
 	mrmovl 2752, %edx
 	rmmovl %edx, 0x00FFFE14
-	irmovl 3039, %edi
+	irmovl 12345, %edi
+	rrmovl %ebp, %esp
+	ret
 your_func:
 
 	rrmovl %esp, %ebp
@@ -27,6 +32,8 @@ your_func:
 	mrmovl 2904, %edx
 	rmmovl %edx, 0x00FFFE10
 	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	ret
 main:
 
 	rrmovl %esp, %ebp
@@ -34,14 +41,17 @@ main:
 	subl %ecx, %esp
 	irmovl 2, %eax
 	irmovl 4, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 2756
+
 	mrmovl 2756, %eax
 	mrmovl 2760, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 2764
 
 	irmovl 4, %eax
 	irmovl 5, %ecx
-	 divl %ecx, %eax
+	 divl %ecx, %eax	rmmovl %eax, 2772
+
 	mrmovl 2772, %eax
 	mrmovl 2776, %eax
 	rmmovl %eax, -28(%ebp)
@@ -50,7 +60,7 @@ main:
 	mrmovl -12(%ebp), %eax
 	rmmovl %eax, -8(%ebp)
 	mrmovl -8(%ebp), %eax
-	irmovl a, %ecx
+	irmovl 10, %ecx
 	subl %ecx, %eax
 	rmmovl %eax, 2792
 	jg L_48_TRUE
@@ -85,17 +95,21 @@ L_59_DO_WHILE_BEGIN:
 	rmmovl %eax, -12(%ebp)
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 2800
+
 	mrmovl -12(%ebp), %eax
 	mrmovl -16(%ebp), %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 2804
 
 	mrmovl -8(%ebp), %eax
 	mrmovl 2804, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 2808
+
 	mrmovl 2808, %eax
 	mrmovl -24(%ebp), %ecx
-	 divl %ecx, %eax
+	 divl %ecx, %eax	rmmovl %eax, 2812
+
 	mrmovl 2824, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
@@ -125,14 +139,14 @@ L_54_FI:
 	jmp L_47_FI
 L_47_ELSE:
 
-	irmovl 7b, %eax
+	irmovl 123, %eax
 	rmmovl %eax, -44(%ebp)
 	irmovl 0, %eax
 	rmmovl %eax, -12(%ebp)
 L_95_FOR_BEGIN:
 
 	mrmovl -12(%ebp), %eax
-	irmovl 63, %ecx
+	irmovl 99, %ecx
 	subl %ecx, %eax
 	rmmovl %eax, 2836
 	jl L_99_TRUE
@@ -182,7 +196,8 @@ L_119_FUNC_EPILOGUE:
 
 	irmovl 2, %eax
 	mrmovl -8(%ebp), %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 2844
+
 	mrmovl 2844, %eax
 	rmmovl %eax, -24(%ebp)
 L_130_FUNC_PROLOGUE_BEGIN:
@@ -201,32 +216,41 @@ L_130_FUNC_EPILOGUE:
 
 	irmovl 2, %eax
 	rrmovl %edi, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 2856
+
 	mrmovl 2856, %eax
 	rmmovl %eax, -24(%ebp)
 	mrmovl -8(%ebp), %eax
 	mrmovl -24(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 2860
 
 	mrmovl -12(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 2864
+
 	mrmovl 2864, %eax
 	mrmovl -28(%ebp), %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 2868
 
 	mrmovl 2868, %eax
 	mrmovl -16(%ebp), %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 2872
 
 	mrmovl 2872, %eax
 	mrmovl -24(%ebp), %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 2876
 
 	mrmovl 2860, %eax
 	mrmovl 2876, %ecx
-	 divl %ecx, %eax
+	 divl %ecx, %eax	rmmovl %eax, 2880
+
 	mrmovl 2880, %edi
+	rrmovl %ebp, %esp
+	ret
 .pos 0xb48    #Start of string space
 
 	.long 	0x4c4f4c21

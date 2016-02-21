@@ -66,24 +66,28 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_ADD:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_SUB:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tmull %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_DIV:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\t divl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
@@ -91,6 +95,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_MOD:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\t modl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 

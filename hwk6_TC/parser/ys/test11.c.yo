@@ -1,0 +1,31 @@
+  0x0000:              | .pos 0
+  0x0000:30f4ffff0000  | 	irmovl stack, %esp
+  0x0006:30f5ffff0000  | 	irmovl stack, %ebp
+  0x000c:8012000000    | 	call main
+  0x0011:00            | 	halt
+  0x0012:              | main:
+                       | 
+  0x0012:2045          | 	rrmovl %esp, %ebp
+  0x0014:30f114000000  | 	irmovl 20, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+  0x001c:30f001000000  | 	irmovl 1, %eax
+  0x0022:4005f0ffffff  | 	rmmovl %eax, -16(%ebp)
+  0x0028:5005f0ffffff  | 	mrmovl -16(%ebp), %eax
+  0x002e:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0034:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
+  0x003a:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x0040:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
+  0x0046:5015f0ffffff  | 	mrmovl -16(%ebp), %ecx
+  0x004c:6010          | 	addl %ecx, %eax
+  0x004e:400fe8000000  | 	rmmovl %eax, 232
+                       | 
+  0x0054:500fe8000000  | 	mrmovl 232, %eax
+  0x005a:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x0060:30f700000000  | 	irmovl 0, %edi
+  0x0066:2054          | 	rrmovl %ebp, %esp
+  0x0068:90            | 	ret
+  0x00f0:              | .pos 0xf0    #Start of string space
+                       | 
+  0x00f4:              | .pos 0xf4   # Start of global var space 
+  0xffff:              | .pos 0x0000FFFF
+  0xffff:              | stack:
