@@ -126,7 +126,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_IFF:
 				if(array[i-1]->op == Q_EQ) {
-					fprintf(ofile, "\tje %s\n",array[i]->dest->name_clean);
+					fprintf(ofile, "\tjne %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_GT) {
 					fprintf(ofile, "\tjle %s\n",array[i]->dest->name_clean);
@@ -139,6 +139,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				}
 				else if(array[i-1]->op == Q_LTEQ) {
 					fprintf(ofile, "\tjg %s\n",array[i]->dest->name_clean);
+				}
+				else if(array[i-1]->op == Q_NEQ) {
+					fprintf(ofile, "\tje %s\n",array[i]->dest->name_clean);
 				}
 				else {
 					assert(array[i]->src1 != NULL);
@@ -164,6 +167,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				}
 				else if(array[i-1]->op == Q_LTEQ) {
 					fprintf(ofile, "\tjle %s\n",array[i]->dest->name_clean);
+				}
+				else if(array[i-1]->op == Q_NEQ) {
+					fprintf(ofile, "\tjne %s\n",array[i]->dest->name_clean);
 				}
 				else {
 					assert(array[i]->src1 != NULL);
@@ -293,6 +299,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_NEQ:
+				move_to_reg_bin(array[i]);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 
 				break;
 

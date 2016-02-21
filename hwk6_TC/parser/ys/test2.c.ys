@@ -122,9 +122,10 @@ L_59_DO_WHILE_BEGIN:
 	divl %ecx, %eax
 	rmmovl %eax, 2812
 
-	mrmovl 2824, %eax
-	irmovl 0, %ecx
+	mrmovl 2812, %eax
+	irmovl 10, %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 2824
 	jne L_60_TRUE
 	irmovl 0, %eax
 	rmmovl %eax, 2824
