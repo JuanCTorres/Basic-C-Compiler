@@ -42,6 +42,7 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	mrmovl 208, %eax
 	push %eax
 (CALL, recurr, -, -)
+	push %ebp
 	call recurr
 (LABEL, __L_23_FUNC_EPILOGUE, -, -)
 (MULT, __T6, a, __RET_INT)
@@ -62,6 +63,7 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	mrmovl 216, %eax
 	push %eax
 (CALL, recurr, -, -)
+	push %ebp
 	call recurr
 (LABEL, __L_38_FUNC_EPILOGUE, -, -)
 (ASSIGN, answer, __RET_INT, -)

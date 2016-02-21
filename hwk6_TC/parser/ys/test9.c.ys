@@ -195,6 +195,7 @@ END OF PROG: 580(LABEL, my_func, -, -)
 	mrmovl 676, %eax
 	push %eax
 (CALL, my_func, -, -)
+	push %ebp
 	call my_func
 (LABEL, __L_124_FUNC_EPILOGUE, -, -)
 (ASSIGN, d, __7, -)

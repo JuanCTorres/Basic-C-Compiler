@@ -180,6 +180,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 (LABEL, __L_47_FI, -, -)
 (LABEL, __L_119_FUNC_PROLOGUE_BEGIN, -, -)
 (CALL, your_func, -, -)
+	push %ebp
 	call your_func
 (LABEL, __L_119_FUNC_EPILOGUE, -, -)
 (MULT, __T27, __2, a)
@@ -203,6 +204,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	mrmovl 664, %eax
 	push %eax
 (CALL, my_func, -, -)
+	push %ebp
 	call my_func
 (LABEL, __L_130_FUNC_EPILOGUE, -, -)
 (MULT, __T30, __2, __RET_INT)
