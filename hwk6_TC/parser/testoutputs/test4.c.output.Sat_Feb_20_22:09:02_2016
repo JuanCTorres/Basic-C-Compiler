@@ -72,12 +72,12 @@ ROOT (uid: N0)
         RETURN (uid: N0) [scope (0,0) <- (0,0)]return to main at line 1 (type: VOID_TYPE) 
           VOID_TYPE (uid: N0) 
 (0-0) contains:
-  VAR_INT __void (val: 0, offset: 0)
-  VAR_INT __100 (val: 100, offset: 0)
-  VAR_INT __10 (val: 10, offset: 0)
-  VAR_INT __0 (val: 0, offset: 0)
-  VAR_INT __1 (val: 1, offset: 0)
-  VAR_INT __4 (val: 8, offset: 0)
+  VAR_INT __void (offset: 0)
+  VAR_INT __100 (offset: 0)
+  VAR_INT __10 (offset: 0)
+  VAR_INT __0 (offset: 0)
+  VAR_INT __1 (offset: 0)
+  VAR_INT __4 (offset: 0)
 There are 38 entries
 0: (LABEL, main, -, -)
 1: (NEQ, __T3, e, f)
@@ -134,32 +134,32 @@ lolz -464
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
-  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )
+  FUNC_VOID main (3 params: VAR_INT  VAR_INT  VAR_INT )space needed: 464
   (1-0) contains:
-    VAR_INT zzzz (val: 0, offset: -8)
-    VAR_INT a (val: 0, offset: -12)
-    VAR_INT b (val: 0, offset: -16)
-    VAR_INT c (val: 0, offset: -20)
+    VAR_INT zzzz (offset: -8)
+    VAR_INT a (offset: -12)
+    VAR_INT b (offset: -16)
+    VAR_INT c (offset: -20)
     (2-0) contains:
-      VAR_INT d (val: 0, offset: -24)
+      VAR_INT d (offset: -24)
       (3-0) contains:
-        VAR_INT e (val: 0, offset: -28)
+        VAR_INT e (offset: -28)
         (4-0) contains:
-          VAR_INT f (val: 0, offset: -32)
+          VAR_INT f (offset: -32)
           (5-0) contains:
-            VAR_INT g (val: 0, offset: -36)
+            VAR_INT g (offset: -36)
             (6-0) contains:
-              VAR_INT h (val: 0, offset: -40)
+              VAR_INT h (offset: -40)
               (7-0) contains:
-                VAR_INT i (val: 0, offset: -44)
+                VAR_INT i (offset: -44)
                 (8-0) contains:
-                  VAR_INT j (val: 0, offset: -48)
+                  VAR_INT j (offset: -48)
     (2-1) contains:
-      VAR_INT huehuehue (val: 0, offset: -52)
+      VAR_INT huehuehue (offset: -52)
     (2-2) contains:
-      VAR_INT haaa (val: 0, offset: -56)
+      VAR_INT haaa (offset: -56)
       VAR_ARRAY_INT catz (length: 100, offset: -60)
-      VAR_INT lolz (val: 0, offset: -460)
+      VAR_INT lolz (offset: -460)
 
 
 ===========================================================

@@ -113,17 +113,58 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_IFF:
-
+				if(array[i-1]->op == Q_EQ) {
+					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
+				}
+				else if(array[i-1]->op == Q_GT) {
+					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);
+				}
+				else if(array[i-1]->op == Q_LT) {
+					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);	
+				}
+				else if(array[i-1]->op == Q_GTEQ) {
+					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);	
+				}
+				else if(array[i-1]->op == Q_LTEQ) {
+					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);	
+				}
+				else {
+					assert(array[i]->src1 != NULL);
+					move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
+					fprintf(ofile, "\tirmovl 0, %s\n", RIGHT_OPERAND_REG);
+					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+					fprintf(ofile, "\tje %s\n", array[i]->dest->name);
+				}
 				break;
 
 			case Q_IFT:
 				if(array[i-1]->op == Q_EQ) {
 					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
 				}
+				else if(array[i-1]->op == Q_GT) {
+					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);
+				}
+				else if(array[i-1]->op == Q_LT) {
+					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);	
+				}
+				else if(array[i-1]->op == Q_GTEQ) {
+					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);	
+				}
+				else if(array[i-1]->op == Q_LTEQ) {
+					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);	
+				}
+				else {
+					assert(array[i]->src1 != NULL);
+					move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
+					fprintf(ofile, "\tirmovl 0, %s\n", RIGHT_OPERAND_REG);
+					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+					fprintf(ofile, "\tjne %s\n", array[i]->dest->name);
+				}
 
 				break;
 
 			case Q_GOTO:
+				fprintf(ofile, "\tjmp %s\n", array[i]->dest->name);
 
 				break;
 
@@ -144,7 +185,17 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_PRINT:
+				if(array[i]->src1->type == STRING_T) { //for strings
+					for(int i = 0; i <strlen(array[i]->src1->name)) {
+						
+					}
+					//store at 0x00FFFE10
+				}
+				else if() { //for actual values
+					//store at 0x00FFFE14
 
+				}
+				// for(int i = 0; i <strlen(array[i]->))
 				break;
 
 			case Q_EQ:
@@ -154,22 +205,32 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_GT:
+				move_to_reg_bin(array[i]);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 
 				break;
 
 			case Q_LT:
-
+				move_to_reg_bin(array[i]);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				break;
 
 			case Q_GTEQ:
-
+				move_to_reg_bin(array[i]);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				break;
 
 			case Q_LTEQ:
-
+				move_to_reg_bin(array[i]);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				break;
 
 			case Q_NEG:
+				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 
 				break;
 
@@ -240,12 +301,14 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 					hash = node->abnode->left_child->left_child->snode->parent; //param
 					// printf("\nLOLZ HERE!\n");
 					calculate_var_offsets_helper(hash);
+					node->needed_space = -offset;
 				}
 
 				else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
 
 					hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
 					calculate_var_offsets_helper(hash); //offset starts at eight
+					node->needed_space = -offset;
 				}
 
 			}

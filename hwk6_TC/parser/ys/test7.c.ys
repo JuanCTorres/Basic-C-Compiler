@@ -1,6 +1,7 @@
 END OF PROG: 20(LABEL, this_func, -, -)
 (LABEL, main, -, -)
 (RETURN, __0, -, -)
+	irmovl 0, %edi
 .pos 0x18    #Start of string space
 
 .pos 0x1c   # Start of global var space 
