@@ -1,3 +1,0 @@
-.pos 0x2c    #Start of string space
-
-.pos 0x30   # Start of global var space 

@@ -146,16 +146,16 @@ printf "test10.c finished.\n" >>"${file}"
 
 
 
-file="./testoutputs/test11.c.output.`date +"%a_%b_%d_%T_%Y"`"
+file="./testoutputs/recursive_factorial.c.output.`date +"%a_%b_%d_%T_%Y"`"
 printf "Result of test done to parser.\n\n" >>"${file}"
 
-printf "test11.c BEGIN.\n" >>"${file}"
+printf "recursive_factorial.c BEGIN.\n" >>"${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser test11.c < ./testinputs/test11.c >>"${file}" 2>&1
+./parser recursive_factorial.c < ./testinputs/recursive_factorial.c >>"${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
-printf "test11.c finished.\n" >>"${file}"
+printf "recursive_factorial.c finished.\n" >>"${file}"
 
 
 file="./testoutputs/fibb_no_recur.c.output.`date +"%a_%b_%d_%T_%Y"`"
@@ -193,6 +193,22 @@ printf "===========================================================\n\n" >> "${f
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "helloworld.c finished.\n" >>"${file}"
+
+
+file="./testoutputs/scoping.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "scoping.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser scoping.c < ./testinputs/scoping.c >>"${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "scoping.c finished.\n" >>"${file}"
+
+
+
+
 
 
 file="./testoutputs/test.error.c.output.`date +"%a_%b_%d_%T_%Y"`"

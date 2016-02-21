@@ -16,7 +16,7 @@ int Fibonacci(int n)
 
 int main()
 {
-   int n = 10; 
+   int n = 4; 
    int i = 0;
    int c;
  

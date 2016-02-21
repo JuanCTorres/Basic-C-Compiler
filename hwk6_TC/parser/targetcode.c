@@ -6,7 +6,7 @@
 #include "unescape.h"
 
 #define MAINSTART 20
-#define DEBUG 0
+#define DEBUG 1
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -254,6 +254,10 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				}
 				else if(get_symnode_type(array[i]->dest) == INT_SYMNODE){
 					fprintf(ofile, "\tirmovl %d, %s\n", array[i]->dest->num_val, IO_REG);
+					fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
+				}
+				else if(get_symnode_type(array[i]->dest) == RET_SYMNODE) {
+					fprintf(ofile, "\trrmovl %s, %s\n", RETURN_REG, IO_REG);
 					fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
 				}
 				else {
@@ -689,7 +693,7 @@ int assign(symnode_t *left_val){
 		}
 		else{ // var
 			if(is_var_global(left_val)){
-				fprintf(ofile, "\trmmvol %s, %d\n", LEFT_OPERAND_REG, left_val->addr);
+				fprintf(ofile, "\trmmovl %s, %d\n", LEFT_OPERAND_REG, left_val->addr);
 			} else{
 				fprintf(ofile, "\trmmovl %s, %d(%s)\n", LEFT_OPERAND_REG, left_val->offset, BASE_PTR);
 			}

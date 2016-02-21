@@ -1,0 +1,165 @@
+Result of test done to parser.
+
+fibb_recur.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPEFibonacci  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+      ID (uid: N3) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    SEQ (uid: N4) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N5) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N6) inferred ret type: ROOT
+        IF_STMT (uid: N7) inferred ret type: ROOT
+          == (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N9) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            INT_LITERAL (uid: N10) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          SEQ (uid: N11) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N12) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N13) inferred ret type: ROOT
+              RETURN (uid: N14) inferred ret type: ROOT[scope (2,0) <- (1,0)]return to Fibonacci at line 2 
+                INT_LITERAL (uid: N15) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        IF_STMT (uid: N16) inferred ret type: ROOT
+          == (uid: N17) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N18) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            INT_LITERAL (uid: N19) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          SEQ (uid: N20) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N21) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N22) inferred ret type: ROOT
+              RETURN (uid: N23) inferred ret type: ROOT[scope (2,1) <- (1,0)]return to Fibonacci at line 2 
+                INT_LITERAL (uid: N24) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        RETURN (uid: N25) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to Fibonacci at line 2 
+          + (uid: N26) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            CALL (uid: N27) inferred ret type: INT_TYPE(type: INT_TYPE) 
+              FUNCTION (uid: N28) inferred ret type: INT_TYPEFibonacci  (1 params: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                - (uid: N29) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N30) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N31) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+            CALL (uid: N32) inferred ret type: INT_TYPE(type: INT_TYPE) 
+              FUNCTION (uid: N33) inferred ret type: INT_TYPEFibonacci  (1 params: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                - (uid: N34) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N35) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N36) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N37) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 17 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N38) inferred ret type: ROOT
+    SEQ (uid: N39) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N40) inferred ret type: ROOT
+        = (uid: N41) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N42) inferred ret type: INT_TYPEn [scope (1,1) <- (0,0)] declared at line 19 (type: INT_TYPE) 
+          INT_LITERAL (uid: N43) inferred ret type: INT_TYPE4(type: INT_TYPE) 
+        = (uid: N44) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N45) inferred ret type: INT_TYPEi [scope (1,1) <- (0,0)] declared at line 20 (type: INT_TYPE) 
+          INT_LITERAL (uid: N46) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        ID (uid: N47) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N48) inferred ret type: ROOT
+        FOR (uid: N49) inferred ret type: ROOT
+          = (uid: N50) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N51) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N52) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          <= (uid: N53) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N54) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            ID (uid: N55) inferred ret type: INT_TYPEn [scope (1,1) <- (0,0)] declared at line 19 (type: INT_TYPE) 
+          ++ (uid: N56) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N57) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+          SEQ (uid: N58) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N59) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N60) inferred ret type: ROOT
+              PRINT (uid: N61) inferred ret type: ROOT
+                CALL (uid: N62) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  FUNCTION (uid: N63) inferred ret type: INT_TYPEFibonacci  (1 params: INT_TYPE)[scope (2,2) <- (1,1)] declared at line 2 (type: INT_TYPE) 
+                    ID (uid: N64) inferred ret type: INT_TYPEi [scope (2,2) <- (1,1)] declared at line 20 (type: INT_TYPE) 
+              ++ (uid: N65) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                ID (uid: N66) inferred ret type: INT_TYPEi [scope (2,2) <- (1,1)] declared at line 20 (type: INT_TYPE) 
+        RETURN (uid: N67) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 17 
+          INT_LITERAL (uid: N68) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 61 entries
+0: (LABEL, Fibonacci, -, -)
+1: (EQ, __T3, n, __0)
+2: (ifTrue, __L_8_TRUE, __T3, -)
+3: (ASSIGN, __T3, __0, -)
+4: (GOTO, __L_8_DONE, -, -)
+5: (LABEL, __L_8_TRUE, -, -)
+6: (ASSIGN, __T3, __1, -)
+7: (LABEL, __L_8_DONE, -, -)
+8: (ASSIGN, __L_7_FI, __T3, -)
+9: (ifFalse, __L_7_FI, __T0, -)
+10: (RETURN, __0, -, -)
+11: (LABEL, __L_7_FI, -, -)
+12: (EQ, __T7, n, __1)
+13: (ifTrue, __L_17_TRUE, __T7, -)
+14: (ASSIGN, __T7, __0, -)
+15: (GOTO, __L_17_DONE, -, -)
+16: (LABEL, __L_17_TRUE, -, -)
+17: (ASSIGN, __T7, __1, -)
+18: (LABEL, __L_17_DONE, -, -)
+19: (ASSIGN, __L_16_FI, __T7, -)
+20: (ifFalse, __L_16_FI, __T4, -)
+21: (RETURN, __1, -, -)
+22: (LABEL, __L_16_FI, -, -)
+23: (SUB, __T8, n, __1)
+24: (ASSIGN, __T9, __T8, -)
+25: (PUSH, __T9, -, -)
+26: (PRECALL, Fibonacci, -, -)
+27: (CALL, Fibonacci, -, -)
+28: (POSTCALL, Fibonacci, -, -)
+29: (SUB, __T10, n, __2)
+30: (ASSIGN, __T11, __T10, -)
+31: (PUSH, __T11, -, -)
+32: (PRECALL, Fibonacci, -, -)
+33: (CALL, Fibonacci, -, -)
+34: (POSTCALL, Fibonacci, -, -)
+35: (ADD, __T12, __RET_INT, __RET_INT)
+36: (RETURN, __T12, -, -)
+37: (LABEL, main, -, -)
+38: (ASSIGN, n, __4, -)
+39: (ASSIGN, i, __0, -)
+40: (ASSIGN, c, __1, -)
+41: (LABEL, __L_49_FOR_BEGIN, -, -)
+42: (LTEQ, __T15, c, n)
+43: (ifTrue, __L_53_TRUE, __T15, -)
+44: (ASSIGN, __T15, __0, -)
+45: (GOTO, __L_53_DONE, -, -)
+46: (LABEL, __L_53_TRUE, -, -)
+47: (ASSIGN, __T15, __1, -)
+48: (LABEL, __L_53_DONE, -, -)
+49: (ifFalse, __L_49_FOR_END, __T15, -)
+50: (ASSIGN, __T16, i, -)
+51: (PUSH, __T16, -, -)
+52: (PRECALL, Fibonacci, -, -)
+53: (CALL, Fibonacci, -, -)
+54: (POSTCALL, Fibonacci, -, -)
+55: (PRINT, __RET_INT, -, -)
+56: (INC, __T17, i, -)
+57: (INC, __T18, c, -)
+58: (GOTO, __L_49_FOR_BEGIN, -, -)
+59: (LABEL, __L_49_FOR_END, -, -)
+60: (RETURN, __0, -, -)
+c -12
+i -16
+n -20
+n -12
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 20
+  FUNC_INT Fibonacci (1 params: VAR_INT )space needed: 12
+  (1-0) contains:
+    VAR_INT n (offset: -8 or addr: 0)
+    (2-0) contains:
+    (2-1) contains:
+  (1-1) contains:
+    VAR_INT c (offset: -8 or addr: 0)
+    VAR_INT i (offset: -12 or addr: 0)
+    VAR_INT n (offset: -16 or addr: 0)
+    (2-2) contains:
+
+
+===========================================================
+fibb_recur.c finished.

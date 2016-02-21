@@ -750,7 +750,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
         else if((child2->node_type != RETURN_N)){
           if(funcnode->return_type == INT_TYPE_N) {
             returnError = 1;
-            fprintf(stderr, "line: %d | Error: No return statement in function %s\n", funcnode->line_num, funcnode->value_string);
+            fprintf(stderr, "1 line: %d | Error: No return statement in function %s\n", funcnode->line_num, funcnode->value_string);
           }
           else {
             child2->right_sibling = create_ast_node(RETURN_N); //insert implicit return for void functions
@@ -764,13 +764,14 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           if(child2->left_child == NULL) {
 
               returnError = 1;
-              fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
+              fprintf(stderr, "2 line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
 
           }
           else {
             if(child2->left_child->return_type != INT_TYPE_N) {
+              
               returnError = 1;
-              fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
+              fprintf(stderr, "3 line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
             }
           }
         }
@@ -778,7 +779,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           //fprintf(stderr, "detected return! and void main\n");
           if(child2->left_child != NULL) { //returning something
             returnError = 1;
-            fprintf(stderr, "line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
+            fprintf(stderr, "4 line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
           }
 
         }
@@ -1037,6 +1038,7 @@ int is_unary_operator(ast_node root){
   if(root->node_type == OP_NEG_N ||
      root->node_type == OP_NOT_N ||
      root->node_type == OP_INCREMENT_N ||
+     root->node_type == CALL_N ||
      root->node_type == OP_DECREMENT_N){
        return 1;
      } else{

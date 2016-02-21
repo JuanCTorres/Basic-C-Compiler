@@ -69,11 +69,14 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print the node type. */
   printf("%s (uid: N%d) ", NODE_NAME(root->node_type), root->node_no);
-
+printf("inferred ret type: %s", NODE_NAME(root->return_type));
 
 
   /* Print attributes specific to node types. */
   switch (root->node_type) {
+    case CALL_N:
+      //printf("inferred ret type: %s", NODE_NAME(root->return_type));
+      break;
     case SEQ_N:     // change main level when see a new sequence
       // lvl++;
       break;
