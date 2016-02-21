@@ -1,0 +1,128 @@
+Result of test done to parser.
+
+fibb_no_recur.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+    SEQ (uid: N3) 
+      LOCAL_DECLARATIONS (uid: N4) 
+        = (uid: N5) (type: INT_TYPE) 
+          ID (uid: N6) n [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          INT_LITERAL (uid: N7) 10(type: INT_TYPE) 
+        = (uid: N8) (type: INT_TYPE) 
+          ID (uid: N9) first [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N10) 0(type: INT_TYPE) 
+        = (uid: N11) (type: INT_TYPE) 
+          ID (uid: N12) second [scope (1,0) <- (0,0)] declared at line 5 (type: INT_TYPE) 
+          INT_LITERAL (uid: N13) 1(type: INT_TYPE) 
+        ID (uid: N14) next [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+        ID (uid: N15) c [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N16) 
+        FOR (uid: N17) 
+          = (uid: N18) (type: INT_TYPE) 
+            ID (uid: N19) c [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+            INT_LITERAL (uid: N20) 0(type: INT_TYPE) 
+          < (uid: N21) (type: INT_TYPE) 
+            ID (uid: N22) c [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+            ID (uid: N23) n [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          ++ (uid: N24) (type: INT_TYPE) 
+            ID (uid: N25) c [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+          SEQ (uid: N26) 
+            LOCAL_DECLARATIONS (uid: N27) 
+            STATEMENT_LIST (uid: N28) 
+              IF_ELSE_STMT (uid: N29) 
+                <= (uid: N30) (type: INT_TYPE) 
+                  ID (uid: N31) c [scope (2,0) <- (1,0)] declared at line 6 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N32) 1(type: INT_TYPE) 
+                SEQ (uid: N33) 
+                  LOCAL_DECLARATIONS (uid: N34) 
+                  STATEMENT_LIST (uid: N35) 
+                    = (uid: N36) (type: INT_TYPE) 
+                      ID (uid: N37) next [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      ID (uid: N38) c [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                SEQ (uid: N39) 
+                  LOCAL_DECLARATIONS (uid: N40) 
+                  STATEMENT_LIST (uid: N41) 
+                    = (uid: N42) (type: INT_TYPE) 
+                      ID (uid: N43) next [scope (3,1) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      + (uid: N44) (type: INT_TYPE) 
+                        ID (uid: N45) first [scope (3,1) <- (2,0)] declared at line 4 (type: INT_TYPE) 
+                        ID (uid: N46) second [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                    = (uid: N47) (type: INT_TYPE) 
+                      ID (uid: N48) first [scope (3,1) <- (2,0)] declared at line 4 (type: INT_TYPE) 
+                      ID (uid: N49) second [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                    = (uid: N50) (type: INT_TYPE) 
+                      ID (uid: N51) second [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                      ID (uid: N52) next [scope (3,1) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+              PRINT (uid: N53) 
+                ID (uid: N54) next [scope (2,0) <- (1,0)] declared at line 6 (type: INT_TYPE) 
+        RETURN (uid: N55) [scope (1,0) <- (0,0)]return to main at line 1 
+          INT_LITERAL (uid: N56) 0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __10 (offset: 0 or addr: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 36 entries
+0: (LABEL, main, -, -)
+1: (ASSIGN, n, __10, -)
+2: (ASSIGN, first, __0, -)
+3: (ASSIGN, second, __1, -)
+4: (ASSIGN, c, __0, -)
+5: (LABEL, __L_17_FOR_BEGIN, -, -)
+6: (LT, __T2, c, n)
+7: (ifTrue, __L_21_TRUE, __T2, -)
+8: (ASSIGN, __T2, __0, -)
+9: (GOTO, __L_21_DONE, -, -)
+10: (LABEL, __L_21_TRUE, -, -)
+11: (ASSIGN, __T2, __1, -)
+12: (LABEL, __L_21_DONE, -, -)
+13: (ifFalse, __L_17_FOR_END, __T2, -)
+14: (LTEQ, __T6, c, __1)
+15: (ifTrue, __L_30_TRUE, __T6, -)
+16: (ASSIGN, __T6, __0, -)
+17: (GOTO, __L_30_DONE, -, -)
+18: (LABEL, __L_30_TRUE, -, -)
+19: (ASSIGN, __T6, __1, -)
+20: (LABEL, __L_30_DONE, -, -)
+21: (ASSIGN, __T3, __T6, -)
+22: (ifFalse, __L_29_ELSE, __T3, -)
+23: (ASSIGN, next, c, -)
+24: (GOTO, __L_29_FI, -, -)
+25: (LABEL, __L_29_ELSE, -, -)
+26: (ADD, __T7, first, second)
+27: (ASSIGN, next, __T7, -)
+28: (ASSIGN, first, second, -)
+29: (ASSIGN, second, next, -)
+30: (LABEL, __L_29_FI, -, -)
+31: (PRINT, next, -, -)
+32: (INC, __T8, c, -)
+33: (GOTO, __L_17_FOR_BEGIN, -, -)
+34: (LABEL, __L_17_FOR_END, -, -)
+35: (RETURN, __0, -, -)
+second -12
+c -16
+n -20
+next -24
+first -28
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 28
+  (1-0) contains:
+    VAR_INT second (offset: -8 or addr: 0)
+    VAR_INT c (offset: -12 or addr: 0)
+    VAR_INT n (offset: -16 or addr: 0)
+    VAR_INT next (offset: -20 or addr: 0)
+    VAR_INT first (offset: -24 or addr: 0)
+    (2-0) contains:
+      (3-0) contains:
+      (3-1) contains:
+
+
+===========================================================
+fibb_no_recur.c finished.

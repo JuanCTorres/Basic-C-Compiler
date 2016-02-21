@@ -1,14 +1,17 @@
+
+int func(int a, int d) {
+	d = a + d;
+	return d;
+}
+
+
 int main() {
 	
-	int a;
-	int b;
-	int c;
+int b;
 
-	a = b = c = 1;
+b = func(2, 29);
 
-	a = b + c;
-
-
+print b;
 
 	return 0;
 }

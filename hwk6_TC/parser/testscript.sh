@@ -158,6 +158,30 @@ printf "\n\n===========================================================\n" >> "$
 printf "test11.c finished.\n" >>"${file}"
 
 
+file="./testoutputs/fibb_no_recur.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "fibb_no_recur.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser fibb_no_recur.c < ./testinputs/fibb_no_recur.c >>"${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "fibb_no_recur.c finished.\n" >>"${file}"
+
+
+
+file="./testoutputs/fibb_recur.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "fibb_recur.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser fibb_no_recurr.c < ./testinputs/fibb_recur.c >>"${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "fibb_recur.c finished.\n" >>"${file}"
+
 
 
 file="./testoutputs/test.error.c.output.`date +"%a_%b_%d_%T_%Y"`"

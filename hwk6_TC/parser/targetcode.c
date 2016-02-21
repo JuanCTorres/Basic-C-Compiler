@@ -5,7 +5,7 @@
 #include "symtab.h"
 
 #define MAINSTART 20
-#define DEBUG 1
+#define DEBUG 0
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -80,14 +80,14 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tmull %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tmull %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_DIV:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\t divl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tdivl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
@@ -95,7 +95,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_MOD:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\t modl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tmodl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
@@ -739,6 +739,7 @@ void print_initialization() {
 	fprintf(ofile, "\tpushl %s\n", BASE_PTR);
 	fprintf(ofile, "\tcall main\n");
 	fprintf(ofile, "\thalt\n");
+	fprintf(ofile, ".pos 0x14\n");
 }
 
 void print_stack_setup() {
