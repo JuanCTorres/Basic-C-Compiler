@@ -177,30 +177,33 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			// Function declarations (and hence calls wil end up here)
 			fprintf(ofile, "%s:\n\n", array[i]->dest->name);
 				if(is_function(array[i]->dest)){
-
 					// Move the frame pointer to the current stack pointer.
 					fprintf(ofile, "\trrmovl %s %s\n", STACK_PTR, BASE_PTR);
 
 					// Leave space for locals in the stack by increasing the stack
 					// pointer
-					fprintf(ofile, "\tirmovl %d, %s\n", array[i]->dest->needed_space, RIGHT_OPERAND_REG);
+					fprintf(ofile, "\tirmovl %d, %s\n",
+						array[i]->dest->needed_space, RIGHT_OPERAND_REG);
 					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, STACK_PTR);
 
-					// Copy the parameters into locals
-					// 8 bytes needed for return address, old frame pointer.
-					fprintf(ofile, "NUM PARAMS: %d\n", array[i]->dest->num_parameters);
+					// Copy the parameters into locals.
+					// Starts reading at 4(%ebp)
+					// Starts copying at -8(%ebp), since 8 bytes needed for return address, old frame pointer.
 					if(array[i]->dest->num_parameters > 0){
-						for(int i = 0; i < array[i]->dest->num_parameters; i++){
-							fprintf(ofile, "MOVING %d ARG\n", i);
-							fprintf(ofile, "\tmrmovl %d(%s), %s\n", ((i * 4) + 4), BASE_PTR, LEFT_OPERAND_REG);
-							fprintf(ofile, "\trmmovl %s, %d(%s)\n", LEFT_OPERAND_REG, (-i * 4) - 8, BASE_PTR);
+
+						for(int j = 0; j < array[i]->dest->num_parameters; j++){
+							fprintf(ofile, "\tmrmovl %d(%s), %s\n",
+							 	((j * 4) + 4), BASE_PTR, LEFT_OPERAND_REG);
+							fprintf(ofile, "\trmmovl %s, %d(%s)\n",
+							 	LEFT_OPERAND_REG, (-j * 4) - 8, BASE_PTR);
+
 						}
 					}
 				}
-
 				break;
 
 			case Q_READ:
+			//<TODO>
 
 				break;
 
@@ -215,7 +218,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					}
 					//store at 0x00FFFE10
 				}
-				else if(get_symnode_type(array[i]->dest) == TEMP_SYMNODE) { //for lit values  RET_SYMNODE 
+				else if(get_symnode_type(array[i]->dest) == TEMP_SYMNODE) { //for lit values  RET_SYMNODE
 					//store at 0x00FFFE14
 					fprintf(ofile, "\tmrmovl %d, %s\n", get_temp_addr(array[i]->dest), IO_REG);
 					fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
@@ -296,7 +299,10 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_RETURN:
+				fprintf(ofile, "Returning %d\n", array[i]->dest->num_val);
 				move_to_reg(array[i]->dest, RETURN_REG);
+				fprintf(ofile, "\trrmovl %s, %s\n", BASE_PTR, STACK_PTR);
+				fprintf(ofile, "\tret\n");
 				break;
 
 			case Q_ADDR:
@@ -532,7 +538,7 @@ int get_symnode_type(symnode_t *snode){
 
   if(strcmp(substr1, "__T") == 0){
     free(substr1);
-    return TEMP_SYMNODE; 
+    return TEMP_SYMNODE;
 	} else if(strcmp(substr1, "__R") == 0){
 		free(substr1);
 		return RET_SYMNODE;
@@ -629,7 +635,8 @@ void move_to_reg(symnode_t *operand, char *reg){
 
 	fprintf(ofile, "\t");
 	if(type == INT_SYMNODE){
-		fprintf(ofile, "irmovl %x, %s\n", operand->num_val, reg);
+		fprintf(ofile, "irmovl %d, %s\n", operand->num_val, reg);
+		fprintf(ofile, "Found an int\n");
 	} else if(type == TEMP_SYMNODE){
 		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(operand),reg);
 	} else if(type == RET_SYMNODE){
