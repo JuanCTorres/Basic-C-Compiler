@@ -6,7 +6,7 @@
 #include "unescape.h"
 
 #define MAINSTART 20
-#define DEBUG 0
+#define DEBUG 1
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -288,8 +288,10 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_NEG:
-				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-
+				move_to_reg(array[i]->src1, RIGHT_OPERAND_REG);
+				fprintf(ofile, "\tirmovl %d, %s\n", 0, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				break;
 
 			case Q_NEQ:
@@ -550,28 +552,27 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 			if(node->type == STRING_T){
 				// Allocate memory for it
 
-				int len = strlen(node->name);
-				// node->name[len] = ' ';
 				node->name = unescape(node->name);
 
 				int counter = 0;
-				
+				int len = strlen(node->name);
 				for(int counter = 0; counter < len; counter++){
-					//if(counter % 4 == 0){
-						fprintf(ofile, "\n\t.byte \t0x");
-					//}
-					fprintf(ofile, "%x", node->name[counter]);
+					char buf[4];
+					buf[counter % 4] = node->name[counter];
+					if(counter % 4 == 0){
+						// fprintf(ofile, "\n\t.long \t0x");
+						// fprintf(ofile, "%x", buf[3]);
+						// fprintf(ofile, "%x", buf[2]);
+						// fprintf(ofile, "%x", buf[1]);
+						// fprintf(ofile, "%x", buf[0]);
+						// fprintf(ofile, "\n");
+					}
+					// buf[0] = '0';
+					// buf[1] = '0';
+					// buf[2] = '0';
+					// buf[3] = '0';
+					//fprintf(ofile, "%x", node->name[counter]);
 				}
-
-
-				// for(int counter = len-4; counter >= 0; counter--){
-				// 	if(counter % 4 == 0){
-				// 		fprintf(ofile, "\n\t.long \t0x");
-
-				// 	}
-				// 	fprintf(ofile, "%x", node->name[counter]);
-					
-				// }
 			}
     }
 	}
