@@ -660,6 +660,9 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case FOR_HEADER_EMPTY_N:
         // <TODO> Anything here? Probably not?
+        temp = NewTemp(hashtable);
+        make_insert_quad(Q_ASSIGN, temp, true_n, NULL);
+        x->snode = temp;
         break;
 
       case PRINT_N:

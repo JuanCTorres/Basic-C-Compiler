@@ -20,6 +20,7 @@ extern int quad_index;
 #define INT_SYMNODE 2
 #define RET_SYMNODE 3
 
+
 /*
    Macros for the registers, which we plan to use for specific operations.
    Defining a macro allows us to change this later without having to change
@@ -67,5 +68,7 @@ void move_to_reg_un(quad_type *quad);
 void move_to_reg(symnode_t *operand, char *reg);
 
 int assign(symnode_t *left_val);
+
+int is_funcion(symnode_t *label);
 
 #endif

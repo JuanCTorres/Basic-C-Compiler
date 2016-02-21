@@ -128,6 +128,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_LABEL:
+				if(is_funcion(array[i]->dest))
 
 				break;
 
@@ -169,16 +170,20 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 				break;
 
-			case Q_CALL:
+			/*~~~~~~ Functions ~~~~~~~*/
 
+			case Q_CALL:
+				fprintf(ofile, "\tcall %s\n", array[i]->dest->name);
 				break;
 
 			case Q_PUSH:
-
+				// Move into %eax, then push %eax
+				move_to_reg(array[i]->dest, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tpush %s\n", LEFT_OPERAND_REG);
 				break;
 
 			case Q_RETURN:
-
+				move_to_reg(array[i]->dest, RETURN_REG);
 				break;
 
 			case Q_ADDR:
@@ -363,7 +368,6 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 
 	assert(ofile != NULL);
 
-
 	fprintf(ofile, ".pos 0x%x    #Start of string space\n", endoftemp);
 
 	// Traverse the hashtable looking for strings (we have to put them in
@@ -499,27 +503,11 @@ int assign(symnode_t *left_val){
 }
 
 /*
-   Moves the right hand side of an assignment operation into %eax (since assign moves
-   whatever is located in %eax into memory)
+   Moves the value in operand (depending on whether it is a temp,
+   a global, or a local variable), and issues an instruction to move
+	 into the register specified by reg.
+	 For possible registers, see targetcode.h's macros for registers.
 */
-// void move_to_reg_rhs(quad_type *quad){
-// 	int type = get_symnode_type(quad->src2);
-// 	fprintf(ofile, "\t");
-//
-// 	if(type == INT_SYMNODE){
-// 		fprintf(ofile, "irmovl %x, %s\n", quad->src2->num_val, LEFT_OPERAND_REG);
-// 	} else if(type == TEMP_SYMNODE){
-// 		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(quad->src2), LEFT_OPERAND_REG);
-// 	} else{ // var
-// 		if(is_var_global(quad->src2)){
-// 			fprintf(ofile, "mrmovl %d, %s\n", quad->src2->addr, LEFT_OPERAND_REG);
-// 		} else{
-// 			fprintf(ofile, "mrmovl %d(%s), %s\n", quad->src2->offset, BASE_PTR, LEFT_OPERAND_REG);
-// 		}
-// 	}
-// }
-
-
 void move_to_reg(symnode_t *operand, char *reg){
 	int type = get_symnode_type(operand);
 
@@ -536,5 +524,16 @@ void move_to_reg(symnode_t *operand, char *reg){
 		} else{
 			fprintf(ofile, "mrmovl %d(%s), %s\n", operand->offset, BASE_PTR, reg);
 		}
+	}
+}
+
+
+int is_funcion(symnode_t *operand){
+	char *substr1 = substring(operand->name, 3); // first 3 chars of label name
+
+	if(strcmp(substr1, "__L") != 0){
+		return 1;
+	} else{
+		return 0;
 	}
 }
