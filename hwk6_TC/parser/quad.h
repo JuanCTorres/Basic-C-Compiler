@@ -45,6 +45,8 @@ symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable);
   Q_JLE,
   Q_ADDR,
   Q_DEREF,
+  Q_PRECALL,
+  Q_POSTCALL
  } quad_op_type;
 
  static val_name_pair3 token_table3[] = {
@@ -80,6 +82,8 @@ symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable);
     {Q_JLE, "JMP_LEQ"},
     {Q_ADDR, "ADDR"},
     {Q_DEREF, "DEREF"},
+    {Q_PRECALL, "PRECALL"},
+    {Q_POSTCALL, "POSTCALL"},
     {0, NULL}
  };
 

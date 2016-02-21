@@ -174,15 +174,14 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_LABEL:
-			// Function declarations (and hence calls wil end up here)
-			if(is_function(array[i]->dest) == 0) {
-				fprintf(ofile, "%s:\n\n", array[i]->dest->name_clean);
-			}
-
+				// Function declarations (and hence calls wil end up here)
+				if(!is_function(array[i]->dest)) {
+					fprintf(ofile, "%s:\n\n", array[i]->dest->name_clean);
+				}
 				if(is_function(array[i]->dest)){
 					fprintf(ofile, "%s:\n\n", array[i]->dest->name);
 					// Move the frame pointer to the current stack pointer.
-					fprintf(ofile, "\trrmovl %s, %s\n", STACK_PTR, BASE_PTR);
+					//fprintf(ofile, "\trrmovl %s, %s\n", STACK_PTR, BASE_PTR);
 
 					// Leave space for locals in the stack by increasing the stack
 					// pointer
@@ -294,7 +293,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_CALL:
 				// Push caller's base pointer
-				fprintf(ofile, "\tpushl %s\n", BASE_PTR);
+				//fprintf(ofile, "\tpushl %s\n", BASE_PTR);
 				// And transfer control to the function
 				fprintf(ofile, "\tcall %s\n", array[i]->dest->name);
 				break;
@@ -306,11 +305,33 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_RETURN:
-				fprintf(ofile, "Returning %d\n", array[i]->dest->num_val);
 				move_to_reg(array[i]->dest, RETURN_REG);
 				fprintf(ofile, "\trrmovl %s, %s\n", BASE_PTR, STACK_PTR);
+
+				// Pop into base pointer, i.e., get old one back.
+				fprintf(ofile, "\tpopl %s\n", BASE_PTR);
+
+				// Move stack pointer back down so return will pop return address
+				// and not something else.
+				fprintf(ofile, "\tirmovl %d, %s\n", -8, RIGHT_OPERAND_REG);
+				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, STACK_PTR);
 				fprintf(ofile, "\tret\n");
 				break;
+
+			case Q_PRECALL:
+				// Push caller's base pointer
+				fprintf(ofile, "\tpushl %s\n", BASE_PTR);
+				fprintf(ofile, "\trrmovl %s, %s\n", STACK_PTR, BASE_PTR);
+				break;
+
+			case Q_POSTCALL:
+				fprintf(ofile, "\tirmovl %d, %s\n", (4 + array[i]->dest->needed_space),
+					RIGHT_OPERAND_REG);
+				fprintf(ofile, "\trrmovl %s, %s\n", BASE_PTR, STACK_PTR);
+				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, STACK_PTR);
+				break;
+
+			/*~~~~~~~ Arrays ~~~~~~~~~*/
 
 			case Q_ADDR:
 				if(get_symnode_type(array[i]->src1) != VAR_SYMNODE){

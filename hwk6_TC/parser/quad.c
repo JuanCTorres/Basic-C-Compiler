@@ -202,8 +202,11 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         case CALL_N:
           // Function Prologue is caller's responsibility!
           // See after recursion as well.
-          label1 = NewLabel(y, "FUNC_PROLOGUE_BEGIN", hashtable);
-          make_insert_quad(Q_LABEL, label1, NULL, NULL);
+          //label1 = NewLabel(y, "FUNC_PROLOGUE_BEGIN", hashtable);
+
+          //make_insert_quad(Q_PRECALL, y->left_child->snode, NULL, NULL);
+
+          //make_insert_quad(Q_LABEL, label1, NULL, NULL);
           break;
 
         // case IF_STMT_N:
@@ -714,8 +717,9 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case CALL_N:
         // Function epilogue
-        label2 = NewLabel(x, "FUNC_EPILOGUE", hashtable);
-        make_insert_quad(Q_LABEL, label2, NULL, NULL);
+        //label2 = NewLabel(x, "FUNC_EPILOGUE", hashtable);
+        //make_insert_quad(Q_LABEL, label2, NULL, NULL);
+        make_insert_quad(Q_POSTCALL, x->left_child->snode, NULL, NULL);
         x->snode = create_symnode("__RET_INT", NULL);
         break;
 
@@ -726,6 +730,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           make_insert_quad(Q_ASSIGN, temp, z->snode, NULL);
           make_insert_quad(Q_PUSH, temp, NULL, NULL);
         }
+        // Precall
+        make_insert_quad(Q_PRECALL, x->snode, NULL, NULL);
         // Function call
         make_insert_quad(Q_CALL, x->snode, NULL, NULL);
         break;
