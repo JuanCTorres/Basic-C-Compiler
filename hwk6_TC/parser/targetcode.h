@@ -38,7 +38,7 @@ extern int quad_index;
 #define DSTR "0x00FFFE10"
 #define DHXR "0x00FFFE14"
 #define KHXR "0x00FFFE1C"
-#define KSTR "0x00FFFE18"   
+#define KSTR "0x00FFFE18"
 #define KBDR "0x00FFFE04"
 
 int gen_target_code (quad_type **array, char argv[], symboltable_t *symboltable);
