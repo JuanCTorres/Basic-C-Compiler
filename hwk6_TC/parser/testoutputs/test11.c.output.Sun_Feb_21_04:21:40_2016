@@ -1,0 +1,60 @@
+Result of test done to parser.
+
+test11.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) func  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+      ID (uid: N3) a [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    SEQ (uid: N4) 
+      LOCAL_DECLARATIONS (uid: N5) 
+      STATEMENT_LIST (uid: N6) 
+        RETURN (uid: N7) [scope (1,0) <- (0,0)]return to func at line 2 
+          ID (uid: N8) a [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N9) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N10) 
+    SEQ (uid: N11) 
+      LOCAL_DECLARATIONS (uid: N12) 
+        ID (uid: N13) b [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N14) 
+        = (uid: N15) 
+          ID (uid: N16) b [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          CALL (uid: N17) 
+            FUNCTION (uid: N18) func  (1 params: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+              INT_LITERAL (uid: N19) 3(type: INT_TYPE) 
+        RETURN (uid: N20) [scope (1,1) <- (0,0)]return to main at line 8 
+          INT_LITERAL (uid: N21) 0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __3 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 10 entries
+0: (LABEL, func, -, -)
+1: (RETURN, a, -, -)
+2: (LABEL, main, -, -)
+3: (LABEL, __L_17_FUNC_PROLOGUE_BEGIN, -, -)
+4: (ASSIGN, __T0, __3, -)
+5: (PUSH, __T0, -, -)
+6: (CALL, func, -, -)
+7: (LABEL, __L_17_FUNC_EPILOGUE, -, -)
+8: (ASSIGN, b, __RET_INT, -)
+9: (RETURN, __0, -, -)
+b -12
+a -12
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 12
+  FUNC_INT func (1 params: VAR_INT )space needed: 12
+  (1-0) contains:
+    VAR_INT a (offset: -8 or addr: 0)
+  (1-1) contains:
+    VAR_INT b (offset: -8 or addr: 0)
+
+
+===========================================================
+test11.c finished.

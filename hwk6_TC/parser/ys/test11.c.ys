@@ -3,29 +3,38 @@
 	irmovl stack, %ebp
 	call main
 	halt
+func:
+
+	rrmovl %esp, %ebp
+	irmovl 12, %ecx
+	subl %ecx, %esp
+	mrmovl 4(%ebp), %eax
+	rmmovl %eax, -8(%ebp)
+	mrmovl -8(%ebp), %edi
+	rrmovl %ebp, %esp
+	ret
 main:
 
 	rrmovl %esp, %ebp
-	irmovl 20, %ecx
+	irmovl 12, %ecx
 	subl %ecx, %esp
-	irmovl 1, %eax
-	rmmovl %eax, -16(%ebp)
-	mrmovl -16(%ebp), %eax
-	rmmovl %eax, -12(%ebp)
-	mrmovl -12(%ebp), %eax
-	rmmovl %eax, -8(%ebp)
-	mrmovl -12(%ebp), %eax
-	mrmovl -16(%ebp), %ecx
-	addl %ecx, %eax
-	rmmovl %eax, 232
+L_17_FUNC_PROLOGUE_BEGIN:
 
-	mrmovl 232, %eax
+	irmovl 3, %eax
+	rmmovl %eax, 324
+	mrmovl 324, %eax
+	pushl %eax
+	pushl %ebp
+	call func
+L_17_FUNC_EPILOGUE:
+
+	rrmovl %edi, %eax
 	rmmovl %eax, -8(%ebp)
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
 	ret
-.pos 0xf0    #Start of string space
+.pos 0x14c    #Start of string space
 
-.pos 0xf4   # Start of global var space 
-.pos 0x0000FFFF
+.pos 0x150   # Start of global var space 
+.pos 0x0000FFFC
 stack:

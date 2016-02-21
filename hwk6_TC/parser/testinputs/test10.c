@@ -1,5 +1,4 @@
 int recurr( int a ) {
-	int b;
 
 	if (a == 0) {
 		return 1;
@@ -8,16 +7,16 @@ int recurr( int a ) {
 		return a*recurr(a-1);
 	}
 
-	return b;
+	return 1;
 }
 
 
 int main(void) {
 	int answer;
 
-	answer = recurr(10);
+	answer = recurr(4);
 
 
-
+	print answer;
 	return answer;
 }

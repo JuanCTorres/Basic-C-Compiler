@@ -1,88 +1,93 @@
   0x0000:              | .pos 0
-  0x0000:30f4ffff0000  | 	irmovl stack, %esp
-  0x0006:30f5ffff0000  | 	irmovl stack, %ebp
-  0x000c:80d0000000    | 	call main
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:80dc000000    | 	call main
   0x0011:00            | 	halt
   0x0012:              | recurr:
                        | 
   0x0012:2045          | 	rrmovl %esp, %ebp
-  0x0014:30f110000000  | 	irmovl 16, %ecx
+  0x0014:30f10c000000  | 	irmovl 12, %ecx
   0x001a:6114          | 	subl %ecx, %esp
   0x001c:500504000000  | 	mrmovl 4(%ebp), %eax
   0x0022:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
   0x0028:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
   0x002e:30f100000000  | 	irmovl 0, %ecx
   0x0034:6110          | 	subl %ecx, %eax
-  0x0036:400fc4030000  | 	rmmovl %eax, 964
-  0x003c:7352000000    | 	je L_9_TRUE
+  0x0036:400fe4030000  | 	rmmovl %eax, 996
+  0x003c:7352000000    | 	je L_8_TRUE
   0x0041:30f000000000  | 	irmovl 0, %eax
-  0x0047:400fc4030000  | 	rmmovl %eax, 964
-  0x004d:705e000000    | 	jmp L_9_DONE
-  0x0052:              | L_9_TRUE:
+  0x0047:400fe4030000  | 	rmmovl %eax, 996
+  0x004d:705e000000    | 	jmp L_8_DONE
+  0x0052:              | L_8_TRUE:
                        | 
   0x0052:30f001000000  | 	irmovl 1, %eax
-  0x0058:400fc4030000  | 	rmmovl %eax, 964
-  0x005e:              | L_9_DONE:
+  0x0058:400fe4030000  | 	rmmovl %eax, 996
+  0x005e:              | L_8_DONE:
                        | 
-  0x005e:500fc4030000  | 	mrmovl 964, %eax
-  0x0064:400fb8030000  | 	rmmovl %eax, 952
-  0x006a:500fb8030000  | 	mrmovl 952, %eax
+  0x005e:500fe4030000  | 	mrmovl 996, %eax
+  0x0064:400fd8030000  | 	rmmovl %eax, 984
+  0x006a:500fd8030000  | 	mrmovl 984, %eax
   0x0070:30f100000000  | 	irmovl 0, %ecx
   0x0076:6110          | 	subl %ecx, %eax
-  0x0078:738b000000    | 	je L_8_ELSE
+  0x0078:738b000000    | 	je L_7_ELSE
   0x007d:30f701000000  | 	irmovl 1, %edi
   0x0083:2054          | 	rrmovl %ebp, %esp
   0x0085:90            | 	ret
-  0x0086:70c7000000    | 	jmp L_8_FI
-  0x008b:              | L_8_ELSE:
+  0x0086:70d3000000    | 	jmp L_7_FI
+  0x008b:              | L_7_ELSE:
                        | 
-  0x008b:              | L_23_FUNC_PROLOGUE_BEGIN:
+  0x008b:              | L_22_FUNC_PROLOGUE_BEGIN:
                        | 
   0x008b:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
   0x0091:30f101000000  | 	irmovl 1, %ecx
   0x0097:6110          | 	subl %ecx, %eax
+  0x0099:400fe8030000  | 	rmmovl %eax, 1000
                        | 
-  0x0099:500fc8030000  | 	mrmovl 968, %eax
-  0x009f:400fcc030000  | 	rmmovl %eax, 972
-  0x00a5:500fcc030000  | 	mrmovl 972, %eax
-  0x00ab:a00f          | 	pushl %eax
-  0x00ad:a05f          | 	pushl %ebp
-  0x00af:8012000000    | 	call recurr
-  0x00b4:              | L_23_FUNC_EPILOGUE:
+  0x009f:500fe8030000  | 	mrmovl 1000, %eax
+  0x00a5:400fec030000  | 	rmmovl %eax, 1004
+  0x00ab:500fec030000  | 	mrmovl 1004, %eax
+  0x00b1:a00f          | 	pushl %eax
+  0x00b3:a05f          | 	pushl %ebp
+  0x00b5:8012000000    | 	call recurr
+  0x00ba:              | L_22_FUNC_EPILOGUE:
                        | 
-  0x00b4:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
-  0x00ba:2071          | 	rrmovl %edi, %ecx
-  0x00bc:6410          | 	mull %ecx, %eax
-  0x00be:507fd0030000  | 	mrmovl 976, %edi
-  0x00c4:2054          | 	rrmovl %ebp, %esp
-  0x00c6:90            | 	ret
-  0x00c7:              | L_8_FI:
+  0x00ba:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x00c0:2071          | 	rrmovl %edi, %ecx
+  0x00c2:6410          | 	mull %ecx, %eax
+  0x00c4:400ff0030000  | 	rmmovl %eax, 1008
                        | 
-  0x00c7:5075f4ffffff  | 	mrmovl -12(%ebp), %edi
-  0x00cd:2054          | 	rrmovl %ebp, %esp
-  0x00cf:90            | 	ret
-  0x00d0:              | main:
+  0x00ca:507ff0030000  | 	mrmovl 1008, %edi
+  0x00d0:2054          | 	rrmovl %ebp, %esp
+  0x00d2:90            | 	ret
+  0x00d3:              | L_7_FI:
                        | 
-  0x00d0:2045          | 	rrmovl %esp, %ebp
-  0x00d2:30f10c000000  | 	irmovl 12, %ecx
-  0x00d8:6114          | 	subl %ecx, %esp
-  0x00da:              | L_38_FUNC_PROLOGUE_BEGIN:
+  0x00d3:30f701000000  | 	irmovl 1, %edi
+  0x00d9:2054          | 	rrmovl %ebp, %esp
+  0x00db:90            | 	ret
+  0x00dc:              | main:
                        | 
-  0x00da:30f00a000000  | 	irmovl 10, %eax
-  0x00e0:400fd4030000  | 	rmmovl %eax, 980
-  0x00e6:500fd4030000  | 	mrmovl 980, %eax
-  0x00ec:a00f          | 	pushl %eax
-  0x00ee:a05f          | 	pushl %ebp
-  0x00f0:8012000000    | 	call recurr
-  0x00f5:              | L_38_FUNC_EPILOGUE:
+  0x00dc:2045          | 	rrmovl %esp, %ebp
+  0x00de:30f10c000000  | 	irmovl 12, %ecx
+  0x00e4:6114          | 	subl %ecx, %esp
+  0x00e6:              | L_37_FUNC_PROLOGUE_BEGIN:
                        | 
-  0x00f5:2070          | 	rrmovl %edi, %eax
-  0x00f7:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
-  0x00fd:5075f8ffffff  | 	mrmovl -8(%ebp), %edi
-  0x0103:2054          | 	rrmovl %ebp, %esp
-  0x0105:90            | 	ret
-  0x03dc:              | .pos 0x3dc    #Start of string space
+  0x00e6:30f004000000  | 	irmovl 4, %eax
+  0x00ec:400ff4030000  | 	rmmovl %eax, 1012
+  0x00f2:500ff4030000  | 	mrmovl 1012, %eax
+  0x00f8:a00f          | 	pushl %eax
+  0x00fa:a05f          | 	pushl %ebp
+  0x00fc:8012000000    | 	call recurr
+  0x0101:              | L_37_FUNC_EPILOGUE:
                        | 
-  0x03e0:              | .pos 0x3e0   # Start of global var space 
-  0xffff:              | .pos 0x0000FFFF
-  0xffff:              | stack:
+  0x0101:2070          | 	rrmovl %edi, %eax
+  0x0103:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x0109:5025f8ffffff  | 	mrmovl -8(%ebp), %edx
+  0x010f:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+  0x0115:5075f8ffffff  | 	mrmovl -8(%ebp), %edi
+  0x011b:2054          | 	rrmovl %ebp, %esp
+  0x011d:90            | 	ret
+  0x03fc:              | .pos 0x3fc    #Start of string space
+                       | 
+  0x0400:              | .pos 0x400   # Start of global var space 
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

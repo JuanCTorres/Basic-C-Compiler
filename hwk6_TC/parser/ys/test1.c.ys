@@ -18,38 +18,58 @@ main:
 	rmmovl %eax, -56(%ebp)
 	irmovl 12, %eax
 	irmovl 8, %ecx
-	mull %ecx, %eax	rmmovl %eax, 5692
+	mull %ecx, %eax
+	rmmovl %eax, 5692
 
+	irmovl -60, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5696
 	mrmovl 5692, %eax
 	mrmovl 5696, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, 5700
 
+	mrmovl 5700, %eax
+	rmmovl %eax, 5704
 	irmovl 5, %eax
 	irmovl 8, %ecx
-	mull %ecx, %eax	rmmovl %eax, 5708
+	mull %ecx, %eax
+	rmmovl %eax, 5708
 
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5712
 	mrmovl 5708, %eax
 	mrmovl 5712, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, 5716
 
+	mrmovl 5716, %eax
+	rmmovl %eax, 5720
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 5724
+	mull %ecx, %eax
+	rmmovl %eax, 5724
 
 	mrmovl 5724, %eax
 	irmovl 8, %ecx
-	mull %ecx, %eax	rmmovl %eax, 5728
+	mull %ecx, %eax
+	rmmovl %eax, 5728
 
+	irmovl -60, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5732
 	mrmovl 5728, %eax
 	mrmovl 5732, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, 5736
 
+	mrmovl 5736, %eax
+	rmmovl %eax, 5740
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 5744
+	mull %ecx, %eax
+	rmmovl %eax, 5744
 
 	mrmovl 5744, %eax
 	rmmovl %eax, 5740
@@ -84,7 +104,8 @@ main:
 	rmmovl %eax, -36(%ebp)
 	irmovl 1, %eax
 	irmovl -6, %ecx
-	mull %ecx, %eax	rmmovl %eax, 5764
+	mull %ecx, %eax
+	rmmovl %eax, 5764
 
 	mrmovl 5764, %eax
 	rmmovl %eax, -36(%ebp)
@@ -119,7 +140,8 @@ main:
 	mrmovl -32(%ebp), %eax
 	mrmovl -28(%ebp), %eax
 	mrmovl 5784, %ecx
-	mull %ecx, %eax	rmmovl %eax, 5788
+	mull %ecx, %eax
+	rmmovl %eax, 5788
 
 	mrmovl 5788, %eax
 	rmmovl %eax, -36(%ebp)
@@ -139,19 +161,22 @@ main:
 	rmmovl %eax, -36(%ebp)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 5800
+	mull %ecx, %eax
+	rmmovl %eax, 5800
 
 	mrmovl 5800, %eax
 	rmmovl %eax, -36(%ebp)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	 divl %ecx, %eax	rmmovl %eax, 5804
+	divl %ecx, %eax
+	rmmovl %eax, 5804
 
 	mrmovl 5804, %eax
 	rmmovl %eax, -36(%ebp)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	 modl %ecx, %eax	rmmovl %eax, 5808
+	modl %ecx, %eax
+	rmmovl %eax, 5808
 
 	mrmovl 5808, %eax
 	rmmovl %eax, -36(%ebp)
@@ -330,7 +355,8 @@ L_154_DONE:
 	rmmovl %eax, -36(%ebp)
 	mrmovl -28(%ebp), %eax
 	irmovl 5, %ecx
-	 modl %ecx, %eax	rmmovl %eax, 5936
+	modl %ecx, %eax
+	rmmovl %eax, 5936
 
 	mrmovl 5936, %eax
 	rmmovl %eax, -36(%ebp)
@@ -383,7 +409,8 @@ L_199_WHILE_BEGIN:
 
 	mrmovl -28(%ebp), %eax
 	irmovl 5, %ecx
-	 divl %ecx, %eax	rmmovl %eax, 5964
+	divl %ecx, %eax
+	rmmovl %eax, 5964
 
 	irmovl -3, %eax
 	irmovl -8, %ecx
@@ -415,16 +442,23 @@ L_200_DONE:
 	je L_199_WHILE_END
 	irmovl 10, %eax
 	irmovl 8, %ecx
-	mull %ecx, %eax	rmmovl %eax, 5988
+	mull %ecx, %eax
+	rmmovl %eax, 5988
 
+	irmovl -116, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5992
 	mrmovl 5988, %eax
 	mrmovl 5992, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, 5996
 
+	mrmovl 5996, %eax
+	rmmovl %eax, 6000
 	irmovl 12, %eax
 	irmovl 21, %ecx
-	mull %ecx, %eax	rmmovl %eax, 6004
+	mull %ecx, %eax
+	rmmovl %eax, 6004
 
 	mrmovl 6004, %edx
 	rmmovl %edx, 0x00FFFE14
@@ -439,7 +473,8 @@ L_219_DO_WHILE_BEGIN:
 	jne L_219_DO_WHILE_BEGIN
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 6012
+	mull %ecx, %eax
+	rmmovl %eax, 6012
 
 	mrmovl 6012, %eax
 	mrmovl -40(%ebp), %ecx
@@ -479,5 +514,5 @@ L_229_FI:
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000
-.pos 0x0000FFFF
+.pos 0x0000FFFC
 stack:

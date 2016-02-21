@@ -1,12 +1,15 @@
+
+int func(int a) {
+
+	return a;
+}
+
+
 int main() {
 	
-	int a;
-	int b;
-	int c;
+int b;
 
-	a = b = c = 1;
-
-	a = b + c;
+b = func(3);
 
 
 

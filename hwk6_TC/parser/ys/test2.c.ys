@@ -41,16 +41,23 @@ main:
 	subl %ecx, %esp
 	irmovl 2, %eax
 	irmovl 4, %ecx
-	mull %ecx, %eax	rmmovl %eax, 2756
+	mull %ecx, %eax
+	rmmovl %eax, 2756
 
+	irmovl -36, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 2760
 	mrmovl 2756, %eax
 	mrmovl 2760, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, 2764
 
+	mrmovl 2764, %eax
+	rmmovl %eax, 2768
 	irmovl 4, %eax
 	irmovl 5, %ecx
-	 divl %ecx, %eax	rmmovl %eax, 2772
+	divl %ecx, %eax
+	rmmovl %eax, 2772
 
 	mrmovl 2772, %eax
 	mrmovl 2776, %eax
@@ -95,7 +102,8 @@ L_59_DO_WHILE_BEGIN:
 	rmmovl %eax, -12(%ebp)
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 2800
+	mull %ecx, %eax
+	rmmovl %eax, 2800
 
 	mrmovl -12(%ebp), %eax
 	mrmovl -16(%ebp), %ecx
@@ -104,11 +112,13 @@ L_59_DO_WHILE_BEGIN:
 
 	mrmovl -8(%ebp), %eax
 	mrmovl 2804, %ecx
-	mull %ecx, %eax	rmmovl %eax, 2808
+	mull %ecx, %eax
+	rmmovl %eax, 2808
 
 	mrmovl 2808, %eax
 	mrmovl -24(%ebp), %ecx
-	 divl %ecx, %eax	rmmovl %eax, 2812
+	divl %ecx, %eax
+	rmmovl %eax, 2812
 
 	mrmovl 2824, %eax
 	irmovl 0, %ecx
@@ -196,7 +206,8 @@ L_119_FUNC_EPILOGUE:
 
 	irmovl 2, %eax
 	mrmovl -8(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 2844
+	mull %ecx, %eax
+	rmmovl %eax, 2844
 
 	mrmovl 2844, %eax
 	rmmovl %eax, -24(%ebp)
@@ -216,7 +227,8 @@ L_130_FUNC_EPILOGUE:
 
 	irmovl 2, %eax
 	rrmovl %edi, %ecx
-	mull %ecx, %eax	rmmovl %eax, 2856
+	mull %ecx, %eax
+	rmmovl %eax, 2856
 
 	mrmovl 2856, %eax
 	rmmovl %eax, -24(%ebp)
@@ -227,7 +239,8 @@ L_130_FUNC_EPILOGUE:
 
 	mrmovl -12(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx, %eax	rmmovl %eax, 2864
+	mull %ecx, %eax
+	rmmovl %eax, 2864
 
 	mrmovl 2864, %eax
 	mrmovl -28(%ebp), %ecx
@@ -246,7 +259,8 @@ L_130_FUNC_EPILOGUE:
 
 	mrmovl 2860, %eax
 	mrmovl 2876, %ecx
-	 divl %ecx, %eax	rmmovl %eax, 2880
+	divl %ecx, %eax
+	rmmovl %eax, 2880
 
 	mrmovl 2880, %edi
 	rrmovl %ebp, %esp
@@ -262,5 +276,5 @@ L_130_FUNC_EPILOGUE:
 	.long 	0x6e6f745c
 	.long 	0x6e
 .pos 0xb6c   # Start of global var space 
-.pos 0x0000FFFF
+.pos 0x0000FFFC
 stack:

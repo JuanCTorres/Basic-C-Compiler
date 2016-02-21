@@ -19,5 +19,5 @@ main:
 .pos 0x74    #Start of string space
 
 .pos 0x78   # Start of global var space 
-.pos 0x0000FFFF
+.pos 0x0000FFFC
 stack:
