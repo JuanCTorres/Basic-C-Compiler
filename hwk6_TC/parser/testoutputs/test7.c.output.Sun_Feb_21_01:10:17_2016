@@ -19,9 +19,9 @@ ROOT (uid: N0)
         RETURN (uid: N11) [scope (1,1) <- (0,0)]return to main at line 5 
           INT_LITERAL (uid: N12) 0(type: INT_TYPE) 
 (0-0) contains:
-  VAR_INT __0 (offset: 0)
-  VAR_INT __1 (offset: 0)
-  VAR_INT __4 (offset: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
 There are 3 entries
 0: (LABEL, this_func, -, -)
 1: (LABEL, main, -, -)

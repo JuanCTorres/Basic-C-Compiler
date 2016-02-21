@@ -1,26 +1,33 @@
-END OF PROG: 188(LABEL, recurr, -, -)
+END OF PROG: 932
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+(LABEL, recurr, -, -)
 (EQ, __T3, a, __0)
 	mrmovl -8(%ebp), %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 200
+	rmmovl %eax, 944
 (ifTrue, __L_9_TRUE, __T3, -)
 	je __L_9_TRUE
 (ASSIGN, __T3, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 200
+	rmmovl %eax, 944
 (GOTO, __L_9_DONE, -, -)
 	jmp __L_9_DONE
 (LABEL, __L_9_TRUE, -, -)
 (ASSIGN, __T3, __1, -)
 	irmovl 1, %eax
-	rmmovl %eax, 200
+	rmmovl %eax, 944
 (LABEL, __L_9_DONE, -, -)
 (ASSIGN, __T0, __T3, -)
-	mrmovl 200, %eax
-	rmmovl %eax, 188
+	mrmovl 944, %eax
+	rmmovl %eax, 932
 (ifFalse, __L_8_ELSE, __T0, -)
-	mrmovl 188, %eax
+	mrmovl 932, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
 	je __L_8_ELSE
@@ -36,12 +43,13 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	subl %ecx %eax
 
 (ASSIGN, __T5, __T4, -)
-	mrmovl 204, %eax
-	rmmovl %eax, 208
+	mrmovl 948, %eax
+	rmmovl %eax, 952
 (PUSH, __T5, -, -)
-	mrmovl 208, %eax
+	mrmovl 952, %eax
 	push %eax
 (CALL, recurr, -, -)
+	push %ebp
 	call recurr
 (LABEL, __L_23_FUNC_EPILOGUE, -, -)
 (MULT, __T6, a, __RET_INT)
@@ -49,7 +57,7 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	rrmovl %edi %ecx
 	mull %ecx %eax
 (RETURN, __T6, -, -)
-	mrmovl 212, %edi
+	mrmovl 956, %edi
 (LABEL, __L_8_FI, -, -)
 (RETURN, b, -, -)
 	mrmovl -12(%ebp), %edi
@@ -57,11 +65,12 @@ END OF PROG: 188(LABEL, recurr, -, -)
 (LABEL, __L_38_FUNC_PROLOGUE_BEGIN, -, -)
 (ASSIGN, __T7, __10, -)
 	irmovl a, %eax
-	rmmovl %eax, 216
+	rmmovl %eax, 960
 (PUSH, __T7, -, -)
-	mrmovl 216, %eax
+	mrmovl 960, %eax
 	push %eax
 (CALL, recurr, -, -)
+	push %ebp
 	call recurr
 (LABEL, __L_38_FUNC_EPILOGUE, -, -)
 (ASSIGN, answer, __RET_INT, -)
@@ -69,6 +78,8 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	rmmovl %eax, -8(%ebp)
 (RETURN, answer, -, -)
 	mrmovl -8(%ebp), %edi
-.pos 0xe0    #Start of string space
+.pos 0x3dc    #Start of string space
 
-.pos 0xe4   # Start of global var space 
+.pos 0x3e0   # Start of global var space 
+.pos 0x0000FFFF
+stack:

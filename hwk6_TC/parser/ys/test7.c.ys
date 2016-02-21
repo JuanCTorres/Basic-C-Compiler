@@ -1,7 +1,16 @@
-END OF PROG: 20(LABEL, this_func, -, -)
+END OF PROG: 92
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+(LABEL, this_func, -, -)
 (LABEL, main, -, -)
 (RETURN, __0, -, -)
 	irmovl 0, %edi
-.pos 0x18    #Start of string space
+.pos 0x74    #Start of string space
 
-.pos 0x1c   # Start of global var space 
+.pos 0x78   # Start of global var space 
+.pos 0x0000FFFF
+stack:
