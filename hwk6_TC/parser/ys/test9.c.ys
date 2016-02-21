@@ -38,6 +38,8 @@ END OF PROG: 556(LABEL, my_func, -, -)
 (ASSIGN, __L_41_FI, __T4, -)
 	mrmovl 572, %eax
 (ifFalse, __L_41_FI, __T1, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_41_FI
 (ASSIGN, b, __1, -)
 	irmovl 1, %eax
 	rmmovl %eax, -12(%ebp)
@@ -62,6 +64,8 @@ END OF PROG: 556(LABEL, my_func, -, -)
 	mrmovl 588, %eax
 	rmmovl %eax, 576
 (ifFalse, __L_51_ELSE, __T5, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_51_ELSE
 (ASSIGN, c, __2, -)
 	irmovl 2, %eax
 	rmmovl %eax, -16(%ebp)
@@ -114,11 +118,15 @@ END OF PROG: 556(LABEL, my_func, -, -)
 	rmmovl %eax, 608
 (LABEL, __L_85_DONE, -, -)
 (ifTrue, __L_84_DO_WHILE_BEGIN, __T13, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	jne __L_84_DO_WHILE_BEGIN
 (ASSIGN, a, __3, -)
 	irmovl 3, %eax
 	rmmovl %eax, -8(%ebp)
 (LABEL, __L_94_FOR_BEGIN, -, -)
 (ifFalse, __L_94_FOR_END, -, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_94_FOR_END
 (ASSIGN, b, __3, -)
 	irmovl 3, %eax
 	rmmovl %eax, -12(%ebp)

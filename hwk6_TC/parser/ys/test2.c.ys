@@ -26,6 +26,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	irmovl 5, %ecx
 	 divl %ecx %eax
 (NEG, __T8, __T7, -)
+	mrmovl 576, %eax
 (ASSIGN, y, __T8, -)
 	mrmovl 580, %eax
 	rmmovl %eax, -28(%ebp)
@@ -36,7 +37,12 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	mrmovl -12(%ebp), %eax
 	rmmovl %eax, -8(%ebp)
 (GT, __T12, a, __10)
+	mrmovl -8(%ebp), %eax
+	irmovl a, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 596
 (ifTrue, __L_48_TRUE, __T12, -)
+	jg __L_48_TRUE
 (ASSIGN, __T12, __0, -)
 	irmovl 0, %eax
 	rmmovl %eax, 596
@@ -50,10 +56,14 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	mrmovl 596, %eax
 	rmmovl %eax, 584
 (ifFalse, __L_47_ELSE, __T9, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_47_ELSE
 (ASSIGN, __T13, __1, -)
 	irmovl 1, %eax
 	rmmovl %eax, 600
 (ifFalse, __L_54_ELSE, __T13, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_54_ELSE
 (LABEL, __L_59_DO_WHILE_BEGIN, -, -)
 (ASSIGN, a, __3, -)
 	irmovl 3, %eax
@@ -83,6 +93,8 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	 divl %ecx %eax
 (NEQ, __T20, __T17, __10)
 (ifTrue, __L_60_TRUE, __T20, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	jne __L_60_TRUE
 (ASSIGN, __T20, __0, -)
 	irmovl 0, %eax
 	rmmovl %eax, 628
@@ -93,6 +105,8 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	rmmovl %eax, 628
 (LABEL, __L_60_DONE, -, -)
 (ifTrue, __L_59_DO_WHILE_BEGIN, __T20, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	jne __L_59_DO_WHILE_BEGIN
 (GOTO, __L_54_FI, -, -)
 (LABEL, __L_54_ELSE, -, -)
 (PRINT, __T21, not\n, -)
@@ -107,7 +121,12 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	rmmovl %eax, -12(%ebp)
 (LABEL, __L_95_FOR_BEGIN, -, -)
 (LT, __T24, t, __99)
+	mrmovl -12(%ebp), %eax
+	irmovl 63, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 644
 (ifTrue, __L_99_TRUE, __T24, -)
+	jl __L_99_TRUE
 (ASSIGN, __T24, __0, -)
 	irmovl 0, %eax
 	rmmovl %eax, 644
@@ -118,6 +137,8 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	rmmovl %eax, 644
 (LABEL, __L_99_DONE, -, -)
 (ifFalse, __L_95_FOR_END, __T24, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_95_FOR_END
 (ASSIGN, y, u, -)
 	mrmovl -16(%ebp), %eax
 	rmmovl %eax, -28(%ebp)
