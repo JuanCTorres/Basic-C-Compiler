@@ -49,6 +49,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 596
 (GOTO, __L_48_DONE, -, -)
+	jmp __L_48_DONE
 (LABEL, __L_48_TRUE, -, -)
 (ASSIGN, __T12, __1, -)
 	irmovl 1, %eax
@@ -107,6 +108,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 628
 (GOTO, __L_60_DONE, -, -)
+	jmp __L_60_DONE
 (LABEL, __L_60_TRUE, -, -)
 (ASSIGN, __T20, __1, -)
 	irmovl 1, %eax
@@ -118,10 +120,12 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	subl %ecx, %eax
 	jne __L_59_DO_WHILE_BEGIN
 (GOTO, __L_54_FI, -, -)
+	jmp __L_54_FI
 (LABEL, __L_54_ELSE, -, -)
 (PRINT, __T21, not\n, -)
 (LABEL, __L_54_FI, -, -)
 (GOTO, __L_47_FI, -, -)
+	jmp __L_47_FI
 (LABEL, __L_47_ELSE, -, -)
 (ASSIGN, qwert, __123, -)
 	irmovl 7b, %eax
@@ -141,6 +145,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 644
 (GOTO, __L_99_DONE, -, -)
+	jmp __L_99_DONE
 (LABEL, __L_99_TRUE, -, -)
 (ASSIGN, __T24, __1, -)
 	irmovl 1, %eax
@@ -170,6 +175,7 @@ END OF PROG: 548(LABEL, my_func, -, -)
 	addl %ecx, %eax
 	rmmovl %eax, -12(%ebp)
 (GOTO, __L_95_FOR_BEGIN, -, -)
+	jmp __L_95_FOR_BEGIN
 (LABEL, __L_95_FOR_END, -, -)
 (LABEL, __L_47_FI, -, -)
 (LABEL, __L_119_FUNC_PROLOGUE_BEGIN, -, -)

@@ -62,6 +62,8 @@ int main(){
 		// a = 0;
 	}
 	print "alygljkglkug";
+	print a*b;
+	print c;
 
 	my_func(b + 3 + d, c);
 

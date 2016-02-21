@@ -164,11 +164,12 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_GOTO:
+				fprintf(ofile, "\tjmp %s\n", array[i]->dest->name);
 
 				break;
 
 			case Q_LABEL:
-				if(is_funcion(array[i]->dest))
+
 
 				break;
 
@@ -177,7 +178,17 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_PRINT:
+				if(array[i]->src1->type == STRING_T) { //for strings
+					for(int i = 0; i <strlen(array[i]->src1->name)) {
+						
+					}
+					//store at 0x00FFFE10
+				}
+				else if() { //for actual values
+					//store at 0x00FFFE14
 
+				}
+				// for(int i = 0; i <strlen(array[i]->))
 				break;
 
 			case Q_EQ:

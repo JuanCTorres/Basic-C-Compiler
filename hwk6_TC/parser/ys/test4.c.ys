@@ -9,6 +9,7 @@ END OF PROG: 232(LABEL, main, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 244
 (GOTO, __L_23_DONE, -, -)
+	jmp __L_23_DONE
 (LABEL, __L_23_TRUE, -, -)
 (ASSIGN, __T3, __1, -)
 	irmovl 1, %eax
@@ -32,6 +33,7 @@ END OF PROG: 232(LABEL, main, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 256
 (GOTO, __L_35_DONE, -, -)
+	jmp __L_35_DONE
 (LABEL, __L_35_TRUE, -, -)
 (ASSIGN, __T6, __1, -)
 	irmovl 1, %eax
@@ -54,6 +56,7 @@ END OF PROG: 232(LABEL, main, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 268
 (GOTO, __L_44_DONE, -, -)
+	jmp __L_44_DONE
 (LABEL, __L_44_TRUE, -, -)
 (ASSIGN, __T9, __1, -)
 	irmovl 1, %eax
@@ -70,8 +73,10 @@ END OF PROG: 232(LABEL, main, -, -)
 	addl %ecx, %eax
 	rmmovl %eax, -40(%ebp)
 (GOTO, __L_42_FOR_BEGIN, -, -)
+	jmp __L_42_FOR_BEGIN
 (LABEL, __L_42_FOR_END, -, -)
 (GOTO, __L_34_WHILE_BEGIN, -, -)
+	jmp __L_34_WHILE_BEGIN
 (LABEL, __L_22_FI, -, -)
 (MULT, __T11, __100, __4)
 	irmovl 64, %eax

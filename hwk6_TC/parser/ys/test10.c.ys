@@ -10,6 +10,7 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	irmovl 0, %eax
 	rmmovl %eax, 200
 (GOTO, __L_9_DONE, -, -)
+	jmp __L_9_DONE
 (LABEL, __L_9_TRUE, -, -)
 (ASSIGN, __T3, __1, -)
 	irmovl 1, %eax
@@ -26,6 +27,7 @@ END OF PROG: 188(LABEL, recurr, -, -)
 (RETURN, __1, -, -)
 	irmovl 1, %edi
 (GOTO, __L_8_FI, -, -)
+	jmp __L_8_FI
 (LABEL, __L_8_ELSE, -, -)
 (LABEL, __L_23_FUNC_PROLOGUE_BEGIN, -, -)
 (SUB, __T4, a, __1)
