@@ -335,7 +335,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           // Execute test code first
           CG(x->left_child, hashtable);
           // Assign to temp to avoid destruction
-          make_insert_quad(Q_ASSIGN, label1, x->left_child->snode, NULL);
+          make_insert_quad(Q_ASSIGN, temp, x->left_child->snode, NULL);
           // Conditional jump
           make_insert_quad(Q_IFF, label1, temp, NULL);
           break;
