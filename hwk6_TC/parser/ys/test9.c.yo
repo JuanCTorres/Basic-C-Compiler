@@ -1,0 +1,245 @@
+  0x0000:              | .pos 0
+  0x0000:30f4ffff0000  | 	irmovl stack, %esp
+  0x0006:30f5ffff0000  | 	irmovl stack, %ebp
+  0x000c:8052000000    | 	call main
+  0x0011:00            | 	halt
+  0x0012:              | my_func:
+                       | 
+  0x0012:2045          | 	rrmovl %esp, %ebp
+  0x0014:30f120000000  | 	irmovl 32, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+  0x001c:500504000000  | 	mrmovl 4(%ebp), %eax
+  0x0022:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x0028:5005ecffffff  | 	mrmovl -20(%ebp), %eax
+  0x002e:30f104000000  | 	irmovl 4, %ecx
+  0x0034:6010          | 	addl %ecx, %eax
+                       | 
+  0x0036:500f740b0000  | 	mrmovl 2932, %eax
+  0x003c:4005f0ffffff  | 	rmmovl %eax, -16(%ebp)
+  0x0042:30f700000000  | 	irmovl 0, %edi
+  0x0048:              | my_new_f:
+                       | 
+  0x0048:2045          | 	rrmovl %esp, %ebp
+  0x004a:30f10c000000  | 	irmovl 12, %ecx
+  0x0050:6114          | 	subl %ecx, %esp
+  0x0052:              | main:
+                       | 
+  0x0052:2045          | 	rrmovl %esp, %ebp
+  0x0054:30f118000000  | 	irmovl 24, %ecx
+  0x005a:6114          | 	subl %ecx, %esp
+  0x005c:30f001000000  | 	irmovl 1, %eax
+  0x0062:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0068:30f002000000  | 	irmovl 2, %eax
+  0x006e:4005f0ffffff  | 	rmmovl %eax, -16(%ebp)
+  0x0074:30f003000000  | 	irmovl 3, %eax
+  0x007a:4005ecffffff  | 	rmmovl %eax, -20(%ebp)
+  0x0080:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0086:30f101000000  | 	irmovl 1, %ecx
+  0x008c:6110          | 	subl %ecx, %eax
+  0x008e:400f840b0000  | 	rmmovl %eax, 2948
+  0x0094:73aa000000    | 	je  L_45_TRUE
+  0x0099:30f000000000  | 	irmovl 0, %eax
+  0x009f:400f840b0000  | 	rmmovl %eax, 2948
+  0x00a5:70b6000000    | 	jmp  L_45_DONE
+  0x00aa:              |  L_45_TRUE:
+                       | 
+  0x00aa:30f001000000  | 	irmovl 1, %eax
+  0x00b0:400f840b0000  | 	rmmovl %eax, 2948
+  0x00b6:              |  L_45_DONE:
+                       | 
+  0x00b6:500f840b0000  | 	mrmovl 2948, %eax
+  0x00bc:500f780b0000  | 	mrmovl 2936, %eax
+  0x00c2:30f100000000  | 	irmovl 0, %ecx
+  0x00c8:6110          | 	subl %ecx, %eax
+  0x00ca:73db000000    | 	je  L_44_FI
+  0x00cf:30f001000000  | 	irmovl 1, %eax
+  0x00d5:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x00db:              |  L_44_FI:
+                       | 
+  0x00db:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
+  0x00e1:30f101000000  | 	irmovl 1, %ecx
+  0x00e7:6110          | 	subl %ecx, %eax
+  0x00e9:400f940b0000  | 	rmmovl %eax, 2964
+  0x00ef:7305010000    | 	je  L_55_TRUE
+  0x00f4:30f000000000  | 	irmovl 0, %eax
+  0x00fa:400f940b0000  | 	rmmovl %eax, 2964
+  0x0100:7011010000    | 	jmp  L_55_DONE
+  0x0105:              |  L_55_TRUE:
+                       | 
+  0x0105:30f001000000  | 	irmovl 1, %eax
+  0x010b:400f940b0000  | 	rmmovl %eax, 2964
+  0x0111:              |  L_55_DONE:
+                       | 
+  0x0111:500f940b0000  | 	mrmovl 2964, %eax
+  0x0117:400f880b0000  | 	rmmovl %eax, 2952
+  0x011d:500f880b0000  | 	mrmovl 2952, %eax
+  0x0123:30f100000000  | 	irmovl 0, %ecx
+  0x0129:6110          | 	subl %ecx, %eax
+  0x012b:735b010000    | 	je  L_54_ELSE
+  0x0130:30f002000000  | 	irmovl 2, %eax
+  0x0136:4005f0ffffff  | 	rmmovl %eax, -16(%ebp)
+  0x013c:30f004000000  | 	irmovl 4, %eax
+  0x0142:4005ecffffff  | 	rmmovl %eax, -20(%ebp)
+  0x0148:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x014e:5015f4ffffff  | 	mrmovl -12(%ebp), %ecx
+  0x0154:6010          | 	addl %ecx, %eax
+                       | 
+  0x0156:7099010000    | 	jmp  L_54_FI
+  0x015b:              |  L_54_ELSE:
+                       | 
+  0x015b:30f003000000  | 	irmovl 3, %eax
+  0x0161:4005f0ffffff  | 	rmmovl %eax, -16(%ebp)
+  0x0167:30f002000000  | 	irmovl 2, %eax
+  0x016d:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0173:30f001000000  | 	irmovl 1, %eax
+  0x0179:4005ecffffff  | 	rmmovl %eax, -20(%ebp)
+  0x017f:5005ecffffff  | 	mrmovl -20(%ebp), %eax
+  0x0185:5015f4ffffff  | 	mrmovl -12(%ebp), %ecx
+  0x018b:6010          | 	addl %ecx, %eax
+                       | 
+  0x018d:500f9c0b0000  | 	mrmovl 2972, %eax
+  0x0193:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x0199:              |  L_54_FI:
+                       | 
+  0x0199:              |  L_87_DO_WHILE_BEGIN:
+                       | 
+  0x0199:30f003000000  | 	irmovl 3, %eax
+  0x019f:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x01a5:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
+  0x01ab:30f103000000  | 	irmovl 3, %ecx
+  0x01b1:6110          | 	subl %ecx, %eax
+  0x01b3:400fa80b0000  | 	rmmovl %eax, 2984
+  0x01b9:73cf010000    | 	je  L_88_TRUE
+  0x01be:30f000000000  | 	irmovl 0, %eax
+  0x01c4:400fa80b0000  | 	rmmovl %eax, 2984
+  0x01ca:70db010000    | 	jmp  L_88_DONE
+  0x01cf:              |  L_88_TRUE:
+                       | 
+  0x01cf:30f001000000  | 	irmovl 1, %eax
+  0x01d5:400fa80b0000  | 	rmmovl %eax, 2984
+  0x01db:              |  L_88_DONE:
+                       | 
+  0x01db:500fa80b0000  | 	mrmovl 2984, %eax
+  0x01e1:30f100000000  | 	irmovl 0, %ecx
+  0x01e7:6110          | 	subl %ecx, %eax
+  0x01e9:7499010000    | 	jne  L_87_DO_WHILE_BEGIN
+  0x01ee:30f001000000  | 	irmovl 1, %eax
+  0x01f4:400fac0b0000  | 	rmmovl %eax, 2988
+  0x01fa:              |  L_97_FOR_BEGIN:
+                       | 
+  0x01fa:30f001000000  | 	irmovl 1, %eax
+  0x0200:400fb00b0000  | 	rmmovl %eax, 2992
+  0x0206:500fb00b0000  | 	mrmovl 2992, %eax
+  0x020c:30f100000000  | 	irmovl 0, %ecx
+  0x0212:6110          | 	subl %ecx, %eax
+  0x0214:7366020000    | 	je  L_97_FOR_END
+  0x0219:30f003000000  | 	irmovl 3, %eax
+  0x021f:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0225:30f003000000  | 	irmovl 3, %eax
+  0x022b:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0231:30f003000000  | 	irmovl 3, %eax
+  0x0237:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x023d:30f003000000  | 	irmovl 3, %eax
+  0x0243:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0249:30f003000000  | 	irmovl 3, %eax
+  0x024f:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+  0x0255:30f001000000  | 	irmovl 1, %eax
+  0x025b:400fb40b0000  | 	rmmovl %eax, 2996
+  0x0261:70fa010000    | 	jmp  L_97_FOR_BEGIN
+  0x0266:              |  L_97_FOR_END:
+                       | 
+  0x0266:502f0c0c0000  | 	mrmovl 3084, %edx
+  0x026c:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+  0x0272:502f1c0c0000  | 	mrmovl 3100, %edx
+  0x0278:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+  0x027e:502f2c0c0000  | 	mrmovl 3116, %edx
+  0x0284:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+  0x028a:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0290:5015f4ffffff  | 	mrmovl -12(%ebp), %ecx
+  0x0296:6410          | 	mull %ecx, %eax
+  0x0298:502fb80b0000  | 	mrmovl 3000, %edx
+  0x029e:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+  0x02a4:5025f0ffffff  | 	mrmovl -16(%ebp), %edx
+  0x02aa:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+  0x02b0:502f240c0000  | 	mrmovl 3108, %edx
+  0x02b6:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+  0x02bc:              |  L_129_FUNC_PROLOGUE_BEGIN:
+                       | 
+  0x02bc:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
+  0x02c2:30f103000000  | 	irmovl 3, %ecx
+  0x02c8:6010          | 	addl %ecx, %eax
+                       | 
+  0x02ca:500fbc0b0000  | 	mrmovl 3004, %eax
+  0x02d0:5015ecffffff  | 	mrmovl -20(%ebp), %ecx
+  0x02d6:6010          | 	addl %ecx, %eax
+                       | 
+  0x02d8:500fc00b0000  | 	mrmovl 3008, %eax
+  0x02de:400fc40b0000  | 	rmmovl %eax, 3012
+  0x02e4:500fc40b0000  | 	mrmovl 3012, %eax
+  0x02ea:a00f          | 	pushl %eax
+  0x02ec:5005f0ffffff  | 	mrmovl -16(%ebp), %eax
+  0x02f2:400fc80b0000  | 	rmmovl %eax, 3016
+  0x02f8:500fc80b0000  | 	mrmovl 3016, %eax
+  0x02fe:a00f          | 	pushl %eax
+  0x0300:a05f          | 	pushl %ebp
+  0x0302:8012000000    | 	call my_func
+  0x0307:              |  L_129_FUNC_EPILOGUE:
+                       | 
+  0x0307:30f007000000  | 	irmovl 7, %eax
+  0x030d:4005ecffffff  | 	rmmovl %eax, -20(%ebp)
+  0x0313:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0319:5015f0ffffff  | 	mrmovl -16(%ebp), %ecx
+  0x031f:6010          | 	addl %ecx, %eax
+                       | 
+  0x0321:5005ecffffff  | 	mrmovl -20(%ebp), %eax
+  0x0327:5015f4ffffff  | 	mrmovl -12(%ebp), %ecx
+  0x032d:6010          | 	addl %ecx, %eax
+                       | 
+  0x032f:500fd00b0000  | 	mrmovl 3024, %eax
+  0x0335:30f102000000  | 	irmovl 2, %ecx
+  0x033b:6110          | 	subl %ecx, %eax
+  0x033d:400fdc0b0000  | 	rmmovl %eax, 3036
+  0x0343:7359030000    | 	je  L_143_TRUE
+  0x0348:30f000000000  | 	irmovl 0, %eax
+  0x034e:400fdc0b0000  | 	rmmovl %eax, 3036
+  0x0354:7065030000    | 	jmp  L_143_DONE
+  0x0359:              |  L_143_TRUE:
+                       | 
+  0x0359:30f001000000  | 	irmovl 1, %eax
+  0x035f:400fdc0b0000  | 	rmmovl %eax, 3036
+  0x0365:              |  L_143_DONE:
+                       | 
+  0x0365:30f003000000  | 	irmovl 3, %eax
+  0x036b:30f104000000  | 	irmovl 4, %ecx
+  0x0371:6410          | 	mull %ecx, %eax
+  0x0373:500fe00b0000  | 	mrmovl 3040, %eax
+  0x0379:501fe40b0000  | 	mrmovl 3044, %ecx
+  0x037f:6010          | 	addl %ecx, %eax
+                       | 
+  0x0381:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0387:501fec0b0000  | 	mrmovl 3052, %ecx
+  0x038d:6010          | 	addl %ecx, %eax
+                       | 
+  0x038f:30f005000000  | 	irmovl 5, %eax
+  0x0395:30f104000000  | 	irmovl 4, %ecx
+  0x039b:6410          | 	mull %ecx, %eax
+  0x039d:500ff40b0000  | 	mrmovl 3060, %eax
+  0x03a3:501ff80b0000  | 	mrmovl 3064, %ecx
+  0x03a9:6010          | 	addl %ecx, %eax
+                       | 
+  0x03ab:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x03b1:501f000c0000  | 	mrmovl 3072, %ecx
+  0x03b7:6010          | 	addl %ecx, %eax
+                       | 
+  0x03b9:30f700000000  | 	irmovl 0, %edi
+  0x0c0c:              | .pos 0xc0c    #Start of string space
+                       | 
+  0x0c0c:67796c61      | 	.long 	0x616c7967
+  0x0c10:676b6a6c      | 	.long 	0x6c6a6b67
+  0x0c14:67756b6c      | 	.long 	0x6c6b7567
+  0x0c20:              | .pos 0xc20   # Start of global var space 
+  0x0c20:00000000      | 	.long 0x00000000
+  0x0c24:00000000      | 	.long 0x00000000
+  0x0c28:00000000      | 	.long 0x00000000
+  0xffff:              | .pos 0x0000FFFF
+  0xffff:              | stack:

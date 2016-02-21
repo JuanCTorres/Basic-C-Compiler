@@ -1,13 +1,18 @@
-END OF PROG: 92
-
 .pos 0
 	irmovl stack, %esp
 	irmovl stack, %ebp
 	call main
 	halt
-(LABEL, this_func, -, -)
-(LABEL, main, -, -)
-(RETURN, __0, -, -)
+this_func:
+
+	rrmovl %esp, %ebp
+	irmovl 0, %ecx
+	subl %ecx, %esp
+main:
+
+	rrmovl %esp, %ebp
+	irmovl 0, %ecx
+	subl %ecx, %esp
 	irmovl 0, %edi
 .pos 0x74    #Start of string space
 

@@ -60,6 +60,7 @@ static val_name_pair_2 decl_table[] = {
 
 typedef struct symnode {
   char *name;	                /* name in this symnode */
+  char *name_clean;
   int num_val;
   decl_type type;
   struct symnode  *next;	    /* next symnode in list */

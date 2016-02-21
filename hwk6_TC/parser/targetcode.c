@@ -5,7 +5,7 @@
 #include "symtab.h"
 
 #define MAINSTART 20
-
+#define DEBUG 0
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -37,18 +37,18 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 	calculate_var_offsets(symboltable->root);
 	calculate_string_addrs(symboltable->literal_collection);
 	calculate_global_var_addrs(symboltable);
-
+#if DEBUG
 	fprintf(ofile, "END OF PROG: %d\n\n", ENDOFPROG);
-
+#endif
 	print_initialization();
 
 	for(int i = 0; i < quad_index; i++){
 
 		int type1;
 		int type2;
-
+#if DEBUG
 		print_quad(array[i]);
-
+#endif
 		switch(array[i]->op){
 			case Q_ASSIGN:
 				/*
@@ -65,32 +65,32 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			/*~~~~~~~~~ Binary operations ~~~~~~~~~*/
 			case Q_ADD:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\taddl %s %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_SUB:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tsubl %s %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tmull %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\tmull %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_DIV:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\t divl %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\t divl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
 
 			case Q_MOD:
 				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\t modl %s %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				fprintf(ofile, "\t modl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				fprintf(ofile, "\n");
 				break;
 
@@ -119,66 +119,70 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_IFF:
 				if(array[i-1]->op == Q_EQ) {
-					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tje %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_GT) {
-					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjle %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_LT) {
-					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjge %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_GTEQ) {
-					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjl %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_LTEQ) {
-					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjg %s\n",array[i]->dest->name_clean);
 				}
 				else {
 					assert(array[i]->src1 != NULL);
 					move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 					fprintf(ofile, "\tirmovl 0, %s\n", RIGHT_OPERAND_REG);
 					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tje %s\n", array[i]->dest->name);
+					fprintf(ofile, "\tje %s\n", array[i]->dest->name_clean);
 				}
 				break;
 
 			case Q_IFT:
 				if(array[i-1]->op == Q_EQ) {
-					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tje %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_GT) {
-					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjg %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_LT) {
-					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjl %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_GTEQ) {
-					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjge %s\n",array[i]->dest->name_clean);
 				}
 				else if(array[i-1]->op == Q_LTEQ) {
-					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);
+					fprintf(ofile, "\tjle %s\n",array[i]->dest->name_clean);
 				}
 				else {
 					assert(array[i]->src1 != NULL);
 					move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 					fprintf(ofile, "\tirmovl 0, %s\n", RIGHT_OPERAND_REG);
 					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tjne %s\n", array[i]->dest->name);
+					fprintf(ofile, "\tjne %s\n", array[i]->dest->name_clean);
 				}
 
 				break;
 
 			case Q_GOTO:
-				fprintf(ofile, "\tjmp %s\n", array[i]->dest->name);
+				fprintf(ofile, "\tjmp %s\n", array[i]->dest->name_clean);
 
 				break;
 
 			case Q_LABEL:
 			// Function declarations (and hence calls wil end up here)
-			fprintf(ofile, "%s:\n\n", array[i]->dest->name);
+			if(is_function(array[i]->dest) == 0) {
+				fprintf(ofile, "%s:\n\n", array[i]->dest->name_clean);
+			}
+
 				if(is_function(array[i]->dest)){
+					fprintf(ofile, "%s:\n\n", array[i]->dest->name);
 					// Move the frame pointer to the current stack pointer.
-					fprintf(ofile, "\trrmovl %s %s\n", STACK_PTR, BASE_PTR);
+					fprintf(ofile, "\trrmovl %s, %s\n", STACK_PTR, BASE_PTR);
 
 					// Leave space for locals in the stack by increasing the stack
 					// pointer
@@ -189,6 +193,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					// Copy the parameters into locals.
 					// Starts reading at 4(%ebp)
 					// Starts copying at -8(%ebp), since 8 bytes needed for return address, old frame pointer.
+					#if DEBUG
+					fprintf(ofile, "NUM PARAMS: %d\n", array[i]->dest->num_parameters);
+					#endif
 					if(array[i]->dest->num_parameters > 0){
 
 						for(int j = 0; j < array[i]->dest->num_parameters; j++){
@@ -287,7 +294,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_CALL:
 				// Push caller's base pointer
-				fprintf(ofile, "\tpush %s\n", BASE_PTR);
+				fprintf(ofile, "\tpushl %s\n", BASE_PTR);
 				// And transfer control to the function
 				fprintf(ofile, "\tcall %s\n", array[i]->dest->name);
 				break;
@@ -295,7 +302,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_PUSH:
 				// Move into %eax, then push %eax
 				move_to_reg(array[i]->dest, LEFT_OPERAND_REG);
-				fprintf(ofile, "\tpush %s\n", LEFT_OPERAND_REG);
+				fprintf(ofile, "\tpushl %s\n", LEFT_OPERAND_REG);
 				break;
 
 			case Q_RETURN:
@@ -636,11 +643,10 @@ void move_to_reg(symnode_t *operand, char *reg){
 	fprintf(ofile, "\t");
 	if(type == INT_SYMNODE){
 		fprintf(ofile, "irmovl %d, %s\n", operand->num_val, reg);
-		fprintf(ofile, "Found an int\n");
 	} else if(type == TEMP_SYMNODE){
 		fprintf(ofile, "mrmovl %d, %s\n", get_temp_addr(operand),reg);
 	} else if(type == RET_SYMNODE){
-		fprintf(ofile, "rrmovl %s %s\n", RETURN_REG, reg);
+		fprintf(ofile, "rrmovl %s, %s\n", RETURN_REG, reg);
 	} else{ // var
 		if(is_var_global(operand)){
 			fprintf(ofile, "mrmovl %d, %s\n", operand->addr, reg);

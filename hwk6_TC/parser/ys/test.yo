@@ -1,0 +1,16 @@
+                       | 
+  0x0000:              | .pos 0
+  0x0000:              | init:
+  0x0000:30f500010000  | 	irmovl stack, %ebp
+  0x0006:30f400010000  | 	irmovl stack, %esp
+  0x000c:7050000000    | 	jmp H___O
+  0x0050:              | .pos 0x50
+  0x0050:              | H___O:
+  0x0050:30f07b000000  | 	irmovl 123, %eax
+                       | 
+  0x0100:              | .pos 0x100
+  0x0100:              | stack:
+                       | 
+  0xfe10:              | .pos 0x0000FE10
+                       | 
+                       | 
