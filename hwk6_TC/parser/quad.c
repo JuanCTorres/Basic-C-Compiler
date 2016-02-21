@@ -24,8 +24,13 @@ symnode_t* elem_size_n = NULL;
 */
  symnode_t* NewLabel(ast_node anode, char *text, symhashtable_t *hashtable) {
      char *label_name = calloc(sizeof(char), 100);
+     char *label_name_clean = calloc(sizeof(char), 100);
+
      sprintf(label_name, "__L_%d_", anode->node_no);
      strcat(label_name, text);
+
+     sprintf(label_name_clean, "L_%d_", anode->node_no);
+     strcat(label_name_clean, text);
 
      assert(hashtable != NULL);
      symnode_t *snode = lookup_symhashtable(hashtable, label_name, NOHASHSLOT);
@@ -35,6 +40,7 @@ symnode_t* elem_size_n = NULL;
         assert(new_anode != NULL);
         new_anode->value_string = label_name;
         snode = insert_into_symhashtable(hashtable, new_anode);
+        snode->name_clean = label_name_clean;
         assert(snode != NULL);
      }
      else {

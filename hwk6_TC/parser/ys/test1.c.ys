@@ -1,68 +1,50 @@
-END OF PROG: 5672
-
 .pos 0
 	irmovl stack, %esp
 	irmovl stack, %ebp
 	call main
 	halt
-(ASSIGN, a, __0, -)
 	irmovl 0, %eax
 	rmmvol %eax, 6052
-(ASSIGN, c, __23, -)
 	irmovl 17, %eax
 	rmmvol %eax, 6060
-(LABEL, main, -, -)
-(ASSIGN, h, __2, -)
+main:
+
+	rrmovl %esp, %ebp
+	irmovl 172, %ecx
+	subl %ecx, %esp
 	irmovl 2, %eax
 	rmmovl %eax, -52(%ebp)
-(ASSIGN, i, __3, -)
 	irmovl 3, %eax
 	rmmovl %eax, -56(%ebp)
-(MULT, __T0, __12, __4)
 	irmovl c, %eax
 	irmovl 8, %ecx
-	mull %ecx %eax
-(ADDR, __T1, cc, -)
-(ADD, __T2, __T0, __T1)
-	mrmovl 5672, %eax
-	mrmovl 5676, %ecx
-	addl %ecx %eax
+	mull %ecx, %eax
+	mrmovl 5692, %eax
+	mrmovl 5696, %ecx
+	addl %ecx, %eax
 
-(DEREF, __T3, __T2, -)
-(MULT, __T4, __5, __4)
 	irmovl 5, %eax
 	irmovl 8, %ecx
-	mull %ecx %eax
-(ADDR, __T5, dd, -)
-(ADD, __T6, __T4, __T5)
-	mrmovl 5688, %eax
-	mrmovl 5692, %ecx
-	addl %ecx %eax
-
-(DEREF, __T7, __T6, -)
-(MULT, __T8, a, b)
-	mrmovl -28(%ebp), %eax
-	mrmovl -32(%ebp), %ecx
-	mull %ecx %eax
-(MULT, __T9, __T8, __4)
-	mrmovl 5704, %eax
-	irmovl 8, %ecx
-	mull %ecx %eax
-(ADDR, __T10, cc, -)
-(ADD, __T11, __T9, __T10)
+	mull %ecx, %eax
 	mrmovl 5708, %eax
 	mrmovl 5712, %ecx
-	addl %ecx %eax
+	addl %ecx, %eax
 
-(DEREF, __T12, __T11, -)
-(MULT, __T13, a, b)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx %eax
-(ASSIGN, __T12, __T13, -)
+	mull %ecx, %eax
 	mrmovl 5724, %eax
-	rmmovl %eax, 5720
-(PRINT, test basics!\n, -, -)
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	mrmovl 5728, %eax
+	mrmovl 5732, %ecx
+	addl %ecx, %eax
+
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	mull %ecx, %eax
+	mrmovl 5744, %eax
+	rmmovl %eax, 5740
 	mrmovl 6032, %edx
 	rmmovl %edx, 0x00FFFE10
 	mrmovl 6048, %edx
@@ -71,495 +53,387 @@ END OF PROG: 5672
 	rmmovl %edx, 0x00FFFE10
 	mrmovl 6080, %edx
 	rmmovl %edx, 0x00FFFE10
-(READ, __T14, f, -)
-(SUB, __T15, __1, b)
 	irmovl 1, %eax
 	mrmovl -32(%ebp), %ecx
-	subl %ecx %eax
+	subl %ecx, %eax
 
-(ASSIGN, c, __T15, -)
-	mrmovl 5732, %eax
-	rmmovl %eax, -36(%ebp)
-(ADD, __T16, b, __1)
-	mrmovl -32(%ebp), %eax
-	irmovl 1, %ecx
-	addl %ecx %eax
-
-(ASSIGN, c, __T16, -)
-	mrmovl 5736, %eax
-	rmmovl %eax, -36(%ebp)
-(SUB, __T17, __5, __5)
-	irmovl 5, %eax
-	irmovl 5, %ecx
-	subl %ecx %eax
-
-(ASSIGN, c, __T17, -)
-	mrmovl 5740, %eax
-	rmmovl %eax, -36(%ebp)
-(MULT, __T18, __1, __-6)
-	irmovl 1, %eax
-	irmovl fffffffa, %ecx
-	mull %ecx %eax
-(ASSIGN, c, __T18, -)
-	mrmovl 5744, %eax
-	rmmovl %eax, -36(%ebp)
-(SUB, __T19, __-2, __9)
-	irmovl fffffffe, %eax
-	irmovl 9, %ecx
-	subl %ecx %eax
-
-(ASSIGN, c, __T19, -)
-	mrmovl 5748, %eax
-	rmmovl %eax, -36(%ebp)
-(ADD, __T20, __1, __7)
-	irmovl 1, %eax
-	irmovl 7, %ecx
-	addl %ecx %eax
-
-(ASSIGN, c, __T20, -)
 	mrmovl 5752, %eax
 	rmmovl %eax, -36(%ebp)
-(SUB, __T21, __1, __-10)
-	irmovl 1, %eax
-	irmovl fffffff6, %ecx
-	subl %ecx %eax
+	mrmovl -32(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
 
-(ASSIGN, c, __T21, -)
 	mrmovl 5756, %eax
 	rmmovl %eax, -36(%ebp)
-(SUB, __T22, __22, __-88)
-	irmovl 16, %eax
-	irmovl ffffffa8, %ecx
-	subl %ecx %eax
+	irmovl 5, %eax
+	irmovl 5, %ecx
+	subl %ecx, %eax
 
-(ASSIGN, c, __T22, -)
 	mrmovl 5760, %eax
 	rmmovl %eax, -36(%ebp)
-(NEG, __T23, b, -)
-	mrmovl -32(%ebp), %eax
-(MULT, __T24, a, __T23)
-	mrmovl -28(%ebp), %eax
-	mrmovl 5764, %ecx
-	mull %ecx %eax
-(ASSIGN, c, __T24, -)
+	irmovl 1, %eax
+	irmovl fffffffa, %ecx
+	mull %ecx, %eax
+	mrmovl 5764, %eax
+	rmmovl %eax, -36(%ebp)
+	irmovl fffffffe, %eax
+	irmovl 9, %ecx
+	subl %ecx, %eax
+
 	mrmovl 5768, %eax
 	rmmovl %eax, -36(%ebp)
-(ADD, __T25, a, b)
-	mrmovl -28(%ebp), %eax
-	mrmovl -32(%ebp), %ecx
-	addl %ecx %eax
+	irmovl 1, %eax
+	irmovl 7, %ecx
+	addl %ecx, %eax
 
-(ASSIGN, c, __T25, -)
 	mrmovl 5772, %eax
 	rmmovl %eax, -36(%ebp)
-(SUB, __T26, a, b)
-	mrmovl -28(%ebp), %eax
-	mrmovl -32(%ebp), %ecx
-	subl %ecx %eax
+	irmovl 1, %eax
+	irmovl fffffff6, %ecx
+	subl %ecx, %eax
 
-(ASSIGN, c, __T26, -)
 	mrmovl 5776, %eax
 	rmmovl %eax, -36(%ebp)
-(MULT, __T27, a, b)
-	mrmovl -28(%ebp), %eax
-	mrmovl -32(%ebp), %ecx
-	mull %ecx %eax
-(ASSIGN, c, __T27, -)
+	irmovl 16, %eax
+	irmovl ffffffa8, %ecx
+	subl %ecx, %eax
+
 	mrmovl 5780, %eax
 	rmmovl %eax, -36(%ebp)
-(DIV, __T28, a, b)
+	mrmovl -32(%ebp), %eax
 	mrmovl -28(%ebp), %eax
-	mrmovl -32(%ebp), %ecx
-	 divl %ecx %eax
-(ASSIGN, c, __T28, -)
-	mrmovl 5784, %eax
-	rmmovl %eax, -36(%ebp)
-(MOD, __T29, a, b)
-	mrmovl -28(%ebp), %eax
-	mrmovl -32(%ebp), %ecx
-	 modl %ecx %eax
-(ASSIGN, c, __T29, -)
+	mrmovl 5784, %ecx
+	mull %ecx, %eax
 	mrmovl 5788, %eax
 	rmmovl %eax, -36(%ebp)
-(LT, __T32, a, b)
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	addl %ecx, %eax
+
+	mrmovl 5792, %eax
+	rmmovl %eax, -36(%ebp)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5800
-(ifTrue, __L_114_TRUE, __T32, -)
-	jl __L_114_TRUE
-(ASSIGN, __T32, __0, -)
-	irmovl 0, %eax
-	rmmovl %eax, 5800
-(GOTO, __L_114_DONE, -, -)
-	jmp __L_114_DONE
-(LABEL, __L_114_TRUE, -, -)
-(ASSIGN, __T32, __1, -)
-	irmovl 1, %eax
-	rmmovl %eax, 5800
-(LABEL, __L_114_DONE, -, -)
-(ASSIGN, c, __T32, -)
+
+	mrmovl 5796, %eax
+	rmmovl %eax, -36(%ebp)
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	mull %ecx, %eax
 	mrmovl 5800, %eax
 	rmmovl %eax, -36(%ebp)
-(LTEQ, __T35, a, b)
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	 divl %ecx, %eax
+	mrmovl 5804, %eax
+	rmmovl %eax, -36(%ebp)
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	 modl %ecx, %eax
+	mrmovl 5808, %eax
+	rmmovl %eax, -36(%ebp)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5812
-(ifTrue, __L_119_TRUE, __T35, -)
-	jle __L_119_TRUE
-(ASSIGN, __T35, __0, -)
+	rmmovl %eax, 5820
+	jl L_114_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5812
-(GOTO, __L_119_DONE, -, -)
-	jmp __L_119_DONE
-(LABEL, __L_119_TRUE, -, -)
-(ASSIGN, __T35, __1, -)
+	rmmovl %eax, 5820
+	jmp L_114_DONE
+L_114_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 5812
-(LABEL, __L_119_DONE, -, -)
-(ASSIGN, c, __T35, -)
-	mrmovl 5812, %eax
+	rmmovl %eax, 5820
+L_114_DONE:
+
+	mrmovl 5820, %eax
 	rmmovl %eax, -36(%ebp)
-(GT, __T38, a, b)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5824
-(ifTrue, __L_124_TRUE, __T38, -)
-	jg __L_124_TRUE
-(ASSIGN, __T38, __0, -)
+	rmmovl %eax, 5832
+	jle L_119_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5824
-(GOTO, __L_124_DONE, -, -)
-	jmp __L_124_DONE
-(LABEL, __L_124_TRUE, -, -)
-(ASSIGN, __T38, __1, -)
+	rmmovl %eax, 5832
+	jmp L_119_DONE
+L_119_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 5824
-(LABEL, __L_124_DONE, -, -)
-(ASSIGN, c, __T38, -)
-	mrmovl 5824, %eax
+	rmmovl %eax, 5832
+L_119_DONE:
+
+	mrmovl 5832, %eax
 	rmmovl %eax, -36(%ebp)
-(GTEQ, __T41, a, b)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5836
-(ifTrue, __L_129_TRUE, __T41, -)
-	jge __L_129_TRUE
-(ASSIGN, __T41, __0, -)
+	rmmovl %eax, 5844
+	jg L_124_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5836
-(GOTO, __L_129_DONE, -, -)
-	jmp __L_129_DONE
-(LABEL, __L_129_TRUE, -, -)
-(ASSIGN, __T41, __1, -)
+	rmmovl %eax, 5844
+	jmp L_124_DONE
+L_124_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 5836
-(LABEL, __L_129_DONE, -, -)
-(ASSIGN, c, __T41, -)
-	mrmovl 5836, %eax
+	rmmovl %eax, 5844
+L_124_DONE:
+
+	mrmovl 5844, %eax
 	rmmovl %eax, -36(%ebp)
-(EQ, __T44, a, b)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5848
-(ifTrue, __L_134_TRUE, __T44, -)
-	je __L_134_TRUE
-(ASSIGN, __T44, __0, -)
+	rmmovl %eax, 5856
+	jge L_129_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5848
-(GOTO, __L_134_DONE, -, -)
-	jmp __L_134_DONE
-(LABEL, __L_134_TRUE, -, -)
-(ASSIGN, __T44, __1, -)
+	rmmovl %eax, 5856
+	jmp L_129_DONE
+L_129_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 5848
-(LABEL, __L_134_DONE, -, -)
-(ASSIGN, c, __T44, -)
-	mrmovl 5848, %eax
+	rmmovl %eax, 5856
+L_129_DONE:
+
+	mrmovl 5856, %eax
 	rmmovl %eax, -36(%ebp)
-(NEQ, __T47, a, b)
-(ifTrue, __L_139_TRUE, __T47, -)
-	mrmovl 5860, %eax
-	irmovl 0, %ecx
-	subl %ecx, %eax
-	jne __L_139_TRUE
-(ASSIGN, __T47, __0, -)
-	irmovl 0, %eax
-	rmmovl %eax, 5860
-(GOTO, __L_139_DONE, -, -)
-	jmp __L_139_DONE
-(LABEL, __L_139_TRUE, -, -)
-(ASSIGN, __T47, __1, -)
-	irmovl 1, %eax
-	rmmovl %eax, 5860
-(LABEL, __L_139_DONE, -, -)
-(ASSIGN, c, __T47, -)
-	mrmovl 5860, %eax
-	rmmovl %eax, -36(%ebp)
-(ASSIGN, __T49, a, -)
 	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	subl %ecx, %eax
 	rmmovl %eax, 5868
-(ifFalse, __L_144_FALSE, __T49, -)
-	mrmovl 5868, %eax
-	irmovl 0, %ecx
-	subl %ecx, %eax
-	je __L_144_FALSE
-(ASSIGN, __T50, b, -)
-	mrmovl -32(%ebp), %eax
-	rmmovl %eax, 5872
-(ifFalse, __L_144_FALSE, __T50, -)
-	mrmovl 5872, %eax
-	irmovl 0, %ecx
-	subl %ecx, %eax
-	je __L_144_FALSE
-(ASSIGN, __T51, __1, -)
-	irmovl 1, %eax
-	rmmovl %eax, 5876
-(GOTO, __L_144_DONE, -, -)
-	jmp __L_144_DONE
-(LABEL, __L_144_FALSE, -, -)
-(ASSIGN, __T51, __0, -)
+	je L_134_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5876
-(LABEL, __L_144_DONE, -, -)
-(ASSIGN, c, __T51, -)
-	mrmovl 5876, %eax
+	rmmovl %eax, 5868
+	jmp L_134_DONE
+L_134_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 5868
+L_134_DONE:
+
+	mrmovl 5868, %eax
 	rmmovl %eax, -36(%ebp)
-(ASSIGN, __T52, a, -)
-	mrmovl -28(%ebp), %eax
-	rmmovl %eax, 5880
-(ifTrue, __L_149_TRUE, __T52, -)
 	mrmovl 5880, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	jne __L_149_TRUE
-(ASSIGN, __T55, b, -)
+	jne L_139_TRUE
+	irmovl 0, %eax
+	rmmovl %eax, 5880
+	jmp L_139_DONE
+L_139_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 5880
+L_139_DONE:
+
+	mrmovl 5880, %eax
+	rmmovl %eax, -36(%ebp)
+	mrmovl -28(%ebp), %eax
+	rmmovl %eax, 5888
+	mrmovl 5888, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_144_FALSE
 	mrmovl -32(%ebp), %eax
 	rmmovl %eax, 5892
-(ifTrue, __L_149_TRUE, __T52, -)
-	mrmovl 5880, %eax
+	mrmovl 5892, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	jne __L_149_TRUE
-(ASSIGN, __T54, __0, -)
-	irmovl 0, %eax
-	rmmovl %eax, 5888
-(GOTO, __L_149_DONE, -, -)
-	jmp __L_149_DONE
-(LABEL, __L_149_TRUE, -, -)
-(ASSIGN, __T54, __1, -)
+	je L_144_FALSE
 	irmovl 1, %eax
-	rmmovl %eax, 5888
-(LABEL, __L_149_DONE, -, -)
-(ASSIGN, c, __T54, -)
-	mrmovl 5888, %eax
-	rmmovl %eax, -36(%ebp)
-(ASSIGN, __T56, b, -)
-	mrmovl -32(%ebp), %eax
 	rmmovl %eax, 5896
-(ifFalse, __L_154_FALSE, __T56, -)
+	jmp L_144_DONE
+L_144_FALSE:
+
+	irmovl 0, %eax
+	rmmovl %eax, 5896
+L_144_DONE:
+
 	mrmovl 5896, %eax
+	rmmovl %eax, -36(%ebp)
+	mrmovl -28(%ebp), %eax
+	rmmovl %eax, 5900
+	mrmovl 5900, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	je __L_154_FALSE
-(ASSIGN, __T57, __0, -)
-	irmovl 0, %eax
-	rmmovl %eax, 5900
-(GOTO, __L_154_DONE, -, -)
-	jmp __L_154_DONE
-(LABEL, __L_154_FALSE, -, -)
-(ASSIGN, __T57, __1, -)
-	irmovl 1, %eax
-	rmmovl %eax, 5900
-(LABEL, __L_154_DONE, -, -)
-(ASSIGN, c, __T57, -)
-	mrmovl 5900, %eax
-	rmmovl %eax, -36(%ebp)
-(NEG, __T58, b, -)
+	jne L_149_TRUE
 	mrmovl -32(%ebp), %eax
-(ASSIGN, c, __T58, -)
-	mrmovl 5904, %eax
+	rmmovl %eax, 5912
+	mrmovl 5900, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_149_TRUE
+	irmovl 0, %eax
+	rmmovl %eax, 5908
+	jmp L_149_DONE
+L_149_TRUE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 5908
+L_149_DONE:
+
+	mrmovl 5908, %eax
 	rmmovl %eax, -36(%ebp)
-(INC, __T59, b, -)
+	mrmovl -32(%ebp), %eax
+	rmmovl %eax, 5916
+	mrmovl 5916, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_154_FALSE
+	irmovl 0, %eax
+	rmmovl %eax, 5920
+	jmp L_154_DONE
+L_154_FALSE:
+
+	irmovl 1, %eax
+	rmmovl %eax, 5920
+L_154_DONE:
+
+	mrmovl 5920, %eax
+	rmmovl %eax, -36(%ebp)
+	mrmovl -32(%ebp), %eax
+	mrmovl 5924, %eax
+	rmmovl %eax, -36(%ebp)
 	mrmovl -32(%ebp), %eax
 	irmovl 1, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, -32(%ebp)
-(ASSIGN, c, __T59, -)
-	mrmovl 5908, %eax
+	mrmovl 5928, %eax
 	rmmovl %eax, -36(%ebp)
-(DEC, __T60, b, -)
 	mrmovl -32(%ebp), %eax
 	irmovl 1, %ecx
 	subl %ecx, %eax
 	rmmovl %eax, -32(%ebp)
-(ASSIGN, c, __T60, -)
-	mrmovl 5912, %eax
+	mrmovl 5932, %eax
 	rmmovl %eax, -36(%ebp)
-(MOD, __T61, a, __5)
 	mrmovl -28(%ebp), %eax
 	irmovl 5, %ecx
-	 modl %ecx %eax
-(ASSIGN, c, __T61, -)
-	mrmovl 5916, %eax
+	 modl %ecx, %eax
+	mrmovl 5936, %eax
 	rmmovl %eax, -36(%ebp)
-(ASSIGN, c, __-23, -)
 	irmovl ffffffe9, %eax
 	rmmovl %eax, -36(%ebp)
-(ASSIGN, a, __100, -)
 	irmovl 64, %eax
 	rmmovl %eax, -28(%ebp)
-(LABEL, __L_176_FOR_BEGIN, -, -)
-(LT, __T64, a, __200)
+L_176_FOR_BEGIN:
+
 	mrmovl -28(%ebp), %eax
 	irmovl c8, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5928
-(ifTrue, __L_180_TRUE, __T64, -)
-	jl __L_180_TRUE
-(ASSIGN, __T64, __0, -)
+	rmmovl %eax, 5948
+	jl L_180_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5928
-(GOTO, __L_180_DONE, -, -)
-	jmp __L_180_DONE
-(LABEL, __L_180_TRUE, -, -)
-(ASSIGN, __T64, __1, -)
+	rmmovl %eax, 5948
+	jmp L_180_DONE
+L_180_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 5928
-(LABEL, __L_180_DONE, -, -)
-(ifFalse, __L_176_FOR_END, __T64, -)
-	mrmovl 5928, %eax
+	rmmovl %eax, 5948
+L_180_DONE:
+
+	mrmovl 5948, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	je __L_176_FOR_END
-(ASSIGN, zz, __-100, -)
+	je L_176_FOR_END
 	irmovl ffffff9c, %eax
 	rmmovl %eax, -108(%ebp)
-(ADD, __T65, a, b)
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	addl %ecx %eax
+	addl %ecx, %eax
 
-(ADD, __T66, e, f)
 	mrmovl -44(%ebp), %eax
 	mrmovl -48(%ebp), %ecx
-	addl %ecx %eax
+	addl %ecx, %eax
 
-(ASSIGN, c, __T66, -)
-	mrmovl 5936, %eax
+	mrmovl 5956, %eax
 	rmmovl %eax, -36(%ebp)
-(INC, __T67, a, -)
 	mrmovl -28(%ebp), %eax
 	irmovl 1, %ecx
 	addl %ecx, %eax
 	rmmovl %eax, -28(%ebp)
-(GOTO, __L_176_FOR_BEGIN, -, -)
-	jmp __L_176_FOR_BEGIN
-(LABEL, __L_176_FOR_END, -, -)
-(LABEL, __L_199_WHILE_BEGIN, -, -)
-(DIV, __T68, a, __5)
+	jmp L_176_FOR_BEGIN
+L_176_FOR_END:
+
+L_199_WHILE_BEGIN:
+
 	mrmovl -28(%ebp), %eax
 	irmovl 5, %ecx
-	 divl %ecx %eax
-(ADD, __T69, __-3, __-8)
+	 divl %ecx, %eax
 	irmovl fffffffd, %eax
 	irmovl fffffff8, %ecx
-	addl %ecx %eax
+	addl %ecx, %eax
 
-(SUB, __T70, __T68, __T69)
-	mrmovl 5944, %eax
-	mrmovl 5948, %ecx
-	subl %ecx %eax
+	mrmovl 5964, %eax
+	mrmovl 5968, %ecx
+	subl %ecx, %eax
 
-(EQ, __T73, __T70, __100)
-	mrmovl 5952, %eax
+	mrmovl 5972, %eax
 	irmovl 64, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 5964
-(ifTrue, __L_200_TRUE, __T73, -)
-	je __L_200_TRUE
-(ASSIGN, __T73, __0, -)
+	rmmovl %eax, 5984
+	je L_200_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 5964
-(GOTO, __L_200_DONE, -, -)
-	jmp __L_200_DONE
-(LABEL, __L_200_TRUE, -, -)
-(ASSIGN, __T73, __1, -)
+	rmmovl %eax, 5984
+	jmp L_200_DONE
+L_200_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 5964
-(LABEL, __L_200_DONE, -, -)
-(ifFalse, __L_199_WHILE_END, __T73, -)
-	mrmovl 5964, %eax
+	rmmovl %eax, 5984
+L_200_DONE:
+
+	mrmovl 5984, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	je __L_199_WHILE_END
-(MULT, __T74, __10, __4)
+	je L_199_WHILE_END
 	irmovl a, %eax
 	irmovl 8, %ecx
-	mull %ecx %eax
-(ADDR, __T75, uu, -)
-(ADD, __T76, __T74, __T75)
-	mrmovl 5968, %eax
-	mrmovl 5972, %ecx
-	addl %ecx %eax
+	mull %ecx, %eax
+	mrmovl 5988, %eax
+	mrmovl 5992, %ecx
+	addl %ecx, %eax
 
-(DEREF, __T77, __T76, -)
-(MULT, __T78, __12, __21)
 	irmovl c, %eax
 	irmovl 15, %ecx
-	mull %ecx %eax
-(PRINT, __T78, -, -)
-	mrmovl 5984, %edx
+	mull %ecx, %eax
+	mrmovl 6004, %edx
 	rmmovl %edx, 0x00FFFE14
-(GOTO, __L_199_WHILE_BEGIN, -, -)
-	jmp __L_199_WHILE_BEGIN
-(LABEL, __L_219_DO_WHILE_BEGIN, -, -)
-(ASSIGN, asd, dsa, -)
+	jmp L_199_WHILE_BEGIN
+L_219_DO_WHILE_BEGIN:
+
 	mrmovl -156(%ebp), %eax
 	rmmovl %eax, -160(%ebp)
-(ifTrue, __L_219_DO_WHILE_BEGIN, __1, -)
 	irmovl 1, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	jne __L_219_DO_WHILE_BEGIN
-(MULT, __T80, a, b)
+	jne L_219_DO_WHILE_BEGIN
 	mrmovl -28(%ebp), %eax
 	mrmovl -32(%ebp), %ecx
-	mull %ecx %eax
-(EQ, __T83, __T80, d)
-	mrmovl 5992, %eax
+	mull %ecx, %eax
+	mrmovl 6012, %eax
 	mrmovl -40(%ebp), %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 6004
-(ifTrue, __L_230_TRUE, __T83, -)
-	je __L_230_TRUE
-(ASSIGN, __T83, __0, -)
+	rmmovl %eax, 6024
+	je L_230_TRUE
 	irmovl 0, %eax
-	rmmovl %eax, 6004
-(GOTO, __L_230_DONE, -, -)
-	jmp __L_230_DONE
-(LABEL, __L_230_TRUE, -, -)
-(ASSIGN, __T83, __1, -)
+	rmmovl %eax, 6024
+	jmp L_230_DONE
+L_230_TRUE:
+
 	irmovl 1, %eax
-	rmmovl %eax, 6004
-(LABEL, __L_230_DONE, -, -)
-(ASSIGN, __T79, __T83, -)
-	mrmovl 6004, %eax
-	rmmovl %eax, 5988
-(ifFalse, __L_229_ELSE, __T79, -)
-	mrmovl 5988, %eax
+	rmmovl %eax, 6024
+L_230_DONE:
+
+	mrmovl 6024, %eax
+	rmmovl %eax, 6008
+	mrmovl 6008, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
-	je __L_229_ELSE
-(GOTO, __L_229_FI, -, -)
-	jmp __L_229_FI
-(LABEL, __L_229_ELSE, -, -)
-(LABEL, __L_229_FI, -, -)
-(RETURN, __0, -, -)
+	je L_229_ELSE
+	jmp L_229_FI
+L_229_ELSE:
+
+L_229_FI:
+
 	irmovl 0, %edi
 .pos 0x1790    #Start of string space
 
