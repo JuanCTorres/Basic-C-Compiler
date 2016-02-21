@@ -1,9 +1,0 @@
-  0x0000:              | .pos 0
-                       | 
-  0x0000:30f21cfeff00  | irmovl 0x00FFFE1C, %edx
-                       | 
-  0x0006:500200000000  | mrmovl (%edx), %eax
-                       | 
-  0x000c:2001          | rrmovl %eax, %ecx
-                       | 
-                       | 

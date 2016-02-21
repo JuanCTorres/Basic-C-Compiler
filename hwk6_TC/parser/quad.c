@@ -679,12 +679,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case READ_N:
-        temp = NewTemp(hashtable);
-        make_insert_quad(Q_READ, temp, x->left_child->snode, NULL);
+        make_insert_quad(Q_READ, x->left_child->snode, NULL, NULL);
         break;
 
       case ARRAY_TYPE_N:
-        //<TODO> Ugh. Temps, probably to calculate offsets and whatnot
         temp = NewTemp(hashtable);
         temp2 = NewTemp(hashtable);
         temp3 = NewTemp(hashtable);

@@ -73,10 +73,14 @@ void move_to_reg_un(quad_type *quad);
 
 void move_to_reg(symnode_t *operand, char *reg);
 
+void move_from_reg(char* reg, symnode_t* target);
+
 int assign(symnode_t *left_val);
 
 int is_function(symnode_t *label);
+
 void print_initialization();
+
 void print_stack_setup();
 
 #endif

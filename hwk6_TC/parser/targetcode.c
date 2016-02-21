@@ -39,7 +39,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 	calculate_string_addrs(symboltable->literal_collection);
 	calculate_global_var_addrs(symboltable);
 #if DEBUG
-	fprintf(ofile, "END OF PROG: %d\n\n", ENDOFPROG);
+	fprintf(ofile, "#END OF PROG: %d\n\n", ENDOFPROG);
 #endif
 	print_initialization();
 
@@ -48,6 +48,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 		int type1;
 		int type2;
 #if DEBUG
+		fprintf(ofile, "#");
 		print_quad(array[i]);
 #endif
 		switch(array[i]->op){
@@ -199,7 +200,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					// Starts reading at 4(%ebp)
 					// Starts copying at -8(%ebp), since 8 bytes needed for return address, old frame pointer.
 					#if DEBUG
-					fprintf(ofile, "NUM PARAMS: %d\n", array[i]->dest->num_parameters);
+					fprintf(ofile, "#NUM PARAMS: %d\n", array[i]->dest->num_parameters);
 					#endif
 					if(array[i]->dest->num_parameters > 0){
 
@@ -215,8 +216,8 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_READ:
-			//<TODO>
-
+				fprintf(ofile, "\tmrmovl %s, %s\n", KHXR, LEFT_OPERAND_REG);
+				move_from_reg(LEFT_OPERAND_REG, array[i]->dest);
 				break;
 
 			case Q_PRINT:
@@ -646,8 +647,8 @@ void move_to_reg_un(quad_type *quad){
 
 
 /*
-   Handles register and memory moves to assign a value to a particular variable
-	 or temp.
+   Handles register and memory moves to assign a value seen in a quad
+	 to a particular variable or temp.
 	 Returns 1 if successful, 0 if unsuccessful (when trying to assign to an int
    or a register used for returning values)
 */
@@ -673,6 +674,29 @@ int assign(symnode_t *left_val){
 			}
 		}
 		return 1;
+	}
+}
+
+
+/*
+  Moves a value to stored in a register to
+*/
+void move_from_reg(char* reg, symnode_t* target){
+	int type = get_symnode_type(target);
+
+	fprintf(ofile, "\t");
+	if(type == TEMP_SYMNODE){
+		fprintf(ofile, "rmmovl %s, %d\n", reg, get_temp_addr(target));
+	} else if(type == RET_SYMNODE){
+		fprintf(ofile, "rrmovl %s, %s\n", reg, RETURN_REG);
+	} else if(type == VAR_SYMNODE){
+		if(is_var_global(target)){
+			fprintf(ofile, "rmmovl %s, %d\n", reg, target->addr);
+		} else{ // local
+			fprintf(ofile, "rmmovl %s, %d(%s)\n", reg, target->offset, BASE_PTR);
+		}
+	} else{
+		fprintf(ofile, "Error: trying to assign a value to an right value\n");
 	}
 }
 
