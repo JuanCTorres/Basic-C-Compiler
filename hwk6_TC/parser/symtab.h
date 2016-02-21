@@ -70,6 +70,7 @@ typedef struct symnode {
   int offset;
   int num_variables;
   int addr;
+  int needed_space;
   /* Other attributes go here. */
 } symnode_t;
 

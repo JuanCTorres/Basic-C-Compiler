@@ -129,9 +129,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);	
 				}
 				else {
-					// assert(array[i]->src1 != NULL);
-					// move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tirmovl 0, %s", RIGHT_OPERAND_REG);
+					assert(array[i]->src1 != NULL);
+					move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
+					fprintf(ofile, "\tirmovl 0, %s\n", RIGHT_OPERAND_REG);
 					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 					fprintf(ofile, "\tje %s\n", array[i]->dest->name);
 				}
@@ -154,9 +154,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);	
 				}
 				else {
-					// assert(array[i]->src1 != NULL);
-					// move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tirmovl 0, %s", RIGHT_OPERAND_REG);
+					assert(array[i]->src1 != NULL);
+					move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
+					fprintf(ofile, "\tirmovl 0, %s\n", RIGHT_OPERAND_REG);
 					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 					fprintf(ofile, "\tjne %s\n", array[i]->dest->name);
 				}
@@ -280,12 +280,14 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 					hash = node->abnode->left_child->left_child->snode->parent; //param
 					// printf("\nLOLZ HERE!\n");
 					calculate_var_offsets_helper(hash);
+					node->needed_space = -offset;
 				}
 
 				else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
 
 					hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
 					calculate_var_offsets_helper(hash); //offset starts at eight
+					node->needed_space = -offset;
 				}
 
 			}

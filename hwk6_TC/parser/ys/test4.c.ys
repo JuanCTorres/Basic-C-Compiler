@@ -1,7 +1,9 @@
 END OF PROG: 232(LABEL, main, -, -)
 (NEQ, __T3, e, f)
 (ifTrue, __L_23_TRUE, __T3, -)
-	irmovl 0, %ecx	subl %ecx, %eax
+	mrmovl 244, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
 	jne __L_23_TRUE
 (ASSIGN, __T3, __0, -)
 	irmovl 0, %eax
@@ -15,12 +17,16 @@ END OF PROG: 232(LABEL, main, -, -)
 (ASSIGN, __L_22_FI, __T3, -)
 	mrmovl 244, %eax
 (ifFalse, __L_22_FI, __T0, -)
-	irmovl 0, %ecx	subl %ecx, %eax
+	mrmovl 232, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
 	je __L_22_FI
 (LABEL, __L_34_WHILE_BEGIN, -, -)
 (NEQ, __T6, h, __0)
 (ifTrue, __L_35_TRUE, __T6, -)
-	irmovl 0, %ecx	subl %ecx, %eax
+	mrmovl 256, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
 	jne __L_35_TRUE
 (ASSIGN, __T6, __0, -)
 	irmovl 0, %eax
@@ -32,7 +38,9 @@ END OF PROG: 232(LABEL, main, -, -)
 	rmmovl %eax, 256
 (LABEL, __L_35_DONE, -, -)
 (ifFalse, __L_34_WHILE_END, __T6, -)
-	irmovl 0, %ecx	subl %ecx, %eax
+	mrmovl 256, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
 	je __L_34_WHILE_END
 (LABEL, __L_42_FOR_BEGIN, -, -)
 (GT, __T9, h, __10)
@@ -52,7 +60,9 @@ END OF PROG: 232(LABEL, main, -, -)
 	rmmovl %eax, 268
 (LABEL, __L_44_DONE, -, -)
 (ifFalse, __L_42_FOR_END, __T9, -)
-	irmovl 0, %ecx	subl %ecx, %eax
+	mrmovl 268, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
 	je __L_42_FOR_END
 (INC, __T10, h, -)
 	mrmovl -40(%ebp), %eax
@@ -75,6 +85,7 @@ END OF PROG: 232(LABEL, main, -, -)
 
 (DEREF, __T14, __T13, -)
 (RETURN, __void, -, -)
+	irmovl 0, %edi
 .pos 0x128    #Start of string space
 
 .pos 0x12c   # Start of global var space 

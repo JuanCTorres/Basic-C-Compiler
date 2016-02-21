@@ -49,10 +49,10 @@ ROOT (uid: N0)
         RETURN (uid: N41) [scope (1,1) <- (0,0)]return to main at line 15 
           ID (uid: N42) answer [scope (1,1) <- (0,0)] declared at line 16 (type: INT_TYPE) 
 (0-0) contains:
-  VAR_INT __10 (val: 10, offset: 0)
-  VAR_INT __0 (val: 0, offset: 0)
-  VAR_INT __1 (val: 1, offset: 0)
-  VAR_INT __4 (val: 8, offset: 0)
+  VAR_INT __10 (offset: 0)
+  VAR_INT __0 (offset: 0)
+  VAR_INT __1 (offset: 0)
+  VAR_INT __4 (offset: 0)
 There are 31 entries
 0: (LABEL, recurr, -, -)
 1: (EQ, __T3, a, __0)
@@ -91,15 +91,15 @@ b -16
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
-  FUNC_INT main (0 params:)
-  FUNC_INT recurr (1 params: VAR_INT )
+  FUNC_INT main (0 params:)space needed: 12
+  FUNC_INT recurr (1 params: VAR_INT )space needed: 16
   (1-0) contains:
-    VAR_INT a (val: 0, offset: -8)
-    VAR_INT b (val: 0, offset: -12)
+    VAR_INT a (offset: -8)
+    VAR_INT b (offset: -12)
     (2-0) contains:
     (2-1) contains:
   (1-1) contains:
-    VAR_INT answer (val: 0, offset: -8)
+    VAR_INT answer (offset: -8)
 
 
 ===========================================================

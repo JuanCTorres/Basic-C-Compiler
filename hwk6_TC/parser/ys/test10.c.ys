@@ -19,9 +19,12 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	mrmovl 200, %eax
 	rmmovl %eax, 188
 (ifFalse, __L_8_ELSE, __T0, -)
-	irmovl 0, %ecx	subl %ecx, %eax
+	mrmovl 188, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
 	je __L_8_ELSE
 (RETURN, __1, -, -)
+	irmovl 1, %edi
 (GOTO, __L_8_FI, -, -)
 (LABEL, __L_8_ELSE, -, -)
 (LABEL, __L_23_FUNC_PROLOGUE_BEGIN, -, -)
@@ -34,27 +37,36 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	mrmovl 204, %eax
 	rmmovl %eax, 208
 (PUSH, __T5, -, -)
+	mrmovl 208, %eax
+	push %eax
 (CALL, recurr, -, -)
+	call recurr
 (LABEL, __L_23_FUNC_EPILOGUE, -, -)
 (MULT, __T6, a, __RET_INT)
 	mrmovl -8(%ebp), %eax
 	rrmovl %edi %ecx
 	mull %ecx %eax
 (RETURN, __T6, -, -)
+	mrmovl 212, %edi
 (LABEL, __L_8_FI, -, -)
 (RETURN, b, -, -)
+	mrmovl -12(%ebp), %edi
 (LABEL, main, -, -)
 (LABEL, __L_38_FUNC_PROLOGUE_BEGIN, -, -)
 (ASSIGN, __T7, __10, -)
 	irmovl a, %eax
 	rmmovl %eax, 216
 (PUSH, __T7, -, -)
+	mrmovl 216, %eax
+	push %eax
 (CALL, recurr, -, -)
+	call recurr
 (LABEL, __L_38_FUNC_EPILOGUE, -, -)
 (ASSIGN, answer, __RET_INT, -)
 	rrmovl %edi %eax
 	rmmovl %eax, -8(%ebp)
 (RETURN, answer, -, -)
+	mrmovl -8(%ebp), %edi
 .pos 0xe0    #Start of string space
 
 .pos 0xe4   # Start of global var space 
