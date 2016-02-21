@@ -8,10 +8,10 @@
 .pos 0x14
 #(ASSIGN, a, __0, -)
 	irmovl 0, %eax
-	rmmvol %eax, 6048
+	rmmovl %eax, 6048
 #(ASSIGN, c, __23, -)
 	irmovl 23, %eax
-	rmmvol %eax, 6056
+	rmmovl %eax, 6056
 #(LABEL, main, -, -)
 main:
 

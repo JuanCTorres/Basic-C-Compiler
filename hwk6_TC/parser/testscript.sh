@@ -158,29 +158,18 @@ printf "\n\n===========================================================\n" >> "$
 printf "recursive_factorial.c finished.\n" >>"${file}"
 
 
-file="./testoutputs/fibb_no_recur.c.output.`date +"%a_%b_%d_%T_%Y"`"
+file="./testoutputs/fibb.c.output.`date +"%a_%b_%d_%T_%Y"`"
 printf "Result of test done to parser.\n\n" >>"${file}"
 
-printf "fibb_no_recur.c BEGIN.\n" >>"${file}"
+printf "fibb.c BEGIN.\n" >>"${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser fibb_no_recur.c < ./testinputs/fibb_no_recur.c >>"${file}" 2>&1
+./parser fibb.c < ./testinputs/fibb.c >>"${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
-printf "fibb_no_recur.c finished.\n" >>"${file}"
+printf "fibb.c finished.\n" >>"${file}"
 
 
-
-file="./testoutputs/fibb_recur.c.output.`date +"%a_%b_%d_%T_%Y"`"
-printf "Result of test done to parser.\n\n" >>"${file}"
-
-printf "fibb_recur.c BEGIN.\n" >>"${file}"
-printf "===========================================================\n\n" >> "${file}"
-
-./parser fibb_recur.c < ./testinputs/fibb_recur.c >>"${file}" 2>&1
-
-printf "\n\n===========================================================\n" >> "${file}"
-printf "fibb_recur.c finished.\n" >>"${file}"
 
 
 file="./testoutputs/helloworld.c.output.`date +"%a_%b_%d_%T_%Y"`"
