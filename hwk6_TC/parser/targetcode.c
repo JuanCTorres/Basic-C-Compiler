@@ -714,6 +714,7 @@ void print_initialization() {
 	fprintf(ofile, "\tirmovl stack, %s\n", BASE_PTR);
 	fprintf(ofile, "\tcall main\n");
 	fprintf(ofile, "\thalt\n");
+	fprintf(ofile, ".pos 0x14\n");
 }
 
 void print_stack_setup() {

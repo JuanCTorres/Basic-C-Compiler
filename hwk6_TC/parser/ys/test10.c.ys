@@ -3,9 +3,9 @@
 	irmovl stack, %ebp
 	call main
 	halt
+.pos 0x14
 recurr:
 
-	rrmovl %esp, %ebp
 	irmovl 12, %ecx
 	subl %ecx, %esp
 	mrmovl 4(%ebp), %eax
@@ -32,11 +32,12 @@ L_8_DONE:
 	je L_7_ELSE
 	irmovl 1, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 	jmp L_7_FI
 L_7_ELSE:
-
-L_22_FUNC_PROLOGUE_BEGIN:
 
 	mrmovl -8(%ebp), %eax
 	irmovl 1, %ecx
@@ -48,9 +49,11 @@ L_22_FUNC_PROLOGUE_BEGIN:
 	mrmovl 1004, %eax
 	pushl %eax
 	pushl %ebp
+	rrmovl %esp, %ebp
 	call recurr
-L_22_FUNC_EPILOGUE:
-
+	irmovl 16, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
 	mrmovl -8(%ebp), %eax
 	rrmovl %edi, %ecx
 	mull %ecx, %eax
@@ -58,33 +61,41 @@ L_22_FUNC_EPILOGUE:
 
 	mrmovl 1008, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 L_7_FI:
 
 	irmovl 1, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 main:
 
-	rrmovl %esp, %ebp
 	irmovl 12, %ecx
 	subl %ecx, %esp
-L_37_FUNC_PROLOGUE_BEGIN:
-
-	irmovl 4, %eax
+	irmovl 6, %eax
 	rmmovl %eax, 1012
 	mrmovl 1012, %eax
 	pushl %eax
 	pushl %ebp
+	rrmovl %esp, %ebp
 	call recurr
-L_37_FUNC_EPILOGUE:
-
+	irmovl 16, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
 	rrmovl %edi, %eax
 	rmmovl %eax, -8(%ebp)
 	mrmovl -8(%ebp), %edx
 	rmmovl %edx, 0x00FFFE14
 	mrmovl -8(%ebp), %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 .pos 0x3fc    #Start of string space
 

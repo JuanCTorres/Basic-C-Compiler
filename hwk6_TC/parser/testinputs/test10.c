@@ -14,7 +14,7 @@ int recurr( int a ) {
 int main(void) {
 	int answer;
 
-	answer = recurr(4);
+	answer = recurr(6);
 
 
 	print answer;

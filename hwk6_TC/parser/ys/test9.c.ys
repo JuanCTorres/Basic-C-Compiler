@@ -3,9 +3,9 @@
 	irmovl stack, %ebp
 	call main
 	halt
+.pos 0x14
 my_func:
 
-	rrmovl %esp, %ebp
 	irmovl 32, %ecx
 	subl %ecx, %esp
 	mrmovl 4(%ebp), %eax
@@ -21,15 +21,16 @@ my_func:
 	rmmovl %eax, -16(%ebp)
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 my_new_f:
 
-	rrmovl %esp, %ebp
 	irmovl 12, %ecx
 	subl %ecx, %esp
 main:
 
-	rrmovl %esp, %ebp
 	irmovl 24, %ecx
 	subl %ecx, %esp
 	irmovl 1, %eax
@@ -172,8 +173,6 @@ L_97_FOR_END:
 	rmmovl %edx, 0x00FFFE14
 	mrmovl 3108, %edx
 	rmmovl %edx, 0x00FFFE14
-L_129_FUNC_PROLOGUE_BEGIN:
-
 	mrmovl -12(%ebp), %eax
 	irmovl 3, %ecx
 	addl %ecx, %eax
@@ -193,9 +192,11 @@ L_129_FUNC_PROLOGUE_BEGIN:
 	mrmovl 3016, %eax
 	pushl %eax
 	pushl %ebp
+	rrmovl %esp, %ebp
 	call my_func
-L_129_FUNC_EPILOGUE:
-
+	irmovl 36, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
 	irmovl 7, %eax
 	rmmovl %eax, -20(%ebp)
 	mrmovl -8(%ebp), %eax
@@ -264,6 +265,9 @@ L_143_DONE:
 
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 .pos 0xc0c    #Start of string space
 

@@ -1,0 +1,9 @@
+.pos 0
+
+irmovl 0x00FFFE1C, %edx
+
+mrmovl (%edx), %eax
+
+rrmovl %eax, %ecx
+
+

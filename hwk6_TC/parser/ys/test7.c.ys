@@ -3,18 +3,20 @@
 	irmovl stack, %ebp
 	call main
 	halt
+.pos 0x14
 this_func:
 
-	rrmovl %esp, %ebp
 	irmovl 0, %ecx
 	subl %ecx, %esp
 main:
 
-	rrmovl %esp, %ebp
 	irmovl 0, %ecx
 	subl %ecx, %esp
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 .pos 0x74    #Start of string space
 

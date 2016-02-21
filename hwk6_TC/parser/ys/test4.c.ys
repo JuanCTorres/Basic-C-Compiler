@@ -3,9 +3,9 @@
 	irmovl stack, %ebp
 	call main
 	halt
+.pos 0x14
 main:
 
-	rrmovl %esp, %ebp
 	irmovl 464, %ecx
 	subl %ecx, %esp
 	mrmovl 4(%ebp), %eax
@@ -98,6 +98,9 @@ L_22_FI:
 	rmmovl %eax, 1220
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
 	ret
 .pos 0x4cc    #Start of string space
 

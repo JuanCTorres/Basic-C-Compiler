@@ -1,11 +1,11 @@
   0x0000:              | .pos 0
   0x0000:30f4fcff0000  | 	irmovl stack, %esp
   0x0006:30f5fcff0000  | 	irmovl stack, %ebp
-  0x000c:80dc000000    | 	call main
+  0x000c:8006010000    | 	call main
   0x0011:00            | 	halt
-  0x0012:              | recurr:
+  0x0014:              | .pos 0x14
+  0x0014:              | recurr:
                        | 
-  0x0012:2045          | 	rrmovl %esp, %ebp
   0x0014:30f10c000000  | 	irmovl 12, %ecx
   0x001a:6114          | 	subl %ecx, %esp
   0x001c:500504000000  | 	mrmovl 4(%ebp), %eax
@@ -29,63 +29,74 @@
   0x006a:500fd8030000  | 	mrmovl 984, %eax
   0x0070:30f100000000  | 	irmovl 0, %ecx
   0x0076:6110          | 	subl %ecx, %eax
-  0x0078:738b000000    | 	je L_7_ELSE
+  0x0078:7395000000    | 	je L_7_ELSE
   0x007d:30f701000000  | 	irmovl 1, %edi
   0x0083:2054          | 	rrmovl %ebp, %esp
-  0x0085:90            | 	ret
-  0x0086:70d3000000    | 	jmp L_7_FI
-  0x008b:              | L_7_ELSE:
+  0x0085:b05f          | 	popl %ebp
+  0x0087:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x008d:6014          | 	addl %ecx, %esp
+  0x008f:90            | 	ret
+  0x0090:70f3000000    | 	jmp L_7_FI
+  0x0095:              | L_7_ELSE:
                        | 
-  0x008b:              | L_22_FUNC_PROLOGUE_BEGIN:
+  0x0095:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x009b:30f101000000  | 	irmovl 1, %ecx
+  0x00a1:6110          | 	subl %ecx, %eax
+  0x00a3:400fe8030000  | 	rmmovl %eax, 1000
                        | 
-  0x008b:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
-  0x0091:30f101000000  | 	irmovl 1, %ecx
-  0x0097:6110          | 	subl %ecx, %eax
-  0x0099:400fe8030000  | 	rmmovl %eax, 1000
+  0x00a9:500fe8030000  | 	mrmovl 1000, %eax
+  0x00af:400fec030000  | 	rmmovl %eax, 1004
+  0x00b5:500fec030000  | 	mrmovl 1004, %eax
+  0x00bb:a00f          | 	pushl %eax
+  0x00bd:a05f          | 	pushl %ebp
+  0x00bf:2045          | 	rrmovl %esp, %ebp
+  0x00c1:8014000000    | 	call recurr
+  0x00c6:30f110000000  | 	irmovl 16, %ecx
+  0x00cc:2054          | 	rrmovl %ebp, %esp
+  0x00ce:6014          | 	addl %ecx, %esp
+  0x00d0:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x00d6:2071          | 	rrmovl %edi, %ecx
+  0x00d8:6410          | 	mull %ecx, %eax
+  0x00da:400ff0030000  | 	rmmovl %eax, 1008
                        | 
-  0x009f:500fe8030000  | 	mrmovl 1000, %eax
-  0x00a5:400fec030000  | 	rmmovl %eax, 1004
-  0x00ab:500fec030000  | 	mrmovl 1004, %eax
-  0x00b1:a00f          | 	pushl %eax
-  0x00b3:a05f          | 	pushl %ebp
-  0x00b5:8012000000    | 	call recurr
-  0x00ba:              | L_22_FUNC_EPILOGUE:
+  0x00e0:507ff0030000  | 	mrmovl 1008, %edi
+  0x00e6:2054          | 	rrmovl %ebp, %esp
+  0x00e8:b05f          | 	popl %ebp
+  0x00ea:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x00f0:6014          | 	addl %ecx, %esp
+  0x00f2:90            | 	ret
+  0x00f3:              | L_7_FI:
                        | 
-  0x00ba:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
-  0x00c0:2071          | 	rrmovl %edi, %ecx
-  0x00c2:6410          | 	mull %ecx, %eax
-  0x00c4:400ff0030000  | 	rmmovl %eax, 1008
+  0x00f3:30f701000000  | 	irmovl 1, %edi
+  0x00f9:2054          | 	rrmovl %ebp, %esp
+  0x00fb:b05f          | 	popl %ebp
+  0x00fd:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0103:6014          | 	addl %ecx, %esp
+  0x0105:90            | 	ret
+  0x0106:              | main:
                        | 
-  0x00ca:507ff0030000  | 	mrmovl 1008, %edi
-  0x00d0:2054          | 	rrmovl %ebp, %esp
-  0x00d2:90            | 	ret
-  0x00d3:              | L_7_FI:
-                       | 
-  0x00d3:30f701000000  | 	irmovl 1, %edi
-  0x00d9:2054          | 	rrmovl %ebp, %esp
-  0x00db:90            | 	ret
-  0x00dc:              | main:
-                       | 
-  0x00dc:2045          | 	rrmovl %esp, %ebp
-  0x00de:30f10c000000  | 	irmovl 12, %ecx
-  0x00e4:6114          | 	subl %ecx, %esp
-  0x00e6:              | L_37_FUNC_PROLOGUE_BEGIN:
-                       | 
-  0x00e6:30f004000000  | 	irmovl 4, %eax
-  0x00ec:400ff4030000  | 	rmmovl %eax, 1012
-  0x00f2:500ff4030000  | 	mrmovl 1012, %eax
-  0x00f8:a00f          | 	pushl %eax
-  0x00fa:a05f          | 	pushl %ebp
-  0x00fc:8012000000    | 	call recurr
-  0x0101:              | L_37_FUNC_EPILOGUE:
-                       | 
-  0x0101:2070          | 	rrmovl %edi, %eax
-  0x0103:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
-  0x0109:5025f8ffffff  | 	mrmovl -8(%ebp), %edx
-  0x010f:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
-  0x0115:5075f8ffffff  | 	mrmovl -8(%ebp), %edi
-  0x011b:2054          | 	rrmovl %ebp, %esp
-  0x011d:90            | 	ret
+  0x0106:30f10c000000  | 	irmovl 12, %ecx
+  0x010c:6114          | 	subl %ecx, %esp
+  0x010e:30f006000000  | 	irmovl 6, %eax
+  0x0114:400ff4030000  | 	rmmovl %eax, 1012
+  0x011a:500ff4030000  | 	mrmovl 1012, %eax
+  0x0120:a00f          | 	pushl %eax
+  0x0122:a05f          | 	pushl %ebp
+  0x0124:2045          | 	rrmovl %esp, %ebp
+  0x0126:8014000000    | 	call recurr
+  0x012b:30f110000000  | 	irmovl 16, %ecx
+  0x0131:2054          | 	rrmovl %ebp, %esp
+  0x0133:6014          | 	addl %ecx, %esp
+  0x0135:2070          | 	rrmovl %edi, %eax
+  0x0137:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+  0x013d:5025f8ffffff  | 	mrmovl -8(%ebp), %edx
+  0x0143:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+  0x0149:5075f8ffffff  | 	mrmovl -8(%ebp), %edi
+  0x014f:2054          | 	rrmovl %ebp, %esp
+  0x0151:b05f          | 	popl %ebp
+  0x0153:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0159:6014          | 	addl %ecx, %esp
+  0x015b:90            | 	ret
   0x03fc:              | .pos 0x3fc    #Start of string space
                        | 
   0x0400:              | .pos 0x400   # Start of global var space 
