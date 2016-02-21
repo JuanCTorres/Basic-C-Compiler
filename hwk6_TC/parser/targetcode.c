@@ -120,13 +120,13 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);
 				}
 				else if(array[i-1]->op == Q_LT) {
-					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);	
+					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);
 				}
 				else if(array[i-1]->op == Q_GTEQ) {
-					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);	
+					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);
 				}
 				else if(array[i-1]->op == Q_LTEQ) {
-					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);	
+					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);
 				}
 				else {
 					assert(array[i]->src1 != NULL);
@@ -145,13 +145,13 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);
 				}
 				else if(array[i-1]->op == Q_LT) {
-					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);	
+					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);
 				}
 				else if(array[i-1]->op == Q_GTEQ) {
-					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);	
+					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);
 				}
 				else if(array[i-1]->op == Q_LTEQ) {
-					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);	
+					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);
 				}
 				else {
 					assert(array[i]->src1 != NULL);
@@ -170,7 +170,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_LABEL:
 			// Function declarations (and hence calls wil end up here)
-				if(is_funcion(array[i]->dest)){
+				if(is_function(array[i]->dest)){
 					//<TODO> Leave space for locals in the stack by increasing the stack
 					// pointer
 					//fprintf(ofile, "irmovl %d %s\n", array[i]->dest->space_needed, RIGHT_OPERAND_REG);
@@ -187,7 +187,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_PRINT:
 				if(array[i]->src1->type == STRING_T) { //for strings
 					for(int i = 0; i <strlen(array[i]->src1->name)) {
-						
+
 					}
 					//store at 0x00FFFE10
 				}
@@ -601,7 +601,7 @@ void move_to_reg(symnode_t *operand, char *reg){
 }
 
 
-int is_funcion(symnode_t *label){
+int is_function(symnode_t *label){
 	char *substr1 = substring(label->name, 3); // first 3 chars of label name
 
 	if(strcmp(substr1, "__L") != 0){
