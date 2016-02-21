@@ -1,0 +1,85 @@
+Result of test done to parser.
+
+fibb_recur.c BEGIN.
+===========================================================
+
+line: 11 | Error: Returning wrong type for function Fibonacci
+
+WARNING: There were return errors. Data structure may be ill-formed.
+
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) Fibonacci  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+      ID (uid: N3) n [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    SEQ (uid: N4) 
+      LOCAL_DECLARATIONS (uid: N5) 
+      STATEMENT_LIST (uid: N6) 
+        IF_STMT (uid: N7) 
+          == (uid: N8) (type: INT_TYPE) 
+            ID (uid: N9) n [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            INT_LITERAL (uid: N10) 0(type: INT_TYPE) 
+          SEQ (uid: N11) 
+            LOCAL_DECLARATIONS (uid: N12) 
+            STATEMENT_LIST (uid: N13) 
+              RETURN (uid: N14) [scope (2,0) <- (1,0)]return to Fibonacci at line 2 
+                INT_LITERAL (uid: N15) 0(type: INT_TYPE) 
+        IF_STMT (uid: N16) 
+          == (uid: N17) (type: INT_TYPE) 
+            ID (uid: N18) n [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            INT_LITERAL (uid: N19) 1(type: INT_TYPE) 
+          SEQ (uid: N20) 
+            LOCAL_DECLARATIONS (uid: N21) 
+            STATEMENT_LIST (uid: N22) 
+              RETURN (uid: N23) [scope (2,1) <- (1,0)]return to Fibonacci at line 2 
+                INT_LITERAL (uid: N24) 1(type: INT_TYPE) 
+        RETURN (uid: N25) [scope (1,0) <- (0,0)]return to Fibonacci at line 2 
+          + (uid: N26) 
+            CALL (uid: N27) 
+              FUNCTION (uid: N28) Fibonacci  (1 params: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                - (uid: N29) (type: INT_TYPE) 
+                  ID (uid: N30) n [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N31) 1(type: INT_TYPE) 
+            CALL (uid: N32) 
+              FUNCTION (uid: N33) Fibonacci  (1 params: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                - (uid: N34) (type: INT_TYPE) 
+                  ID (uid: N35) n [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N36) 2(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N37) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 17 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N38) 
+    SEQ (uid: N39) 
+      LOCAL_DECLARATIONS (uid: N40) 
+        = (uid: N41) (type: INT_TYPE) 
+          ID (uid: N42) n [scope (1,1) <- (0,0)] declared at line 19 (type: INT_TYPE) 
+          INT_LITERAL (uid: N43) 10(type: INT_TYPE) 
+        = (uid: N44) (type: INT_TYPE) 
+          ID (uid: N45) i [scope (1,1) <- (0,0)] declared at line 20 (type: INT_TYPE) 
+          INT_LITERAL (uid: N46) 0(type: INT_TYPE) 
+        ID (uid: N47) c [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N48) 
+        FOR (uid: N49) 
+          = (uid: N50) (type: INT_TYPE) 
+            ID (uid: N51) c [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N52) 1(type: INT_TYPE) 
+          <= (uid: N53) (type: INT_TYPE) 
+            ID (uid: N54) c [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            ID (uid: N55) n [scope (1,1) <- (0,0)] declared at line 19 (type: INT_TYPE) 
+          ++ (uid: N56) (type: INT_TYPE) 
+            ID (uid: N57) c [scope (1,1) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+          SEQ (uid: N58) 
+            LOCAL_DECLARATIONS (uid: N59) 
+            STATEMENT_LIST (uid: N60) 
+              PRINT (uid: N61) 
+                CALL (uid: N62) 
+                  FUNCTION (uid: N63) Fibonacci  (1 params: INT_TYPE)[scope (2,2) <- (1,1)] declared at line 2 (type: INT_TYPE) 
+                    ID (uid: N64) i [scope (2,2) <- (1,1)] declared at line 20 (type: INT_TYPE) 
+              ++ (uid: N65) (type: INT_TYPE) 
+                ID (uid: N66) i [scope (2,2) <- (1,1)] declared at line 20 (type: INT_TYPE) 
+        RETURN (uid: N67) [scope (1,1) <- (0,0)]return to main at line 17 
+          INT_LITERAL (uid: N68) 0(type: INT_TYPE) 
+Halting
+
+
+===========================================================
+fibb_recur.c finished.

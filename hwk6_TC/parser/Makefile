@@ -31,9 +31,8 @@ parser.tab.c : parser.y
 parser_driver.o : parser_driver.c
 
 clean :
-	rm -f parser lex.yy.o parser.tab.o parser_driver.o ast.o \
-	parser.tab.h parser.tab.c lex.yy.c *~ parser.output symtab.o \
-    quad.o targetcode.o
+	rm -f parser parser.tab.h parser.tab.c lex.yy.c *~ parser.output
+	rm *.o
 	rm -rf *.dSYM
 
 depend :
