@@ -5,7 +5,7 @@
 #include "symtab.h"
 
 #define MAINSTART 20
-#define DEBUG 0
+#define DEBUG 1
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -318,11 +318,26 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_ADDR:
+				if(get_symnode_type(array[i]->src1) != VAR_SYMNODE){
+					assert(0);
+				}
+				if(is_var_global(array[i]->src1)){
+					fprintf(ofile, "\tirmovl %d, %s\n", array[i]->src1->addr, LEFT_OPERAND_REG);
+				}
+				else{ // local
+					// Have to calculate address in ref to frame pointer:
+					// move offset to %eax, add frame pointer to it.
+					fprintf(ofile, "\tirmovl %d, %s\n", array[i]->src1->offset, LEFT_OPERAND_REG);
+					fprintf(ofile, "\taddl %s, %s\n", BASE_PTR, LEFT_OPERAND_REG);
+				}
 
+				assign(array[i]->dest);
 				break;
 
 			case Q_DEREF:
-
+				fprintf(ofile, "\tmrmovl %d, %s\n",
+					get_temp_addr(array[i]->src1), LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				break;
 
 			default:
