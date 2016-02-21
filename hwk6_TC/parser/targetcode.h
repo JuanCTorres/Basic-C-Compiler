@@ -10,7 +10,7 @@
 
 extern int quad_index;
 
-#define ENDOFPROG ((quad_index * 6) + (4 - (quad_index * 6) % 4))
+#define ENDOFPROG ((quad_index * 6 * 5) + (4 - (quad_index * 6) % 4))
 #define HASHSIZE 211
 
 /* Need to differentiate between these as getting values into registers will

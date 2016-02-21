@@ -170,13 +170,27 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_LABEL:
 			// Function declarations (and hence calls wil end up here)
+			fprintf(ofile, "%s:\n\n", array[i]->dest->name);
 				if(is_function(array[i]->dest)){
-					//<TODO> Leave space for locals in the stack by increasing the stack
+
+					// Move the frame pointer to the current stack pointer.
+					fprintf(ofile, "\trrmovl %s %s\n", STACK_PTR, BASE_PTR);
+
+					// Leave space for locals in the stack by increasing the stack
 					// pointer
-					fprintf(ofile, "irmovl %d, %s\n", array[i]->dest->needed_space, RIGHT_OPERAND_REG);
+					fprintf(ofile, "\tirmovl %d, %s\n", array[i]->dest->needed_space, RIGHT_OPERAND_REG);
+					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, STACK_PTR);
 
-					//fprintf(ofile, "", );
-
+					// Copy the parameters into locals
+					// 8 bytes needed for return address, old frame pointer.
+					fprintf(ofile, "NUM PARAMS: %d\n", array[i]->dest->num_parameters);
+					if(array[i]->dest->num_parameters > 0){
+						for(int i = 0; i < array[i]->dest->num_parameters; i++){
+							fprintf(ofile, "MOVING %d ARG\n", i);
+							fprintf(ofile, "\tmrmovl %d(%s), %s\n", ((i * 4) + 4), BASE_PTR, LEFT_OPERAND_REG);
+							fprintf(ofile, "\trmmovl %s, %d(%s)\n", LEFT_OPERAND_REG, (-i * 4) - 8, BASE_PTR);
+						}
+					}
 				}
 
 				break;
