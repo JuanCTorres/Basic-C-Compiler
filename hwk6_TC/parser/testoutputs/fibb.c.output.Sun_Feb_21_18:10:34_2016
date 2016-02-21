@@ -1,6 +1,6 @@
 Result of test done to parser.
 
-fibb_no_recur.c BEGIN.
+fibb.c BEGIN.
 ===========================================================
 
 
@@ -125,4 +125,4 @@ Print hashtables (level-sibno) according to their hierarchy
 
 
 ===========================================================
-fibb_no_recur.c finished.
+fibb.c finished.

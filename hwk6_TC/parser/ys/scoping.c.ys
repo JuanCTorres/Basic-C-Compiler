@@ -1,0 +1,97 @@
+#END OF PROG: 604
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, myfunc, -, -)
+myfunc:
+
+	irmovl 20, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 2
+	mrmovl 4(%ebp), %eax
+	rmmovl %eax, -8(%ebp)
+	mrmovl 8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
+#(ASSIGN, c, __9, -)
+	irmovl 9, %eax
+	rmmovl %eax, -16(%ebp)
+#(PRINT, c, -, -)
+	mrmovl -16(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(ADD, __T0, a, b)
+	mrmovl -8(%ebp), %eax
+	mrmovl -12(%ebp), %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 624
+
+#(ASSIGN, a, __T0, -)
+	mrmovl 624, %eax
+	rmmovl %eax, -8(%ebp)
+#(PRINT, a, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, __999, -, -)
+	irmovl 999, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(LABEL, main, -, -)
+main:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(ASSIGN, a, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 644
+#(ASSIGN, c, __11, -)
+	irmovl 11, %eax
+	rmmovl %eax, 652
+#(ASSIGN, __T1, __3, -)
+	irmovl 3, %eax
+	rmmovl %eax, 628
+#(PUSH, __T1, -, -)
+	mrmovl 628, %eax
+	pushl %eax
+#(ASSIGN, __T2, __4, -)
+	irmovl 4, %eax
+	rmmovl %eax, 632
+#(PUSH, __T2, -, -)
+	mrmovl 632, %eax
+	pushl %eax
+#(PRECALL, myfunc, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, myfunc, -, -)
+	call myfunc
+#(POSTCALL, myfunc, -, -)
+	irmovl 24, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(PRINT, a, -, -)
+	mrmovl 644, %edx
+	rmmovl %edx, 0x00FFFE14
+#(PRINT, c, -, -)
+	mrmovl 652, %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x280    #Start of string space
+
+.pos 0x284   # Start of global var space 
+	.long 0x00000000
+	.long 0x00000000
+	.long 0x00000000
+.pos 0x0000FFFC
+stack:
