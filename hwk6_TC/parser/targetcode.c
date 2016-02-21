@@ -4,6 +4,8 @@
 #include "targetcode.h"
 #include "symtab.h"
 
+#define MAINSTART 20
+
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -34,8 +36,11 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 	calculate_var_offsets(symboltable->root);
 	calculate_string_addrs(symboltable->literal_collection);
+	calculate_global_var_addrs(symboltable);
 
-	fprintf(ofile, "END OF PROG: %d", ENDOFPROG);
+	fprintf(ofile, "END OF PROG: %d\n\n", ENDOFPROG);
+
+	print_initialization();
 
 	for(int i = 0; i < quad_index; i++){
 
@@ -170,14 +175,14 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_LABEL:
 			// Function declarations (and hence calls wil end up here)
-				if(is_function(array[i]->dest)){
+				// if(is_function(array[i]->dest)){
 					//<TODO> Leave space for locals in the stack by increasing the stack
 					// pointer
-					fprintf(ofile, "irmovl %d, %s\n", array[i]->dest->needed_space, RIGHT_OPERAND_REG);
+					//fprintf(ofile, "irmovl %d, %s\n", array[i]->dest->needed_space, RIGHT_OPERAND_REG);
 
 					//fprintf(ofile, "", );
 
-				}
+				//}
 
 				break;
 
@@ -186,16 +191,38 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_PRINT:
-				// if(array[i]->src1->type == STRING_T) { //for strings
-				// 	for(int i = 0; i <strlen(array[i]->src1->name); i++) {
-
-				// 	}
-				// 	//store at 0x00FFFE10
-				// }
-				// else if(1) { //for actual values
-				// 	//store at 0x00FFFE14
-
-				//}
+				if(array[i]->dest->type == STRING_T) { //for strings
+					for(int k = 0; k <strlen(array[i]->dest->name); k++) {
+						if(k%4 == 0) {
+							// fprintf(ofile, "%s\n", array[i]->dest->name);
+							fprintf(ofile, "\tmrmovl %d, %s\n", (array[i]->dest->addr + k * 4), IO_REG);
+							fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DSTR);
+						}
+					}
+					//store at 0x00FFFE10
+				}
+				else if(get_symnode_type(array[i]->dest) == TEMP_SYMNODE) { //for lit values  RET_SYMNODE 
+					//store at 0x00FFFE14
+					fprintf(ofile, "\tmrmovl %d, %s\n", get_temp_addr(array[i]->dest), IO_REG);
+					fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
+				}
+				else if(get_symnode_type(array[i]->dest) == VAR_SYMNODE){
+					if(is_var_global(array[i]->dest) == 1){ //global variable
+						fprintf(ofile, "\tmrmovl %d, %s\n", array[i]->dest->addr, IO_REG);
+						fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
+					}
+					else { //local variable
+						fprintf(ofile, "\tmrmovl %d(%s), %s\n", array[i]->dest->offset, BASE_PTR, IO_REG);
+						fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
+					}
+				}
+				else if(get_symnode_type(array[i]->dest) == INT_SYMNODE){
+					fprintf(ofile, "\tirmovl %d, %s\n", array[i]->dest->num_val, IO_REG);
+					fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DHXR);
+				}
+				else {
+					assert(0);
+				}
 				// for(int i = 0; i <strlen(array[i]->))
 				break;
 
@@ -273,6 +300,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 	put_strings_in_mem(symboltable->literal_collection);
 	print_global_vars(symboltable);
+	print_stack_setup();
 
 	return 0;
 }
@@ -414,7 +442,7 @@ int get_temp_addr(symnode_t* temp){
 /* Calculates the location of strings in memory and stores that location in the
  symnode for the particular string */
 void calculate_string_addrs(symhashtable_t* hashtable){
-	endoftemp = (temp_counter * 4 + ENDOFPROG + 4); // Where in memory the strings should start
+	endoftemp = (temp_counter * 4 + ENDOFPROG + 4) + MAINSTART; // Where in memory the strings should start
 	// +4 because that's the space for the last quad.
 	int str_offset = 0;	// str_offset
 
@@ -490,7 +518,7 @@ int get_symnode_type(symnode_t *snode){
 
   if(strcmp(substr1, "__T") == 0){
     free(substr1);
-    return TEMP_SYMNODE;
+    return TEMP_SYMNODE; 
 	} else if(strcmp(substr1, "__R") == 0){
 		free(substr1);
 		return RET_SYMNODE;
@@ -610,4 +638,17 @@ int is_function(symnode_t *label){
 	} else{
 		return 0;
 	}
+}
+
+void print_initialization() {
+	fprintf(ofile, ".pos 0\n");
+	fprintf(ofile, "\tirmovl stack, %s\n", STACK_PTR);
+	fprintf(ofile, "\tirmovl stack, %s\n", BASE_PTR);
+	fprintf(ofile, "\tcall main\n");
+	fprintf(ofile, "\thalt\n");
+}
+
+void print_stack_setup() {
+	fprintf(ofile, ".pos 0x0000FFFF\n");
+	fprintf(ofile, "stack:\n");
 }

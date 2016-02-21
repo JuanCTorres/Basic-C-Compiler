@@ -514,10 +514,10 @@ void pretty_print(symhashtable_t *root, int depth) {
       }
       if(node->type == VAR_INT_T){
         // printf(" (val: %d, offset: %d)", node->num_val, node->offset);
-        printf(" (offset: %d)", node->offset);
+        printf(" (offset: %d or addr: %d)", node->offset, node->addr);
       }
       if(node->type == VAR_ARRAY_INT_T) {
-        printf(" (length: %d, offset: %d)", node->abnode->array_length, node->offset);
+        printf(" (length: %d, offset: %d or addr: %d)", node->abnode->array_length, node->offset, node->addr);
       }
 
         printf("\n");

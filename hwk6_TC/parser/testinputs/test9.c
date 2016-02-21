@@ -1,3 +1,7 @@
+int diz_gloval_var;
+int diz_thing;
+int diz_yolo;
+
 void my_func(int a, int d){
 	int e, f, g, h;
 	e = f + 4;
@@ -64,6 +68,7 @@ int main(){
 	print "alygljkglkug";
 	print a*b;
 	print c;
+	print diz_gloval_var;
 
 	my_func(b + 3 + d, c);
 
