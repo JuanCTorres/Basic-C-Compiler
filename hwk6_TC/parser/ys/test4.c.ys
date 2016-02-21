@@ -14,9 +14,10 @@ main:
 	rmmovl %eax, -12(%ebp)
 	mrmovl 12(%ebp), %eax
 	rmmovl %eax, -16(%ebp)
-	mrmovl 1176, %eax
-	irmovl 0, %ecx
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 1176
 	jne L_23_TRUE
 	irmovl 0, %eax
 	rmmovl %eax, 1176
@@ -34,9 +35,10 @@ L_23_DONE:
 	je L_22_FI
 L_34_WHILE_BEGIN:
 
-	mrmovl 1188, %eax
+	mrmovl -40(%ebp), %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 1188
 	jne L_35_TRUE
 	irmovl 0, %eax
 	rmmovl %eax, 1188

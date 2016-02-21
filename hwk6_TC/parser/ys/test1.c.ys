@@ -256,9 +256,10 @@ L_134_DONE:
 
 	mrmovl 5864, %eax
 	rmmovl %eax, -36(%ebp)
-	mrmovl 5876, %eax
-	irmovl 0, %ecx
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
 	subl %ecx, %eax
+	rmmovl %eax, 5876
 	jne L_139_TRUE
 	irmovl 0, %eax
 	rmmovl %eax, 5876
