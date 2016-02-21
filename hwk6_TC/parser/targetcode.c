@@ -435,7 +435,7 @@ int get_global_addr(symnode_t *var){
 
 
 int get_temp_addr(symnode_t* temp){
-	return temp->num_val * 4 + ENDOFPROG;
+	return temp->num_val * 4 + ENDOFPROG + MAINSTART;
 }
 
 
