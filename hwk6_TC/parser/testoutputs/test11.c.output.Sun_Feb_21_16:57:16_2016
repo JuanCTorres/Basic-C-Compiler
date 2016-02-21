@@ -1,0 +1,77 @@
+Result of test done to parser.
+
+test11.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) 
+  FUNC_DECLARATION (uid: N1) func  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) 
+      ID (uid: N3) a [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+      ID (uid: N4) d [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    SEQ (uid: N5) 
+      LOCAL_DECLARATIONS (uid: N6) 
+      STATEMENT_LIST (uid: N7) 
+        = (uid: N8) (type: INT_TYPE) 
+          ID (uid: N9) d [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+          + (uid: N10) (type: INT_TYPE) 
+            ID (uid: N11) a [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            ID (uid: N12) d [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+        RETURN (uid: N13) [scope (1,0) <- (0,0)]return to func at line 2 
+          ID (uid: N14) d [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N15) main  (0 params:)[scope (0,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N16) 
+    SEQ (uid: N17) 
+      LOCAL_DECLARATIONS (uid: N18) 
+        ID (uid: N19) b [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N20) 
+        = (uid: N21) 
+          ID (uid: N22) b [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          CALL (uid: N23) 
+            FUNCTION (uid: N24) func  (2 params: INT_TYPE INT_TYPE)[scope (1,1) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+              INT_LITERAL (uid: N25) 2(type: INT_TYPE) 
+              INT_LITERAL (uid: N26) 29(type: INT_TYPE) 
+        PRINT (uid: N27) 
+          ID (uid: N28) b [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+        RETURN (uid: N29) [scope (1,1) <- (0,0)]return to main at line 8 
+          INT_LITERAL (uid: N30) 0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __29 (offset: 0 or addr: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 15 entries
+0: (LABEL, func, -, -)
+1: (ADD, __T0, a, d)
+2: (ASSIGN, d, __T0, -)
+3: (RETURN, d, -, -)
+4: (LABEL, main, -, -)
+5: (ASSIGN, __T1, __2, -)
+6: (PUSH, __T1, -, -)
+7: (ASSIGN, __T2, __29, -)
+8: (PUSH, __T2, -, -)
+9: (PRECALL, func, -, -)
+10: (CALL, func, -, -)
+11: (POSTCALL, func, -, -)
+12: (ASSIGN, b, __RET_INT, -)
+13: (PRINT, b, -, -)
+14: (RETURN, __0, -, -)
+b -12
+a -12
+d -16
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 12
+  FUNC_INT func (2 params: VAR_INT  VAR_INT )space needed: 16
+  (1-0) contains:
+    VAR_INT a (offset: -8 or addr: 0)
+    VAR_INT d (offset: -12 or addr: 0)
+  (1-1) contains:
+    VAR_INT b (offset: -8 or addr: 0)
+
+
+===========================================================
+test11.c finished.

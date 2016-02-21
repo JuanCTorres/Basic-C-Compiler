@@ -1,0 +1,152 @@
+#END OF PROG: 1144
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 464, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 3
+	mrmovl 4(%ebp), %eax
+	rmmovl %eax, -8(%ebp)
+	mrmovl 8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
+	mrmovl 12(%ebp), %eax
+	rmmovl %eax, -16(%ebp)
+#(NEQ, __T3, e, f)
+	mrmovl -28(%ebp), %eax
+	mrmovl -32(%ebp), %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1176
+#(ifTrue, __L_23_TRUE, __T3, -)
+	jne L_23_TRUE
+#(ASSIGN, __T3, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 1176
+#(GOTO, __L_23_DONE, -, -)
+	jmp L_23_DONE
+#(LABEL, __L_23_TRUE, -, -)
+L_23_TRUE:
+
+#(ASSIGN, __T3, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 1176
+#(LABEL, __L_23_DONE, -, -)
+L_23_DONE:
+
+#(ASSIGN, __L_22_FI, __T3, -)
+	mrmovl 1176, %eax
+#(ifFalse, __L_22_FI, __T0, -)
+	mrmovl 1164, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_22_FI
+#(LABEL, __L_34_WHILE_BEGIN, -, -)
+L_34_WHILE_BEGIN:
+
+#(NEQ, __T6, h, __0)
+	mrmovl -40(%ebp), %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1188
+#(ifTrue, __L_35_TRUE, __T6, -)
+	jne L_35_TRUE
+#(ASSIGN, __T6, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 1188
+#(GOTO, __L_35_DONE, -, -)
+	jmp L_35_DONE
+#(LABEL, __L_35_TRUE, -, -)
+L_35_TRUE:
+
+#(ASSIGN, __T6, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 1188
+#(LABEL, __L_35_DONE, -, -)
+L_35_DONE:
+
+#(ifFalse, __L_34_WHILE_END, __T6, -)
+	mrmovl 1188, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_34_WHILE_END
+#(LABEL, __L_42_FOR_BEGIN, -, -)
+L_42_FOR_BEGIN:
+
+#(GT, __T9, h, __10)
+	mrmovl -40(%ebp), %eax
+	irmovl 10, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1200
+#(ifTrue, __L_44_TRUE, __T9, -)
+	jg L_44_TRUE
+#(ASSIGN, __T9, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 1200
+#(GOTO, __L_44_DONE, -, -)
+	jmp L_44_DONE
+#(LABEL, __L_44_TRUE, -, -)
+L_44_TRUE:
+
+#(ASSIGN, __T9, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 1200
+#(LABEL, __L_44_DONE, -, -)
+L_44_DONE:
+
+#(ifFalse, __L_42_FOR_END, __T9, -)
+	mrmovl 1200, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_42_FOR_END
+#(INC, __T10, h, -)
+	mrmovl -40(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -40(%ebp)
+#(GOTO, __L_42_FOR_BEGIN, -, -)
+	jmp L_42_FOR_BEGIN
+#(LABEL, __L_42_FOR_END, -, -)
+L_42_FOR_END:
+
+#(GOTO, __L_34_WHILE_BEGIN, -, -)
+	jmp L_34_WHILE_BEGIN
+#(LABEL, __L_22_FI, -, -)
+L_22_FI:
+
+#(MULT, __T11, __100, __4)
+	irmovl 100, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1208
+
+#(ADDR, __T12, catz, -)
+	irmovl -60, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1212
+#(ADD, __T13, __T11, __T12)
+	mrmovl 1208, %eax
+	mrmovl 1212, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1216
+
+#(DEREF, __T14, __T13, -)
+	mrmovl 1216, %eax
+	rmmovl %eax, 1220
+#(RETURN, __void, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x4cc    #Start of string space
+
+.pos 0x4d0   # Start of global var space 
+.pos 0x0000FFFC
+stack:
