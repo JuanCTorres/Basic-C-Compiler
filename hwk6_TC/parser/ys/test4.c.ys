@@ -10,6 +10,10 @@ main:
 	subl %ecx, %esp
 	mrmovl 4(%ebp), %eax
 	rmmovl %eax, -8(%ebp)
+	mrmovl 8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
+	mrmovl 12(%ebp), %eax
+	rmmovl %eax, -16(%ebp)
 	mrmovl 1176, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
@@ -50,7 +54,7 @@ L_35_DONE:
 L_42_FOR_BEGIN:
 
 	mrmovl -40(%ebp), %eax
-	irmovl a, %ecx
+	irmovl 10, %ecx
 	subl %ecx, %eax
 	rmmovl %eax, 1200
 	jg L_44_TRUE
@@ -77,14 +81,18 @@ L_42_FOR_END:
 	jmp L_34_WHILE_BEGIN
 L_22_FI:
 
-	irmovl 64, %eax
+	irmovl 100, %eax
 	irmovl 8, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 1208
+
 	mrmovl 1208, %eax
 	mrmovl 1212, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 1216
 
 	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	ret
 .pos 0x4cc    #Start of string space
 
 .pos 0x4d0   # Start of global var space 

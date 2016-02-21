@@ -10,13 +10,18 @@ my_func:
 	subl %ecx, %esp
 	mrmovl 4(%ebp), %eax
 	rmmovl %eax, -8(%ebp)
+	mrmovl 8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
 	mrmovl -20(%ebp), %eax
 	irmovl 4, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 2932
 
 	mrmovl 2932, %eax
 	rmmovl %eax, -16(%ebp)
 	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	ret
 my_new_f:
 
 	rrmovl %esp, %ebp
@@ -83,6 +88,7 @@ L_55_DONE:
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 2968
 
 	jmp L_54_FI
 L_54_ELSE:
@@ -96,6 +102,7 @@ L_54_ELSE:
 	mrmovl -20(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 2972
 
 	mrmovl 2972, %eax
 	rmmovl %eax, -8(%ebp)
@@ -156,7 +163,8 @@ L_97_FOR_END:
 	rmmovl %edx, 0x00FFFE10
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 3000
+
 	mrmovl 3000, %edx
 	rmmovl %edx, 0x00FFFE14
 	mrmovl -16(%ebp), %edx
@@ -168,10 +176,12 @@ L_129_FUNC_PROLOGUE_BEGIN:
 	mrmovl -12(%ebp), %eax
 	irmovl 3, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3004
 
 	mrmovl 3004, %eax
 	mrmovl -20(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3008
 
 	mrmovl 3008, %eax
 	rmmovl %eax, 3012
@@ -190,10 +200,12 @@ L_129_FUNC_EPILOGUE:
 	mrmovl -8(%ebp), %eax
 	mrmovl -16(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3020
 
 	mrmovl -20(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3024
 
 	mrmovl 3024, %eax
 	irmovl 2, %ecx
@@ -211,27 +223,35 @@ L_143_DONE:
 
 	irmovl 3, %eax
 	irmovl 4, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 3040
+
 	mrmovl 3040, %eax
 	mrmovl 3044, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3048
 
 	mrmovl -8(%ebp), %eax
 	mrmovl 3052, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3056
 
 	irmovl 5, %eax
 	irmovl 4, %ecx
-	mull %ecx, %eax
+	mull %ecx, %eax	rmmovl %eax, 3060
+
 	mrmovl 3060, %eax
 	mrmovl 3064, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3068
 
 	mrmovl -8(%ebp), %eax
 	mrmovl 3072, %ecx
 	addl %ecx, %eax
+	rmmovl %eax, 3076
 
 	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	ret
 .pos 0xc0c    #Start of string space
 
 	.long 	0x616c7967

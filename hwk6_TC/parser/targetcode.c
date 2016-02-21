@@ -66,24 +66,28 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_ADD:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_SUB:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tmull %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_DIV:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\t divl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
@@ -91,6 +95,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_MOD:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\t modl %s, %s", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
+				assign(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
@@ -306,7 +311,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_RETURN:
-				fprintf(ofile, "Returning %d\n", array[i]->dest->num_val);
+				// fprintf(ofile, "Returning %d\n", array[i]->dest->num_val);
 				move_to_reg(array[i]->dest, RETURN_REG);
 				fprintf(ofile, "\trrmovl %s, %s\n", BASE_PTR, STACK_PTR);
 				fprintf(ofile, "\tret\n");
