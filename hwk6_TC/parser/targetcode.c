@@ -173,7 +173,8 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				if(is_function(array[i]->dest)){
 					//<TODO> Leave space for locals in the stack by increasing the stack
 					// pointer
-					//fprintf(ofile, "irmovl %d %s\n", array[i]->dest->space_needed, RIGHT_OPERAND_REG);
+					fprintf(ofile, "irmovl %d, %s\n", array[i]->dest->needed_space, RIGHT_OPERAND_REG);
+
 					//fprintf(ofile, "", );
 
 				}
@@ -185,17 +186,17 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_PRINT:
-				if(array[i]->src1->type == STRING_T) { //for strings
-					for(int i = 0; i <strlen(array[i]->src1->name)) {
-
-					}
-					//store at 0x00FFFE10
-				}
-				else if() { //for actual values
-					//store at 0x00FFFE14
-
-				}
-				// for(int i = 0; i <strlen(array[i]->))
+				// if(array[i]->src1->type == STRING_T) { //for strings
+				// 	for(int i = 0; i <strlen(array[i]->src1->name)) {
+				//
+				// 	}
+				// 	//store at 0x00FFFE10
+				// }
+				// else if() { //for actual values
+				// 	//store at 0x00FFFE14
+				//
+				// }
+				// // for(int i = 0; i <strlen(array[i]->))
 				break;
 
 			case Q_EQ:

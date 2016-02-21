@@ -69,6 +69,6 @@ void move_to_reg(symnode_t *operand, char *reg);
 
 int assign(symnode_t *left_val);
 
-int is_funcion(symnode_t *label);
+int is_function(symnode_t *label);
 
 #endif

@@ -666,8 +666,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case PRINT_N:
-        temp = NewTemp(hashtable);
-        make_insert_quad(Q_PRINT, temp, x->left_child->snode, NULL);
+        make_insert_quad(Q_PRINT, x->left_child->snode, NULL, NULL);
         break;
 
       case READ_N:
