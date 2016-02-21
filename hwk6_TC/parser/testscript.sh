@@ -177,11 +177,22 @@ printf "Result of test done to parser.\n\n" >>"${file}"
 printf "fibb_recur.c BEGIN.\n" >>"${file}"
 printf "===========================================================\n\n" >> "${file}"
 
-./parser fibb_no_recurr.c < ./testinputs/fibb_recur.c >>"${file}" 2>&1
+./parser fibb_recur.c < ./testinputs/fibb_recur.c >>"${file}" 2>&1
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "fibb_recur.c finished.\n" >>"${file}"
 
+
+file="./testoutputs/helloworld.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "helloworld.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser helloworld.c < ./testinputs/helloworld.c >>"${file}" 2>&1
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "helloworld.c finished.\n" >>"${file}"
 
 
 file="./testoutputs/test.error.c.output.`date +"%a_%b_%d_%T_%Y"`"

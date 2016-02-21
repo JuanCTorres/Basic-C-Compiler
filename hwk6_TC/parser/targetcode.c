@@ -3,6 +3,7 @@
 #include <string.h>
 #include "targetcode.h"
 #include "symtab.h"
+#include "unescape.h"
 
 #define MAINSTART 20
 #define DEBUG 0
@@ -220,13 +221,13 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_PRINT:
 				if(array[i]->dest->type == STRING_T) { //for strings
-					for(int k = 0; k <strlen(array[i]->dest->name); k++) {
-						if(k%4 == 0) {
+					//for(int k = 0; k <strlen(array[i]->dest->name); k++) {
+						//if(k%4 == 0) {
 							// fprintf(ofile, "%s\n", array[i]->dest->name);
-							fprintf(ofile, "\tmrmovl %d, %s\n", (array[i]->dest->addr + k * 4), IO_REG);
+							fprintf(ofile, "\tirmovl %d, %s\n", array[i]->dest->addr, IO_REG);
 							fprintf(ofile, "\trmmovl %s, %s\n", IO_REG, DSTR);
-						}
-					}
+						//}
+					//}
 					//store at 0x00FFFE10
 				}
 				else if(get_symnode_type(array[i]->dest) == TEMP_SYMNODE) { //for lit values  RET_SYMNODE
@@ -547,6 +548,9 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 
 			if(node->type == STRING_T){
 				// Allocate memory for it
+
+				node->name = unescape(node->name);
+
 				int counter = 0;
 				int len = strlen(node->name);
 				for(int counter = 0; counter < len; counter++){

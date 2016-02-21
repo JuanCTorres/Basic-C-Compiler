@@ -156,11 +156,7 @@ L_97_FOR_BEGIN:
 	jmp L_97_FOR_BEGIN
 L_97_FOR_END:
 
-	mrmovl 3084, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 3100, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 3116, %edx
+	irmovl 3084, %edx
 	rmmovl %edx, 0x00FFFE10
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx

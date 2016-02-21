@@ -29,9 +29,7 @@ your_func:
 
 	irmovl 16, %ecx
 	subl %ecx, %esp
-	mrmovl 2888, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 2904, %edx
+	irmovl 2888, %edx
 	rmmovl %edx, 0x00FFFE10
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
@@ -144,9 +142,7 @@ L_60_DONE:
 	jmp L_54_FI
 L_54_ELSE:
 
-	mrmovl 2912, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 2928, %edx
+	irmovl 2912, %edx
 	rmmovl %edx, 0x00FFFE10
 L_54_FI:
 
@@ -185,13 +181,7 @@ L_99_DONE:
 	rmmovl %eax, -8(%ebp)
 	mrmovl -8(%ebp), %eax
 	rmmovl %eax, -28(%ebp)
-	mrmovl 2896, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 2912, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 2928, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 2944, %edx
+	irmovl 2896, %edx
 	rmmovl %edx, 0x00FFFE10
 	mrmovl -12(%ebp), %eax
 	irmovl 1, %ecx
@@ -275,13 +265,11 @@ L_47_FI:
 .pos 0xb48    #Start of string space
 
 	.long 	0x4c4f4c21
-	.long 	0x5c6e
+	.long 	0xa
 	.long 	0x696e2066
 	.long 	0x6f72206c
-	.long 	0x6f6f705c
-	.long 	0x6e
-	.long 	0x6e6f745c
-	.long 	0x6e
+	.long 	0x6f6f70a
+	.long 	0x6e6f74a
 .pos 0xb6c   # Start of global var space 
 .pos 0x0000FFFC
 stack:

@@ -73,13 +73,7 @@ main:
 
 	mrmovl 5744, %eax
 	rmmovl %eax, 5740
-	mrmovl 6032, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 6048, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 6064, %edx
-	rmmovl %edx, 0x00FFFE10
-	mrmovl 6080, %edx
+	irmovl 6032, %edx
 	rmmovl %edx, 0x00FFFE10
 	irmovl 1, %eax
 	mrmovl -32(%ebp), %ecx
@@ -512,7 +506,7 @@ L_229_FI:
 	.long 	0x74657374
 	.long 	0x20626173
 	.long 	0x69637321
-	.long 	0x5c6e
+	.long 	0xa
 .pos 0x17a4   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
