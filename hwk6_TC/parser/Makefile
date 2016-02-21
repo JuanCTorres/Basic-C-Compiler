@@ -32,7 +32,7 @@ parser_driver.o : parser_driver.c
 
 clean :
 	rm -f parser parser.tab.h parser.tab.c lex.yy.c *~ parser.output
-	rm *.o
+	rm -rf *.o
 	rm -rf *.dSYM
 
 depend :

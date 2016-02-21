@@ -14,6 +14,12 @@ Some code provided by Professor Sean W. Smith with some originally written by Pr
 
 - Execute make test to build the program and run relevant tests. The folder `./testinputs` contains several example programs written in our C grammar, a subset of the full C grammar. Our test script should produce several files `[testfile].output.{date}` with the results of each test. The assembly files will be located in the `ys` folder, with the title `[testfile].ys`, e.g., `test1.c.ys`.
 
+    - `recursive_factorial.c` contains a recursive function that calculates `n!` for a given `n`.
+    - `fibb` contains a function that calculates the `n^th` term of the _Fibonacci_ sequence. It containts `if` and `for` statements designed to test our handling of jumps and condition testing.
+    - `scoping.c` contains a program that uses global and local variables, as well as nested scopes inside a function.
+    - `helloworld` contains a sample of a program that simply prints `"helloworld"` to the terminal window from where the Y86-simulator is called.
+
+
 - Generating assembly code for a particular file should be done by running `./parser [output file] < [input file]`, where `[input file]` represents the high-level C program and `[output file]` represents the file name of the output file. The output file will be located in `ys/[output file].ys`
 
 ## Program execution
@@ -71,33 +77,7 @@ I/O in our compiler is achieved by moving or reading data from the following add
 - String literals are stored in the heap, above the temporary space as `.byte` directives.
 - Global variables are stored in the heap, above the string literals, as `.long` directives.
 - Local variables are stored in the stack, with an offset from the frame pointer.
-- Parameters to a function are stored above the function's frame pointer, though we are copying them into the same space as locals (below the frame pointer), to make their handling easier.
-
-#### Function prologue and epilogues
-
-Since we are at this stage generating intermediate code, function prologues and epilogues are by necessity high-level.
-In a function prologue, a caller pushes all the arguments to the function, then transfers control to the function.
-
-Function prologues are, at the moment, just placeholders.
-
-Both of these are handled by the caller.
-
-An example for the function call `my_func(b + 3 + d, c)` follows:
-
-```
-60: (LABEL, __L_121_FUNC_PROLOGUE_BEGIN, -, -)
-61: (ADD, __T46, b, __3)
-62: (ADD, __T47, __T46, d)
-63: (PUSH, __T47, -, -)
-64: (PUSH, c, -, -)
-65: (CALL, my_func, -, -)
-66: (LABEL, __L_121_FUNC_EPILOGUE, -, -)
-```
-
-
-
-
-
+- Parameters to a function are stored above the function's frame pointer, though we are copying them into the same space as locals (below the frame pointer), to make their handling easier
 
 ## Changes from previous programs
 
