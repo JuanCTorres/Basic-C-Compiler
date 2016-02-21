@@ -1,0 +1,29 @@
+#END OF PROG: 92
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(PRINT, Hello World! - From Jun & Juan <3, -, -)
+	irmovl 116, %edx
+	rmmovl %edx, 0x00FFFE10
+#(RETURN, __2, -, -)
+	irmovl 2, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x74    #Start of string space
+
+.pos 0x9c   # Start of global var space 
+.pos 0x0000FFFC
+stack:

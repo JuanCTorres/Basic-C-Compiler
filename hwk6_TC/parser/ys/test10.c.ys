@@ -1,0 +1,140 @@
+#END OF PROG: 964
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, recurr, -, -)
+recurr:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 1
+	mrmovl 4(%ebp), %eax
+	rmmovl %eax, -8(%ebp)
+#(EQ, __T3, a, __0)
+	mrmovl -8(%ebp), %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 996
+#(ifTrue, __L_8_TRUE, __T3, -)
+	je L_8_TRUE
+#(ASSIGN, __T3, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 996
+#(GOTO, __L_8_DONE, -, -)
+	jmp L_8_DONE
+#(LABEL, __L_8_TRUE, -, -)
+L_8_TRUE:
+
+#(ASSIGN, __T3, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 996
+#(LABEL, __L_8_DONE, -, -)
+L_8_DONE:
+
+#(ASSIGN, __T0, __T3, -)
+	mrmovl 996, %eax
+	rmmovl %eax, 984
+#(ifFalse, __L_7_ELSE, __T0, -)
+	mrmovl 984, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_7_ELSE
+#(RETURN, __1, -, -)
+	irmovl 1, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(GOTO, __L_7_FI, -, -)
+	jmp L_7_FI
+#(LABEL, __L_7_ELSE, -, -)
+L_7_ELSE:
+
+#(SUB, __T4, a, __1)
+	mrmovl -8(%ebp), %eax
+	irmovl 1, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1000
+
+#(ASSIGN, __T5, __T4, -)
+	mrmovl 1000, %eax
+	rmmovl %eax, 1004
+#(PUSH, __T5, -, -)
+	mrmovl 1004, %eax
+	pushl %eax
+#(PRECALL, recurr, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, recurr, -, -)
+	call recurr
+#(POSTCALL, recurr, -, -)
+	irmovl 16, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(MULT, __T6, a, __RET_INT)
+	mrmovl -8(%ebp), %eax
+	rrmovl %edi, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1008
+
+#(RETURN, __T6, -, -)
+	mrmovl 1008, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(LABEL, __L_7_FI, -, -)
+L_7_FI:
+
+#(RETURN, __1, -, -)
+	irmovl 1, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(LABEL, main, -, -)
+main:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(ASSIGN, __T7, __6, -)
+	irmovl 6, %eax
+	rmmovl %eax, 1012
+#(PUSH, __T7, -, -)
+	mrmovl 1012, %eax
+	pushl %eax
+#(PRECALL, recurr, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, recurr, -, -)
+	call recurr
+#(POSTCALL, recurr, -, -)
+	irmovl 16, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(ASSIGN, answer, __RET_INT, -)
+	rrmovl %edi, %eax
+	rmmovl %eax, -8(%ebp)
+#(PRINT, answer, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, answer, -, -)
+	mrmovl -8(%ebp), %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x3fc    #Start of string space
+
+.pos 0x400   # Start of global var space 
+.pos 0x0000FFFC
+stack:
