@@ -19,6 +19,8 @@ END OF PROG: 188(LABEL, recurr, -, -)
 	mrmovl 200, %eax
 	rmmovl %eax, 188
 (ifFalse, __L_8_ELSE, __T0, -)
+	irmovl 0, %ecx	subl %ecx, %eax
+	je __L_8_ELSE
 (RETURN, __1, -, -)
 (GOTO, __L_8_FI, -, -)
 (LABEL, __L_8_ELSE, -, -)
