@@ -1,4 +1,4 @@
-#END OF PROG: 604
+#END OF PROG: 964
 
 .pos 0
 	irmovl stack, %esp
@@ -26,10 +26,10 @@ myfunc:
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
 	addl %ecx, %eax
-	rmmovl %eax, 624
+	rmmovl %eax, 984
 
 #(ASSIGN, a, __T0, -)
-	mrmovl 624, %eax
+	mrmovl 984, %eax
 	rmmovl %eax, -8(%ebp)
 #(PRINT, a, -, -)
 	mrmovl -8(%ebp), %edx
@@ -47,23 +47,60 @@ main:
 	irmovl 0, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
+#(EQ, __T4, __1, __1)
+	irmovl 1, %eax
+	irmovl 1, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1000
+#(ifTrue, __L_31_TRUE, __T4, -)
+	je L_31_TRUE
+#(ASSIGN, __T4, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 1000
+#(GOTO, __L_31_DONE, -, -)
+	jmp L_31_DONE
+#(LABEL, __L_31_TRUE, -, -)
+L_31_TRUE:
+
+#(ASSIGN, __T4, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 1000
+#(LABEL, __L_31_DONE, -, -)
+L_31_DONE:
+
+#(ASSIGN, __L_30_FI, __T4, -)
+	mrmovl 1000, %eax
+#(ifFalse, __L_30_FI, __T1, -)
+	mrmovl 988, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_30_FI
+#(ASSIGN, a, __333, -)
+	irmovl 333, %eax
+	rmmovl %eax, 0(%ebp)
+#(PRINT, a, -, -)
+	mrmovl 0(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(LABEL, __L_30_FI, -, -)
+L_30_FI:
+
 #(ASSIGN, a, __1, -)
 	irmovl 1, %eax
-	rmmovl %eax, 644
+	rmmovl %eax, 1020
 #(ASSIGN, c, __11, -)
 	irmovl 11, %eax
-	rmmovl %eax, 652
-#(ASSIGN, __T1, __3, -)
+	rmmovl %eax, 1028
+#(ASSIGN, __T5, __3, -)
 	irmovl 3, %eax
-	rmmovl %eax, 628
-#(PUSH, __T1, -, -)
-	mrmovl 628, %eax
+	rmmovl %eax, 1004
+#(PUSH, __T5, -, -)
+	mrmovl 1004, %eax
 	pushl %eax
-#(ASSIGN, __T2, __4, -)
+#(ASSIGN, __T6, __4, -)
 	irmovl 4, %eax
-	rmmovl %eax, 632
-#(PUSH, __T2, -, -)
-	mrmovl 632, %eax
+	rmmovl %eax, 1008
+#(PUSH, __T6, -, -)
+	mrmovl 1008, %eax
 	pushl %eax
 #(PRECALL, myfunc, -, -)
 	pushl %ebp
@@ -75,10 +112,10 @@ main:
 	rrmovl %ebp, %esp
 	addl %ecx, %esp
 #(PRINT, a, -, -)
-	mrmovl 644, %edx
+	mrmovl 1020, %edx
 	rmmovl %edx, 0x00FFFE14
 #(PRINT, c, -, -)
-	mrmovl 652, %edx
+	mrmovl 1028, %edx
 	rmmovl %edx, 0x00FFFE14
 #(RETURN, __0, -, -)
 	irmovl 0, %edi
@@ -87,9 +124,9 @@ main:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x280    #Start of string space
+.pos 0x3f8    #Start of string space
 
-.pos 0x284   # Start of global var space 
+.pos 0x3fc   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000

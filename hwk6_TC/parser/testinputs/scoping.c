@@ -16,6 +16,11 @@ int myfunc(int a, int b) {
 
 int main (){
 
+	if(1 == 1){
+		int a = 333;
+		print a;
+	}
+
 	a = 1;
 	
 	c = 11;
@@ -23,6 +28,8 @@ int main (){
 	myfunc(3,4);
 	print a;
 	print c;
+
+
 
 	return 0;
 }

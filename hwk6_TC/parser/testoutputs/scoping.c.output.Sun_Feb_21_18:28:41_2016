@@ -35,22 +35,34 @@ ROOT (uid: N0) inferred ret type: ROOT
     SEQ (uid: N27) inferred ret type: ROOT
       LOCAL_DECLARATIONS (uid: N28) inferred ret type: ROOT
       STATEMENT_LIST (uid: N29) inferred ret type: ROOT
-        = (uid: N30) inferred ret type: INT_TYPE(type: INT_TYPE) 
-          ID (uid: N31) inferred ret type: INT_TYPEa [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
-          INT_LITERAL (uid: N32) inferred ret type: INT_TYPE1(type: INT_TYPE) 
-        = (uid: N33) inferred ret type: INT_TYPE(type: INT_TYPE) 
-          ID (uid: N34) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
-          INT_LITERAL (uid: N35) inferred ret type: INT_TYPE11(type: INT_TYPE) 
-        CALL (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
-          FUNCTION (uid: N37) inferred ret type: INT_TYPEmyfunc  (2 params: INT_TYPE INT_TYPE)[scope (1,1) <- (0,0)] declared at line 3 (type: INT_TYPE) 
-            INT_LITERAL (uid: N38) inferred ret type: INT_TYPE3(type: INT_TYPE) 
-            INT_LITERAL (uid: N39) inferred ret type: INT_TYPE4(type: INT_TYPE) 
-        PRINT (uid: N40) inferred ret type: ROOT
-          ID (uid: N41) inferred ret type: INT_TYPEa [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
-        PRINT (uid: N42) inferred ret type: ROOT
-          ID (uid: N43) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
-        RETURN (uid: N44) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 17 
-          INT_LITERAL (uid: N45) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        IF_STMT (uid: N30) inferred ret type: ROOT
+          == (uid: N31) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            INT_LITERAL (uid: N32) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+            INT_LITERAL (uid: N33) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          SEQ (uid: N34) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N35) inferred ret type: ROOT
+              = (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                ID (uid: N37) inferred ret type: INT_TYPEa [scope (2,0) <- (1,1)] declared at line 20 (type: INT_TYPE) 
+                INT_LITERAL (uid: N38) inferred ret type: INT_TYPE333(type: INT_TYPE) 
+            STATEMENT_LIST (uid: N39) inferred ret type: ROOT
+              PRINT (uid: N40) inferred ret type: ROOT
+                ID (uid: N41) inferred ret type: INT_TYPEa [scope (2,0) <- (1,1)] declared at line 20 (type: INT_TYPE) 
+        = (uid: N42) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N43) inferred ret type: INT_TYPEa [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+          INT_LITERAL (uid: N44) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        = (uid: N45) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N46) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+          INT_LITERAL (uid: N47) inferred ret type: INT_TYPE11(type: INT_TYPE) 
+        CALL (uid: N48) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          FUNCTION (uid: N49) inferred ret type: INT_TYPEmyfunc  (2 params: INT_TYPE INT_TYPE)[scope (1,1) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+            INT_LITERAL (uid: N50) inferred ret type: INT_TYPE3(type: INT_TYPE) 
+            INT_LITERAL (uid: N51) inferred ret type: INT_TYPE4(type: INT_TYPE) 
+        PRINT (uid: N52) inferred ret type: ROOT
+          ID (uid: N53) inferred ret type: INT_TYPEa [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+        PRINT (uid: N54) inferred ret type: ROOT
+          ID (uid: N55) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+        RETURN (uid: N56) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 17 
+          INT_LITERAL (uid: N57) inferred ret type: INT_TYPE0(type: INT_TYPE) 
 (0-0) contains:
   VAR_INT __11 (offset: 0 or addr: 0)
   VAR_INT __999 (offset: 0 or addr: 0)
@@ -59,7 +71,8 @@ ROOT (uid: N0) inferred ret type: ROOT
   VAR_INT __3 (offset: 0 or addr: 0)
   VAR_INT __4 (offset: 0 or addr: 0)
   VAR_INT __9 (offset: 0 or addr: 0)
-There are 20 entries
+  VAR_INT __333 (offset: 0 or addr: 0)
+There are 32 entries
 0: (LABEL, myfunc, -, -)
 1: (ASSIGN, c, __9, -)
 2: (PRINT, c, -, -)
@@ -68,18 +81,30 @@ There are 20 entries
 5: (PRINT, a, -, -)
 6: (RETURN, __999, -, -)
 7: (LABEL, main, -, -)
-8: (ASSIGN, a, __1, -)
-9: (ASSIGN, c, __11, -)
-10: (ASSIGN, __T1, __3, -)
-11: (PUSH, __T1, -, -)
-12: (ASSIGN, __T2, __4, -)
-13: (PUSH, __T2, -, -)
-14: (PRECALL, myfunc, -, -)
-15: (CALL, myfunc, -, -)
-16: (POSTCALL, myfunc, -, -)
-17: (PRINT, a, -, -)
-18: (PRINT, c, -, -)
-19: (RETURN, __0, -, -)
+8: (EQ, __T4, __1, __1)
+9: (ifTrue, __L_31_TRUE, __T4, -)
+10: (ASSIGN, __T4, __0, -)
+11: (GOTO, __L_31_DONE, -, -)
+12: (LABEL, __L_31_TRUE, -, -)
+13: (ASSIGN, __T4, __1, -)
+14: (LABEL, __L_31_DONE, -, -)
+15: (ASSIGN, __L_30_FI, __T4, -)
+16: (ifFalse, __L_30_FI, __T1, -)
+17: (ASSIGN, a, __333, -)
+18: (PRINT, a, -, -)
+19: (LABEL, __L_30_FI, -, -)
+20: (ASSIGN, a, __1, -)
+21: (ASSIGN, c, __11, -)
+22: (ASSIGN, __T5, __3, -)
+23: (PUSH, __T5, -, -)
+24: (ASSIGN, __T6, __4, -)
+25: (PUSH, __T6, -, -)
+26: (PRECALL, myfunc, -, -)
+27: (CALL, myfunc, -, -)
+28: (POSTCALL, myfunc, -, -)
+29: (PRINT, a, -, -)
+30: (PRINT, c, -, -)
+31: (RETURN, __0, -, -)
 a -12
 b -16
 c -20
@@ -87,15 +112,17 @@ c -20
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)space needed: 0
-  VAR_INT a (offset: 0 or addr: 644)
-  VAR_INT b (offset: 0 or addr: 648)
-  VAR_INT c (offset: 0 or addr: 652)
+  VAR_INT a (offset: 0 or addr: 1020)
+  VAR_INT b (offset: 0 or addr: 1024)
+  VAR_INT c (offset: 0 or addr: 1028)
   FUNC_INT myfunc (2 params: VAR_INT  VAR_INT )space needed: 20
   (1-0) contains:
     VAR_INT a (offset: -8 or addr: 0)
     VAR_INT b (offset: -12 or addr: 0)
     VAR_INT c (offset: -16 or addr: 0)
   (1-1) contains:
+    (2-0) contains:
+      VAR_INT a (offset: 0 or addr: 0)
 
 
 ===========================================================
