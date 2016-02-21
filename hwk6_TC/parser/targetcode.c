@@ -113,52 +113,12 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_IFF:
-				if(array[i-1]->op == Q_EQ) {
-					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
-				}
-				else if(array[i-1]->op == Q_GT) {
-					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);
-				}
-				else if(array[i-1]->op == Q_LT) {
-					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);	
-				}
-				else if(array[i-1]->op == Q_GTEQ) {
-					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);	
-				}
-				else if(array[i-1]->op == Q_LTEQ) {
-					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);	
-				}
-				else {
-					// assert(array[i]->src1 != NULL);
-					// move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tirmovl 0, %s", RIGHT_OPERAND_REG);
-					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tje %s\n", array[i]->dest->name);
-				}
+
 				break;
 
 			case Q_IFT:
 				if(array[i-1]->op == Q_EQ) {
 					fprintf(ofile, "\tje %s\n",array[i]->dest->name);
-				}
-				else if(array[i-1]->op == Q_GT) {
-					fprintf(ofile, "\tjg %s\n",array[i]->dest->name);
-				}
-				else if(array[i-1]->op == Q_LT) {
-					fprintf(ofile, "\tjl %s\n",array[i]->dest->name);	
-				}
-				else if(array[i-1]->op == Q_GTEQ) {
-					fprintf(ofile, "\tjge %s\n",array[i]->dest->name);	
-				}
-				else if(array[i-1]->op == Q_LTEQ) {
-					fprintf(ofile, "\tjle %s\n",array[i]->dest->name);	
-				}
-				else {
-					// assert(array[i]->src1 != NULL);
-					// move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tirmovl 0, %s", RIGHT_OPERAND_REG);
-					fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-					fprintf(ofile, "\tjne %s\n", array[i]->dest->name);
 				}
 
 				break;
@@ -168,7 +128,14 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_LABEL:
-				if(is_funcion(array[i]->dest))
+			// Function declarations (and hence calls wil end up here)
+				if(is_funcion(array[i]->dest)){
+					//<TODO> Leave space for locals in the stack by increasing the stack
+					// pointer
+					//fprintf(ofile, "irmovl %d %s\n", array[i]->dest->space_needed, RIGHT_OPERAND_REG);
+					//fprintf(ofile, "", );
+
+				}
 
 				break;
 
@@ -187,32 +154,22 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_GT:
-				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
 
 				break;
 
 			case Q_LT:
-				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+
 				break;
 
 			case Q_GTEQ:
-				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+
 				break;
 
 			case Q_LTEQ:
-				move_to_reg_bin(array[i]);
-				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+
 				break;
 
 			case Q_NEG:
-				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 
 				break;
 
@@ -223,6 +180,9 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			/*~~~~~~ Functions ~~~~~~~*/
 
 			case Q_CALL:
+				// Push caller's base pointer
+				fprintf(ofile, "\tpush %s\n", BASE_PTR);
+				// And transfer control to the function
 				fprintf(ofile, "\tcall %s\n", array[i]->dest->name);
 				break;
 
@@ -578,8 +538,8 @@ void move_to_reg(symnode_t *operand, char *reg){
 }
 
 
-int is_funcion(symnode_t *operand){
-	char *substr1 = substring(operand->name, 3); // first 3 chars of label name
+int is_funcion(symnode_t *label){
+	char *substr1 = substring(label->name, 3); // first 3 chars of label name
 
 	if(strcmp(substr1, "__L") != 0){
 		return 1;
