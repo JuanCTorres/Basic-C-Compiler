@@ -47,6 +47,10 @@ void put_strings_in_mem(symhashtable_t* hashtable);
 
 void calculate_string_addrs(symhashtable_t* hashtable);
 
+/*
+  Returns the type of the symnode (variable, temp, int) so that it is treated
+  properly by other functions.
+*/
 int get_symnode_type(symnode_t *snode);
 
 int get_temp_addr(symnode_t* temp);
@@ -55,6 +59,8 @@ int is_var_global(symnode_t *var);
 
 void print_global_vars(symboltable_t *symboltable);
 
+/* Takes a str, and returns the amount of bytes it will need in memory (a multiple
+   of 4), since addresses must be aligned in 4-byte boundaries. */
 int round_str_addr(char* str);
 
 void calculate_var_offsets_helper(symhashtable_t* hashtable);
@@ -63,20 +69,48 @@ void calculate_global_var_addrs(symboltable_t *symboltable);
 
 int calculate_var_offsets(symhashtable_t* hashtable);
 
+/*
+  Returns a substring of str, from str[0] to str[len]
+*/
 char *substring(char *str, int len);
 
 void print_quad(quad_type *quad);
 
+/*
+  Moves the operands of a quad containing a binary operation into %eax and %ecx.
+	The left operand is moved into %eax, while the right one is moved into %ecx.
+*/
 void move_to_reg_bin(quad_type *quad);
 
+/*
+  Moves a unary operand into %eax.
+*/
 void move_to_reg_un(quad_type *quad);
 
+/*
+   Moves the value in operand (depending on whether it is a temp,
+   a global, or a local variable), and issues an instruction to move
+	 into the register specified by reg.
+	 For possible registers, see targetcode.h's macros for registers.
+*/
 void move_to_reg(symnode_t *operand, char *reg);
 
+/*
+  Moves a value to stored in a register to the variable specified by target.
+*/
 void move_from_reg(char* reg, symnode_t* target);
 
+/*
+   Handles register and memory moves to assign a value seen in a quad
+	 to a particular variable or temp.
+	 Returns 1 if successful, 0 if unsuccessful (when trying to assign to an int
+   or a register used for returning values)
+*/
 int assign(symnode_t *left_val);
 
+/*
+   Returns 1 if a label is a function, 0 otherwise
+*/
 int is_function(symnode_t *label);
 
 void print_initialization();
