@@ -424,7 +424,9 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 				else if(has_locals(node)){
 					// If local declaration contains an assignment, this node will be a '=' in the ast.
 					// Use its left child, which is linked to the variable declaration in the symbol table.
-					if(node->abnode->left_child->right_sibling->left_child->left_child->left_child != NULL){
+					//if(node->abnode->left_child->right_sibling->left_child->left_child->left_child != NULL){
+					if(node->abnode->left_child->right_sibling->left_child->left_child->node_type == OP_ASSIGN_N){
+
 						hash = node->abnode->left_child->right_sibling->left_child->left_child->left_child->snode->parent; //hashtabel containing var declaration
 					// If it does not contain an assignment, simply use the node itself, which is
 					// linked to the variable declaration in the symbol table.
@@ -468,6 +470,28 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable){
 	for (child = hashtable->child; child != NULL; child = child->rightsib)
 		calculate_var_offsets_helper(child);
 
+}
+
+
+/* Returns 1 if the function symnode has parameters, 0 otherwise*/
+int has_params(symnode_t *node){
+	if(node->abnode->left_child->left_child != NULL) {
+		return 1;
+	} else{
+		return 0;
+	}
+}
+
+
+/* Returns 1 if the function symnode has local var declarations, 0 otherwise*/
+int has_locals(symnode_t *node){
+	//this means tht this function contains var declarations
+	if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) {
+		fprintf(ofile, "\n\n #This function has locals \n\n");
+		return 1;
+	} else{
+		return 0;
+	}
 }
 
 
@@ -772,25 +796,4 @@ void print_initialization() {
 void print_stack_setup() {
 	fprintf(ofile, ".pos 0x0000FFFC\n");
 	fprintf(ofile, "stack:\n");
-}
-
-
-/* Returns 1 if the function symnode has parameters, 0 otherwise*/
-int has_params(symnode_t *node){
-	if(node->abnode->left_child->left_child != NULL) {
-		return 1;
-	} else{
-		return 0;
-	}
-}
-
-
-/* Returns 1 if the function symnode has local var declarations, 0 otherwise*/
-int has_locals(symnode_t *node){
-	//this means tht this function contains var declarations
-	if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) {
-		return 1;
-	} else{
-		return 0;
-	}
 }
