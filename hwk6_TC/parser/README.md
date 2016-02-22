@@ -22,6 +22,8 @@ Some code provided by Professor Sean W. Smith with some originally written by Pr
 
 - Generating assembly code for a particular file should be done by running `./parser [output file] < [input file]`, where `[input file]` represents the high-level C program and `[output file]` represents the file name of the output file. The output file will be located in `ys/[output file].ys`
 
+- *WARNING*: Using the scrollable memory display will freeze the simulator when running some of our programs given the spread-out nature of memory accesses. Use a nonscrollable .tcl file if possible.
+
 ## Program execution
 
 *For descriptions of previous parts of this compiler, please see previous folders.*

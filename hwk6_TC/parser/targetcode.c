@@ -16,7 +16,7 @@ int endofstr;
 
 FILE *ofile = NULL;
 
-
+/* Translates array of quads into series of assembly instructions */
 int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable) {
 
 	char *filename = calloc(sizeof(char), 100);
@@ -512,13 +512,9 @@ int is_var_global(symnode_t *var){
 }
 
 
-/* */
-int get_global_addr(symnode_t *var){
-  return 0;
-}
-
-
-
+/*
+ * Gets the address of a temporary variable
+ */
 int get_temp_addr(symnode_t* temp){
 	return temp->num_val * 4 + ENDOFPROG + MAINSTART;
 }
@@ -549,6 +545,7 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 
 
 /*
+   Lays out the strings in their location in memory as .byte directives
 */
 void put_strings_in_mem(symhashtable_t* hashtable){
 

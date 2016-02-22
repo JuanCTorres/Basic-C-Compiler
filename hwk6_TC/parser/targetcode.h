@@ -41,10 +41,18 @@ extern int quad_index;
 #define KSTR "0x00FFFE18"
 #define KBDR "0x00FFFE04"
 
+
+/* Translates array of quads into series of assembly instructions */
 int gen_target_code (quad_type **array, char argv[], symboltable_t *symboltable);
 
+/*
+   Lays out the strings in their location in memory as .byte directives
+*/
 void put_strings_in_mem(symhashtable_t* hashtable);
 
+/* Calculates the location of strings in memory and stores that location in the
+   symnode for the particular string
+ */
 void calculate_string_addrs(symhashtable_t* hashtable);
 
 /*
@@ -53,10 +61,17 @@ void calculate_string_addrs(symhashtable_t* hashtable);
 */
 int get_symnode_type(symnode_t *snode);
 
+/*
+ * Gets the address of a temporary variable
+ */
 int get_temp_addr(symnode_t* temp);
 
+/*
+Returns 1 if var is global, i.e., was declared in scope (0-0)
+*/
 int is_var_global(symnode_t *var);
 
+/* Print the global variables into the file */
 void print_global_vars(symboltable_t *symboltable);
 
 /* Takes a str, and returns the amount of bytes it will need in memory (a multiple
@@ -65,6 +80,7 @@ int round_str_addr(char* str);
 
 void calculate_var_offsets_helper(symhashtable_t* hashtable);
 
+/* Allocates space for all the variables in the symbol table */
 void calculate_global_var_addrs(symboltable_t *symboltable);
 
 int calculate_var_offsets(symhashtable_t* hashtable);
