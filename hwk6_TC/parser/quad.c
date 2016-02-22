@@ -86,6 +86,7 @@ symnode_t* elem_size_n = NULL;
      printf("There are %d entries\n",quad_index);
      for(int i=0; i < quad_index; i++) {
         assert(array[i] != NULL);
+        //printf("Currently considering %s\n", OP_NAME(array[i]->op));
         assert(array[i]->dest != NULL);
         printf("%d: ", i);
         printf("(%s, %s, ",OP_NAME(array[i]->op), array[i]->dest->name);
@@ -111,15 +112,13 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
   symnode_t* label1, *label2, *label3, *label4;
 
+  symnode_t *left_node, *right_node;
+
   if (x != NULL) {
 
     ast_node y;
     ast_node z;
     symnode_t *temp, *temp2, *temp3, *temp4;
-
-    if(!strcmp(true_n->name, "__4")){
-      printf("KIK YES\n");
-    }
 
 
     /* Recursion pattern depends on the node type
@@ -225,7 +224,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           // Evaluate A, assign to temp
           CG(y->left_child, hashtable);
           temp = NewTemp(hashtable);
-          make_insert_quad(Q_ASSIGN, temp, y->left_child->snode, NULL);
+          left_node = get_symnode(y->left_child);
+          make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
 
           // Short circuiting: Jump if !A
           make_insert_quad(Q_IFF, label1, temp, NULL);
@@ -233,7 +233,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           // Evaluate B, assign to temp
           CG(y->left_child->right_sibling, hashtable);
           temp2 = NewTemp(hashtable);
-          make_insert_quad(Q_ASSIGN, temp2, y->left_child->right_sibling->snode, NULL);
+          right_node = get_symnode(y->left_child->right_sibling);
+          make_insert_quad(Q_ASSIGN, temp2, right_node, NULL);
 
           // Jump if !B
           make_insert_quad(Q_IFF, label1, temp2, NULL);
@@ -249,7 +250,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
           // Done
           make_insert_quad(Q_LABEL, label2, NULL, NULL);
-          y->snode = temp3;
+          y->temp_node = temp3;
 
           break;
 
@@ -264,12 +265,14 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           // Evaluate A, assign to temp
           CG(y->left_child, hashtable);
           temp2 = NewTemp(hashtable);
-          make_insert_quad(Q_ASSIGN, temp, y->left_child->snode, NULL);
+          left_node = get_symnode(y->left_child);
+          make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
           make_insert_quad(Q_IFT, label1, temp, NULL);
 
           // Evaluate B, assign to temp
           CG(y->left_child->right_sibling, hashtable);
-          make_insert_quad(Q_ASSIGN, temp2, y->left_child->right_sibling->snode, NULL);
+          right_node = get_symnode(y->left_child->right_sibling);
+          make_insert_quad(Q_ASSIGN, temp2, right_node, NULL);
           make_insert_quad(Q_IFT, label1, temp, NULL);
 
           // A || B == False
@@ -282,7 +285,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
           // Done
           make_insert_quad(Q_LABEL, label2, NULL, NULL);
-          y->snode = temp3;
+          y->temp_node = temp3;
           break;
 
         case OP_NOT_N:
@@ -294,7 +297,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
           // Eval A, assign temp to it.
           CG(y->left_child, hashtable);
-          make_insert_quad(Q_ASSIGN, temp, y->left_child->snode, NULL);
+          left_node = get_symnode(y->left_child);
+          make_insert_quad(Q_ASSIGN, temp, left_node,  NULL);
 
           // Jump?
           make_insert_quad(Q_IFF, label1, temp, NULL);
@@ -311,7 +315,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
           // Set boolean value
-          y->snode = temp2;
+          y->temp_node = temp2;
           break;
 
         /*~~~~~~~ Comparations better handled after recursing on children and we
@@ -335,7 +339,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           // Execute test code first
           CG(x->left_child, hashtable);
           // Assign to temp to avoid destruction
-          make_insert_quad(Q_ASSIGN, temp, x->left_child->snode, NULL);
+          left_node = get_symnode(x->left_child);
+          make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
           // Conditional jump
           make_insert_quad(Q_IFF, label1, temp, NULL);
           break;
@@ -350,7 +355,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
           // test
           CG(x->left_child, hashtable);
-          make_insert_quad(Q_ASSIGN, temp, x->left_child->snode, NULL);
+          left_node = get_symnode(x->left_child);
+          make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
 
           make_insert_quad(Q_IFF, label1, temp, NULL);
           // if
@@ -368,7 +374,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           make_insert_quad(Q_LABEL, label1, NULL, NULL);
           // Test
           CG(x->left_child, hashtable);
-          make_insert_quad(Q_IFF, label2, x->left_child->snode, NULL);
+          left_node = get_symnode(x->left_child);
+          make_insert_quad(Q_IFF, label2, left_node, NULL);
           break;
 
         case DO_WHILE_N:
@@ -390,7 +397,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           make_insert_quad(Q_LABEL, label1, NULL, NULL);
           // Loop invariant
           CG(x->left_child->right_sibling, hashtable);
-          make_insert_quad(Q_IFF, label2, x->left_child->right_sibling->snode, NULL);
+          right_node = get_symnode(x->left_child->right_sibling);
+          make_insert_quad(Q_IFF, label2, right_node, NULL);
           break;
 
         default:
@@ -415,38 +423,57 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case OP_ASSIGN_N:
         // No need for temps, variable should have been declared before
-        make_insert_quad(Q_ASSIGN, x->left_child->snode, x->left_child->right_sibling->snode, NULL);
-        x->snode = x->left_child->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        //make_insert_quad(Q_ASSIGN, x->left_child->temp_node, x->left_child->right_sibling->temp_node, NULL);
+        make_insert_quad(Q_ASSIGN, left_node, right_node, NULL);
+        left_node = get_symnode(x->left_child);
+        x->temp_node = left_node;
         break;
 
       case OP_PLUS_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_ADD, temp, x->left_child->snode, x->left_child->right_sibling->snode);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+
+        make_insert_quad(Q_ADD, temp, left_node, right_node);
+        x->temp_node = temp;
         break;
 
       case OP_MINUS_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_SUB, temp, x->left_child->snode, x->left_child->right_sibling->snode);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+
+        make_insert_quad(Q_SUB, temp, left_node, right_node);
+        x->temp_node = temp;
         break;
 
       case OP_TIMES_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_MULT, temp, x->left_child->snode, x->left_child->right_sibling->snode);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+
+        make_insert_quad(Q_MULT, temp, left_node, right_node);
+        x->temp_node = temp;
         break;
 
       case OP_DIVIDE_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_DIV, temp, x->left_child->snode, x->left_child->right_sibling->snode);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+
+        make_insert_quad(Q_DIV, temp, left_node, right_node);
+        x->temp_node = temp;
         break;
 
       case OP_MODULUS_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_MOD, temp, x->left_child->snode, x->left_child->right_sibling->snode);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+
+        make_insert_quad(Q_MOD, temp, left_node, right_node);
+        x->temp_node = temp;
         break;
 
       /*~~~~~~~~~ Comparators ~~~~~~~~~*/
@@ -459,8 +486,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         label2 = NewLabel(x, "DONE", hashtable);
 
         // Is either greater?
-        temp = x->left_child->snode;
-        temp2 = x->left_child->right_sibling->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        temp = left_node;
+        temp2 = right_node;
 
         //make_insert_quad(Q_JEQ, label1, NULL, NULL);
         make_insert_quad(Q_EQ, temp3, temp, temp2);
@@ -477,7 +506,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Done
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
-        x->snode = temp3;
+        x->temp_node = temp3;
         break;
 
       case OP_LESS_THAN_N:
@@ -488,8 +517,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         label2 = NewLabel(x, "DONE", hashtable);
 
         // Is either smaller?
-        temp = x->left_child->snode;
-        temp2 = x->left_child->right_sibling->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        temp = left_node;
+        temp2 = right_node;
 
         make_insert_quad(Q_LT, temp3, temp, temp2);
         make_insert_quad(Q_IFT, label1, temp3, NULL);
@@ -505,7 +536,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Done
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
-        x->snode = temp3;
+        x->temp_node = temp3;
         break;
 
       case OP_LESS_EQUAL_N:
@@ -516,8 +547,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         label2 = NewLabel(x, "DONE", hashtable);
 
         // LEQ?
-        temp = x->left_child->snode;
-        temp2 = x->left_child->right_sibling->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        temp = left_node;
+        temp2 = right_node;
 
         make_insert_quad(Q_LTEQ, temp3, temp, temp2);
         make_insert_quad(Q_IFT, label1, temp3, NULL);
@@ -533,7 +566,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Done
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
-        x->snode = temp3;
+        x->temp_node = temp3;
         break;
 
       case OP_GREATER_THAN_N:
@@ -544,8 +577,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         label2 = NewLabel(x, "DONE", hashtable);
 
         // GT?
-        temp = x->left_child->snode;
-        temp2 = x->left_child->right_sibling->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        temp = left_node;
+        temp2 = right_node;
 
         make_insert_quad(Q_GT, temp3, temp, temp2);
         make_insert_quad(Q_IFT, label1, temp3, NULL);
@@ -561,7 +596,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Done
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
-        x->snode = temp3;
+        x->temp_node = temp3;
         break;
 
       case OP_GREATER_EQUAL_N:
@@ -572,8 +607,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         label2 = NewLabel(x, "DONE", hashtable);
 
         // GEQ?
-        temp = x->left_child->snode;
-        temp2 = x->left_child->right_sibling->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        temp = left_node;
+        temp2 = right_node;
 
         make_insert_quad(Q_GTEQ, temp3, temp, temp2);
         make_insert_quad(Q_IFT, label1, temp3, NULL);
@@ -589,7 +626,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Done
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
-        x->snode = temp3;
+        x->temp_node = temp3;
         break;
 
       case OP_NOT_EQUAL_N:
@@ -600,8 +637,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         label2 = NewLabel(x, "DONE", hashtable);
 
         // NEQ?
-        temp = x->left_child->snode;
-        temp2 = x->left_child->right_sibling->snode;
+        left_node = get_symnode(x->left_child);
+        right_node = get_symnode(x->left_child->right_sibling);
+        temp = left_node;
+        temp2 = right_node;;
 
         make_insert_quad(Q_NEQ, temp3, temp, temp2);
         make_insert_quad(Q_IFT, label1, temp3, NULL);
@@ -617,7 +656,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Done
         make_insert_quad(Q_LABEL, label2, NULL, NULL);
 
-        x->snode = temp3;
+        x->temp_node = temp3;
         break;
 
       /*~~~~~ Unary ops ~~~~~~~*/
@@ -625,21 +664,26 @@ void CG(ast_node x, symhashtable_t *hashtable) {
       case OP_NEG_N:
         temp = NewTemp(hashtable);
         assert(temp != NULL);
-        assert(x->left_child->snode != NULL);
-        make_insert_quad(Q_NEG, temp, x->left_child->snode, NULL);
-        x->snode = temp;
+        symnode_t *node = get_symnode(x->left_child);
+        assert(node != NULL);
+
+        left_node = get_symnode(x->left_child);
+        make_insert_quad(Q_NEG, temp, left_node, NULL);
+        x->temp_node = temp;
         break;
 
       case OP_INCREMENT_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_INC, temp, x->left_child->snode, NULL);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        make_insert_quad(Q_INC, temp, left_node, NULL);
+        x->temp_node = temp;
         break;
 
       case OP_DECREMENT_N:
         temp = NewTemp(hashtable);
-        make_insert_quad(Q_DEC, temp, x->left_child->snode, NULL);
-        x->snode = temp;
+        left_node = get_symnode(x->left_child);
+        make_insert_quad(Q_DEC, temp, left_node, NULL);
+        x->temp_node = temp;
         break;
 
       /*~~~~~~~ Control Statements ~~~~~~*/
@@ -659,7 +703,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case DO_WHILE_N:
         CG(x->left_child, hashtable);
-        make_insert_quad(Q_IFT, label1, x->left_child->snode, NULL);
+        left_node = get_symnode(x->left_child);
+        make_insert_quad(Q_IFT, label1, left_node, NULL);
         break;
 
       case FOR_N:
@@ -672,15 +717,19 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // <TODO> Anything here? Probably not?
         temp = NewTemp(hashtable);
         make_insert_quad(Q_ASSIGN, temp, true_n, NULL);
-        x->snode = temp;
+        x->temp_node = temp;
         break;
 
       case PRINT_N:
-        make_insert_quad(Q_PRINT, x->left_child->snode, NULL, NULL);
+        left_node = get_symnode(x->left_child);
+        //make_insert_quad(Q_PRINT, x->left_child->temp_node, NULL, NULL);
+        make_insert_quad(Q_PRINT, left_node, NULL, NULL);
         break;
 
       case READ_N:
-        make_insert_quad(Q_READ, x->left_child->snode, NULL, NULL);
+        left_node = get_symnode(x->left_child);
+        //make_insert_quad(Q_READ, x->left_child->temp_node, NULL, NULL);
+        make_insert_quad(Q_READ, left_node, NULL, NULL);
         break;
 
       case ARRAY_TYPE_N:
@@ -689,20 +738,26 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         temp3 = NewTemp(hashtable);
         temp4 = NewTemp(hashtable);
 
+        left_node = get_symnode(x->left_child);
+
         // Calculate offset into array chunk in memory
-        make_insert_quad(Q_MULT, temp, x->left_child->snode, elem_size_n);
+        make_insert_quad(Q_MULT, temp, left_node, elem_size_n);
         // Grab the address of array
-        make_insert_quad(Q_ADDR, temp2, x->snode, NULL);
+        left_node = get_symnode(x);
+        make_insert_quad(Q_ADDR, temp2, left_node, NULL);
         // And add the offset to it
         make_insert_quad(Q_ADD, temp3, temp, temp2);
         // Grab the element
         make_insert_quad(Q_DEREF, temp4, temp3, NULL);
-        x->snode = temp4;
+        x->temp_node = temp4;
         break;
 
       case RETURN_N:
+        left_node = get_symnode(x->left_child);
+        assert(left_node != NULL);
         if(x->left_child != NULL){
-          make_insert_quad(Q_RETURN, x->left_child->snode, NULL, NULL);
+          make_insert_quad(Q_RETURN, left_node, NULL, NULL);
+          //make_insert_quad(Q_RETURN, x->left_child->temp_node, NULL, NULL);
         } else{
           //symnode_t * empty_return = create_symnode("empty_return", hashtable);
           //empty_return->type = VOID_RET_T;
@@ -718,21 +773,24 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Function epilogue
         //label2 = NewLabel(x, "FUNC_EPILOGUE", hashtable);
         //make_insert_quad(Q_LABEL, label2, NULL, NULL);
-        make_insert_quad(Q_POSTCALL, x->left_child->snode, NULL, NULL);
-        x->snode = create_symnode("__RET_INT", NULL);
+        left_node = get_symnode(x->left_child);
+        make_insert_quad(Q_POSTCALL, left_node, NULL, NULL);
+        x->temp_node = create_symnode("__RET_INT", NULL);
         break;
 
       case FUNCTION_N:
         // Push arguments
         for(z = x->left_child; z != NULL; z = z->right_sibling){
           temp = NewTemp(hashtable);
-          make_insert_quad(Q_ASSIGN, temp, z->snode, NULL);
+          left_node = get_symnode(z);
+          make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
           make_insert_quad(Q_PUSH, temp, NULL, NULL);
         }
         // Precall
-        make_insert_quad(Q_PRECALL, x->snode, NULL, NULL);
+        left_node = get_symnode(x);
+        make_insert_quad(Q_PRECALL, left_node, NULL, NULL);
         // Function call
-        make_insert_quad(Q_CALL, x->snode, NULL, NULL);
+        make_insert_quad(Q_CALL, left_node, NULL, NULL);
         break;
 
       case FORMAL_PARAMS_N:
@@ -888,5 +946,13 @@ void set_constants(symhashtable_t *hashtable){
   if(elem_size_n == NULL){
     elem_size_n = insert_into_symhashtable(hashtable, node2);
   }
+}
 
+symnode_t *get_symnode(ast_node anode){
+  if(anode->snode == NULL){
+    return anode->temp_node;
+  }
+  else{
+    return anode->snode;
+  }
 }

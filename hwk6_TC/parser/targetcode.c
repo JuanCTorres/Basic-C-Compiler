@@ -410,17 +410,31 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 				assert(node->abnode->left_child->right_sibling->left_child != NULL); //LOCAL_DECLARATIONS
 				// assert(node->abnode->left_child->right_sibling->left_child->left_child);
 
-
-				if(node->abnode->left_child->left_child != NULL) {
+				// If function has params
+				//if(node->abnode->left_child->left_child != NULL) {
+				if(has_params(node)){
 					hash = node->abnode->left_child->left_child->snode->parent; //param
 					// printf("\nLOLZ HERE!\n");
 					calculate_var_offsets_helper(hash);
 					node->needed_space = -offset;
 				}
 
-				else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
+				// If function has locals
+				//else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
+				else if(has_locals(node)){
+					// If local declaration contains an assignment, this node will be a '=' in the ast.
+					// Use its left child, which is linked to the variable declaration in the symbol table.
+					if(node->abnode->left_child->right_sibling->left_child->left_child->left_child != NULL){
+						hash = node->abnode->left_child->right_sibling->left_child->left_child->left_child->snode->parent; //hashtabel containing var declaration
+					// If it does not contain an assignment, simply use the node itself, which is
+					// linked to the variable declaration in the symbol table.
+					} else{
+						hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
+					}
 
-					hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
+					//fprintf(ofile, "%s\n", node->name);
+					//assert(node->abnode->left_child->right_sibling->left_child->left_child->snode != NULL);
+					//hash = node->abnode->left_child->right_sibling->left_child->left_child->snode->parent; //hashtabel containing var declaration
 					calculate_var_offsets_helper(hash); //offset starts at eight
 					node->needed_space = -offset;
 				}
@@ -758,4 +772,25 @@ void print_initialization() {
 void print_stack_setup() {
 	fprintf(ofile, ".pos 0x0000FFFC\n");
 	fprintf(ofile, "stack:\n");
+}
+
+
+/* Returns 1 if the function symnode has parameters, 0 otherwise*/
+int has_params(symnode_t *node){
+	if(node->abnode->left_child->left_child != NULL) {
+		return 1;
+	} else{
+		return 0;
+	}
+}
+
+
+/* Returns 1 if the function symnode has local var declarations, 0 otherwise*/
+int has_locals(symnode_t *node){
+	//this means tht this function contains var declarations
+	if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) {
+		return 1;
+	} else{
+		return 0;
+	}
 }

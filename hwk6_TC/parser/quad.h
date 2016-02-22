@@ -97,9 +97,7 @@ void print_quad_array(quad_type **array);
 
 symnode_t* NewTemp(symhashtable_t *hashtable);
 
-
 void CG(ast_node x, symhashtable_t *hashtable);
-
 
 void preorder_print(ast_node root);
 
@@ -107,6 +105,10 @@ void make_insert_quad(quad_op_type op, symnode_t *dest, symnode_t *src1, symnode
 
 void add_temps_to_ast(ast_node root, symhashtable_t *hashtable);
 
+/*~~~~~ Helper functions ~~~~~*/
+
 void set_constants(symhashtable_t *hashtable);
+
+symnode_t *get_symnode(ast_node anode);
 
 #endif

@@ -133,4 +133,11 @@ void print_initialization();
 
 void print_stack_setup();
 
+/* Returns 1 if the function symnode has parameters, 0 otherwise*/
+int has_params(symnode_t *node);
+
+/* Returns 1 if the function symnode has local var declarations, 0 otherwise*/
+int has_locals(symnode_t *node);
+
+
 #endif
