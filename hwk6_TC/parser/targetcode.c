@@ -538,7 +538,6 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 
 
 			if(node->type == STRING_T){
-				// fprintf(ofile, "Found a string: %s\n", node->name);
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
 				str_offset += round_str_addr(node->name);
@@ -570,26 +569,14 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 				int counter = 0;
 				int len = strlen(node->name);
 				for(int counter = 0; counter < len; counter++){
-					char buf[4];
-					buf[counter % 4] = node->name[counter];
-					if(counter % 4 == 0){
-						// fprintf(ofile, "\n\t.long \t0x");
-						// fprintf(ofile, "%x", buf[3]);
-						// fprintf(ofile, "%x", buf[2]);
-						// fprintf(ofile, "%x", buf[1]);
-						// fprintf(ofile, "%x", buf[0]);
-						// fprintf(ofile, "\n");
-					}
-					// buf[0] = '0';
-					// buf[1] = '0';
-					// buf[2] = '0';
-					// buf[3] = '0';
-					//fprintf(ofile, "%x", node->name[counter]);
+					fprintf(ofile, "\n\t.byte \t0x");
+					fprintf(ofile, "%x", node->name[counter]);
 				}
 			}
-    }
-	}
+		}
+  }
 }
+
 
 
 /* Takes a str, and returns the amount of bytes it will need in memory (a multiple
@@ -631,7 +618,6 @@ int get_symnode_type(symnode_t *snode){
 /*
   Returns a substring of str, from str[0] to str[len]
 */
-
 char *substring(char *str, int len) {
   char *sub = calloc(len + 1, sizeof(char));
   assert(sub != NULL);
@@ -680,10 +666,8 @@ void move_to_reg_un(quad_type *quad){
 */
 int assign(symnode_t *left_val){
 	assert(left_val != NULL);
-	//assert(right_val != NULL);
 
 	int left_type = get_symnode_type(left_val);
-	//int right_type = get_symnode_type(right_val);
 
 	// Can't assign to right value (int or return register from function)
 	if(left_type == INT_SYMNODE || left_type == RET_SYMNODE){
@@ -705,7 +689,7 @@ int assign(symnode_t *left_val){
 
 
 /*
-  Moves a value to stored in a register to
+  Moves a value to stored in a register to the variable specified by target.
 */
 void move_from_reg(char* reg, symnode_t* target){
 	int type = get_symnode_type(target);
@@ -751,7 +735,9 @@ void move_to_reg(symnode_t *operand, char *reg){
 	}
 }
 
-
+/*
+   Returns 1 if a label is a function, 0 otherwise
+*/
 int is_function(symnode_t *label){
 	char *substr1 = substring(label->name, 3); // first 3 chars of label name
 
@@ -761,6 +747,7 @@ int is_function(symnode_t *label){
 		return 0;
 	}
 }
+
 
 void print_initialization() {
 	fprintf(ofile, ".pos 0\n");
