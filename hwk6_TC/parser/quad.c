@@ -654,6 +654,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case WHILE_N:
         make_insert_quad(Q_GOTO, label1, NULL, NULL);
+        make_insert_quad(Q_LABEL, label2, NULL, NULL);
         break;
 
       case DO_WHILE_N:
