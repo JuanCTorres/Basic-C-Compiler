@@ -1,0 +1,140 @@
+                       | #END OF PROG: 964
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:8006010000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(LABEL, recurr, -, -)
+  0x0014:              | recurr:
+                       | 
+  0x0014:30f10c000000  | 	irmovl 12, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 1
+  0x001c:500504000000  | 	mrmovl 4(%ebp), %eax
+  0x0022:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(EQ, __T3, a, __0)
+  0x0028:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x002e:30f100000000  | 	irmovl 0, %ecx
+  0x0034:6110          | 	subl %ecx, %eax
+  0x0036:400fe4030000  | 	rmmovl %eax, 996
+                       | #(ifTrue, __L_8_TRUE, __T3, -)
+  0x003c:7352000000    | 	je L_8_TRUE
+                       | #(ASSIGN, __T3, __0, -)
+  0x0041:30f000000000  | 	irmovl 0, %eax
+  0x0047:400fe4030000  | 	rmmovl %eax, 996
+                       | #(GOTO, __L_8_DONE, -, -)
+  0x004d:705e000000    | 	jmp L_8_DONE
+                       | #(LABEL, __L_8_TRUE, -, -)
+  0x0052:              | L_8_TRUE:
+                       | 
+                       | #(ASSIGN, __T3, __1, -)
+  0x0052:30f001000000  | 	irmovl 1, %eax
+  0x0058:400fe4030000  | 	rmmovl %eax, 996
+                       | #(LABEL, __L_8_DONE, -, -)
+  0x005e:              | L_8_DONE:
+                       | 
+                       | #(ASSIGN, __T0, __T3, -)
+  0x005e:500fe4030000  | 	mrmovl 996, %eax
+  0x0064:400fd8030000  | 	rmmovl %eax, 984
+                       | #(ifFalse, __L_7_ELSE, __T0, -)
+  0x006a:500fd8030000  | 	mrmovl 984, %eax
+  0x0070:30f100000000  | 	irmovl 0, %ecx
+  0x0076:6110          | 	subl %ecx, %eax
+  0x0078:7395000000    | 	je L_7_ELSE
+                       | #(RETURN, __1, -, -)
+  0x007d:30f701000000  | 	irmovl 1, %edi
+  0x0083:2054          | 	rrmovl %ebp, %esp
+  0x0085:b05f          | 	popl %ebp
+  0x0087:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x008d:6014          | 	addl %ecx, %esp
+  0x008f:90            | 	ret
+                       | #(GOTO, __L_7_FI, -, -)
+  0x0090:70f3000000    | 	jmp L_7_FI
+                       | #(LABEL, __L_7_ELSE, -, -)
+  0x0095:              | L_7_ELSE:
+                       | 
+                       | #(SUB, __T4, a, __1)
+  0x0095:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x009b:30f101000000  | 	irmovl 1, %ecx
+  0x00a1:6110          | 	subl %ecx, %eax
+  0x00a3:400fe8030000  | 	rmmovl %eax, 1000
+                       | 
+                       | #(ASSIGN, __T5, __T4, -)
+  0x00a9:500fe8030000  | 	mrmovl 1000, %eax
+  0x00af:400fec030000  | 	rmmovl %eax, 1004
+                       | #(PUSH, __T5, -, -)
+  0x00b5:500fec030000  | 	mrmovl 1004, %eax
+  0x00bb:a00f          | 	pushl %eax
+                       | #(PRECALL, recurr, -, -)
+  0x00bd:a05f          | 	pushl %ebp
+  0x00bf:2045          | 	rrmovl %esp, %ebp
+                       | #(CALL, recurr, -, -)
+  0x00c1:8014000000    | 	call recurr
+                       | #(POSTCALL, recurr, -, -)
+  0x00c6:30f110000000  | 	irmovl 16, %ecx
+  0x00cc:2054          | 	rrmovl %ebp, %esp
+  0x00ce:6014          | 	addl %ecx, %esp
+                       | #(MULT, __T6, a, __RET_INT)
+  0x00d0:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x00d6:2071          | 	rrmovl %edi, %ecx
+  0x00d8:6410          | 	mull %ecx, %eax
+  0x00da:400ff0030000  | 	rmmovl %eax, 1008
+                       | 
+                       | #(RETURN, __T6, -, -)
+  0x00e0:507ff0030000  | 	mrmovl 1008, %edi
+  0x00e6:2054          | 	rrmovl %ebp, %esp
+  0x00e8:b05f          | 	popl %ebp
+  0x00ea:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x00f0:6014          | 	addl %ecx, %esp
+  0x00f2:90            | 	ret
+                       | #(LABEL, __L_7_FI, -, -)
+  0x00f3:              | L_7_FI:
+                       | 
+                       | #(RETURN, __1, -, -)
+  0x00f3:30f701000000  | 	irmovl 1, %edi
+  0x00f9:2054          | 	rrmovl %ebp, %esp
+  0x00fb:b05f          | 	popl %ebp
+  0x00fd:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0103:6014          | 	addl %ecx, %esp
+  0x0105:90            | 	ret
+                       | #(LABEL, main, -, -)
+  0x0106:              | main:
+                       | 
+  0x0106:30f10c000000  | 	irmovl 12, %ecx
+  0x010c:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #(ASSIGN, __T7, __6, -)
+  0x010e:30f006000000  | 	irmovl 6, %eax
+  0x0114:400ff4030000  | 	rmmovl %eax, 1012
+                       | #(PUSH, __T7, -, -)
+  0x011a:500ff4030000  | 	mrmovl 1012, %eax
+  0x0120:a00f          | 	pushl %eax
+                       | #(PRECALL, recurr, -, -)
+  0x0122:a05f          | 	pushl %ebp
+  0x0124:2045          | 	rrmovl %esp, %ebp
+                       | #(CALL, recurr, -, -)
+  0x0126:8014000000    | 	call recurr
+                       | #(POSTCALL, recurr, -, -)
+  0x012b:30f110000000  | 	irmovl 16, %ecx
+  0x0131:2054          | 	rrmovl %ebp, %esp
+  0x0133:6014          | 	addl %ecx, %esp
+                       | #(ASSIGN, answer, __RET_INT, -)
+  0x0135:2070          | 	rrmovl %edi, %eax
+  0x0137:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(PRINT, answer, -, -)
+  0x013d:5025f8ffffff  | 	mrmovl -8(%ebp), %edx
+  0x0143:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(RETURN, answer, -, -)
+  0x0149:5075f8ffffff  | 	mrmovl -8(%ebp), %edi
+  0x014f:2054          | 	rrmovl %ebp, %esp
+  0x0151:b05f          | 	popl %ebp
+  0x0153:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0159:6014          | 	addl %ecx, %esp
+  0x015b:90            | 	ret
+  0x03fc:              | .pos 0x3fc    #Start of string space
+                       | 
+  0x0400:              | .pos 0x400   # Start of global var space 
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

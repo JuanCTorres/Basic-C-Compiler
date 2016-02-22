@@ -78,7 +78,7 @@ ROOT (uid: N0) inferred ret type: ROOT
   VAR_INT __0 (offset: 0 or addr: 0)
   VAR_INT __1 (offset: 0 or addr: 0)
   VAR_INT __4 (offset: 0 or addr: 0)
-There are 38 entries
+There are 39 entries
 0: (LABEL, main, -, -)
 1: (NEQ, __T3, e, f)
 2: (ifTrue, __L_23_TRUE, __T3, -)
@@ -87,7 +87,7 @@ There are 38 entries
 5: (LABEL, __L_23_TRUE, -, -)
 6: (ASSIGN, __T3, __1, -)
 7: (LABEL, __L_23_DONE, -, -)
-8: (ASSIGN, __L_22_FI, __T3, -)
+8: (ASSIGN, __T0, __T3, -)
 9: (ifFalse, __L_22_FI, __T0, -)
 10: (LABEL, __L_34_WHILE_BEGIN, -, -)
 11: (NEQ, __T6, h, __0)
@@ -111,12 +111,13 @@ There are 38 entries
 29: (GOTO, __L_42_FOR_BEGIN, -, -)
 30: (LABEL, __L_42_FOR_END, -, -)
 31: (GOTO, __L_34_WHILE_BEGIN, -, -)
-32: (LABEL, __L_22_FI, -, -)
-33: (MULT, __T11, __100, __4)
-34: (ADDR, __T12, catz, -)
-35: (ADD, __T13, __T11, __T12)
-36: (DEREF, __T14, __T13, -)
-37: (RETURN, __void, -, -)
+32: (LABEL, __L_34_WHILE_END, -, -)
+33: (LABEL, __L_22_FI, -, -)
+34: (MULT, __T11, __100, __4)
+35: (ADDR, __T12, catz, -)
+36: (ADD, __T13, __T11, __T12)
+37: (DEREF, __T14, __T13, -)
+38: (RETURN, __void, -, -)
 zzzz -12
 a -16
 b -20

@@ -192,7 +192,7 @@ There are 97 entries
 13: (LABEL, __L_45_TRUE, -, -)
 14: (ASSIGN, __T4, __1, -)
 15: (LABEL, __L_45_DONE, -, -)
-16: (ASSIGN, __L_44_FI, __T4, -)
+16: (ASSIGN, __T1, __T4, -)
 17: (ifFalse, __L_44_FI, __T1, -)
 18: (ASSIGN, b, __1, -)
 19: (LABEL, __L_44_FI, -, -)

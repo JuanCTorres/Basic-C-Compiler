@@ -62,6 +62,7 @@ if(argc != 2) {
 
  		if(symtabError) {	//when we get var/func use without declaration, we cannot progress any further as we cannot build the sym table which later funcs depend on
  			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");
+ 			return 1;
  		}
  		else {
 	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table, records all variable types by using symbol table
@@ -120,6 +121,7 @@ if(argc != 2) {
 
  	else {
  		fprintf(stderr,"Error: NO root!\n");
+ 		return 1;
  	}
 
 

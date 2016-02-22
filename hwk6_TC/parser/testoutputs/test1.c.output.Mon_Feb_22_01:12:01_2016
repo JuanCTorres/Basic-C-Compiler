@@ -275,7 +275,7 @@ ROOT (uid: N0) inferred ret type: ROOT
   VAR_INT __7 (offset: 0 or addr: 0)
   VAR_INT __9 (offset: 0 or addr: 0)
   STRING test basics!\n
-There are 189 entries
+There are 190 entries
 0: (ASSIGN, a, __0, -)
 1: (ASSIGN, c, __23, -)
 2: (LABEL, main, -, -)
@@ -448,23 +448,24 @@ There are 189 entries
 169: (MULT, __T77, __12, __21)
 170: (PRINT, __T77, -, -)
 171: (GOTO, __L_199_WHILE_BEGIN, -, -)
-172: (LABEL, __L_219_DO_WHILE_BEGIN, -, -)
-173: (ASSIGN, asd, dsa, -)
-174: (ifTrue, __L_219_DO_WHILE_BEGIN, __1, -)
-175: (MULT, __T79, a, b)
-176: (EQ, __T82, __T79, d)
-177: (ifTrue, __L_230_TRUE, __T82, -)
-178: (ASSIGN, __T82, __0, -)
-179: (GOTO, __L_230_DONE, -, -)
-180: (LABEL, __L_230_TRUE, -, -)
-181: (ASSIGN, __T82, __1, -)
-182: (LABEL, __L_230_DONE, -, -)
-183: (ASSIGN, __T78, __T82, -)
-184: (ifFalse, __L_229_ELSE, __T78, -)
-185: (GOTO, __L_229_FI, -, -)
-186: (LABEL, __L_229_ELSE, -, -)
-187: (LABEL, __L_229_FI, -, -)
-188: (RETURN, __0, -, -)
+172: (LABEL, __L_199_WHILE_END, -, -)
+173: (LABEL, __L_219_DO_WHILE_BEGIN, -, -)
+174: (ASSIGN, asd, dsa, -)
+175: (ifTrue, __L_219_DO_WHILE_BEGIN, __1, -)
+176: (MULT, __T79, a, b)
+177: (EQ, __T82, __T79, d)
+178: (ifTrue, __L_230_TRUE, __T82, -)
+179: (ASSIGN, __T82, __0, -)
+180: (GOTO, __L_230_DONE, -, -)
+181: (LABEL, __L_230_TRUE, -, -)
+182: (ASSIGN, __T82, __1, -)
+183: (LABEL, __L_230_DONE, -, -)
+184: (ASSIGN, __T78, __T82, -)
+185: (ifFalse, __L_229_ELSE, __T78, -)
+186: (GOTO, __L_229_FI, -, -)
+187: (LABEL, __L_229_ELSE, -, -)
+188: (LABEL, __L_229_FI, -, -)
+189: (RETURN, __0, -, -)
 a -32
 b -36
 c -40
@@ -483,9 +484,9 @@ y -172
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)space needed: 172
-  VAR_INT a (offset: 0 or addr: 6048)
-  VAR_INT b (offset: 0 or addr: 6052)
-  VAR_INT c (offset: 0 or addr: 6056)
+  VAR_INT a (offset: 0 or addr: 6080)
+  VAR_INT b (offset: 0 or addr: 6084)
+  VAR_INT c (offset: 0 or addr: 6088)
   (1-0) contains:
     VAR_ARRAY_INT dd (length: 5, offset: -8 or addr: 0)
     VAR_INT a (offset: -28 or addr: 0)

@@ -88,7 +88,7 @@ There are 32 entries
 12: (LABEL, __L_31_TRUE, -, -)
 13: (ASSIGN, __T4, __1, -)
 14: (LABEL, __L_31_DONE, -, -)
-15: (ASSIGN, __L_30_FI, __T4, -)
+15: (ASSIGN, __T1, __T4, -)
 16: (ifFalse, __L_30_FI, __T1, -)
 17: (ASSIGN, a, __333, -)
 18: (PRINT, a, -, -)

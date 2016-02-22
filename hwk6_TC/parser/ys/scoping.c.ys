@@ -68,8 +68,9 @@ L_31_TRUE:
 #(LABEL, __L_31_DONE, -, -)
 L_31_DONE:
 
-#(ASSIGN, __L_30_FI, __T4, -)
+#(ASSIGN, __T1, __T4, -)
 	mrmovl 1000, %eax
+	rmmovl %eax, 988
 #(ifFalse, __L_30_FI, __T1, -)
 	mrmovl 988, %eax
 	irmovl 0, %ecx

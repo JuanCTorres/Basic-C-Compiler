@@ -18,6 +18,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser test1.c < ./testinputs/test1.c >> "${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test1.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test1.c finished.\n" >> "${file}"
 
@@ -29,6 +34,11 @@ printf "test2.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
 ./parser test2.c < ./testinputs/test2.c >> "${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test2.c.ys
+fi
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test2.c finished.\n" >> "${file}"
@@ -42,6 +52,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser test3.c < ./testinputs/test3.c >> "${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test3.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test3.c finished.\n" >> "${file}"
 
@@ -54,6 +69,11 @@ printf "test4.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
 ./parser test4.c < ./testinputs/test4.c >> "${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test4.c.ys
+fi
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test4.c finished.\n" >> "${file}"
@@ -70,6 +90,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser test5.c < ./testinputs/test5.c >> "${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test5.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test5.c finished.\n" >> "${file}"
 
@@ -84,6 +109,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser test6.c < ./testinputs/test6.c >> "${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test6.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test6.c finished.\n" >> "${file}"
 
@@ -97,6 +127,11 @@ printf "test7.c BEGIN.\n" >> "${file}"
 printf "===========================================================\n\n" >> "${file}"
 
 ./parser test7.c < ./testinputs/test7.c >> "${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test7.c.ys
+fi
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test7.c finished.\n" >> "${file}"
@@ -114,6 +149,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser test8.c < ./testinputs/test8.c >> "${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test8.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test8.c finished.\n" >> "${file}"
 
@@ -126,6 +166,11 @@ printf "test9.c BEGIN.\n" >>"${file}"
 printf "===========================================================\n\n" >> "${file}"
 
 ./parser test9.c < ./testinputs/test9.c >>"${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test9.c.ys
+fi
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test9.c finished.\n" >>"${file}"
@@ -141,6 +186,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser test10.c < ./testinputs/test10.c >>"${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test10.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test10.c finished.\n" >>"${file}"
 
@@ -154,6 +204,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser recursive_factorial.c < ./testinputs/recursive_factorial.c >>"${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/recursive_factorial.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "recursive_factorial.c finished.\n" >>"${file}"
 
@@ -165,6 +220,11 @@ printf "fibb.c BEGIN.\n" >>"${file}"
 printf "===========================================================\n\n" >> "${file}"
 
 ./parser fibb.c < ./testinputs/fibb.c >>"${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/fibb.c.ys
+fi
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "fibb.c finished.\n" >>"${file}"
@@ -180,6 +240,11 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser helloworld.c < ./testinputs/helloworld.c >>"${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/helloworld.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "helloworld.c finished.\n" >>"${file}"
 
@@ -192,10 +257,13 @@ printf "===========================================================\n\n" >> "${f
 
 ./parser scoping.c < ./testinputs/scoping.c >>"${file}" 2>&1
 
+if [ $? -eq 0 ] 
+then
+  yas ./ys/scoping.c.ys
+fi
+
 printf "\n\n===========================================================\n" >> "${file}"
 printf "scoping.c finished.\n" >>"${file}"
-
-
 
 
 
@@ -207,6 +275,11 @@ printf "test.error.c BEGIN.\n" >>"${file}"
 printf "===========================================================\n\n" >> "${file}"
 
 ./parser test.error.c < ./testinputs/test.error.c >>"${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/test.error.c.ys
+fi
 
 printf "\n\n===========================================================\n" >> "${file}"
 printf "test.error.c finished.\n" >>"${file}"
