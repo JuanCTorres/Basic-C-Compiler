@@ -1,0 +1,82 @@
+Result of test done to parser.
+
+test8.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  ID (uid: N1) inferred ret type: INT_TYPEqq [scope (0,0) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+  ARRAY_TYPE (uid: N2) inferred ret type: INT_TYPEdd [scope (0,0) <- (0,0)] declared at line 16 (type: INT_TYPE) 
+    INT_LITERAL (uid: N3) inferred ret type: INT_TYPE10(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N4) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 18 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N5) inferred ret type: ROOT
+    SEQ (uid: N6) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N7) inferred ret type: ROOT
+        ARRAY_TYPE (uid: N8) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+          INT_LITERAL (uid: N9) inferred ret type: INT_TYPE12(type: INT_TYPE) 
+      STATEMENT_LIST (uid: N10) inferred ret type: ROOT
+        = (uid: N11) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N12) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N13) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          INT_LITERAL (uid: N14) inferred ret type: INT_TYPE7(type: INT_TYPE) 
+        = (uid: N15) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N16) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N17) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          INT_LITERAL (uid: N18) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+        = (uid: N19) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N20) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N21) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+          INT_LITERAL (uid: N22) inferred ret type: INT_TYPE3(type: INT_TYPE) 
+        PRINT (uid: N23) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N24) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N25) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        PRINT (uid: N26) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N27) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N28) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        PRINT (uid: N29) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N30) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 21 (type: INT_TYPE) 
+            INT_LITERAL (uid: N31) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+        RETURN (uid: N32) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to main at line 18 
+          INT_LITERAL (uid: N33) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __10 (offset: 0 or addr: 0)
+  VAR_INT __12 (offset: 0 or addr: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __3 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+  VAR_INT __7 (offset: 0 or addr: 0)
+There are 17 entries
+0: (LABEL, main, -, -)
+1: (MULT, __T0, __0, __4)
+2: (ADDR, __T1, a, -)
+3: (SUB, __T2, __T1, __T0)
+4: (ASSIGN, __T2, __7, -)
+5: (MULT, __T4, __1, __4)
+6: (ADDR, __T5, a, -)
+7: (SUB, __T6, __T5, __T4)
+8: (ASSIGN, __T6, __2, -)
+9: (MULT, __T8, __2, __4)
+10: (ADDR, __T9, a, -)
+11: (SUB, __T10, __T9, __T8)
+12: (ASSIGN, __T10, __3, -)
+13: (PRINT, a, -, -)
+14: (PRINT, a, -, -)
+15: (PRINT, a, -, -)
+16: (RETURN, __0, -, -)
+in var array 
+in var int 
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  VAR_ARRAY_INT dd (length: 10, offset: 0 or addr: 588)
+  VAR_INT qq (offset: 0 or addr: 628)
+  FUNC_INT main (0 params:)space needed: 56
+  (1-0) contains:
+    VAR_ARRAY_INT a (length: 12, offset: -8 or addr: 0)
+
+
+===========================================================
+test8.c finished.

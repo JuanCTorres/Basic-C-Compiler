@@ -1,3 +1,11 @@
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
                        | #END OF PROG: 2912
                        | 
   0x0000:              | .pos 0
@@ -225,7 +233,7 @@
   0x0293:              | L_97_FOR_END:
                        | 
                        | #(PRINT, alygljkglkug, -, -)
-  0x0293:30f20c0c0000  | 	irmovl 3084, %edx
+  0x0293:30f2140c0000  | 	irmovl 3092, %edx
   0x0299:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
                        | #(MULT, __T17, a, b)
   0x029f:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
@@ -240,7 +248,7 @@
   0x02bf:5025f0ffffff  | 	mrmovl -16(%ebp), %edx
   0x02c5:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
                        | #(PRINT, diz_gloval_var, -, -)
-  0x02cb:502f240c0000  | 	mrmovl 3108, %edx
+  0x02cb:502f2c0c0000  | 	mrmovl 3116, %edx
   0x02d1:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
                        | #(ADD, __T18, b, __3)
   0x02d7:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
@@ -311,80 +319,82 @@
                        | #(LABEL, __L_143_DONE, -, -)
   0x03a4:              | L_143_DONE:
                        | 
-                       | #(MULT, __T27, __3, __4)
+                       | #(MULT, __T28, __3, __4)
   0x03a4:30f003000000  | 	irmovl 3, %eax
   0x03aa:30f104000000  | 	irmovl 4, %ecx
   0x03b0:6410          | 	mull %ecx, %eax
-  0x03b2:400fe00b0000  | 	rmmovl %eax, 3040
+  0x03b2:400fe40b0000  | 	rmmovl %eax, 3044
                        | 
-                       | #(ADDR, __T28, b, -)
+                       | #(ADDR, __T29, b, -)
   0x03b8:30f0f4ffffff  | 	irmovl -12, %eax
   0x03be:6050          | 	addl %ebp, %eax
-  0x03c0:400fe40b0000  | 	rmmovl %eax, 3044
-                       | #(ADD, __T29, __T27, __T28)
-  0x03c6:500fe00b0000  | 	mrmovl 3040, %eax
+  0x03c0:400fe80b0000  | 	rmmovl %eax, 3048
+                       | #(SUB, __T30, __T29, __T28)
+  0x03c6:500fe80b0000  | 	mrmovl 3048, %eax
   0x03cc:501fe40b0000  | 	mrmovl 3044, %ecx
-  0x03d2:6010          | 	addl %ecx, %eax
-  0x03d4:400fe80b0000  | 	rmmovl %eax, 3048
+  0x03d2:6110          | 	subl %ecx, %eax
+  0x03d4:400fec0b0000  | 	rmmovl %eax, 3052
                        | 
-                       | #(DEREF, __T30, __T29, -)
-  0x03da:500fe80b0000  | 	mrmovl 3048, %eax
-  0x03e0:400fec0b0000  | 	rmmovl %eax, 3052
-                       | #(ADD, __T31, a, __T30)
-  0x03e6:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
-  0x03ec:501fec0b0000  | 	mrmovl 3052, %ecx
-  0x03f2:6010          | 	addl %ecx, %eax
-  0x03f4:400ff00b0000  | 	rmmovl %eax, 3056
+                       | #(DEREF, __T27, __T30, -)
+  0x03da:501fec0b0000  | 	mrmovl 3052, %ecx
+  0x03e0:500100000000  | 	mrmovl (%ecx), %eax
+  0x03e6:400fe00b0000  | 	rmmovl %eax, 3040
+                       | #(ADD, __T32, a, __T27)
+  0x03ec:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x03f2:501fe00b0000  | 	mrmovl 3040, %ecx
+  0x03f8:6010          | 	addl %ecx, %eax
+  0x03fa:400ff40b0000  | 	rmmovl %eax, 3060
                        | 
-                       | #(MULT, __T32, __5, __4)
-  0x03fa:30f005000000  | 	irmovl 5, %eax
-  0x0400:30f104000000  | 	irmovl 4, %ecx
-  0x0406:6410          | 	mull %ecx, %eax
-  0x0408:400ff40b0000  | 	rmmovl %eax, 3060
+                       | #(MULT, __T34, __5, __4)
+  0x0400:30f005000000  | 	irmovl 5, %eax
+  0x0406:30f104000000  | 	irmovl 4, %ecx
+  0x040c:6410          | 	mull %ecx, %eax
+  0x040e:400ffc0b0000  | 	rmmovl %eax, 3068
                        | 
-                       | #(ADDR, __T33, b, -)
-  0x040e:30f0f4ffffff  | 	irmovl -12, %eax
-  0x0414:6050          | 	addl %ebp, %eax
-  0x0416:400ff80b0000  | 	rmmovl %eax, 3064
-                       | #(ADD, __T34, __T32, __T33)
-  0x041c:500ff40b0000  | 	mrmovl 3060, %eax
-  0x0422:501ff80b0000  | 	mrmovl 3064, %ecx
-  0x0428:6010          | 	addl %ecx, %eax
-  0x042a:400ffc0b0000  | 	rmmovl %eax, 3068
+                       | #(ADDR, __T35, b, -)
+  0x0414:30f0f4ffffff  | 	irmovl -12, %eax
+  0x041a:6050          | 	addl %ebp, %eax
+  0x041c:400f000c0000  | 	rmmovl %eax, 3072
+                       | #(SUB, __T36, __T35, __T34)
+  0x0422:500f000c0000  | 	mrmovl 3072, %eax
+  0x0428:501ffc0b0000  | 	mrmovl 3068, %ecx
+  0x042e:6110          | 	subl %ecx, %eax
+  0x0430:400f040c0000  | 	rmmovl %eax, 3076
                        | 
-                       | #(DEREF, __T35, __T34, -)
-  0x0430:500ffc0b0000  | 	mrmovl 3068, %eax
-  0x0436:400f000c0000  | 	rmmovl %eax, 3072
-                       | #(ADD, __T36, a, __T35)
-  0x043c:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
-  0x0442:501f000c0000  | 	mrmovl 3072, %ecx
-  0x0448:6010          | 	addl %ecx, %eax
-  0x044a:400f040c0000  | 	rmmovl %eax, 3076
+                       | #(DEREF, __T33, __T36, -)
+  0x0436:501f040c0000  | 	mrmovl 3076, %ecx
+  0x043c:500100000000  | 	mrmovl (%ecx), %eax
+  0x0442:400ff80b0000  | 	rmmovl %eax, 3064
+                       | #(ADD, __T38, a, __T33)
+  0x0448:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x044e:501ff80b0000  | 	mrmovl 3064, %ecx
+  0x0454:6010          | 	addl %ecx, %eax
+  0x0456:400f0c0c0000  | 	rmmovl %eax, 3084
                        | 
                        | #(RETURN, __0, -, -)
-  0x0450:30f700000000  | 	irmovl 0, %edi
-  0x0456:2054          | 	rrmovl %ebp, %esp
-  0x0458:b05f          | 	popl %ebp
-  0x045a:30f1f8ffffff  | 	irmovl -8, %ecx
-  0x0460:6014          | 	addl %ecx, %esp
-  0x0462:90            | 	ret
-  0x0c0c:              | .pos 0xc0c    #Start of string space
+  0x045c:30f700000000  | 	irmovl 0, %edi
+  0x0462:2054          | 	rrmovl %ebp, %esp
+  0x0464:b05f          | 	popl %ebp
+  0x0466:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x046c:6014          | 	addl %ecx, %esp
+  0x046e:90            | 	ret
+  0x0c14:              | .pos 0xc14    #Start of string space
                        | 
-  0x0c0c:61            | 	.byte 	0x61
-  0x0c0d:6c            | 	.byte 	0x6c
-  0x0c0e:79            | 	.byte 	0x79
-  0x0c0f:67            | 	.byte 	0x67
-  0x0c10:6c            | 	.byte 	0x6c
-  0x0c11:6a            | 	.byte 	0x6a
-  0x0c12:6b            | 	.byte 	0x6b
-  0x0c13:67            | 	.byte 	0x67
-  0x0c14:6c            | 	.byte 	0x6c
-  0x0c15:6b            | 	.byte 	0x6b
-  0x0c16:75            | 	.byte 	0x75
+  0x0c14:61            | 	.byte 	0x61
+  0x0c15:6c            | 	.byte 	0x6c
+  0x0c16:79            | 	.byte 	0x79
   0x0c17:67            | 	.byte 	0x67
-  0x0c20:              | .pos 0xc20   # Start of global var space 
-  0x0c20:00000000      | 	.long 0x00000000
-  0x0c24:00000000      | 	.long 0x00000000
+  0x0c18:6c            | 	.byte 	0x6c
+  0x0c19:6a            | 	.byte 	0x6a
+  0x0c1a:6b            | 	.byte 	0x6b
+  0x0c1b:67            | 	.byte 	0x67
+  0x0c1c:6c            | 	.byte 	0x6c
+  0x0c1d:6b            | 	.byte 	0x6b
+  0x0c1e:75            | 	.byte 	0x75
+  0x0c1f:67            | 	.byte 	0x67
+  0x0c28:              | .pos 0xc28   # Start of global var space 
   0x0c28:00000000      | 	.long 0x00000000
+  0x0c2c:00000000      | 	.long 0x00000000
+  0x0c30:00000000      | 	.long 0x00000000
   0xfffc:              | .pos 0x0000FFFC
   0xfffc:              | stack:

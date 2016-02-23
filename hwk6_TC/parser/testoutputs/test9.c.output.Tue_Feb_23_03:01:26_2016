@@ -262,16 +262,16 @@ There are 97 entries
 83: (LABEL, __L_143_TRUE, -, -)
 84: (ASSIGN, __T26, __1, -)
 85: (LABEL, __L_143_DONE, -, -)
-86: (MULT, __T27, __3, __4)
-87: (ADDR, __T28, b, -)
-88: (ADD, __T29, __T27, __T28)
-89: (DEREF, __T30, __T29, -)
-90: (ADD, __T31, a, __T30)
-91: (MULT, __T32, __5, __4)
-92: (ADDR, __T33, b, -)
-93: (ADD, __T34, __T32, __T33)
-94: (DEREF, __T35, __T34, -)
-95: (ADD, __T36, a, __T35)
+86: (MULT, __T28, __3, __4)
+87: (ADDR, __T29, b, -)
+88: (SUB, __T30, __T29, __T28)
+89: (DEREF, __T27, __T30, -)
+90: (ADD, __T32, a, __T27)
+91: (MULT, __T34, __5, __4)
+92: (ADDR, __T35, b, -)
+93: (SUB, __T36, __T35, __T34)
+94: (DEREF, __T33, __T36, -)
+95: (ADD, __T38, a, __T33)
 96: (RETURN, __0, -, -)
 a -12
 b -16
@@ -284,14 +284,17 @@ e -20
 f -24
 g -28
 h -32
+in var int 
+in var int 
+in var int 
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
-  VAR_INT diz_thing (offset: 0 or addr: 3104)
+  VAR_INT diz_thing (offset: 0 or addr: 3112)
   FUNC_INT main (0 params:)space needed: 24
-  VAR_INT diz_gloval_var (offset: 0 or addr: 3108)
+  VAR_INT diz_gloval_var (offset: 0 or addr: 3116)
   FUNC_VOID my_new_f (0 params:)space needed: 12
-  VAR_INT diz_yolo (offset: 0 or addr: 3112)
+  VAR_INT diz_yolo (offset: 0 or addr: 3120)
   FUNC_VOID my_func (2 params: VAR_INT  VAR_INT )space needed: 32
   (1-0) contains:
     VAR_INT a (offset: -8 or addr: 0)

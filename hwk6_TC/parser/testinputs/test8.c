@@ -12,8 +12,8 @@
 // 	print a;
 // 	return 0;
 // }
-
-
+int qq;
+int dd[10];
 
 int main() {
 

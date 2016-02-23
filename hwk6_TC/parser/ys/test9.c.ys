@@ -1,3 +1,11 @@
+
+
+ #This function has locals 
+
+
+
+ #This function has locals 
+
 #END OF PROG: 2912
 
 .pos 0
@@ -225,7 +233,7 @@ L_97_FOR_BEGIN:
 L_97_FOR_END:
 
 #(PRINT, alygljkglkug, -, -)
-	irmovl 3084, %edx
+	irmovl 3092, %edx
 	rmmovl %edx, 0x00FFFE10
 #(MULT, __T17, a, b)
 	mrmovl -8(%ebp), %eax
@@ -240,7 +248,7 @@ L_97_FOR_END:
 	mrmovl -16(%ebp), %edx
 	rmmovl %edx, 0x00FFFE14
 #(PRINT, diz_gloval_var, -, -)
-	mrmovl 3108, %edx
+	mrmovl 3116, %edx
 	rmmovl %edx, 0x00FFFE14
 #(ADD, __T18, b, __3)
 	mrmovl -12(%ebp), %eax
@@ -311,55 +319,57 @@ L_143_TRUE:
 #(LABEL, __L_143_DONE, -, -)
 L_143_DONE:
 
-#(MULT, __T27, __3, __4)
+#(MULT, __T28, __3, __4)
 	irmovl 3, %eax
 	irmovl 4, %ecx
 	mull %ecx, %eax
-	rmmovl %eax, 3040
+	rmmovl %eax, 3044
 
-#(ADDR, __T28, b, -)
+#(ADDR, __T29, b, -)
 	irmovl -12, %eax
 	addl %ebp, %eax
-	rmmovl %eax, 3044
-#(ADD, __T29, __T27, __T28)
-	mrmovl 3040, %eax
-	mrmovl 3044, %ecx
-	addl %ecx, %eax
 	rmmovl %eax, 3048
-
-#(DEREF, __T30, __T29, -)
+#(SUB, __T30, __T29, __T28)
 	mrmovl 3048, %eax
+	mrmovl 3044, %ecx
+	subl %ecx, %eax
 	rmmovl %eax, 3052
-#(ADD, __T31, a, __T30)
-	mrmovl -8(%ebp), %eax
-	mrmovl 3052, %ecx
-	addl %ecx, %eax
-	rmmovl %eax, 3056
 
-#(MULT, __T32, __5, __4)
+#(DEREF, __T27, __T30, -)
+	mrmovl 3052, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 3040
+#(ADD, __T32, a, __T27)
+	mrmovl -8(%ebp), %eax
+	mrmovl 3040, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 3060
+
+#(MULT, __T34, __5, __4)
 	irmovl 5, %eax
 	irmovl 4, %ecx
 	mull %ecx, %eax
-	rmmovl %eax, 3060
-
-#(ADDR, __T33, b, -)
-	irmovl -12, %eax
-	addl %ebp, %eax
-	rmmovl %eax, 3064
-#(ADD, __T34, __T32, __T33)
-	mrmovl 3060, %eax
-	mrmovl 3064, %ecx
-	addl %ecx, %eax
 	rmmovl %eax, 3068
 
-#(DEREF, __T35, __T34, -)
-	mrmovl 3068, %eax
+#(ADDR, __T35, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
 	rmmovl %eax, 3072
-#(ADD, __T36, a, __T35)
-	mrmovl -8(%ebp), %eax
-	mrmovl 3072, %ecx
-	addl %ecx, %eax
+#(SUB, __T36, __T35, __T34)
+	mrmovl 3072, %eax
+	mrmovl 3068, %ecx
+	subl %ecx, %eax
 	rmmovl %eax, 3076
+
+#(DEREF, __T33, __T36, -)
+	mrmovl 3076, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 3064
+#(ADD, __T38, a, __T33)
+	mrmovl -8(%ebp), %eax
+	mrmovl 3064, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 3084
 
 #(RETURN, __0, -, -)
 	irmovl 0, %edi
@@ -368,7 +378,7 @@ L_143_DONE:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0xc0c    #Start of string space
+.pos 0xc14    #Start of string space
 
 	.byte 	0x61
 	.byte 	0x6c
@@ -382,7 +392,7 @@ L_143_DONE:
 	.byte 	0x6b
 	.byte 	0x75
 	.byte 	0x67
-.pos 0xc20   # Start of global var space 
+.pos 0xc28   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000
