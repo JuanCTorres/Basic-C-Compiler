@@ -374,7 +374,8 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_DEREF:
 				fprintf(ofile, "\tmrmovl %d, %s\n",
-					get_temp_addr(array[i]->src1), LEFT_OPERAND_REG);
+					get_temp_addr(array[i]->src1), RIGHT_OPERAND_REG);
+				fprintf(ofile, "\tmrmovl (%s), %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 				assign(array[i]->dest);
 				break;
 
@@ -540,16 +541,6 @@ void print_global_vars(symboltable_t *symboltable){
 }
 
 
-/* Returns 1 if var is global, i.e., was declared in scope (0-0)*/
-int is_var_global(symnode_t *var){
-  if(var->abnode->curr_level == 0 && var->abnode->curr_sib == 0){
-    return 1;
-  } else{
-    return 0;
-  }
-}
-
-
 /*
  * Gets the address of a temporary variable
  */
@@ -709,7 +700,13 @@ int assign(symnode_t *left_val){
 		return 0;
 	} else{
 		if(left_type == TEMP_SYMNODE){
-			fprintf(ofile, "\trmmovl %s, %d\n", LEFT_OPERAND_REG, get_temp_addr(left_val));
+			if(left_val->is_array){ // Address of an array
+				fprintf(ofile, "\tmrmovl %d, %s\n", get_temp_addr(left_val), RIGHT_OPERAND_REG);
+				fprintf(ofile, "\trmmovl %s, (%s)\n", LEFT_OPERAND_REG, RIGHT_OPERAND_REG);
+			}
+			else{
+				fprintf(ofile, "\trmmovl %s, %d\n", LEFT_OPERAND_REG, get_temp_addr(left_val));
+			}
 		}
 		else{ // var
 			if(is_var_global(left_val)){

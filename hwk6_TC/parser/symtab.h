@@ -72,6 +72,7 @@ typedef struct symnode {
   int num_variables;
   int addr;
   int needed_space;
+  int is_array;
   /* Other attributes go here. */
 } symnode_t;
 

@@ -66,10 +66,6 @@ int get_symnode_type(symnode_t *snode);
  */
 int get_temp_addr(symnode_t* temp);
 
-/*
-Returns 1 if var is global, i.e., was declared in scope (0-0)
-*/
-int is_var_global(symnode_t *var);
 
 /* Print the global variables into the file */
 void print_global_vars(symboltable_t *symboltable);

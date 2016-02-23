@@ -17,6 +17,7 @@ symnode_t* false_n = NULL;
 symnode_t* elem_size_n = NULL;
 
 
+//NOTE TO THE READER: "Abandon all hope, ye who enter here."
 
 /* a label is a symnode with the label name, it is inserted into specified hashtable
     label name takes a form of "__L_%d + text" where %d is from the node_no var in the ast node
@@ -423,57 +424,46 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case OP_ASSIGN_N:
         // No need for temps, variable should have been declared before
-        left_node = get_symnode(x->left_child);
-        right_node = get_symnode(x->left_child->right_sibling);
+        if(x->left_child->node_type == ARRAY_TYPE_N){
+          left_node = get_array_slot_addr(x->left_child, hashtable);
+        } else{
+          left_node = get_symnode(x->left_child);
+        }
+
+        if(x->left_child->right_sibling->node_type == ARRAY_TYPE_N){
+          right_node = get_array_slot_val(x->left_child->right_sibling, hashtable);
+        } else{
+          right_node = get_symnode(x->left_child->right_sibling);
+        }
+
+        // left_node = get_symnode(x->left_child);
+        //right_node = get_symnode(x->left_child->right_sibling);
+
         //make_insert_quad(Q_ASSIGN, x->left_child->temp_node, x->left_child->right_sibling->temp_node, NULL);
         make_insert_quad(Q_ASSIGN, left_node, right_node, NULL);
-        left_node = get_symnode(x->left_child);
+
+        //left_node = get_symnode(x->left_child);
         x->temp_node = left_node;
         break;
 
       case OP_PLUS_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        right_node = get_symnode(x->left_child->right_sibling);
-
-        make_insert_quad(Q_ADD, temp, left_node, right_node);
-        x->temp_node = temp;
+        insert_binary_op_quad(x, Q_ADD, hashtable);
         break;
 
       case OP_MINUS_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        right_node = get_symnode(x->left_child->right_sibling);
-
-        make_insert_quad(Q_SUB, temp, left_node, right_node);
-        x->temp_node = temp;
+        insert_binary_op_quad(x, Q_SUB, hashtable);
         break;
 
       case OP_TIMES_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        right_node = get_symnode(x->left_child->right_sibling);
-
-        make_insert_quad(Q_MULT, temp, left_node, right_node);
-        x->temp_node = temp;
+        insert_binary_op_quad(x, Q_MULT, hashtable);
         break;
 
       case OP_DIVIDE_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        right_node = get_symnode(x->left_child->right_sibling);
-
-        make_insert_quad(Q_DIV, temp, left_node, right_node);
-        x->temp_node = temp;
+        insert_binary_op_quad(x, Q_DIV, hashtable);
         break;
 
       case OP_MODULUS_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        right_node = get_symnode(x->left_child->right_sibling);
-
-        make_insert_quad(Q_MOD, temp, left_node, right_node);
-        x->temp_node = temp;
+        insert_binary_op_quad(x, Q_MOD, hashtable);
         break;
 
       /*~~~~~~~~~ Comparators ~~~~~~~~~*/
@@ -659,7 +649,8 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         x->temp_node = temp3;
         break;
 
-      /*~~~~~ Unary ops ~~~~~~~*/
+      /*~~~~~ Unary operations ~~~~~~~*/
+      //<TODO> GOTTA FIX THESE!!!!
 
       case OP_NEG_N:
         temp = NewTemp(hashtable);
@@ -733,23 +724,24 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case ARRAY_TYPE_N:
-        temp = NewTemp(hashtable);
-        temp2 = NewTemp(hashtable);
-        temp3 = NewTemp(hashtable);
-        temp4 = NewTemp(hashtable);
-
-        left_node = get_symnode(x->left_child);
-
-        // Calculate offset into array chunk in memory
-        make_insert_quad(Q_MULT, temp, left_node, elem_size_n);
-        // Grab the address of array
-        left_node = get_symnode(x);
-        make_insert_quad(Q_ADDR, temp2, left_node, NULL);
-        // And add the offset to it
-        make_insert_quad(Q_ADD, temp3, temp, temp2);
-        // Grab the element
-        make_insert_quad(Q_DEREF, temp4, temp3, NULL);
-        x->temp_node = temp4;
+      //   temp = NewTemp(hashtable);
+      //   temp2 = NewTemp(hashtable);
+      //   temp3 = NewTemp(hashtable);
+      //   temp4 = NewTemp(hashtable);
+      //
+      //   left_node = get_symnode(x->left_child);
+      //
+      //   // Calculate offset into array chunk in memory
+      //   make_insert_quad(Q_MULT, temp, left_node, elem_size_n);
+      //   // Grab the address of array
+      //   left_node = get_symnode(x);
+      //   make_insert_quad(Q_ADDR, temp2, left_node, NULL);
+      //   // And add the offset to it
+      //   make_insert_quad(Q_ADD, temp3, temp, temp2);
+      //   // Grab the element
+      //   make_insert_quad(Q_DEREF, temp4, temp3, NULL);
+      //
+      //   x->temp_node = temp4;
         break;
 
       case RETURN_N:
@@ -954,5 +946,155 @@ symnode_t *get_symnode(ast_node anode){
   }
   else{
     return anode->snode;
+  }
+}
+
+void insert_binary_op_quad(ast_node anode, quad_op_type quad_op, symhashtable_t *hashtable){
+    symnode_t *temp, *temp2, *temp3, *temp4, *temp5, *temp6, *temp7, *temp8, *temp9;
+    symnode_t *left_node, *right_node;
+    symnode_t *left_index, *right_index;
+    symnode_t *left_arr, *right_arr;
+
+    left_node = get_symnode(anode->left_child);
+    right_node = get_symnode(anode->left_child->right_sibling);
+
+    //left_arr = get_array_slot_val(anode->left_child, hashtable);
+    // right_arr = get_array_slot_val(anode->left_child->right_sibling, hashtable);
+
+
+     //<TODO> anode->left_child->snode->is_array
+
+    if(anode->left_child->node_type == ARRAY_TYPE_N){
+      left_arr = get_array_slot_val(anode->left_child, hashtable);
+    //   temp = NewTemp(hashtable);
+    //   temp2 = NewTemp(hashtable);
+    //   temp3 = NewTemp(hashtable);
+    //   temp4 = NewTemp(hashtable);
+    //
+    //   // What index of the array are we looking for?
+    //   left_index = get_symnode(anode->left_child->left_child);
+    //
+    //   make_insert_quad(Q_MULT, temp, left_index, elem_size_n);
+    //   make_insert_quad(Q_ADDR, temp2, left_node, NULL);
+    //
+    //   // Global array addresses grow up as their slots grow up,
+    //   // local ones do the opposite.
+    //   if(is_var_global(anode->left_child->snode)){
+    //     make_insert_quad(Q_ADD, temp3, temp2, temp);
+    //   }
+    //   else{
+    //     make_insert_quad(Q_SUB, temp3, temp2, temp);
+    //   }
+    //
+    //   // Actual value of array[something]
+    //   make_insert_quad(Q_DEREF, temp4, temp3, NULL);
+    }
+
+    if(anode->left_child->right_sibling->node_type == ARRAY_TYPE_N){
+      right_arr = get_array_slot_val(anode->left_child->right_sibling, hashtable);
+    //   temp5 = NewTemp(hashtable);
+    //   temp6 = NewTemp(hashtable);
+    //   temp7 = NewTemp(hashtable);
+    //   temp8 = NewTemp(hashtable);
+    //
+    //   // What index of the array are we looking for?
+    //   right_index = get_symnode(anode->left_child->right_sibling->left_child);
+    //   make_insert_quad(Q_MULT, temp5, right_index, elem_size_n);
+    //   // temp6 will hold the address of right array.
+    //   make_insert_quad(Q_ADDR, temp6, right_node, NULL);
+    //
+    //   // Global array addresses grow up as their slots grow up,
+    //   // local ones do the opposite.
+    //   if(is_var_global(anode->left_child->snode)){
+    //     make_insert_quad(Q_ADD, temp7, temp6, temp5);
+    //   }
+    //   else{
+    //     make_insert_quad(Q_SUB, temp7, temp6, temp5);
+    //   }
+    //
+    //   // Actual value of array[something]
+    //   make_insert_quad(Q_DEREF, temp8, temp7, NULL);
+    }
+
+    temp9 = NewTemp(hashtable);
+
+    if(anode->left_child->node_type == ARRAY_TYPE_N){
+      if(anode->left_child->right_sibling->node_type == ARRAY_TYPE_N){ // array + array
+        // make_insert_quad(quad_op, temp9, temp4, temp8);
+        make_insert_quad(quad_op, temp9, left_arr, right_arr);
+      }
+      else{               // array + num
+        //make_insert_quad(quad_op, temp9, temp4, right_node);
+        make_insert_quad(quad_op, temp9, left_arr, right_node);
+      }
+    }
+    else{
+      if(anode->left_child->right_sibling->node_type == ARRAY_TYPE_N){ // num + array
+        //make_insert_quad(quad_op, temp9, left_node, temp8);
+        make_insert_quad(quad_op, temp9, left_node, right_arr);
+      }
+      else{               // num + num
+        make_insert_quad(quad_op, temp9, left_node, right_node);
+      }
+    }
+
+    anode->temp_node = temp9;
+}
+
+
+/*
+   Returns a temporary node holding the _address_ of the array at the index specified
+   as the left child of anode in the abstract syntax tree.
+*/
+symnode_t *get_array_slot_addr(ast_node anode, symhashtable_t *hashtable){
+  symnode_t *temp, *temp2, *temp3, *temp4;
+  symnode_t *index;
+  symnode_t *symnode = get_symnode(anode);
+
+  temp = NewTemp(hashtable);
+  temp2 = NewTemp(hashtable);
+  temp3 = NewTemp(hashtable);
+  temp4 = NewTemp(hashtable);
+
+  // What index of the array are we looking for?
+  index = get_symnode(anode->left_child);
+
+  make_insert_quad(Q_MULT, temp, index, elem_size_n);
+  make_insert_quad(Q_ADDR, temp2, symnode, NULL);
+
+
+  if(is_var_global(anode->snode)){
+    make_insert_quad(Q_ADD, temp3, temp2, temp);
+  }
+  else{
+    make_insert_quad(Q_SUB, temp3, temp2, temp);
+  }
+
+  temp3->is_array = 1; // We need to treat this differently later.
+  return temp3;
+}
+
+/*
+   Returns a temporary node holding the _value_ of the array at the index specified
+   as the left child of anode in the abstract syntax tree.
+*/
+symnode_t *get_array_slot_val(ast_node anode, symhashtable_t *hashtable){
+  symnode_t *temp, *temp2;
+
+  temp2 = NewTemp(hashtable);
+
+  temp = get_array_slot_addr(anode, hashtable);
+  make_insert_quad(Q_DEREF, temp2, temp, NULL);
+
+  return temp2;
+}
+
+
+/* Returns 1 if var is global, i.e., was declared in scope (0-0)*/
+int is_var_global(symnode_t *var){
+  if(var->abnode->curr_level == 0 && var->abnode->curr_sib == 0){
+    return 1;
+  } else{
+    return 0;
   }
 }
