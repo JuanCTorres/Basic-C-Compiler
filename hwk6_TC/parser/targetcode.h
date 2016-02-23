@@ -118,7 +118,10 @@ void move_from_reg(char* reg, symnode_t* target);
 	 Returns 1 if successful, 0 if unsuccessful (when trying to assign to an int
    or a register used for returning values)
 */
-int assign(symnode_t *left_val);
+int assign_immediate(symnode_t *left_val);
+
+
+int assign_to_addr(symnode_t *addr_node);
 
 /*
    Returns 1 if a label is a function, 0 otherwise

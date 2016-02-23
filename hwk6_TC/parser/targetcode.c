@@ -55,41 +55,47 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_ASSIGN:
 				/*
 				   Move the value of the right hand side into %eax,
-				   then call assign(), which will take care of moving it
+				   then call assign_immediate(), which will take care of moving it
 				   into the location of the symnode (somewhere in memory,
 				   depending on whether the left hand side is a temp, a global,
 				   etc.)
 				*/
 				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				//assign_immediate(array[i]->dest);
+				if(array[i]->dest->is_array){
+					assign_to_addr(array[i]->dest);
+				} else{
+					assign_immediate(array[i]->dest);
+				}
+
 				break;
 
 			/*~~~~~~~~~ Binary operations ~~~~~~~~~*/
 			case Q_ADD:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_SUB:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_MULT:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tmull %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
 			case Q_DIV:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tdivl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
@@ -97,7 +103,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_MOD:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tmodl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				fprintf(ofile, "\n");
 				break;
 
@@ -108,7 +114,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
 				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				if(assign(array[i]->src1) == 0){
+				if(assign_immediate(array[i]->src1) == 0){
 					fprintf(ofile, "ERROR. TRYING TO ASSIGN VALUE TO INT\n");
 				}
 				break;
@@ -118,7 +124,7 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 
-				if(!assign(array[i]->src1)){
+				if(!assign_immediate(array[i]->src1)){
 					fprintf(ofile, "\n\n\nERROR. TRYING TO ASSIGN VALUE TO INT\n\n\n");
 				}
 
@@ -269,45 +275,45 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 			case Q_EQ:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			case Q_GT:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 
 				break;
 
 			case Q_LT:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			case Q_GTEQ:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			case Q_LTEQ:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			case Q_NEG:
 				move_to_reg(array[i]->src1, RIGHT_OPERAND_REG);
 				fprintf(ofile, "\tirmovl %d, %s\n", 0, LEFT_OPERAND_REG);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			case Q_NEQ:
 				move_to_reg_bin(array[i]);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 
 				break;
 
@@ -369,14 +375,14 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					fprintf(ofile, "\taddl %s, %s\n", BASE_PTR, LEFT_OPERAND_REG);
 				}
 
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			case Q_DEREF:
 				fprintf(ofile, "\tmrmovl %d, %s\n",
 					get_temp_addr(array[i]->src1), RIGHT_OPERAND_REG);
 				fprintf(ofile, "\tmrmovl (%s), %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				assign(array[i]->dest);
+				assign_immediate(array[i]->dest);
 				break;
 
 			default:
@@ -690,7 +696,7 @@ void move_to_reg_un(quad_type *quad){
 	 Returns 1 if successful, 0 if unsuccessful (when trying to assign to an int
    or a register used for returning values)
 */
-int assign(symnode_t *left_val){
+int assign_immediate(symnode_t *left_val){
 	assert(left_val != NULL);
 
 	int left_type = get_symnode_type(left_val);
@@ -700,13 +706,7 @@ int assign(symnode_t *left_val){
 		return 0;
 	} else{
 		if(left_type == TEMP_SYMNODE){
-			if(left_val->is_array){ // Address of an array
-				fprintf(ofile, "\tmrmovl %d, %s\n", get_temp_addr(left_val), RIGHT_OPERAND_REG);
-				fprintf(ofile, "\trmmovl %s, (%s)\n", LEFT_OPERAND_REG, RIGHT_OPERAND_REG);
-			}
-			else{
 				fprintf(ofile, "\trmmovl %s, %d\n", LEFT_OPERAND_REG, get_temp_addr(left_val));
-			}
 		}
 		else{ // var
 			if(is_var_global(left_val)){
@@ -719,6 +719,18 @@ int assign(symnode_t *left_val){
 	}
 }
 
+int assign_to_addr(symnode_t *addr_node){
+
+	int left_type = get_symnode_type(addr_node);
+
+	if(left_type != TEMP_SYMNODE){
+		fprintf(ofile, "Error: acessing a non-address variable as one.\n");
+		return 1;
+	}
+	fprintf(ofile, "\tmrmovl %d, %s\n", get_temp_addr(addr_node), RIGHT_OPERAND_REG);
+	fprintf(ofile, "\trmmovl %s, (%s)", LEFT_OPERAND_REG, RIGHT_OPERAND_REG);
+	return 0;
+}
 
 /*
   Moves a value to stored in a register to the variable specified by target.
