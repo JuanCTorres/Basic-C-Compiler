@@ -478,6 +478,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         // Is either greater?
         left_node = get_symnode(x->left_child);
         right_node = get_symnode(x->left_child->right_sibling);
+
         temp = left_node;
         temp2 = right_node;
 
@@ -664,17 +665,41 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case OP_INCREMENT_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        make_insert_quad(Q_INC, temp, left_node, NULL);
+
+        if(x->left_child->node_type == ARRAY_TYPE_N){
+
+          temp = get_array_slot_addr(x->left_child, hashtable);
+          temp2 = NewTemp(hashtable);
+          insert_unary_op_quad(x->left_child, Q_ADD, temp2, hashtable);
+          make_insert_quad(Q_ASSIGN, temp, temp2, NULL);
+
+        } else{
+
+          temp = NewTemp(hashtable);
+          left_node = get_symnode(x->left_child);
+          make_insert_quad(Q_INC, temp, left_node, NULL);
+
+        }
         x->temp_node = temp;
         break;
 
       case OP_DECREMENT_N:
-        temp = NewTemp(hashtable);
-        left_node = get_symnode(x->left_child);
-        make_insert_quad(Q_DEC, temp, left_node, NULL);
+        if(x->left_child->node_type == ARRAY_TYPE_N){
+
+          temp = get_array_slot_addr(x->left_child, hashtable);
+          temp2 = NewTemp(hashtable);
+          insert_unary_op_quad(x->left_child, Q_SUB, temp2, hashtable);
+          make_insert_quad(Q_ASSIGN, temp, temp2, NULL);
+
+        } else{
+
+          temp = NewTemp(hashtable);
+          left_node = get_symnode(x->left_child);
+          make_insert_quad(Q_DEC, temp, left_node, NULL);
+
+        }
         x->temp_node = temp;
+
         break;
 
       /*~~~~~~~ Control Statements ~~~~~~*/
@@ -1039,6 +1064,17 @@ void insert_binary_op_quad(ast_node anode, quad_op_type quad_op, symhashtable_t 
     }
 
     anode->temp_node = temp9;
+}
+
+void insert_unary_op_quad(ast_node anode, quad_op_type quad_op, symnode_t *temp, symhashtable_t *hashtable){
+  symnode_t *left_node;
+
+  if(anode->node_type == ARRAY_TYPE_N){
+    left_node = get_array_slot_val(anode, hashtable);
+  } else{
+    left_node = get_symnode(anode->left_child);
+  }
+  make_insert_quad(quad_op, temp, left_node, true_n); // true_n = 1
 }
 
 

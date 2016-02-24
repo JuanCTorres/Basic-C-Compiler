@@ -113,6 +113,7 @@ symnode_t *get_symnode(ast_node anode);
 
 void insert_binary_op_quad(ast_node anode, quad_op_type quad_op, symhashtable_t *hashtable);
 
+void insert_unary_op_quad(ast_node anode, quad_op_type quad_op, symnode_t *temp, symhashtable_t *hashtable);
 
 /*
    Returns a temporary node holding the _address_ of the array at the index specified
@@ -126,8 +127,6 @@ symnode_t *get_array_slot_addr(ast_node anode, symhashtable_t *hashtable);
    as the left child of anode in the abstract syntax tree.
 */
 symnode_t *get_array_slot_val(ast_node anode, symhashtable_t *hashtable);
-
-
 
 /*
 Returns 1 if var is global, i.e., was declared in scope (0-0)

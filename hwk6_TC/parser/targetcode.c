@@ -624,6 +624,7 @@ int round_str_addr(char* str){
   properly by other functions.
 */
 int get_symnode_type(symnode_t *snode){
+
   char *substr1 = substring(snode->name, 3); // first 3 chars of name
   char *substr2 = substring(snode->name, 2); // first 2 chars of name
 
