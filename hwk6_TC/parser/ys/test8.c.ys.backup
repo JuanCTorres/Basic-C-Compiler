@@ -1,0 +1,196 @@
+#END OF PROG: 1204
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 224, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(MULT, __T0, __40, __4) //calc last elemtn's address, relative to ebp, store in T0
+	irmovl 40, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1224
+
+#(ADDR, __T1, d, -) //add offset to ebp and store in T1 //this is now absolute starting address
+	irmovl -64, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1228
+#(ADD, __T2, __T0, __T1)
+	mrmovl 1224, %eax
+	mrmovl 1228, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1232
+
+#(DEREF, __T3, __T2, -)
+	mrmovl 1232, %eax
+	rmmovl %eax, 1236
+#(MULT, __T4, __12, __4)
+	irmovl 12, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1240
+
+#(ADDR, __T5, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1244
+#(ADD, __T6, __T4, __T5)
+	mrmovl 1240, %eax
+	mrmovl 1244, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1248
+
+#(DEREF, __T7, __T6, -)
+	mrmovl 1248, %eax
+	rmmovl %eax, 1252
+#(MULT, __T8, __0, __4)
+	irmovl 0, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1256
+
+#(ADDR, __T9, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1260
+#(ADD, __T10, __T8, __T9)
+	mrmovl 1256, %eax
+	mrmovl 1260, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1264
+
+#(DEREF, __T11, __T10, -)
+	mrmovl 1264, %eax
+	rmmovl %eax, 1268
+#(ASSIGN, __T11, __7, -)
+	irmovl 7, %eax
+	rmmovl %eax, 1268
+#(MULT, __T12, __1, __4)
+	irmovl 1, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1272
+
+#(ADDR, __T13, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1276
+#(ADD, __T14, __T12, __T13)
+	mrmovl 1272, %eax
+	mrmovl 1276, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1280
+
+#(DEREF, __T15, __T14, -)
+	mrmovl 1280, %eax
+	rmmovl %eax, 1284
+#(ASSIGN, __T15, __2, -)
+	irmovl 2, %eax
+	rmmovl %eax, 1284
+#(MULT, __T16, __2, __4)
+	irmovl 2, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1288
+
+#(ADDR, __T17, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1292
+#(ADD, __T18, __T16, __T17)
+	mrmovl 1288, %eax
+	mrmovl 1292, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1296
+
+#(DEREF, __T19, __T18, -)
+	mrmovl 1296, %eax
+	rmmovl %eax, 1300
+#(ASSIGN, __T19, __3, -)
+	irmovl 3, %eax
+	rmmovl %eax, 1300
+#(MULT, __T20, __0, __4)
+	irmovl 0, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1304
+
+#(ADDR, __T21, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1308
+#(ADD, __T22, __T20, __T21)
+	mrmovl 1304, %eax
+	mrmovl 1308, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1312
+
+#(DEREF, __T23, __T22, -)
+	mrmovl 1312, %eax
+	rmmovl %eax, 1316
+#(PRINT, __T23, -, -)
+	mrmovl 1316, %edx
+	rmmovl %edx, 0x00FFFE14
+#(MULT, __T24, __1, __4)
+	irmovl 1, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1320
+
+#(ADDR, __T25, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1324
+#(ADD, __T26, __T24, __T25)
+	mrmovl 1320, %eax
+	mrmovl 1324, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1328
+
+#(DEREF, __T27, __T26, -)
+	mrmovl 1328, %eax
+	rmmovl %eax, 1332
+#(PRINT, __T27, -, -)
+	mrmovl 1332, %edx
+	rmmovl %edx, 0x00FFFE14
+#(MULT, __T28, __2, __4)
+	irmovl 2, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1336
+
+#(ADDR, __T29, a, -)
+	irmovl -8, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1340
+#(ADD, __T30, __T28, __T29)
+	mrmovl 1336, %eax
+	mrmovl 1340, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1344
+
+#(DEREF, __T31, __T30, -)
+	mrmovl 1344, %eax
+	rmmovl %eax, 1348
+#(PRINT, __T31, -, -)
+	mrmovl 1348, %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x54c    #Start of string space
+
+.pos 0x550   # Start of global var space 
+.pos 0x0000FFFC
+stack:

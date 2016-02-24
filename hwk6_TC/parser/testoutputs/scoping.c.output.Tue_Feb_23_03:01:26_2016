@@ -108,6 +108,9 @@ There are 32 entries
 a -12
 b -16
 c -20
+in var int 
+in var int 
+in var int 
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:

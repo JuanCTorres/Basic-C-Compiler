@@ -1,4 +1,4 @@
-                       | #END OF PROG: 1172
+                       | #END OF PROG: 1052
                        | 
   0x0000:              | .pos 0
   0x0000:30f4fcff0000  | 	irmovl stack, %esp
@@ -22,12 +22,12 @@
   0x0040:5005e4ffffff  | 	mrmovl -28(%ebp), %eax
   0x0046:5015e0ffffff  | 	mrmovl -32(%ebp), %ecx
   0x004c:6110          | 	subl %ecx, %eax
-  0x004e:400fb4040000  | 	rmmovl %eax, 1204
+  0x004e:400f3c040000  | 	rmmovl %eax, 1084
                        | #(ifTrue, __L_23_TRUE, __T3, -)
   0x0054:746a000000    | 	jne L_23_TRUE
                        | #(ASSIGN, __T3, __0, -)
   0x0059:30f000000000  | 	irmovl 0, %eax
-  0x005f:400fb4040000  | 	rmmovl %eax, 1204
+  0x005f:400f3c040000  | 	rmmovl %eax, 1084
                        | #(GOTO, __L_23_DONE, -, -)
   0x0065:7076000000    | 	jmp L_23_DONE
                        | #(LABEL, __L_23_TRUE, -, -)
@@ -35,15 +35,15 @@
                        | 
                        | #(ASSIGN, __T3, __1, -)
   0x006a:30f001000000  | 	irmovl 1, %eax
-  0x0070:400fb4040000  | 	rmmovl %eax, 1204
+  0x0070:400f3c040000  | 	rmmovl %eax, 1084
                        | #(LABEL, __L_23_DONE, -, -)
   0x0076:              | L_23_DONE:
                        | 
                        | #(ASSIGN, __T0, __T3, -)
-  0x0076:500fb4040000  | 	mrmovl 1204, %eax
-  0x007c:400fa8040000  | 	rmmovl %eax, 1192
+  0x0076:500f3c040000  | 	mrmovl 1084, %eax
+  0x007c:400f30040000  | 	rmmovl %eax, 1072
                        | #(ifFalse, __L_22_FI, __T0, -)
-  0x0082:500fa8040000  | 	mrmovl 1192, %eax
+  0x0082:500f30040000  | 	mrmovl 1072, %eax
   0x0088:30f100000000  | 	irmovl 0, %ecx
   0x008e:6110          | 	subl %ecx, %eax
   0x0090:7345010000    | 	je L_22_FI
@@ -54,12 +54,12 @@
   0x0095:5005d8ffffff  | 	mrmovl -40(%ebp), %eax
   0x009b:30f100000000  | 	irmovl 0, %ecx
   0x00a1:6110          | 	subl %ecx, %eax
-  0x00a3:400fc0040000  | 	rmmovl %eax, 1216
+  0x00a3:400f48040000  | 	rmmovl %eax, 1096
                        | #(ifTrue, __L_35_TRUE, __T6, -)
   0x00a9:74bf000000    | 	jne L_35_TRUE
                        | #(ASSIGN, __T6, __0, -)
   0x00ae:30f000000000  | 	irmovl 0, %eax
-  0x00b4:400fc0040000  | 	rmmovl %eax, 1216
+  0x00b4:400f48040000  | 	rmmovl %eax, 1096
                        | #(GOTO, __L_35_DONE, -, -)
   0x00ba:70cb000000    | 	jmp L_35_DONE
                        | #(LABEL, __L_35_TRUE, -, -)
@@ -67,12 +67,12 @@
                        | 
                        | #(ASSIGN, __T6, __1, -)
   0x00bf:30f001000000  | 	irmovl 1, %eax
-  0x00c5:400fc0040000  | 	rmmovl %eax, 1216
+  0x00c5:400f48040000  | 	rmmovl %eax, 1096
                        | #(LABEL, __L_35_DONE, -, -)
   0x00cb:              | L_35_DONE:
                        | 
                        | #(ifFalse, __L_34_WHILE_END, __T6, -)
-  0x00cb:500fc0040000  | 	mrmovl 1216, %eax
+  0x00cb:500f48040000  | 	mrmovl 1096, %eax
   0x00d1:30f100000000  | 	irmovl 0, %ecx
   0x00d7:6110          | 	subl %ecx, %eax
   0x00d9:7345010000    | 	je L_34_WHILE_END
@@ -83,12 +83,12 @@
   0x00de:5005d8ffffff  | 	mrmovl -40(%ebp), %eax
   0x00e4:30f10a000000  | 	irmovl 10, %ecx
   0x00ea:6110          | 	subl %ecx, %eax
-  0x00ec:400fcc040000  | 	rmmovl %eax, 1228
+  0x00ec:400f54040000  | 	rmmovl %eax, 1108
                        | #(ifTrue, __L_44_TRUE, __T9, -)
   0x00f2:7608010000    | 	jg L_44_TRUE
                        | #(ASSIGN, __T9, __0, -)
   0x00f7:30f000000000  | 	irmovl 0, %eax
-  0x00fd:400fcc040000  | 	rmmovl %eax, 1228
+  0x00fd:400f54040000  | 	rmmovl %eax, 1108
                        | #(GOTO, __L_44_DONE, -, -)
   0x0103:7014010000    | 	jmp L_44_DONE
                        | #(LABEL, __L_44_TRUE, -, -)
@@ -96,12 +96,12 @@
                        | 
                        | #(ASSIGN, __T9, __1, -)
   0x0108:30f001000000  | 	irmovl 1, %eax
-  0x010e:400fcc040000  | 	rmmovl %eax, 1228
+  0x010e:400f54040000  | 	rmmovl %eax, 1108
                        | #(LABEL, __L_44_DONE, -, -)
   0x0114:              | L_44_DONE:
                        | 
                        | #(ifFalse, __L_42_FOR_END, __T9, -)
-  0x0114:500fcc040000  | 	mrmovl 1228, %eax
+  0x0114:500f54040000  | 	mrmovl 1108, %eax
   0x011a:30f100000000  | 	irmovl 0, %ecx
   0x0120:6110          | 	subl %ecx, %eax
   0x0122:7340010000    | 	je L_42_FOR_END
@@ -123,34 +123,15 @@
                        | #(LABEL, __L_22_FI, -, -)
   0x0145:              | L_22_FI:
                        | 
-                       | #(MULT, __T11, __100, __4)
-  0x0145:30f064000000  | 	irmovl 100, %eax
-  0x014b:30f108000000  | 	irmovl 8, %ecx
-  0x0151:6410          | 	mull %ecx, %eax
-  0x0153:400fd4040000  | 	rmmovl %eax, 1236
-                       | 
-                       | #(ADDR, __T12, catz, -)
-  0x0159:30f0c4ffffff  | 	irmovl -60, %eax
-  0x015f:6050          | 	addl %ebp, %eax
-  0x0161:400fd8040000  | 	rmmovl %eax, 1240
-                       | #(ADD, __T13, __T11, __T12)
-  0x0167:500fd4040000  | 	mrmovl 1236, %eax
-  0x016d:501fd8040000  | 	mrmovl 1240, %ecx
-  0x0173:6010          | 	addl %ecx, %eax
-  0x0175:400fdc040000  | 	rmmovl %eax, 1244
-                       | 
-                       | #(DEREF, __T14, __T13, -)
-  0x017b:500fdc040000  | 	mrmovl 1244, %eax
-  0x0181:400fe0040000  | 	rmmovl %eax, 1248
                        | #(RETURN, __void, -, -)
-  0x0187:30f700000000  | 	irmovl 0, %edi
-  0x018d:2054          | 	rrmovl %ebp, %esp
-  0x018f:b05f          | 	popl %ebp
-  0x0191:30f1f8ffffff  | 	irmovl -8, %ecx
-  0x0197:6014          | 	addl %ecx, %esp
-  0x0199:90            | 	ret
-  0x04e8:              | .pos 0x4e8    #Start of string space
+  0x0145:30f700000000  | 	irmovl 0, %edi
+  0x014b:2054          | 	rrmovl %ebp, %esp
+  0x014d:b05f          | 	popl %ebp
+  0x014f:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0155:6014          | 	addl %ecx, %esp
+  0x0157:90            | 	ret
+  0x0460:              | .pos 0x460    #Start of string space
                        | 
-  0x04ec:              | .pos 0x4ec   # Start of global var space 
+  0x0464:              | .pos 0x464   # Start of global var space 
   0xfffc:              | .pos 0x0000FFFC
   0xfffc:              | stack:
