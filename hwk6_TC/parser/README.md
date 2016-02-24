@@ -81,6 +81,26 @@ I/O in our compiler is achieved by moving or reading data from the following add
 - Local variables are stored in the stack, with an offset from the frame pointer.
 - Parameters to a function are stored above the function's frame pointer, though we are copying them into the same space as locals (below the frame pointer), to make their handling easier
 
+## Project status
+
+### The following features are working at the moment:
+
+- Arithmetic operations using local and global numbers, variables, and arrays.
+- Assignment operations to locals and global variables and arrays.
+- Printing local and global variables, as well as integer literals.
+- Returning variables and integer literals.
+- Passing variables and integer literals as parameters to functions.
+- Simple recursive functions.
+- Local nested scopes
+
+### The following still have bugs:
+
+- Comparing arrays.
+- Returning arrays.
+- Printing arrays.
+- Saving the value of multiple function calls, if they are on the same expression,
+e.g., `f(x) + g(y);`
+
 ## Changes from previous programs
 
 - Function prologues and epilogues are no longer just a label. Instead, each has its own three-address operation or quad.
