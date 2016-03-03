@@ -16,7 +16,10 @@ int main(void) {	//0
 					//1.2
 	int a, t, y, u, w, v, ppp;	//1.2
 	int fff[2];
+	int i;
+	//int j[1];
 	a = t= y = -(4/5);
+	//i = j;
 
 	if(a > 10) { // 1.2
 		//2.0

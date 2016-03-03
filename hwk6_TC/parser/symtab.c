@@ -769,7 +769,7 @@ void check_return_helper(ast_node root, symboltable_t *symtab, ast_node funcnode
           }
           else {
             if(child2->left_child->return_type != INT_TYPE_N) {
-              
+
               returnError = 1;
               fprintf(stderr, "3 line: %d | Error: Returning wrong type for function %s\n", child2->line_num, funcnode->value_string);
             }
@@ -1046,40 +1046,20 @@ int is_unary_operator(ast_node root){
      }
 }
 
-// void insert_true_false(symboltable_t *symtab){
-//   symnode_t * snode;
-//
-//   ast_node true_n = create_ast_node(INT_LITERAL_N);
-//   ast_node false_n = create_ast_node(INT_LITERAL_N);
-//
-//   char *true_name = calloc(DEFAULTSTRSIZE, sizeof(char));
-//   char *false_name = calloc(DEFAULTSTRSIZE, sizeof(char));
-//
-//   true_n->value_int = 1;
-//   false_n->value_int = 0;
-//
-//   sprintf(true_name, "__%d", true_n->value_int);
-//   sprintf(false_name, "__%d", false_n->value_int);
-//
-//   strcpy(true_n->value_string, true_name);
-//   strcpy(false_n->value_string, false_name);
-//
-//   assert(true_n->value_string != NULL);
-//   assert(false_n->value_string != NULL);
-//
-//   symhashtable_t *hash = symtab->literal_collection;
-//   assert(hash != NULL);
-//
-//   snode = lookup_symhashtable(hash, true_n->value_string, NOHASHSLOT);
-//   if(snode == NULL){
-//     insert_into_symhashtable(hash, true_n);
-//   }
-//   true_n->snode = snode;
-//
-//   snode = lookup_symhashtable(hash, false_n->value_string, NOHASHSLOT);
-//   false_n->snode = snode;
-// }
 
+/* Special case for assignments. Only need to check that type(lhs) != type(rhs) */
+void check_assignment(ast_node root){
+  assert(root->left_child != NULL);
+  assert(root->left_child->right_sibling != NULL);
+
+  if(root->left_child->return_type != root->left_child->right_sibling->return_type){
+    exprTypeError = 1;
+      fprintf(stderr, "line: %d | Error: Type disagreement of variable(s) used with assignment operator\n", root->line_num);
+  }
+}
+
+
+/* Check binary operations */
 void check_binary(ast_node root) {
     assert(root->left_child != NULL);
     assert(root->left_child->right_sibling != NULL);
@@ -1107,31 +1087,32 @@ void check_binary(ast_node root) {
     }
 }
 
+/* Check unary operations */
 void check_unary(ast_node root) {
   //assert(root->left_child != NULL);
   if(root->node_type == RETURN_N) {
-      if(root->left_child != NULL && root->left_child->node_type == CALL_N) {
-        if(root->left_child->left_child->return_type == VOID_TYPE_N){
-          exprTypeError = 1;
-          fprintf(stderr, "line: %d | Error: Returning wrong type\n", root->line_num);
-                fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+    if(root->left_child != NULL && root->left_child->node_type == CALL_N) {
+      if(root->left_child->left_child->return_type == VOID_TYPE_N){
+        exprTypeError = 1;
+        fprintf(stderr, "line: %d | Error: Returning wrong type\n", root->line_num);
+        fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
 
       }
-  }
+    }
   }
   else if (root->left_child->return_type == VOID_TYPE_N) {
-fprintf(stderr, "line: %d | Error: Type disagreement of variable used with unary operator\n", root->line_num);
-      fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
+    fprintf(stderr, "line: %d | Error: Type disagreement of variable used with unary operator\n", root->line_num);
+    fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
 
     exprTypeError = 1;
   }
   else if(root->left_child->node_type == CALL_N) {
-      if(root->left_child->left_child->return_type == VOID_TYPE_N){
-    fprintf(stderr, "line: %d | Error: Type disagreement of variable used with unary operator\n", root->line_num);
+    if(root->left_child->left_child->return_type == VOID_TYPE_N){
+      fprintf(stderr, "line: %d | Error: Type disagreement of variable used with unary operator\n", root->line_num);
       fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
 
-        exprTypeError = 1;
-      }
+      exprTypeError = 1;
+    }
   }
 
 }
@@ -1143,37 +1124,38 @@ int check_types_in_expr(ast_node root) {
 
   switch (root->node_type) {
     case OP_ASSIGN_N:
-    check_binary(root);
+    //check_binary(root);
+    check_assignment(root);
     break;
-    
+
     case OP_PLUS_N:
     check_binary(root);
     break;
-    
+
     case OP_MINUS_N:
-    check_binary(root);   
+    check_binary(root);
     break;
-    
+
     case OP_NEG_N:
     check_unary(root);
     break;
-    
+
     case OP_TIMES_N:
         check_binary(root);
     break;
-    
+
     case OP_DIVIDE_N:
         check_binary(root);
     break;
-    
+
     case OP_EQUALS_N:
         check_binary(root);
     break;
-    
+
     case OP_INCREMENT_N:
         check_unary(root);
     break;
-    
+
     case OP_DECREMENT_N:
         check_unary(root);
     break;
@@ -1185,31 +1167,31 @@ int check_types_in_expr(ast_node root) {
     case OP_LESS_THAN_N:
         check_binary(root);
     break;
-    
+
     case OP_LESS_EQUAL_N:
         check_binary(root);
     break;
-    
+
     case OP_GREATER_THAN_N:
         check_binary(root);
     break;
-    
+
     case OP_GREATER_EQUAL_N:
         check_binary(root);
     break;
-    
+
     case OP_NOT_EQUAL_N:
         check_binary(root);
     break;
-    
+
     case OP_AND_N:
         check_binary(root);
     break;
-    
+
     case OP_OR_N:
         check_binary(root);
     break;
-    
+
     case OP_NOT_N:
         check_unary(root);
     break;

@@ -188,11 +188,13 @@ void collect_literals(ast_node root, symboltable_t *symtab);
 
 void link_ast_to_symnode(ast_node root, symboltable_t *symtab);
 
-void check_binary(ast_node root);
-
-void check_unary(ast_node root);
-
+/* ~~~~~~~~~~ Functions for checking type disagreements ~~~~~~~~~*/
 int check_types_in_expr(ast_node root);
 
+void check_binary(ast_node root);
+
+void check_assignment(ast_node root);
+
+void check_unary(ast_node root);
 
 #endif
