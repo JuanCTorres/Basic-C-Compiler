@@ -3,15 +3,15 @@ void this_func() {
 
 int some_func(){
 	int i[2];
-	int a = 100;
-	i[0] = 100;
+	//int a = 100;
+	i[0] = 200;
 	// i[1] = 10;
-	if(++i[0] == 101){
+	if(++i[0] == 201){
 		print "HELLOOOOOO\n";
 		// return 0;
 	}
-	a = i[0];
-	print a;
+	//a = i[0];
+	//print a;
 	return 0;
 }
 

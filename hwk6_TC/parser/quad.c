@@ -91,7 +91,7 @@ symnode_t* elem_size_n = NULL;
         assert(array[i]->dest != NULL);
         printf("%d: ", i);
         printf("(%s, %s, ",OP_NAME(array[i]->op), array[i]->dest->name);
-        if (array[i]->src1 != NULL)
+        if (array[i]->src1 != NULL) // CRASH!
           printf("%s, ",array[i]->src1->name);
         else
           printf("-, ");
@@ -469,14 +469,17 @@ void CG(ast_node x, symhashtable_t *hashtable) {
       /*~~~~~~~~~ Comparators ~~~~~~~~~*/
 
       case OP_EQUALS_N:
-        temp = NewTemp(hashtable); // 3
-        temp2 = NewTemp(hashtable); // 4
-        temp3 = NewTemp(hashtable); // 5 temp5_
+
+        temp = NewTemp(hashtable);
+        fprintf(stderr, "left temp is %d\n", temp->num_val);
+        temp2 = NewTemp(hashtable);
+        temp3 = NewTemp(hashtable);
         label1 = NewLabel(x, "TRUE", hashtable);
         label2 = NewLabel(x, "DONE", hashtable);
 
         // Is either greater?
         left_node = get_symnode(x->left_child, hashtable);
+        fprintf(stderr, "%d\n", left_node->num_val);
         right_node = get_symnode(x->left_child->right_sibling, hashtable);
 
         //temp = left_node;
@@ -681,6 +684,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case OP_INCREMENT_N:
+        left_node = get_symnode(x->left_child, hashtable);
 
         if(x->left_child->node_type == ARRAY_TYPE_N){
 
@@ -688,18 +692,20 @@ void CG(ast_node x, symhashtable_t *hashtable) {
           temp2 = NewTemp(hashtable);
           insert_unary_op_quad(x->left_child, Q_ADD, temp2, hashtable);
           make_insert_quad(Q_ASSIGN, temp, temp2, NULL);
+          x->temp_node = temp2;
 
         } else{
 
           temp = NewTemp(hashtable);
-          left_node = get_symnode(x->left_child, hashtable);
+          //left_node = get_symnode(x->left_child, hashtable);
           //make_insert_quad(Q_INC, temp, left_node, NULL);
           make_insert_quad(Q_INC, left_node, NULL, NULL);
+          x->temp_node = left_node;
 
         }
         //x->temp_node = temp;
-        x->snode = left_node;
-        // x->temp_node = left_node;
+        //x->snode = left_node;
+        //x->temp_node = temp2;
         break;
 
       case OP_DECREMENT_N:
@@ -987,6 +993,7 @@ void set_constants(symhashtable_t *hashtable){
 symnode_t *get_symnode(ast_node anode, symhashtable_t* hashtable) {
   if(anode->node_type == ARRAY_TYPE_N) {
     return get_array_slot_val(anode, hashtable);
+
   }
   else {
     if(anode->snode == NULL) {
