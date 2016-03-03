@@ -60,6 +60,10 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				   depending on whether the left hand side is a temp, a global,
 				   etc.)
 				*/
+				// fprintf(ofile, "\n\n#arlaksdgja;lksdfj as;df\n\n#");
+				// print_quad(array[i]);
+				// fprintf(ofile, "\n\n#arlaksdgja;lksdfj as;df\n\n");
+
 				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
 				//assign_immediate(array[i]->dest);
 				if(array[i]->dest->is_array){
@@ -111,10 +115,11 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 
 			case Q_INC:
 				// move to %eax
-				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
-				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
-				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
-				if(assign_immediate(array[i]->src1) == 0){
+				//move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
+				move_to_reg(array[i]->dest, LEFT_OPERAND_REG); // rmmovl -8(%esp), %eax
+				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG); // irmovl 1, %ecx
+				fprintf(ofile, "\taddl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG); // addl...
+				if(assign_immediate(array[i]->dest) == 0){ //
 					fprintf(ofile, "ERROR. TRYING TO ASSIGN VALUE TO INT\n");
 				}
 				break;
@@ -626,7 +631,7 @@ int round_str_addr(char* str){
   properly by other functions.
 */
 int get_symnode_type(symnode_t *snode){
-
+	//assert(snode != NULL);
   char *substr1 = substring(snode->name, 3); // first 3 chars of name
   char *substr2 = substring(snode->name, 2); // first 2 chars of name
 
@@ -764,6 +769,7 @@ void move_from_reg(char* reg, symnode_t* target){
 	 For possible registers, see targetcode.h's macros for registers.
 */
 void move_to_reg(symnode_t *operand, char *reg){
+	assert(operand != NULL);
 	int type = get_symnode_type(operand);
 
 	fprintf(ofile, "\t");

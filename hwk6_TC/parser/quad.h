@@ -109,7 +109,7 @@ void add_temps_to_ast(ast_node root, symhashtable_t *hashtable);
 
 void set_constants(symhashtable_t *hashtable);
 
-symnode_t *get_symnode(ast_node anode);
+symnode_t *get_symnode(ast_node anode, symhashtable_t *hashtable);
 
 void insert_binary_op_quad(ast_node anode, quad_op_type quad_op, symhashtable_t *hashtable);
 
