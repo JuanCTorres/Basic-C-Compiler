@@ -709,22 +709,21 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case OP_DECREMENT_N:
+        left_node = get_symnode(x->left_child, hashtable);
         if(x->left_child->node_type == ARRAY_TYPE_N){
 
           temp = get_array_slot_addr(x->left_child, hashtable);
           temp2 = NewTemp(hashtable);
           insert_unary_op_quad(x->left_child, Q_SUB, temp2, hashtable);
           make_insert_quad(Q_ASSIGN, temp, temp2, NULL);
+          x->temp_node = temp2;
 
         } else{
 
           temp = NewTemp(hashtable);
-          left_node = get_symnode(x->left_child, hashtable);
-          make_insert_quad(Q_DEC, temp, left_node, NULL);
-
+          make_insert_quad(Q_DEC, left_node, NULL, NULL);
+          x->temp_node = left_node;
         }
-        x->temp_node = temp;
-
         break;
 
       /*~~~~~~~ Control Statements ~~~~~~*/
@@ -771,27 +770,6 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         left_node = get_symnode(x->left_child, hashtable);
         //make_insert_quad(Q_READ, x->left_child->temp_node, NULL, NULL);
         make_insert_quad(Q_READ, left_node, NULL, NULL);
-        break;
-
-      case ARRAY_TYPE_N:
-      //   temp = NewTemp(hashtable);
-      //   temp2 = NewTemp(hashtable);
-      //   temp3 = NewTemp(hashtable);
-      //   temp4 = NewTemp(hashtable);
-      //
-      //   left_node = get_symnode(x->left_child);
-      //
-      //   // Calculate offset into array chunk in memory
-      //   make_insert_quad(Q_MULT, temp, left_node, elem_size_n);
-      //   // Grab the address of array
-      //   left_node = get_symnode(x);
-      //   make_insert_quad(Q_ADDR, temp2, left_node, NULL);
-      //   // And add the offset to it
-      //   make_insert_quad(Q_ADD, temp3, temp, temp2);
-      //   // Grab the element
-      //   make_insert_quad(Q_DEREF, temp4, temp3, NULL);
-      //
-      //   x->temp_node = temp4;
         break;
 
       case RETURN_N:

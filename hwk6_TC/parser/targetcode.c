@@ -125,14 +125,13 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				break;
 
 			case Q_DEC:
-				move_to_reg(array[i]->src1, LEFT_OPERAND_REG);
+				move_to_reg(array[i]->dest, LEFT_OPERAND_REG);
 				fprintf(ofile, "\tirmovl 1, %s\n", RIGHT_OPERAND_REG);
 				fprintf(ofile, "\tsubl %s, %s\n", RIGHT_OPERAND_REG, LEFT_OPERAND_REG);
 
-				if(!assign_immediate(array[i]->src1)){
+				if(!assign_immediate(array[i]->dest)){
 					fprintf(ofile, "\n\n\nERROR. TRYING TO ASSIGN VALUE TO INT\n\n\n");
 				}
-
 				break;
 
 			case Q_IFF:

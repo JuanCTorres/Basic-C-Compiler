@@ -21,6 +21,7 @@ cc[a * b] = a * b;
 
 print "test basics!\n";
 read f;
+print f;
 
 c=1-b;
 
@@ -34,7 +35,7 @@ c=-2-9;
 c=+1+7;
 c=1 - -10;
 c=22- -88;
-
+b = 5;
 
 c = a * -b;
 c = a + b;
@@ -52,7 +53,10 @@ c = a && b;
 c = a || b;
 c = !b;
 c = -b;
+
 c = ++b;
+print c;
+
 c = --b;
 c = (a % 5);
 c = -23;
