@@ -1,6 +1,6 @@
 Result of test done to parser.
 
-test6.c BEGIN.
+test6.c.c BEGIN.
 ===========================================================
 
 line: 23 | error: use of undeclared identifier a

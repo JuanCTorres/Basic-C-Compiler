@@ -1,6 +1,6 @@
 Result of test done to parser.
 
-test5.c BEGIN.
+test5.c.c BEGIN.
 ===========================================================
 
 line: 26 | Error: Number of parameters to function myfunc does not match the declaration at line 1

@@ -12,11 +12,13 @@ int recurr( int a ) {
 
 
 int main(void) {
-	int answer;
+	int g = 5;
+	int answer[g];
+	answer[4] = 6;
 
-	answer = recurr(6);
+	answer[2] = recurr(answer[4]);
 
 
-	print answer;
-	return answer;
+	print answer[2];
+	return answer[2];
 }

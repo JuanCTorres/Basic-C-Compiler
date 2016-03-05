@@ -1,4 +1,4 @@
-#END OF PROG: 964
+#END OF PROG: 1024
 
 .pos 0
 	irmovl stack, %esp
@@ -26,10 +26,10 @@ myfunc:
 	mrmovl -8(%ebp), %eax
 	mrmovl -12(%ebp), %ecx
 	addl %ecx, %eax
-	rmmovl %eax, 984
+	rmmovl %eax, 1044
 
 #(ASSIGN, a, __T0, -)
-	mrmovl 984, %eax
+	mrmovl 1044, %eax
 	rmmovl %eax, -8(%ebp)
 #(PRINT, a, -, -)
 	mrmovl -8(%ebp), %edx
@@ -47,16 +47,22 @@ main:
 	irmovl 0, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
-#(EQ, __T4, __1, __1)
+#(ASSIGN, __T2, __1, -)
 	irmovl 1, %eax
-	irmovl 1, %ecx
+	rmmovl %eax, 1052
+#(ASSIGN, __T3, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 1056
+#(EQ, __T4, __T2, __T3)
+	mrmovl 1052, %eax
+	mrmovl 1056, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 1000
+	rmmovl %eax, 1060
 #(ifTrue, __L_31_TRUE, __T4, -)
 	je L_31_TRUE
 #(ASSIGN, __T4, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 1000
+	rmmovl %eax, 1060
 #(GOTO, __L_31_DONE, -, -)
 	jmp L_31_DONE
 #(LABEL, __L_31_TRUE, -, -)
@@ -64,15 +70,15 @@ L_31_TRUE:
 
 #(ASSIGN, __T4, __1, -)
 	irmovl 1, %eax
-	rmmovl %eax, 1000
+	rmmovl %eax, 1060
 #(LABEL, __L_31_DONE, -, -)
 L_31_DONE:
 
 #(ASSIGN, __T1, __T4, -)
-	mrmovl 1000, %eax
-	rmmovl %eax, 988
+	mrmovl 1060, %eax
+	rmmovl %eax, 1048
 #(ifFalse, __L_30_FI, __T1, -)
-	mrmovl 988, %eax
+	mrmovl 1048, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
 	je L_30_FI
@@ -87,21 +93,21 @@ L_30_FI:
 
 #(ASSIGN, a, __1, -)
 	irmovl 1, %eax
-	rmmovl %eax, 1020
+	rmmovl %eax, 1080
 #(ASSIGN, c, __11, -)
 	irmovl 11, %eax
-	rmmovl %eax, 1028
+	rmmovl %eax, 1088
 #(ASSIGN, __T5, __3, -)
 	irmovl 3, %eax
-	rmmovl %eax, 1004
+	rmmovl %eax, 1064
 #(PUSH, __T5, -, -)
-	mrmovl 1004, %eax
+	mrmovl 1064, %eax
 	pushl %eax
 #(ASSIGN, __T6, __4, -)
 	irmovl 4, %eax
-	rmmovl %eax, 1008
+	rmmovl %eax, 1068
 #(PUSH, __T6, -, -)
-	mrmovl 1008, %eax
+	mrmovl 1068, %eax
 	pushl %eax
 #(PRECALL, myfunc, -, -)
 	pushl %ebp
@@ -113,10 +119,10 @@ L_30_FI:
 	rrmovl %ebp, %esp
 	addl %ecx, %esp
 #(PRINT, a, -, -)
-	mrmovl 1020, %edx
+	mrmovl 1080, %edx
 	rmmovl %edx, 0x00FFFE14
 #(PRINT, c, -, -)
-	mrmovl 1028, %edx
+	mrmovl 1088, %edx
 	rmmovl %edx, 0x00FFFE14
 #(RETURN, __0, -, -)
 	irmovl 0, %edi
@@ -125,9 +131,9 @@ L_30_FI:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x3f8    #Start of string space
+.pos 0x434    #Start of string space
 
-.pos 0x3fc   # Start of global var space 
+.pos 0x438   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000

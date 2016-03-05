@@ -2,7 +2,7 @@
 
  #This function has locals 
 
-#END OF PROG: 1084
+#END OF PROG: 1204
 
 .pos 0
 	irmovl stack, %esp
@@ -31,16 +31,22 @@ main:
 #(LABEL, __L_17_FOR_BEGIN, -, -)
 L_17_FOR_BEGIN:
 
-#(LT, __T2, c, n)
+#(ASSIGN, __T0, c, -)
 	mrmovl -12(%ebp), %eax
-	mrmovl -16(%ebp), %ecx
+	rmmovl %eax, 1224
+#(ASSIGN, __T1, n, -)
+	mrmovl -16(%ebp), %eax
+	rmmovl %eax, 1228
+#(LT, __T2, __T0, __T1)
+	mrmovl 1224, %eax
+	mrmovl 1228, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 1112
+	rmmovl %eax, 1232
 #(ifTrue, __L_21_TRUE, __T2, -)
 	jl L_21_TRUE
 #(ASSIGN, __T2, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 1112
+	rmmovl %eax, 1232
 #(GOTO, __L_21_DONE, -, -)
 	jmp L_21_DONE
 #(LABEL, __L_21_TRUE, -, -)
@@ -48,25 +54,31 @@ L_21_TRUE:
 
 #(ASSIGN, __T2, __1, -)
 	irmovl 1, %eax
-	rmmovl %eax, 1112
+	rmmovl %eax, 1232
 #(LABEL, __L_21_DONE, -, -)
 L_21_DONE:
 
 #(ifFalse, __L_17_FOR_END, __T2, -)
-	mrmovl 1112, %eax
+	mrmovl 1232, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
 	je L_17_FOR_END
-#(LTEQ, __T6, c, __1)
+#(ASSIGN, __T4, c, -)
 	mrmovl -12(%ebp), %eax
-	irmovl 1, %ecx
+	rmmovl %eax, 1240
+#(ASSIGN, __T5, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 1244
+#(LTEQ, __T6, __T4, __T5)
+	mrmovl 1240, %eax
+	mrmovl 1244, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 1128
+	rmmovl %eax, 1248
 #(ifTrue, __L_30_TRUE, __T6, -)
 	jle L_30_TRUE
 #(ASSIGN, __T6, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 1128
+	rmmovl %eax, 1248
 #(GOTO, __L_30_DONE, -, -)
 	jmp L_30_DONE
 #(LABEL, __L_30_TRUE, -, -)
@@ -74,15 +86,15 @@ L_30_TRUE:
 
 #(ASSIGN, __T6, __1, -)
 	irmovl 1, %eax
-	rmmovl %eax, 1128
+	rmmovl %eax, 1248
 #(LABEL, __L_30_DONE, -, -)
 L_30_DONE:
 
 #(ASSIGN, __T3, __T6, -)
-	mrmovl 1128, %eax
-	rmmovl %eax, 1116
+	mrmovl 1248, %eax
+	rmmovl %eax, 1236
 #(ifFalse, __L_29_ELSE, __T3, -)
-	mrmovl 1116, %eax
+	mrmovl 1236, %eax
 	irmovl 0, %ecx
 	subl %ecx, %eax
 	je L_29_ELSE
@@ -98,10 +110,10 @@ L_29_ELSE:
 	mrmovl -24(%ebp), %eax
 	mrmovl -8(%ebp), %ecx
 	addl %ecx, %eax
-	rmmovl %eax, 1132
+	rmmovl %eax, 1252
 
 #(ASSIGN, next, __T7, -)
-	mrmovl 1132, %eax
+	mrmovl 1252, %eax
 	rmmovl %eax, -20(%ebp)
 #(ASSIGN, first, second, -)
 	mrmovl -8(%ebp), %eax
@@ -115,7 +127,7 @@ L_29_FI:
 #(PRINT, next, -, -)
 	mrmovl -20(%ebp), %edx
 	rmmovl %edx, 0x00FFFE14
-#(INC, __T8, c, -)
+#(INC, c, -, -)
 	mrmovl -12(%ebp), %eax
 	irmovl 1, %ecx
 	addl %ecx, %eax
@@ -132,8 +144,8 @@ L_17_FOR_END:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x478    #Start of string space
+.pos 0x4f0    #Start of string space
 
-.pos 0x47c   # Start of global var space 
+.pos 0x4f4   # Start of global var space 
 .pos 0x0000FFFC
 stack:

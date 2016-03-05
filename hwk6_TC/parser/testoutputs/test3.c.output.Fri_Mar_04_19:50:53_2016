@@ -1,6 +1,6 @@
 Result of test done to parser.
 
-test3.c BEGIN.
+test3.c.c BEGIN.
 ===========================================================
 
 line: 18 | error: use of undeclared identifier b

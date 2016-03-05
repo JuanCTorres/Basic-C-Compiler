@@ -1,0 +1,30 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 92
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(ASSIGN, a, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 120
+#(LABEL, main, -, -)
+main:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(ASSIGN, a, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, -8(%ebp)
+.pos 0x74    #Start of string space
+
+.pos 0x78   # Start of global var space 
+	.long 0x00000000
+.pos 0x0000FFFC
+stack:

@@ -287,6 +287,42 @@ printf "test.error.c finished.\n" >>"${file}"
 
 
 
+file="./testoutputs/simple.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "simple.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser simple.c < ./testinputs/simple.c >>"${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/simple.c.ys
+fi
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "simple.c finished.\n" >>"${file}"
+
+
+
+
+file="./testoutputs/global.c.output.`date +"%a_%b_%d_%T_%Y"`"
+printf "Result of test done to parser.\n\n" >>"${file}"
+
+printf "global.c BEGIN.\n" >>"${file}"
+printf "===========================================================\n\n" >> "${file}"
+
+./parser global.c < ./testinputs/global.c >>"${file}" 2>&1
+
+if [ $? -eq 0 ] 
+then
+  yas ./ys/global.c.ys
+fi
+
+printf "\n\n===========================================================\n" >> "${file}"
+printf "global.c finished.\n" >>"${file}"
+
+
 
 
 make clean

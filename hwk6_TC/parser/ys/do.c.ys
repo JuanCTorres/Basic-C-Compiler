@@ -1,0 +1,76 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 484
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 20, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(ASSIGN, a, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, -8(%ebp)
+#(LABEL, __L_9_DO_WHILE_BEGIN, -, -)
+L_9_DO_WHILE_BEGIN:
+
+#(INC, a, -, -)
+	mrmovl -12(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -12(%ebp)
+#(ASSIGN, b, a, -)
+	mrmovl -12(%ebp), %eax
+	rmmovl %eax, -16(%ebp)
+#(ASSIGN, __T1, a, -)
+	mrmovl -8(%ebp), %eax
+	rmmovl %eax, 508
+#(ASSIGN, __T2, __10, -)
+	irmovl 10, %eax
+	rmmovl %eax, 512
+#(LT, __T3, __T1, __T2)
+	mrmovl 508, %eax
+	mrmovl 512, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 516
+#(ifTrue, __L_10_TRUE, __T3, -)
+	jl L_10_TRUE
+#(ASSIGN, __T3, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 516
+#(GOTO, __L_10_DONE, -, -)
+	jmp L_10_DONE
+#(LABEL, __L_10_TRUE, -, -)
+L_10_TRUE:
+
+#(ASSIGN, __T3, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 516
+#(LABEL, __L_10_DONE, -, -)
+L_10_DONE:
+
+#(ifTrue, __L_9_DO_WHILE_BEGIN, __T3, -)
+	mrmovl 516, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_9_DO_WHILE_BEGIN
+#(RETURN, __void, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x20c    #Start of string space
+
+.pos 0x210   # Start of global var space 
+.pos 0x0000FFFC
+stack:

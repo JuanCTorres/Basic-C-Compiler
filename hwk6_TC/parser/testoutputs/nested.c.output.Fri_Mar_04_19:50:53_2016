@@ -1,0 +1,129 @@
+Result of test done to parser.
+
+nested.c.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  = (uid: N1) inferred ret type: INT_TYPE(type: INT_TYPE) 
+    ID (uid: N2) inferred ret type: INT_TYPEa [scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    INT_LITERAL (uid: N3) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N4) inferred ret type: VOID_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 2 (type: VOID_TYPE) 
+    FORMAL_PARAMS (uid: N5) inferred ret type: ROOT
+    SEQ (uid: N6) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N7) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N8) inferred ret type: ROOT
+        FOR (uid: N9) inferred ret type: ROOT
+          = (uid: N10) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N11) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            INT_LITERAL (uid: N12) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          < (uid: N13) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N14) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            INT_LITERAL (uid: N15) inferred ret type: INT_TYPE10(type: INT_TYPE) 
+          ++ (uid: N16) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N17) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+          SEQ (uid: N18) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N19) inferred ret type: ROOT
+              = (uid: N20) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                ID (uid: N21) inferred ret type: INT_TYPEb [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+                ID (uid: N22) inferred ret type: INT_TYPEa [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+            STATEMENT_LIST (uid: N23) inferred ret type: ROOT
+              IF_ELSE_STMT (uid: N24) inferred ret type: ROOT
+                == (uid: N25) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N26) inferred ret type: INT_TYPEa [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+                  ID (uid: N27) inferred ret type: INT_TYPEb [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+                SEQ (uid: N28) inferred ret type: ROOT
+                  LOCAL_DECLARATIONS (uid: N29) inferred ret type: ROOT
+                    = (uid: N30) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N31) inferred ret type: INT_TYPEc [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      + (uid: N32) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                        ID (uid: N33) inferred ret type: INT_TYPEa [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                        ID (uid: N34) inferred ret type: INT_TYPEb [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                  STATEMENT_LIST (uid: N35) inferred ret type: ROOT
+                    PRINT (uid: N36) inferred ret type: ROOT
+                      STRING_LITERAL (uid: N37) inferred ret type: ROOTyes 
+                SEQ (uid: N38) inferred ret type: ROOT
+                  LOCAL_DECLARATIONS (uid: N39) inferred ret type: ROOT
+                    = (uid: N40) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N41) inferred ret type: INT_TYPEc [scope (3,1) <- (2,0)] declared at line 9 (type: INT_TYPE) 
+                      - (uid: N42) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                        ID (uid: N43) inferred ret type: INT_TYPEa [scope (3,1) <- (2,0)] declared at line 9 (type: INT_TYPE) 
+                        ID (uid: N44) inferred ret type: INT_TYPEb [scope (3,1) <- (2,0)] declared at line 9 (type: INT_TYPE) 
+                  STATEMENT_LIST (uid: N45) inferred ret type: ROOT
+                    PRINT (uid: N46) inferred ret type: ROOT
+                      STRING_LITERAL (uid: N47) inferred ret type: ROOTno 
+        RETURN (uid: N0) inferred ret type: VOID_TYPE[scope (0,0) <- (0,0)]return to main at line 2 (type: VOID_Tleft temp is 4
+0
+YPE) 
+          VOID_TYPE (uid: N0) inferred ret type: ROOT
+(0-0) contains:
+  STRING yes
+  VAR_INT __void (offset: 0 or addr: 0)
+  VAR_INT __10 (offset: 0 or addr: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+  STRING no
+There are 39 entries
+0: (ASSIGN, a, __0, -)
+1: (LABEL, main, -, -)
+2: (ASSIGN, a, __0, -)
+3: (LABEL, __L_9_FOR_BEGIN, -, -)
+4: (ASSIGN, __T0, a, -)
+5: (ASSIGN, __T1, __10, -)
+6: (LT, __T2, __T0, __T1)
+7: (ifTrue, __L_13_TRUE, __T2, -)
+8: (ASSIGN, __T2, __0, -)
+9: (GOTO, __L_13_DONE, -, -)
+10: (LABEL, __L_13_TRUE, -, -)
+11: (ASSIGN, __T2, __1, -)
+12: (LABEL, __L_13_DONE, -, -)
+13: (ifFalse, __L_9_FOR_END, __T2, -)
+14: (ASSIGN, b, a, -)
+15: (ASSIGN, __T4, a, -)
+16: (ASSIGN, __T5, b, -)
+17: (EQ, __T6, __T4, __T5)
+18: (ifTrue, __L_25_TRUE, __T6, -)
+19: (ASSIGN, __T6, __0, -)
+20: (GOTO, __L_25_DONE, -, -)
+21: (LABEL, __L_25_TRUE, -, -)
+22: (ASSIGN, __T6, __1, -)
+23: (LABEL, __L_25_DONE, -, -)
+24: (ASSIGN, __T3, __T6, -)
+25: (ifFalse, __L_24_ELSE, __T3, -)
+26: (ADD, __T7, a, b)
+27: (ASSIGN, c, __T7, -)
+28: (PRINT, yes, -, -)
+29: (GOTO, __L_24_FI, -, -)
+30: (LABEL, __L_24_ELSE, -, -)
+31: (SUB, __T8, a, b)
+32: (ASSIGN, c, __T8, -)
+33: (PRINT, no, -, -)
+34: (LABEL, __L_24_FI, -, -)
+35: (INC, a, -, -)
+36: (GOTO, __L_9_FOR_BEGIN, -, -)
+37: (LABEL, __L_9_FOR_END, -, -)
+38: (RETURN, __void, -, -)
+in var int 
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_VOID main (0 params:)space needed: 0
+  VAR_INT a (offset: 0 or addr: 1248)
+  (1-0) contains:
+    (2-0) contains:
+      VAR_INT a (offset: 0 or addr: 0)
+      VAR_INT b (offset: 0 or addr: 0)
+      (3-0) contains:
+        VAR_INT a (offset: 0 or addr: 0)
+        VAR_INT b (offset: 0 or addr: 0)
+        VAR_INT c (offset: 0 or addr: 0)
+      (3-1) contains:
+        VAR_INT a (offset: 0 or addr: 0)
+        VAR_INT b (offset: 0 or addr: 0)
+        VAR_INT c (offset: 0 or addr: 0)
+
+
+===========================================================
+nested.c finished.

@@ -1,0 +1,15 @@
+Result of test done to parser.
+
+op.c.c BEGIN.
+===========================================================
+
+line: 3 | error: use of undeclared function foo
+line: 3 | error: redefinition of identifier b
+line: 4 | error: redefinition of identifier a
+line: 4 | error: redefinition of identifier b
+
+WARNING: There were symtab creation errors. Halting!
+
+
+===========================================================
+op.c finished.

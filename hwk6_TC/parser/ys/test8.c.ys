@@ -2,7 +2,7 @@
 
  #This function has locals 
 
-#END OF PROG: 512
+#END OF PROG: 604
 
 .pos 0
 	irmovl stack, %esp
@@ -13,74 +13,88 @@
 #(LABEL, main, -, -)
 main:
 
-	irmovl 56, %ecx
+	irmovl 68, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
-#(MULT, __T0, __0, __4)
-	irmovl 0, %eax
-	irmovl 8, %ecx
+#(ASSIGN, b, __2, -)
+	irmovl 2, %eax
+	rmmovl %eax, -56(%ebp)
+#(ASSIGN, c, __3, -)
+	irmovl 3, %eax
+	rmmovl %eax, -60(%ebp)
+#(ASSIGN, d, __2, -)
+	irmovl 2, %eax
+	rmmovl %eax, -64(%ebp)
+#(MULT, __T0, __4, __4)
+	irmovl 4, %eax
+	irmovl 4, %ecx
 	mull %ecx, %eax
-	rmmovl %eax, 532
+	rmmovl %eax, 624
 
 #(ADDR, __T1, a, -)
 	irmovl -8, %eax
 	addl %ebp, %eax
-	rmmovl %eax, 536
+	rmmovl %eax, 628
 #(SUB, __T2, __T1, __T0)
-	mrmovl 536, %eax
-	mrmovl 532, %ecx
+	mrmovl 628, %eax
+	mrmovl 624, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 540
+	rmmovl %eax, 632
 
-#(ASSIGN, __T2, __7, -)
-	irmovl 7, %eax
-	mrmovl 540, %ecx
-	rmmovl %eax, (%ecx)#(MULT, __T4, __1, __4)
-	irmovl 1, %eax
-	irmovl 8, %ecx
+#(ASSIGN, __T2, __2, -)
+	irmovl 2, %eax
+	mrmovl 632, %ecx
+	rmmovl %eax, (%ecx)#(MULT, __T5, __4, __4)
+	irmovl 4, %eax
+	irmovl 4, %ecx
 	mull %ecx, %eax
-	rmmovl %eax, 548
+	rmmovl %eax, 644
 
-#(ADDR, __T5, a, -)
+#(ADDR, __T6, a, -)
 	irmovl -8, %eax
 	addl %ebp, %eax
-	rmmovl %eax, 552
-#(SUB, __T6, __T5, __T4)
-	mrmovl 552, %eax
-	mrmovl 548, %ecx
+	rmmovl %eax, 648
+#(SUB, __T7, __T6, __T5)
+	mrmovl 648, %eax
+	mrmovl 644, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 556
+	rmmovl %eax, 652
 
-#(ASSIGN, __T6, __2, -)
-	irmovl 2, %eax
-	mrmovl 556, %ecx
-	rmmovl %eax, (%ecx)#(MULT, __T8, __2, __4)
-	irmovl 2, %eax
-	irmovl 8, %ecx
+#(DEREF, __T4, __T7, -)
+	mrmovl 652, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 640
+#(MULT, __T10, __4, __4)
+	irmovl 4, %eax
+	irmovl 4, %ecx
 	mull %ecx, %eax
-	rmmovl %eax, 564
+	rmmovl %eax, 664
 
-#(ADDR, __T9, a, -)
+#(ADDR, __T11, a, -)
 	irmovl -8, %eax
 	addl %ebp, %eax
-	rmmovl %eax, 568
-#(SUB, __T10, __T9, __T8)
-	mrmovl 568, %eax
-	mrmovl 564, %ecx
+	rmmovl %eax, 668
+#(SUB, __T12, __T11, __T10)
+	mrmovl 668, %eax
+	mrmovl 664, %ecx
 	subl %ecx, %eax
-	rmmovl %eax, 572
+	rmmovl %eax, 672
 
-#(ASSIGN, __T10, __3, -)
-	irmovl 3, %eax
-	mrmovl 572, %ecx
-	rmmovl %eax, (%ecx)#(PRINT, a, -, -)
-	mrmovl -8(%ebp), %edx
-	rmmovl %edx, 0x00FFFE14
-#(PRINT, a, -, -)
-	mrmovl -8(%ebp), %edx
-	rmmovl %edx, 0x00FFFE14
-#(PRINT, a, -, -)
-	mrmovl -8(%ebp), %edx
+#(DEREF, __T9, __T12, -)
+	mrmovl 672, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 660
+#(ADD, __T14, __T9, __3)
+	mrmovl 660, %eax
+	irmovl 3, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 680
+
+#(ASSIGN, d, __T14, -)
+	mrmovl 680, %eax
+	rmmovl %eax, -64(%ebp)
+#(PRINT, d, -, -)
+	mrmovl -64(%ebp), %edx
 	rmmovl %edx, 0x00FFFE14
 #(RETURN, __0, -, -)
 	irmovl 0, %edi
@@ -89,9 +103,9 @@ main:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x248    #Start of string space
+.pos 0x2b0    #Start of string space
 
-.pos 0x24c   # Start of global var space 
+.pos 0x2b4   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000

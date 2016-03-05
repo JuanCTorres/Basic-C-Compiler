@@ -1,4 +1,12 @@
-#END OF PROG: 92
+
+
+ #This function has locals 
+
+
+
+ #This function has locals 
+
+#END OF PROG: 784
 
 .pos 0
 	irmovl stack, %esp
@@ -12,12 +20,112 @@ this_func:
 	irmovl 0, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
+#(LABEL, some_func, -, -)
+some_func:
+
+	irmovl 20, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#(ASSIGN, a, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, -8(%ebp)
+#(MULT, __T0, a, __4)
+	mrmovl -8(%ebp), %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 804
+
+#(ADDR, __T1, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 808
+#(SUB, __T2, __T1, __T0)
+	mrmovl 808, %eax
+	mrmovl 804, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 812
+
+#(ASSIGN, __T2, __300, -)
+	irmovl 300, %eax
+	mrmovl 812, %ecx
+	rmmovl %eax, (%ecx)#(MULT, __T5, __1, __4)
+	irmovl 1, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 824
+
+#(ADDR, __T6, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 828
+#(SUB, __T7, __T6, __T5)
+	mrmovl 828, %eax
+	mrmovl 824, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 832
+
+#(ASSIGN, __T7, __300, -)
+	irmovl 300, %eax
+	mrmovl 832, %ecx
+	rmmovl %eax, (%ecx)#(ASSIGN, __T4, __T7, -)
+	mrmovl 832, %eax
+	rmmovl %eax, 820
+#(ifFalse, __L_20_FI, __T4, -)
+	mrmovl 820, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_20_FI
+#(LABEL, __L_20_FI, -, -)
+L_20_FI:
+
+#(MULT, __T10, __1, __4)
+	irmovl 1, %eax
+	irmovl 8, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 844
+
+#(ADDR, __T11, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 848
+#(SUB, __T12, __T11, __T10)
+	mrmovl 848, %eax
+	mrmovl 844, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 852
+
+#(DEREF, __T9, __T12, -)
+	mrmovl 852, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 840
+#(RETURN, __T9, -, -)
+	mrmovl 840, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
 #(LABEL, main, -, -)
 main:
 
-	irmovl 0, %ecx
+	irmovl 12, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
+#(PRECALL, some_func, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, some_func, -, -)
+	call some_func
+#(POSTCALL, some_func, -, -)
+	irmovl 24, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(ASSIGN, b, __RET_INT, -)
+	rrmovl %edi, %eax
+	rmmovl %eax, -8(%ebp)
+#(PRINT, b, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
 #(RETURN, __0, -, -)
 	irmovl 0, %edi
 	rrmovl %ebp, %esp
@@ -25,8 +133,8 @@ main:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x74    #Start of string space
+.pos 0x360    #Start of string space
 
-.pos 0x78   # Start of global var space 
+.pos 0x364   # Start of global var space 
 .pos 0x0000FFFC
 stack:

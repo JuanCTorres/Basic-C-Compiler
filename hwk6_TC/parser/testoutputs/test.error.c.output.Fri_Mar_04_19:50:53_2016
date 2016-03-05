@@ -1,6 +1,6 @@
 Result of test done to parser.
 
-test.error.c BEGIN.
+test.error.c.c BEGIN.
 ===========================================================
 
 syntax error at line 11	 yytext = 'hello\n'
