@@ -266,7 +266,7 @@ L_97_FOR_END:
 	mrmovl -16(%ebp), %edx
 	rmmovl %edx, 0x00FFFE14
 #(PRINT, diz_gloval_var, -, -)
-	mrmovl 3636, %edx
+	mrmovl 3648, %edx
 	rmmovl %edx, 0x00FFFE14
 #(ADD, __T18, b, __3)
 	mrmovl -12(%ebp), %eax
@@ -442,21 +442,35 @@ L_143_DONE:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0xe1c    #Start of string space
+.pos 0xe1c    #qwerty
 
 	.byte 	0x61
+
 	.byte 	0x6c
+
 	.byte 	0x79
+
 	.byte 	0x67
+
 	.byte 	0x6c
+
 	.byte 	0x6a
+
 	.byte 	0x6b
+
 	.byte 	0x67
+
 	.byte 	0x6c
+
 	.byte 	0x6b
+
 	.byte 	0x75
+
 	.byte 	0x67
-.pos 0xe30   # Start of global var space 
+
+	.byte 	0x0
+
+.pos 0xe3c   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000

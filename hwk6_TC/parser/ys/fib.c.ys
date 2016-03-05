@@ -201,7 +201,6 @@ L_32_FOR_END:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x66c    #Start of string space
 
 .pos 0x670   # Start of global var space 
 	.long 0x00000000

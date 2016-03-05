@@ -266,7 +266,7 @@
   0x0307:5025f0ffffff  | 	mrmovl -16(%ebp), %edx
   0x030d:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
                        | #(PRINT, diz_gloval_var, -, -)
-  0x0313:502f340e0000  | 	mrmovl 3636, %edx
+  0x0313:502f400e0000  | 	mrmovl 3648, %edx
   0x0319:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
                        | #(ADD, __T18, b, __3)
   0x031f:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
@@ -442,23 +442,37 @@
   0x0556:30f1f8ffffff  | 	irmovl -8, %ecx
   0x055c:6014          | 	addl %ecx, %esp
   0x055e:90            | 	ret
-  0x0e1c:              | .pos 0xe1c    #Start of string space
+  0x0e1c:              | .pos 0xe1c    #qwerty
                        | 
   0x0e1c:61            | 	.byte 	0x61
+                       | 
   0x0e1d:6c            | 	.byte 	0x6c
+                       | 
   0x0e1e:79            | 	.byte 	0x79
+                       | 
   0x0e1f:67            | 	.byte 	0x67
+                       | 
   0x0e20:6c            | 	.byte 	0x6c
+                       | 
   0x0e21:6a            | 	.byte 	0x6a
+                       | 
   0x0e22:6b            | 	.byte 	0x6b
+                       | 
   0x0e23:67            | 	.byte 	0x67
+                       | 
   0x0e24:6c            | 	.byte 	0x6c
+                       | 
   0x0e25:6b            | 	.byte 	0x6b
+                       | 
   0x0e26:75            | 	.byte 	0x75
+                       | 
   0x0e27:67            | 	.byte 	0x67
-  0x0e30:              | .pos 0xe30   # Start of global var space 
-  0x0e30:00000000      | 	.long 0x00000000
-  0x0e34:00000000      | 	.long 0x00000000
-  0x0e38:00000000      | 	.long 0x00000000
+                       | 
+  0x0e28:00            | 	.byte 	0x0
+                       | 
+  0x0e3c:              | .pos 0xe3c   # Start of global var space 
+  0x0e3c:00000000      | 	.long 0x00000000
+  0x0e40:00000000      | 	.long 0x00000000
+  0x0e44:00000000      | 	.long 0x00000000
   0xfffc:              | .pos 0x0000FFFC
   0xfffc:              | stack:

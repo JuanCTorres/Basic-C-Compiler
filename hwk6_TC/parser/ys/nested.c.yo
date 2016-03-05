@@ -8,7 +8,7 @@
   0x0014:              | .pos 0x14
                        | #(ASSIGN, a, __0, -)
   0x0014:30f000000000  | 	irmovl 0, %eax
-  0x001a:400fe0040000  | 	rmmovl %eax, 1248
+  0x001a:400fea040000  | 	rmmovl %eax, 1258
                        | #(LABEL, main, -, -)
   0x0020:              | main:
                        | 
@@ -17,12 +17,12 @@
                        | #NUM PARAMS: 0
                        | #(ASSIGN, a, __0, -)
   0x0028:30f000000000  | 	irmovl 0, %eax
-  0x002e:400fe0040000  | 	rmmovl %eax, 1248
+  0x002e:400fea040000  | 	rmmovl %eax, 1258
                        | #(LABEL, __L_9_FOR_BEGIN, -, -)
   0x0034:              | L_9_FOR_BEGIN:
                        | 
                        | #(ASSIGN, __T0, a, -)
-  0x0034:500fe0040000  | 	mrmovl 1248, %eax
+  0x0034:500fea040000  | 	mrmovl 1258, %eax
   0x003a:400fa8040000  | 	rmmovl %eax, 1192
                        | #(ASSIGN, __T1, __10, -)
   0x0040:30f00a000000  | 	irmovl 10, %eax
@@ -118,16 +118,16 @@
   0x0153:500fc8040000  | 	mrmovl 1224, %eax
   0x0159:400500000000  | 	rmmovl %eax, 0(%ebp)
                        | #(PRINT, no, -, -)
-  0x015f:30f2d8040000  | 	irmovl 1240, %edx
+  0x015f:30f2de040000  | 	irmovl 1246, %edx
   0x0165:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
                        | #(LABEL, __L_24_FI, -, -)
   0x016b:              | L_24_FI:
                        | 
                        | #(INC, a, -, -)
-  0x016b:500fe0040000  | 	mrmovl 1248, %eax
+  0x016b:500fea040000  | 	mrmovl 1258, %eax
   0x0171:30f101000000  | 	irmovl 1, %ecx
   0x0177:6010          | 	addl %ecx, %eax
-  0x0179:400fe0040000  | 	rmmovl %eax, 1248
+  0x0179:400fea040000  | 	rmmovl %eax, 1258
                        | #(GOTO, __L_9_FOR_BEGIN, -, -)
   0x017f:7034000000    | 	jmp L_9_FOR_BEGIN
                        | #(LABEL, __L_9_FOR_END, -, -)
@@ -140,14 +140,24 @@
   0x018e:30f1f8ffffff  | 	irmovl -8, %ecx
   0x0194:6014          | 	addl %ecx, %esp
   0x0196:90            | 	ret
-  0x04d4:              | .pos 0x4d4    #Start of string space
+  0x04d4:              | .pos 0x4d4    #qwerty
                        | 
   0x04d4:79            | 	.byte 	0x79
+                       | 
   0x04d5:65            | 	.byte 	0x65
+                       | 
   0x04d6:73            | 	.byte 	0x73
-  0x04d7:6e            | 	.byte 	0x6e
-  0x04d8:6f            | 	.byte 	0x6f
-  0x04e0:              | .pos 0x4e0   # Start of global var space 
-  0x04e0:00000000      | 	.long 0x00000000
+                       | 
+  0x04d7:00            | 	.byte 	0x0
+  0x04de:              | .pos 0x4de    #qwerty
+                       | 
+  0x04de:6e            | 	.byte 	0x6e
+                       | 
+  0x04df:6f            | 	.byte 	0x6f
+                       | 
+  0x04e0:00            | 	.byte 	0x0
+                       | 
+  0x04ea:              | .pos 0x4ea   # Start of global var space 
+  0x04ea:00000000      | 	.long 0x00000000
   0xfffc:              | .pos 0x0000FFFC
   0xfffc:              | stack:

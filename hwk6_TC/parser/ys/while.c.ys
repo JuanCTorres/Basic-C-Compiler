@@ -74,7 +74,6 @@ L_9_WHILE_END:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x248    #Start of string space
 
 .pos 0x24c   # Start of global var space 
 .pos 0x0000FFFC

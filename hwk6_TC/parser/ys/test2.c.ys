@@ -199,7 +199,7 @@ L_61_DONE:
 L_55_ELSE:
 
 #(PRINT, not\n, -, -)
-	irmovl 2956, %edx
+	irmovl 2978, %edx
 	rmmovl %edx, 0x00FFFE10
 #(LABEL, __L_55_FI, -, -)
 L_55_FI:
@@ -263,7 +263,7 @@ L_100_DONE:
 	mrmovl -8(%ebp), %eax
 	rmmovl %eax, -32(%ebp)
 #(PRINT, in for loop\n, -, -)
-	irmovl 2940, %edx
+	irmovl 2948, %edx
 	rmmovl %edx, 0x00FFFE10
 #(INC, t, -, -)
 	mrmovl -16(%ebp), %eax
@@ -369,29 +369,58 @@ L_48_FI:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0xb74    #Start of string space
+.pos 0xb74    #qwerty
 
 	.byte 	0x4c
+
 	.byte 	0x4f
+
 	.byte 	0x4c
+
 	.byte 	0x21
+
 	.byte 	0xa
+
+	.byte 	0x0
+.pos 0xb84    #qwerty
+
 	.byte 	0x69
+
 	.byte 	0x6e
+
 	.byte 	0x20
+
 	.byte 	0x66
+
 	.byte 	0x6f
+
 	.byte 	0x72
+
 	.byte 	0x20
+
 	.byte 	0x6c
+
 	.byte 	0x6f
+
 	.byte 	0x6f
+
 	.byte 	0x70
+
 	.byte 	0xa
+
+	.byte 	0x0
+.pos 0xba2    #qwerty
+
 	.byte 	0x6e
+
 	.byte 	0x6f
+
 	.byte 	0x74
+
 	.byte 	0xa
-.pos 0xb98   # Start of global var space 
+
+	.byte 	0x0
+
+.pos 0xbb4   # Start of global var space 
 .pos 0x0000FFFC
 stack:

@@ -90,7 +90,6 @@ L_9_FOR_END:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x2b0    #Start of string space
 
 .pos 0x2b4   # Start of global var space 
 .pos 0x0000FFFC

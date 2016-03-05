@@ -69,7 +69,6 @@ L_10_DONE:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x20c    #Start of string space
 
 .pos 0x210   # Start of global var space 
 .pos 0x0000FFFC

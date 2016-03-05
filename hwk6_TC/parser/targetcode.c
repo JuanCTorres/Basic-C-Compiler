@@ -577,11 +577,17 @@ void calculate_string_addrs(symhashtable_t* hashtable){
 			if(node->type == STRING_T){
 				// Allocate memory for it
 				node->addr = str_offset + endoftemp;
+				if(node->addr %2 ==1){
+					// node->addr++;
+				}
 				str_offset += round_str_addr(node->name);
 			}
 		}
 	}
+
 	endofstr = endoftemp + str_offset + 4;
+
+	// endofstr++;
 }
 
 
@@ -592,24 +598,32 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 
 	assert(ofile != NULL);
 
-	fprintf(ofile, ".pos 0x%x    #Start of string space\n", endoftemp);
+	//fprintf(ofile, ".pos 0x%x    #Start of string space\n", endoftemp);
 
 	// Traverse the hashtable looking for strings (we have to put them in
 	// memory).
 	for(int j = 0; j < HASHSIZE; j++ ) {
+
+
+
     for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
 			if(node->type == STRING_T){
 				// Allocate memory for it
-
+				fprintf(ofile, ".pos 0x%x    #qwerty\n", node->addr);
 				node->name = unescape(node->name);
+				// node->name[0] = '\0';
+				// node->name[strlen(node->name)-1] = '\0';
 
 				int counter = 0;
 				int len = strlen(node->name);
+
 				for(int counter = 0; counter < len; counter++){
-					fprintf(ofile, "\n\t.byte \t0x");
-					fprintf(ofile, "%x", node->name[counter]);
+					fprintf(ofile, "\n\t.byte \t");
+					fprintf(ofile, "0x%x\n", node->name[counter]);
 				}
+				fprintf(ofile, "\n\t.byte \t");
+					fprintf(ofile, "0x%x\n", '\0');
 			}
 		}
   }
@@ -620,8 +634,8 @@ void put_strings_in_mem(symhashtable_t* hashtable){
 /* Takes a str, and returns the amount of bytes it will need in memory (a multiple
    of 4), since addresses must be aligned in 4-byte boundaries. */
 int round_str_addr(char* str){
-	int len = strlen(str);
-	return len + 4 - (len % 4);
+	int len = (strlen(str)+1)*2;
+	return len + 2- (len % 2);
 }
 
 

@@ -76,7 +76,6 @@ main:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x1e8    #Start of string space
 
 .pos 0x1ec   # Start of global var space 
 .pos 0x0000FFFC

@@ -15,7 +15,6 @@ main:
 	irmovl 0, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
-.pos 0x58    #Start of string space
 
 .pos 0x5c   # Start of global var space 
 	.long 0x00000000

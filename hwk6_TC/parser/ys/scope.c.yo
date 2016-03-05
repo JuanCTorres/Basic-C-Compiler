@@ -67,7 +67,6 @@
   0x00bc:30f1f8ffffff  | 	irmovl -8, %ecx
   0x00c2:6014          | 	addl %ecx, %esp
   0x00c4:90            | 	ret
-  0x01e0:              | .pos 0x1e0    #Start of string space
                        | 
   0x01e4:              | .pos 0x1e4   # Start of global var space 
   0x01e4:00000000      | 	.long 0x00000000

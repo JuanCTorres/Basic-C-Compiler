@@ -148,7 +148,6 @@ L_22_FI:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x514    #Start of string space
 
 .pos 0x518   # Start of global var space 
 .pos 0x0000FFFC

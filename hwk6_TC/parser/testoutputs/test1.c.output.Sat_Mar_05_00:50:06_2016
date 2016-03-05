@@ -508,9 +508,9 @@ in var int
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_INT main (0 params:)space needed: 172
-  VAR_INT a (offset: 0 or addr: 6272)
-  VAR_INT b (offset: 0 or addr: 6276)
-  VAR_INT c (offset: 0 or addr: 6280)
+  VAR_INT a (offset: 0 or addr: 6288)
+  VAR_INT b (offset: 0 or addr: 6292)
+  VAR_INT c (offset: 0 or addr: 6296)
   (1-0) contains:
     VAR_ARRAY_INT dd (length: 5, offset: -8 or addr: 0)
     VAR_INT a (offset: -28 or addr: 0)

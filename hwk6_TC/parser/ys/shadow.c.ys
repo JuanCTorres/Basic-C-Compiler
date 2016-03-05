@@ -22,7 +22,6 @@ main:
 #(ASSIGN, a, __1, -)
 	irmovl 1, %eax
 	rmmovl %eax, -8(%ebp)
-.pos 0x74    #Start of string space
 
 .pos 0x78   # Start of global var space 
 	.long 0x00000000

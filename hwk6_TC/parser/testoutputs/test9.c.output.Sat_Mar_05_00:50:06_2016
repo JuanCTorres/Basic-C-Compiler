@@ -314,11 +314,11 @@ in var int
 
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
-  VAR_INT diz_thing (offset: 0 or addr: 3632)
+  VAR_INT diz_thing (offset: 0 or addr: 3644)
   FUNC_INT main (0 params:)space needed: 24
-  VAR_INT diz_gloval_var (offset: 0 or addr: 3636)
+  VAR_INT diz_gloval_var (offset: 0 or addr: 3648)
   FUNC_VOID my_new_f (0 params:)space needed: 12
-  VAR_INT diz_yolo (offset: 0 or addr: 3640)
+  VAR_INT diz_yolo (offset: 0 or addr: 3652)
   FUNC_VOID my_func (2 params: VAR_INT  VAR_INT )space needed: 32
   (1-0) contains:
     VAR_INT a (offset: -8 or addr: 0)

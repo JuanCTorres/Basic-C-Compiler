@@ -15,7 +15,6 @@
   0x0020:30f100000000  | 	irmovl 0, %ecx
   0x0026:6114          | 	subl %ecx, %esp
                        | #NUM PARAMS: 0
-  0x0058:              | .pos 0x58    #Start of string space
                        | 
   0x005c:              | .pos 0x5c   # Start of global var space 
   0x005c:00000000      | 	.long 0x00000000

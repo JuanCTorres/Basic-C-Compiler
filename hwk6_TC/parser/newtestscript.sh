@@ -25,9 +25,11 @@ do
 
 	./parser ${fileArray[$i]} < ./testinputs/${fileArray[$i]} >> "${file}" 2>&1
 
-	if [ $? -eq 0 ] 
+	if [ $? -eq 0 ];
 	then
 	  yas ./ys/${fileArray[$i]}.ys
+	 else
+	 	printf "\t${fileArray[$i]} generated an error\n"
 	fi
 
 	printf "\n\n===========================================================\n" >> "${file}"

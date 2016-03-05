@@ -7,55 +7,55 @@ nested.c BEGIN.
 
 ROOT (uid: N0) inferred ret type: ROOT
   = (uid: N1) inferred ret type: INT_TYPE(type: INT_TYPE) 
-    ID (uid: N2) inferred ret type: INT_TYPEa [scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    ID (uid: N2) inferred ret type: INT_TYPEa [scope (0,0) <- (0,0)] declared at line 26 (type: INT_TYPE) 
     INT_LITERAL (uid: N3) inferred ret type: INT_TYPE0(type: INT_TYPE) 
-  FUNC_DECLARATION (uid: N4) inferred ret type: VOID_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 2 (type: VOID_TYPE) 
+  FUNC_DECLARATION (uid: N4) inferred ret type: VOID_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 27 (type: VOID_TYPE) 
     FORMAL_PARAMS (uid: N5) inferred ret type: ROOT
     SEQ (uid: N6) inferred ret type: ROOT
       LOCAL_DECLARATIONS (uid: N7) inferred ret type: ROOT
       STATEMENT_LIST (uid: N8) inferred ret type: ROOT
         FOR (uid: N9) inferred ret type: ROOT
           = (uid: N10) inferred ret type: INT_TYPE(type: INT_TYPE) 
-            ID (uid: N11) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            ID (uid: N11) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 26 (type: INT_TYPE) 
             INT_LITERAL (uid: N12) inferred ret type: INT_TYPE0(type: INT_TYPE) 
           < (uid: N13) inferred ret type: INT_TYPE(type: INT_TYPE) 
-            ID (uid: N14) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            ID (uid: N14) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 26 (type: INT_TYPE) 
             INT_LITERAL (uid: N15) inferred ret type: INT_TYPE10(type: INT_TYPE) 
           ++ (uid: N16) inferred ret type: INT_TYPE(type: INT_TYPE) 
-            ID (uid: N17) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            ID (uid: N17) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 26 (type: INT_TYPE) 
           SEQ (uid: N18) inferred ret type: ROOT
             LOCAL_DECLARATIONS (uid: N19) inferred ret type: ROOT
               = (uid: N20) inferred ret type: INT_TYPE(type: INT_TYPE) 
-                ID (uid: N21) inferred ret type: INT_TYPEb [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
-                ID (uid: N22) inferred ret type: INT_TYPEa [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+                ID (uid: N21) inferred ret type: INT_TYPEb [scope (2,0) <- (1,0)] declared at line 29 (type: INT_TYPE) 
+                ID (uid: N22) inferred ret type: INT_TYPEa [scope (2,0) <- (1,0)] declared at line 29 (type: INT_TYPE) 
             STATEMENT_LIST (uid: N23) inferred ret type: ROOT
               IF_ELSE_STMT (uid: N24) inferred ret type: ROOT
                 == (uid: N25) inferred ret type: INT_TYPE(type: INT_TYPE) 
-                  ID (uid: N26) inferred ret type: INT_TYPEa [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
-                  ID (uid: N27) inferred ret type: INT_TYPEb [scope (2,0) <- (1,0)] declared at line 4 (type: INT_TYPE) 
+                  ID (uid: N26) inferred ret type: INT_TYPEa [scope (2,0) <- (1,0)] declared at line 29 (type: INT_TYPE) 
+                  ID (uid: N27) inferred ret type: INT_TYPEb [scope (2,0) <- (1,0)] declared at line 29 (type: INT_TYPE) 
                 SEQ (uid: N28) inferred ret type: ROOT
                   LOCAL_DECLARATIONS (uid: N29) inferred ret type: ROOT
                     = (uid: N30) inferred ret type: INT_TYPE(type: INT_TYPE) 
-                      ID (uid: N31) inferred ret type: INT_TYPEc [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      ID (uid: N31) inferred ret type: INT_TYPEc [scope (3,0) <- (2,0)] declared at line 31 (type: INT_TYPE) 
                       + (uid: N32) inferred ret type: INT_TYPE(type: INT_TYPE) 
-                        ID (uid: N33) inferred ret type: INT_TYPEa [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
-                        ID (uid: N34) inferred ret type: INT_TYPEb [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                        ID (uid: N33) inferred ret type: INT_TYPEa [scope (3,0) <- (2,0)] declared at line 31 (type: INT_TYPE) 
+                        ID (uid: N34) inferred ret type: INT_TYPEb [scope (3,0) <- (2,0)] declared at line 31 (type: INT_TYPE) 
                   STATEMENT_LIST (uid: N35) inferred ret type: ROOT
                     PRINT (uid: N36) inferred ret type: ROOT
                       STRING_LITERAL (uid: N37) inferred ret type: ROOTyes 
                 SEQ (uid: N38) inferred ret type: ROOT
                   LOCAL_DECLARATIONS (uid: N39) inferred ret type: ROOT
                     = (uid: N40) inferred ret type: INT_TYPE(type: INT_TYPE) 
-                      ID (uid: N41) inferred ret type: INT_TYPEc [scope (3,1) <- (2,0)] declared at line 9 (type: INT_TYPE) 
+                      ID (uid: N41) inferred ret type: INT_TYPEc [scope (3,1) <- (2,0)] declared at line 34 (type: INT_TYPE) 
                       - (uid: N42) inferred ret type: INT_TYPE(type: INT_TYPE) 
-                        ID (uid: N43) inferred ret type: INT_TYPEa [scope (3,1) <- (2,0)] declared at line 9 (type: INT_TYPE) 
-                        ID (uid: N44) inferred ret type: INT_TYPEb [scope (3,1) <- (2,0)] declared at line 9 (type: INT_TYPE) 
+                        ID (uid: N43) inferred ret type: INT_TYPEa [scope (3,1) <- (2,0)] declared at line 34 (type: INT_TYPE) 
+                        ID (uid: N44) inferred ret type: INT_TYPEb [scope (3,1) <- (2,0)] declared at line 34 (type: INT_TYPE) 
                   STATEMENT_LIST (uid: N45) inferred ret type: ROOT
                     PRINT (uid: N46) inferred ret type: ROOT
                       STRING_LITERAL (uid: N47) inferred ret type: ROOTno 
-        RETURN (uid: N0) inferred ret type: VOID_TYPE[scope (0,0) <- (0,0)]return to main at line 2 (type: VOID_Tleft temp is 4
+        RETURN (uid: N0) inferred ret type: VOID_TYPE[scope (0,0) <- (0,0)]return to main at line left temp is 4
 0
-YPE) 
+27 (type: VOID_TYPE) 
           VOID_TYPE (uid: N0) inferred ret type: ROOT
 (0-0) contains:
   STRING yes
@@ -110,7 +110,7 @@ in var int
 Print hashtables (level-sibno) according to their hierarchy
 (0-0) contains:
   FUNC_VOID main (0 params:)space needed: 0
-  VAR_INT a (offset: 0 or addr: 1248)
+  VAR_INT a (offset: 0 or addr: 1258)
   (1-0) contains:
     (2-0) contains:
       VAR_INT a (offset: 0 or addr: 0)
