@@ -16,12 +16,11 @@ tLen=${#fileArray[@]}
 
 for (( i=0; i<${tLen}; i++ ));
 do
-  	echo "${fileArray[$i]}"
 
 	file="./testoutputs/${fileArray[$i]}.output.`date +"%a_%b_%d_%T_%Y"`"
 	printf "Result of test done to parser.\n\n" >> "${file}"
 
-	printf "${fileArray[$i]}.c BEGIN.\n" >> "${file}"
+	printf "${fileArray[$i]} BEGIN.\n" >> "${file}"
 	printf "===========================================================\n\n" >> "${file}"
 
 	./parser ${fileArray[$i]} < ./testinputs/${fileArray[$i]} >> "${file}" 2>&1
@@ -37,3 +36,6 @@ do
 
 
 done
+
+
+make clean

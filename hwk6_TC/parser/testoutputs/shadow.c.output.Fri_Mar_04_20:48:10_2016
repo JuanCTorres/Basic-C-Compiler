@@ -1,0 +1,40 @@
+Result of test done to parser.
+
+shadow.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  = (uid: N1) inferred ret type: INT_TYPE(type: INT_TYPE) 
+    ID (uid: N2) inferred ret type: INT_TYPEa [scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    INT_LITERAL (uid: N3) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N4) inferred ret type: VOID_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 2 (type: VOID_TYPE) 
+    FORMAL_PARAMS (uid: N5) inferred ret type: ROOT
+    SEQ (uid: N6) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N7) inferred ret type: ROOT
+        = (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N9) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          INT_LITERAL (uid: N10) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+      STATEMENT_LIST (uid: N11) inferred ret type: ROOT
+(0-0) contains:
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 3 entries
+0: (ASSIGN, a, __0, -)
+1: (LABEL, main, -, -)
+2: (ASSIGN, a, __1, -)
+a -12
+in var int 
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_VOID main (0 params:)space needed: 12
+  VAR_INT a (offset: 0 or addr: 120)
+  (1-0) contains:
+    VAR_INT a (offset: -8 or addr: 0)
+
+
+===========================================================
+shadow.c finished.

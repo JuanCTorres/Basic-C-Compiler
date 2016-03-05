@@ -1,0 +1,12 @@
+Result of test done to parser.
+
+call.c BEGIN.
+===========================================================
+
+line: 3 | error: use of undeclared function foo
+
+WARNING: There were symtab creation errors. Halting!
+
+
+===========================================================
+call.c finished.

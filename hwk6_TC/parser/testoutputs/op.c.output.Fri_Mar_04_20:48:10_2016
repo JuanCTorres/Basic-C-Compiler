@@ -1,0 +1,14 @@
+Result of test done to parser.
+
+op.c BEGIN.
+===========================================================
+
+syntax error at line 9	 yytext = 'a'
+
+WARNING: There were parse errors. Parse tree may be ill-formed.
+
+Error: NO root!
+
+
+===========================================================
+op.c finished.

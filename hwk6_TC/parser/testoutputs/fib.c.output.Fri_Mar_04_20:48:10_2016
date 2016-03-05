@@ -1,0 +1,137 @@
+Result of test done to parser.
+
+fib.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  ID (uid: N1) inferred ret type: INT_TYPEx [scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N2) inferred ret type: INT_TYPEfib  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N3) inferred ret type: ROOT
+      ID (uid: N4) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+    SEQ (uid: N5) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N6) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N7) inferred ret type: ROOT
+        IF_STMT (uid: N8) inferred ret type: ROOT
+          <= (uid: N9) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N10) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+            INT_LITERAL (uid: N11) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          RETURN (uid: N12) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to fib at line 3 
+            INT_LITERAL (uid: N13) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        RETURN (uid: N14) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to fib at line 3 
+          + (uid: N15) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            CALL (uid: N16) inferred ret type: INT_TYPE(type: INT_TYPE) 
+              FUNCTION (uid: N17) inferred ret type: INT_TYPEfib  (1 params: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+                - (uid: N18) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N19) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N20) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+            CALL (uid: N21) inferred ret type: INT_TYPE(type: INT_TYPE) 
+              FUNCTION (uid: N22) inferred ret type: INT_TYPEfib  (1 params: INT_TYPE)[scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+                - (uid: N23) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N24) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N25) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N26) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N27) inferred ret type: ROOT
+    SEQ (uid: N28) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N29) inferred ret type: ROOT
+        ID (uid: N30) inferred ret type: INT_TYPEi [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N31) inferred ret type: ROOT
+        FOR (uid: N32) inferred ret type: ROOT
+          = (uid: N33) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N34) inferred ret type: INT_TYPEi [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            INT_LITERAL (uid: N35) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          <= (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N37) inferred ret type: INT_TYPEi [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            INT_LITERAL (uid: N38) inferred ret type: INT_TYPE7(type: INT_TYPE) 
+          = (uid: N39) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N40) inferred ret type: INT_TYPEi [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+            + (uid: N41) inferred ret type: INT_TYPE(type: INT_TYPE) 
+              ID (uid: N42) inferred ret type: INT_TYPEi [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+              INT_LITERAL (uid: N43) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          SEQ (uid: N44) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N45) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N46) inferred ret type: ROOT
+              PRINT (uid: N47) inferred ret type: ROOT
+                CALL (uid: N48) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  FUNCTION (uid: N49) inferred ret type: INT_TYPEfib  (1 params: INT_TYPE)[scope (2,0) <- (1,1)] declared at line 3 (type: INT_TYPE) 
+                    ID (uid: N50) inferred ret type: INT_TYPEi [scope (2,0) <- (1,1)] declared at line 10 (type: INT_TYPE) 
+        RETURN (uid: N51) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 9 
+          INT_LITERAL (uid: N52) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+  VAR_INT __7 (offset: 0 or addr: 0)
+There are 52 entries
+0: (LABEL, fib, -, -)
+1: (ASSIGN, __T1, a, -)
+2: (ASSIGN, __T2, __1, -)
+3: (LTEQ, __T3, __T1, __T2)
+4: (ifTrue, __L_9_TRUE, __T3, -)
+5: (ASSIGN, __T3, __0, -)
+6: (GOTO, __L_9_DONE, -, -)
+7: (LABEL, __L_9_TRUE, -, -)
+8: (ASSIGN, __T3, __1, -)
+9: (LABEL, __L_9_DONE, -, -)
+10: (ASSIGN, __T0, __T3, -)
+11: (ifFalse, __L_8_FI, __T0, -)
+12: (RETURN, __1, -, -)
+13: (LABEL, __L_8_FI, -, -)
+14: (SUB, __T4, a, __1)
+15: (ASSIGN, __T5, __T4, -)
+16: (PUSH, __T5, -, -)
+17: (PRECALL, fib, -, -)
+18: (CALL, fib, -, -)
+19: (POSTCALL, fib, -, -)
+20: (SUB, __T6, a, __2)
+21: (ASSIGN, __T7, __T6, -)
+22: (PUSH, __T7, -, -)
+23: (PRECALL, fib, -, -)
+24: (CALL, fib, -, -)
+25: (POSTCALL, fib, -, -)
+26: (ADD, __T8, __RET_INT, __RET_INT)
+27: (RETURN, __T8, -, -)
+28: (LABEL, main, -, -)
+29: (ASSIGN, i, __1, -)
+30: (LABEL, __L_32_FOR_BEGIN, -, -)
+31: (ASSIGN, __T9, i, -)
+32: (ASSIGN, __T10, __7, -)
+33: (LTEQ, __T11, __T9, __T10)
+34: (ifTrue, __L_36_TRUE, __T11, -)
+35: (ASSIGN, __T11, __0, -)
+36: (GOTO, __L_36_DONE, -, -)
+37: (LABEL, __L_36_TRUE, -, -)
+38: (ASSIGN, __T11, __1, -)
+39: (LABEL, __L_36_DONE, -, -)
+40: (ifFalse, __L_32_FOR_END, __T11, -)
+41: (ASSIGN, __T12, i, -)
+42: (PUSH, __T12, -, -)
+43: (PRECALL, fib, -, -)
+44: (CALL, fib, -, -)
+45: (POSTCALL, fib, -, -)
+46: (PRINT, __RET_INT, -, -)
+47: (ADD, __T13, i, __1)
+48: (ASSIGN, i, __T13, -)
+49: (GOTO, __L_32_FOR_BEGIN, -, -)
+50: (LABEL, __L_32_FOR_END, -, -)
+51: (RETURN, __0, -, -)
+i -12
+a -12
+in var int 
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 12
+  FUNC_INT fib (1 params: VAR_INT )space needed: 12
+  VAR_INT x (offset: 0 or addr: 1648)
+  (1-0) contains:
+    VAR_INT a (offset: -8 or addr: 0)
+  (1-1) contains:
+    VAR_INT i (offset: -8 or addr: 0)
+    (2-0) contains:
+
+
+===========================================================
+fib.c finished.

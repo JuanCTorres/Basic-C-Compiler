@@ -1,0 +1,85 @@
+Result of test done to parser.
+
+arr.c BEGIN.
+===========================================================
+
+line: 14 | Error: Input parameters to function fun2 does not match the declaration at line 3
+line: 32 | Error: Input parameters to function fun1 does not match the declaration at line 9
+line: 37 | Error: Input parameters to function fun1 does not match the declaration at line 9
+
+WARNING: There were function errors. Data structure may be ill-formed.
+
+1 line: 27 | Error: No return statement in function main
+
+WARNING: There were return errors. Data structure may be ill-formed.
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  ARRAY_TYPE (uid: N1) inferred ret type: INT_TYPEglob [scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    INT_LITERAL (uid: N2) inferred ret type: INT_TYPE3(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N3) inferred ret type: VOID_TYPEfun2  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 3 (type: VOID_TYPE) 
+    FORMAL_PARAMS (uid: N4) inferred ret type: ROOT
+      ARRAY_TYPE (uid: N5) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+    SEQ (uid: N6) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N7) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N8) inferred ret type: ROOT
+        = (uid: N9) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N10) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+            INT_LITERAL (uid: N11) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          INT_LITERAL (uid: N12) inferred ret type: INT_TYPE17(type: INT_TYPE) 
+        RETURN (uid: N0) inferred ret type: VOID_TYPE[scope (0,0) <- (0,0)]return to fun2 at line 3 (type: VOID_TYPE) 
+          VOID_TYPE (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N13) inferred ret type: INT_TYPEfun1  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N14) inferred ret type: ROOT
+      ARRAY_TYPE (uid: N15) inferred ret type: INT_TYPEa [scope (1,1) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+    SEQ (uid: N16) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N17) inferred ret type: ROOT
+        ARRAY_TYPE (uid: N18) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+          INT_LITERAL (uid: N19) inferred ret type: INT_TYPE3(type: INT_TYPE) 
+      STATEMENT_LIST (uid: N20) inferred ret type: ROOT
+        = (uid: N21) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N22) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+            INT_LITERAL (uid: N23) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          INT_LITERAL (uid: N24) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        CALL (uid: N25) inferred ret type: VOID_TYPE(type: VOID_TYPE) 
+          FUNCTION (uid: N26) inferred ret type: VOID_TYPEfun2  (1 params: VOID_TYPE)[scope (1,1) <- (0,0)] declared at line 3 (type: VOID_TYPE) 
+            ID (uid: N27) inferred ret type: ROOTc [scope (1,1) <- (0,0)] declared at line 11 
+        PRINT (uid: N28) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N29) inferred ret type: INT_TYPEc [scope (1,1) <- (0,0)] declared at line 11 (type: INT_TYPE) 
+            INT_LITERAL (uid: N30) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        = (uid: N31) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N32) inferred ret type: INT_TYPEa [scope (1,1) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+            INT_LITERAL (uid: N33) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+          INT_LITERAL (uid: N34) inferred ret type: INT_TYPE23(type: INT_TYPE) 
+        RETURN (uid: N35) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to fun1 at line 9 
+          INT_LITERAL (uid: N36) inferred ret type: INT_TYPE32(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N37) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 27 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N38) inferred ret type: ROOT
+    SEQ (uid: N39) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N40) inferred ret type: ROOT
+        ARRAY_TYPE (uid: N41) inferred ret type: INT_TYPEla [scope (1,2) <- (0,0)] declared at line 29 (type: INT_TYPE) 
+          INT_LITERAL (uid: N42) inferred ret type: INT_TYPE3(type: INT_TYPE) 
+        ID (uid: N43) inferred ret type: INT_TYPEy [scope (1,2) <- (0,0)] declared at line 30 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N44) inferred ret type: ROOT
+        = (uid: N45) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N46) inferred ret type: INT_TYPEy [scope (1,2) <- (0,0)] declared at line 30 (type: INT_TYPE) 
+          CALL (uid: N47) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            FUNCTION (uid: N48) inferred ret type: INT_TYPEfun1  (1 params: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+              ID (uid: N49) inferred ret type: ROOTglob [scope (1,2) <- (0,0)] declared at line 1 
+        PRINT (uid: N50) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N51) inferred ret type: INT_TYPEglob [scope (1,2) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            INT_LITERAL (uid: N52) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+        = (uid: N53) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N54) inferred ret type: INT_TYPEy [scope (1,2) <- (0,0)] declared at line 30 (type: INT_TYPE) 
+          CALL (uid: N55) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            FUNCTION (uid: N56) inferred ret type: INT_TYPEfun1  (1 params: INT_TYPE)[scope (1,2) <- (0,0)] declared at line 9 (type: INT_TYPE) 
+              ID (uid: N57) inferred ret type: ROOTla [scope (1,2) <- (0,0)] declared at line 29 
+        PRINT (uid: N58) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N59) inferred ret type: INT_TYPEla [scope (1,2) <- (0,0)] declared at line 29 (type: INT_TYPE) 
+            INT_LITERAL (uid: N60) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+Halting
+
+
+===========================================================
+arr.c finished.

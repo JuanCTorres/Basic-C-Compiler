@@ -1,0 +1,14 @@
+Result of test done to parser.
+
+recursive_factorial.c BEGIN.
+===========================================================
+
+syntax error at line 16	 yytext = 'g'
+
+WARNING: There were parse errors. Parse tree may be ill-formed.
+
+Error: NO root!
+
+
+===========================================================
+recursive_factorial.c finished.
