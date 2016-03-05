@@ -81,11 +81,11 @@ if(argc != 2) {
 			if(returnError) {
 				fprintf(stderr, "\nWARNING: There were return errors. Data structure may be ill-formed.\n\n");
 			}
-			check_types_in_expr(root); 
+			check_types_in_expr(root);
 			if(exprTypeError) {
 				fprintf(stderr, "\nWARNING: There were type disagreement in expressions. Data structure may be ill-formed.\n\n");
 			}
-      print_ast(root, 0, 0, 0); //print ast tree with added information
+      //print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
 
@@ -101,6 +101,10 @@ if(argc != 2) {
       set_constants(symtab->literal_collection);
 
       link_ast_to_symnode(root, symtab);
+
+			correct_arrays(root);
+
+			print_ast(root, 0, 0, 0); //print ast tree with added information
 
       pretty_print(symtab->literal_collection, 0);
 

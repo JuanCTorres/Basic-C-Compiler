@@ -996,15 +996,35 @@ void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
       break;
   }
 
-
-
-/* Recurse on each child of the subtree root, with a depth one
-     greater than the root's depth. */
+/* Recurse on each child of the subtree root */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling)
     link_ast_to_symnode(child, symtab);
 }
 
+void correct_arrays(ast_node root){
+  /* Correct the return type of this array, if necessary */
+  symnode_t *symnode = root->snode;
+
+  if(symnode != NULL){
+    //fprintf(stderr, "FOUND ONE \n\n\n\n\n\n\n\n");
+    if(symnode->type == VAR_ARRAY_INT_T){
+      if(root->node_type == ID_N){
+        //fprintf(stderr, "\n\n\n\nFOUND: %s, ret_type = %s \n\n\n\n", root->value_string, NODE_NAME(root->return_type));
+        if(root->left_child == NULL){ // no array slot
+          root->return_type = ARRAY_TYPE_N;
+          //fprintf(stderr, "\n\n\n\nFOUND: %s, ret_type = %s \n\n\n\n", root->value_string, NODE_NAME(root->return_type));
+        }
+      }
+    }
+  }
+
+  /* Recurse on each child of the root */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling){
+    correct_arrays(child);
+  }
+}
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
