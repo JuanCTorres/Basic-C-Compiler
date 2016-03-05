@@ -1,0 +1,16 @@
+Result of test done to parser.
+
+op.c BEGIN.
+===========================================================
+
+line: 42 | Error: Input parameters to function foo does not match the declaration at line 27
+
+WARNING: There were function errors. Data structure may be ill-formed.
+
+
+
+Halting
+
+
+===========================================================
+op.c finished.

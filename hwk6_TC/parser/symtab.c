@@ -26,7 +26,9 @@ extern int exprTypeError;
 
 // int siblings[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 static int *siblings;
+static int *trash_array;
 static unsigned arraylen = 0;
+static unsigned arraylen_trash = 0;
 
 static const int HASHSIZE = 211;
 //static const int MAXINTSIZE = 4;  // for now
@@ -341,7 +343,7 @@ int check_if_redef(ast_node anode, symboltable_t *symtab ,int lvl, int sibno) {
     /* Found a match in current or parent scope? */
     if(node != NULL){
       /* If abstract syntax node has a type, it was previously defined */
-      if(anode->return_type != ROOT_N) {
+      if(anode->return_type != ROOT_N && anode->isDecl == 1) {
         symtabError = 1;
         if(anode->node_type == FUNC_DECLARATION_N) {
           fprintf(stderr, "line: %d | error: redefinition of function %s\n", anode->line_num ,anode->value_string);
@@ -370,6 +372,8 @@ int getSibling(int level) {
     return siblings[level - 1];
   }
 }
+
+
 
 
 /*
@@ -401,7 +405,6 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       check_if_redef(root, symtab ,level, sibno);
       hash = find_hashtable(symtab->root, level, sibno);
       if(hash == NULL) {
-        //hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), siblings[level - 1]);
         hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
 
       }
@@ -415,9 +418,12 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       break;
 
     case ID_N:      /* print the id */
-      check_if_redef(root, symtab ,level, sibno);
+      
+        check_if_redef(root, symtab ,level, sibno);
+
       if(root->return_type != 0) {  // a non-zero value means that it is a declaration, since only declarations
                                     // are assigned a return type when building the abstract syntax tree.
+        
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
           hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
@@ -431,7 +437,9 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       break;
 
     case ARRAY_TYPE_N:             // check for return types!
-      check_if_redef(root, symtab ,level, sibno);
+
+        check_if_redef(root, symtab ,level, sibno);
+
       if(root->return_type != 0) {
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
@@ -1234,6 +1242,86 @@ int check_types_in_expr(ast_node root) {
     check_types_in_expr(child);
   return 0;
 }
+
+
+
+
+
+
+
+
+void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab) {
+  //calculate the scope for the variable/func declaration
+  //calculate the parent for that variable/func declaration
+  //need function to take as input
+  //printf("here \n");
+  symhashtable_t *hash;
+
+  /* Depending on node types, go deeper, create sibling scopes, add to hashtable,
+   * or take other appropriate action.
+   */
+  switch (root->node_type) {
+    case SEQ_N:     // change main level when see a new sequence
+      level++;
+      break;
+
+    case FORMAL_PARAMS_N:
+      level++;
+      break;
+
+    case FUNC_DECLARATION_N: // function declaraions
+      //does hashtable exist with given lvl, siblvl (use find_hashtable)
+      if(root->snode != NULL)
+        check_if_redef(root, symtab ,level, sibno);
+      break;
+
+    case FUNCTION_N:
+      // check_if_declared(root, symtab ,level, sibno);
+      break;
+
+    case ID_N:      /* print the id */
+      if(root->snode != NULL)
+        check_if_redef(root, symtab ,level, sibno);
+      break;
+
+    case ARRAY_TYPE_N:             // check for return types!
+      if(root->snode != NULL)
+        check_if_redef(root, symtab ,level, sibno);
+      break;
+
+    case RETURN_N:
+      break;
+
+    default:
+      // printf("at default of switch\n");
+      assert(symtab->root != NULL);
+      break;
+  }
+
+  if(arraylen_trash == level) {
+    arraylen_trash = arraylen_trash + DELTA;
+    trash_array = realloc(trash_array, sizeof(int) * arraylen_trash);
+
+    assert(trash_array != NULL);
+
+    for(int k=0; k < DELTA; k++) {
+      trash_array[arraylen_trash - (DELTA-k)] = 0;
+    }
+  }
+
+  /* Recurse on each child of the subtree root, with a depth one
+     greater than the root's depth. */
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    redef_check(child, level, trash_array[level], symtab);
+
+  if(root->node_type == SEQ_N){//} || root->node_type == FORMAL_PARAMS_N){
+    trash_array[level]++;  // change sibling level after you're done printing all
+                      // subtrees, i.e., after done recursing.
+  }
+}
+
+
 
 
 

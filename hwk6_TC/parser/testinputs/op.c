@@ -1,3 +1,8 @@
+int foo(int bar[]){
+	bar[1]=3;
+	return bar[1];
+}
+
 void main(void){
 	int b[10];
 	int a=foo(b);
@@ -6,7 +11,4 @@ void main(void){
 	a=-a;
 	print b[-a];
 }
-int foo(int bar[]){
-	bar[1]=3;
-	return bar[1];
-}
+

@@ -55,10 +55,11 @@ if(argc != 2) {
  	// printf("\nNo syntatical errors detected.\n\n");
  	//}
  	if (!noRoot) {
-    label_nodes(root);
+    	label_nodes(root);
 
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
+ 		// redef_check(root, 0, 0, symtab);
 
  		if(symtabError) {	//when we get var/func use without declaration, we cannot progress any further as we cannot build the sym table which later funcs depend on
  			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");

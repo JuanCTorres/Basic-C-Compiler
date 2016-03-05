@@ -114,6 +114,7 @@ varDeclaration : INT_T varDeclList ';' {
         $2 = $2->right_sibling;
       }
       $2->return_type = INT_TYPE_N;
+      $2->isDecl = 1;
       $$ = temp_t;
     } else{
       //ast_node t = $2;

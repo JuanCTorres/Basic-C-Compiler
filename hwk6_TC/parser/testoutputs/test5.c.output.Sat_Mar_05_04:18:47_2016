@@ -1,0 +1,21 @@
+Result of test done to parser.
+
+test5.c BEGIN.
+===========================================================
+
+line: 26 | Error: Number of parameters to function myfunc does not match the declaration at line 1
+
+WARNING: There were function errors. Data structure may be ill-formed.
+
+1 line: 1 | Error: No return statement in function myfunc
+1 line: 9 | Error: No return statement in function main
+
+WARNING: There were return errors. Data structure may be ill-formed.
+
+
+
+Halting
+
+
+===========================================================
+test5.c finished.
