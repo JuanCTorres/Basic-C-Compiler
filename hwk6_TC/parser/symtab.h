@@ -197,6 +197,5 @@ void check_assignment(ast_node root);
 
 void check_unary(ast_node root);
 
-void fix_array_type(ast_node root, symboltable_t *symtab);
 
 #endif
