@@ -1214,3 +1214,17 @@ int check_types_in_expr(ast_node root) {
     check_types_in_expr(child);
   return 0;
 }
+
+
+
+void fix_array_type(ast_node root, symboltable_t *symtab) {
+
+
+
+  ast_node child;
+  for (child = root->left_child; child != NULL; child = child->right_sibling)
+    fix_array_type(child, symtab);
+}
+
+
+

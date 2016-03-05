@@ -103,7 +103,6 @@ main:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x2b0    #Start of string space
 
 .pos 0x2b4   # Start of global var space 
 	.long 0x00000000

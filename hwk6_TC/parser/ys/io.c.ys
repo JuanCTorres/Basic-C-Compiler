@@ -32,13 +32,20 @@ main:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0xb0    #Start of string space
+.pos 0xb0    #qwerty
 
 	.byte 	0x48
+
 	.byte 	0x65
+
 	.byte 	0x6c
+
 	.byte 	0x6c
+
 	.byte 	0x6f
-.pos 0xbc   # Start of global var space 
+
+	.byte 	0x0
+
+.pos 0xc2   # Start of global var space 
 .pos 0x0000FFFC
 stack:

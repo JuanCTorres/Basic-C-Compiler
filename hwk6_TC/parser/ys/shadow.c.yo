@@ -22,7 +22,6 @@
                        | #(ASSIGN, a, __1, -)
   0x0028:30f001000000  | 	irmovl 1, %eax
   0x002e:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
-  0x0074:              | .pos 0x74    #Start of string space
                        | 
   0x0078:              | .pos 0x78   # Start of global var space 
   0x0078:00000000      | 	.long 0x00000000

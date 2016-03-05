@@ -131,7 +131,6 @@ L_30_FI:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x434    #Start of string space
 
 .pos 0x438   # Start of global var space 
 	.long 0x00000000

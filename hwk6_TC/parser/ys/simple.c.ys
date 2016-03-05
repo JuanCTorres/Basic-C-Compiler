@@ -12,7 +12,6 @@ main:
 	irmovl 0, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 0
-.pos 0x38    #Start of string space
 
 .pos 0x3c   # Start of global var space 
 .pos 0x0000FFFC

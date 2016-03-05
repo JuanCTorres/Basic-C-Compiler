@@ -12,10 +12,10 @@
 .pos 0x14
 #(ASSIGN, a, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 6272
+	rmmovl %eax, 6288
 #(ASSIGN, c, __23, -)
 	irmovl 23, %eax
-	rmmovl %eax, 6280
+	rmmovl %eax, 6296
 #(LABEL, main, -, -)
 main:
 
@@ -712,22 +712,37 @@ L_236_FI:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x186c    #Start of string space
+.pos 0x186c    #qwerty
 
 	.byte 	0x74
+
 	.byte 	0x65
+
 	.byte 	0x73
+
 	.byte 	0x74
+
 	.byte 	0x20
+
 	.byte 	0x62
+
 	.byte 	0x61
+
 	.byte 	0x73
+
 	.byte 	0x69
+
 	.byte 	0x63
+
 	.byte 	0x73
+
 	.byte 	0x21
+
 	.byte 	0xa
-.pos 0x1880   # Start of global var space 
+
+	.byte 	0x0
+
+.pos 0x1890   # Start of global var space 
 	.long 0x00000000
 	.long 0x00000000
 	.long 0x00000000

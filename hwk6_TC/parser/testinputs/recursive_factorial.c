@@ -12,8 +12,7 @@ int recurr( int a ) {
 
 
 int main(void) {
-	int g = 5;
-	int answer[g];
+	int answer[5];
 	answer[4] = 6;
 
 	answer[2] = recurr(answer[4]);

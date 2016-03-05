@@ -8,7 +8,7 @@
 .pos 0x14
 #(ASSIGN, a, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 1248
+	rmmovl %eax, 1258
 #(LABEL, main, -, -)
 main:
 
@@ -17,12 +17,12 @@ main:
 #NUM PARAMS: 0
 #(ASSIGN, a, __0, -)
 	irmovl 0, %eax
-	rmmovl %eax, 1248
+	rmmovl %eax, 1258
 #(LABEL, __L_9_FOR_BEGIN, -, -)
 L_9_FOR_BEGIN:
 
 #(ASSIGN, __T0, a, -)
-	mrmovl 1248, %eax
+	mrmovl 1258, %eax
 	rmmovl %eax, 1192
 #(ASSIGN, __T1, __10, -)
 	irmovl 10, %eax
@@ -118,16 +118,16 @@ L_24_ELSE:
 	mrmovl 1224, %eax
 	rmmovl %eax, 0(%ebp)
 #(PRINT, no, -, -)
-	irmovl 1240, %edx
+	irmovl 1246, %edx
 	rmmovl %edx, 0x00FFFE10
 #(LABEL, __L_24_FI, -, -)
 L_24_FI:
 
 #(INC, a, -, -)
-	mrmovl 1248, %eax
+	mrmovl 1258, %eax
 	irmovl 1, %ecx
 	addl %ecx, %eax
-	rmmovl %eax, 1248
+	rmmovl %eax, 1258
 #(GOTO, __L_9_FOR_BEGIN, -, -)
 	jmp L_9_FOR_BEGIN
 #(LABEL, __L_9_FOR_END, -, -)
@@ -140,14 +140,24 @@ L_9_FOR_END:
 	irmovl -8, %ecx
 	addl %ecx, %esp
 	ret
-.pos 0x4d4    #Start of string space
+.pos 0x4d4    #qwerty
 
 	.byte 	0x79
+
 	.byte 	0x65
+
 	.byte 	0x73
+
+	.byte 	0x0
+.pos 0x4de    #qwerty
+
 	.byte 	0x6e
+
 	.byte 	0x6f
-.pos 0x4e0   # Start of global var space 
+
+	.byte 	0x0
+
+.pos 0x4ea   # Start of global var space 
 	.long 0x00000000
 .pos 0x0000FFFC
 stack:
