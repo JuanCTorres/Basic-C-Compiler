@@ -61,7 +61,7 @@
   0x0097:400f98020000  | 	rmmovl %eax, 664
                        | 
                        | #(ADDR, __T4, b, -)
-  0x009d:30f0f4ffffff  | 	irmovl -12, %eax
+  0x009d:30f0ccffffff  | 	irmovl -52, %eax
   0x00a3:6050          | 	addl %ebp, %eax
   0x00a5:400f9c020000  | 	rmmovl %eax, 668
                        | #(SUB, __T5, __T4, __T3)

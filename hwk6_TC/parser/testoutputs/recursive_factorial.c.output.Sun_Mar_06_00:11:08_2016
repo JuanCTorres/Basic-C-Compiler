@@ -1,0 +1,195 @@
+Result of test done to parser.
+
+recursive_factorial.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPErecurr  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+      ID (uid: N3) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    SEQ (uid: N4) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N5) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N6) inferred ret type: ROOT
+        IF_ELSE_STMT (uid: N7) inferred ret type: ROOT
+          == (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N9) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            INT_LITERAL (uid: N10) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          SEQ (uid: N11) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N12) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N13) inferred ret type: ROOT
+              RETURN (uid: N14) inferred ret type: ROOT[scope (2,0) <- (1,0)]return to recurr at line 1 
+                INT_LITERAL (uid: N15) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          SEQ (uid: N16) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N17) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N18) inferred ret type: ROOT
+              RETURN (uid: N19) inferred ret type: ROOT[scope (2,1) <- (1,0)]return to recurr at line 1 
+                * (uid: N20) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N21) inferred ret type: INT_TYPEa [scope (2,1) <- (1,0)] declared at line 1 (type: INT_TYPE) 
+                  CALL (uid: N22) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                    FUNCTION (uid: N23) inferred ret type: INT_TYPErecurr  (1 params: INT_TYPE)[scope (2,1) <- (1,0)] declared at line 1 (type: INT_TYPE) 
+                      - (uid: N24) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                        ID (uid: N25) inferred ret type: INT_TYPEa [scope (2,1) <- (1,0)] declared at line 1 (type: INT_TYPE) 
+                        INT_LITERAL (uid: N26) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        RETURN (uid: N27) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to recurr at line 1 
+          INT_LITERAL (uid: N28) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N29) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 14 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N30) inferred ret type: ROOT
+    SEQ (uid: N31) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N32) inferred ret type: ROOT
+        ARRAY_TYPE (uid: N33) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+          INT_LITERAL (uid: N34) inferred ret type: INT_TYPE5(type: INT_TYPE) 
+      STATEMENT_LIST (uid: N35) inferred ret type: ROOT
+        = (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N37) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N38) inferred ret type: INT_TYPE4(type: INT_TYPE) 
+          INT_LITERAL (uid: N39) inferred ret type: INT_TYPE6(type: INT_TYPE) 
+        = (uid: N40) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N41) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N42) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+          CALL (uid: N43) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            FUNCTION (uid: N44) inferred ret type: INT_TYPErecurr  (1 params: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+              ARRAY_TYPE (uid: N45) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+                INT_LITERAL (uid: N46) inferred ret type: INT_TYPE4(type: INT_TYPE) 
+        PRINT (uid: N47) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N48) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N49) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+        RETURN (uid: N50) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 14 
+          ARRAY_TYPE (uid: N51) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N52) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPErecurr  (1 params: VAR_INT )[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+      ID (uid: N3) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    SEQ (uid: N4) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N5) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N6) inferred ret type: ROOT
+        IF_ELSE_STMT (uid: N7) inferred ret type: ROOT
+          == (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N9) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+            INT_LITERAL (uid: N10) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          SEQ (uid: N11) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N12) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N13) inferred ret type: ROOT
+              RETURN (uid: N14) inferred ret type: ROOT[scope (2,0) <- (1,0)]return to recurr at line 1 
+                INT_LITERAL (uid: N15) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+          SEQ (uid: N16) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N17) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N18) inferred ret type: ROOT
+              RETURN (uid: N19) inferred ret type: ROOT[scope (2,1) <- (1,0)]return to recurr at line 1 
+                * (uid: N20) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N21) inferred ret type: INT_TYPEa [scope (2,1) <- (1,0)] declared at line 1 (type: INT_TYPE) 
+                  CALL (uid: N22) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                    FUNCTION (uid: N23) inferred ret type: INT_TYPErecurr  (1 params: INT_TYPE)[scope (2,1) <- (1,0)] declared at line 1 (type: INT_TYPE) 
+                      - (uid: N24) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                        ID (uid: N25) inferred ret type: INT_TYPEa [scope (2,1) <- (1,0)] declared at line 1 (type: INT_TYPE) 
+                        INT_LITERAL (uid: N26) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        RETURN (uid: N27) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to recurr at line 1 
+          INT_LITERAL (uid: N28) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N29) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 14 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N30) inferred ret type: ROOT
+    SEQ (uid: N31) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N32) inferred ret type: ROOT
+        ARRAY_TYPE (uid: N33) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+          INT_LITERAL (uid: N34) inferred ret type: INT_TYPE5(type: INT_TYPE) 
+      STATEMENT_LIST (uid: N35) inferred ret type: ROOT
+        = (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N37) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N38) inferred ret type: INT_TYPE4(type: INT_TYPE) 
+          INT_LITERAL (uid: N39) inferred ret type: INT_TYPE6(type: INT_TYPE) 
+        = (uid: N40) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ARRAY_TYPE (uid: N41) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N42) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+          CALL (uid: N43) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            FUNCTleft temp is 1
+0
+ION (uid: N44) inferred ret type: INT_TYPErecurr  (1 params: INT_TYPE)[scope (1,1) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+              ARRAY_TYPE (uid: N45) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+                INT_LITERAL (uid: N46) inferred ret type: INT_TYPE4(type: INT_TYPE) 
+        PRINT (uid: N47) inferred ret type: ROOT
+          ARRAY_TYPE (uid: N48) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N49) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+        RETURN (uid: N50) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 14 
+          ARRAY_TYPE (uid: N51) inferred ret type: INT_TYPEanswer [scope (1,1) <- (0,0)] declared at line 15 (type: INT_TYPE) 
+            INT_LITERAL (uid: N52) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+  VAR_INT __5 (offset: 0 or addr: 0)
+  VAR_INT __6 (offset: 0 or addr: 0)
+There are 53 entries
+0: (LABEL, recurr, -, -)
+1: (ASSIGN, __T1, a, -)
+2: (ASSIGN, __T2, __0, -)
+3: (EQ, __T3, __T1, __T2)
+4: (ifTrue, __L_8_TRUE, __T3, -)
+5: (ASSIGN, __T3, __0, -)
+6: (GOTO, __L_8_DONE, -, -)
+7: (LABEL, __L_8_TRUE, -, -)
+8: (ASSIGN, __T3, __1, -)
+9: (LABEL, __L_8_DONE, -, -)
+10: (ASSIGN, __T0, __T3, -)
+11: (ifFalse, __L_7_ELSE, __T0, -)
+12: (RETURN, __1, -, -)
+13: (GOTO, __L_7_FI, -, -)
+14: (LABEL, __L_7_ELSE, -, -)
+15: (SUB, __T4, a, __1)
+16: (ASSIGN, __T5, __T4, -)
+17: (PUSH, __T5, -, -)
+18: (PRECALL, recurr, -, -)
+19: (CALL, recurr, -, -)
+20: (POSTCALL, recurr, -, -)
+21: (MULT, __T6, a, __RET_INT)
+22: (RETURN, __T6, -, -)
+23: (LABEL, __L_7_FI, -, -)
+24: (RETURN, __1, -, -)
+25: (LABEL, main, -, -)
+26: (MULT, __T7, __4, __4)
+27: (ADDR, __T8, answer, -)
+28: (SUB, __T9, __T8, __T7)
+29: (ASSIGN, __T9, __6, -)
+30: (MULT, __T13, __4, __4)
+31: (ADDR, __T14, answer, -)
+32: (SUB, __T15, __T14, __T13)
+33: (DEREF, __T12, __T15, -)
+34: (ASSIGN, __T11, __T12, -)
+35: (PUSH, __T11, -, -)
+36: (PRECALL, recurr, -, -)
+37: (CALL, recurr, -, -)
+38: (POSTCALL, recurr, -, -)
+39: (MULT, __T17, __2, __4)
+40: (ADDR, __T18, answer, -)
+41: (SUB, __T19, __T18, __T17)
+42: (ASSIGN, __T19, __RET_INT, -)
+43: (MULT, __T22, __2, __4)
+44: (ADDR, __T23, answer, -)
+45: (SUB, __T24, __T23, __T22)
+46: (DEREF, __T21, __T24, -)
+47: (PRINT, __T21, -, -)
+48: (MULT, __T27, __2, __4)
+49: (ADDR, __T28, answer, -)
+50: (SUB, __T29, __T28, __T27)
+51: (DEREF, __T26, __T29, -)
+52: (RETURN, __T26, -, -)
+a -12
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 28
+  FUNC_INT recurr (1 params: VAR_INT )space needed: 12
+  (1-0) contains:
+    VAR_INT a (offset: -8 or addr: 0)
+    (2-0) contains:
+    (2-1) contains:
+  (1-1) contains:
+    VAR_ARRAY_INT answer (length: 5, offset: -8 or addr: 0)
+
+
+===========================================================
+recursive_factorial.c finished.

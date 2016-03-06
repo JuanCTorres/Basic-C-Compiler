@@ -1,0 +1,111 @@
+Result of test done to parser.
+
+test10.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPEfunc  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+      ID (uid: N3) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+      ID (uid: N4) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    SEQ (uid: N5) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N6) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N7) inferred ret type: ROOT
+        = (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N9) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+          + (uid: N10) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N11) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            ID (uid: N12) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+        RETURN (uid: N13) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to func at line 2 
+          ID (uid: N14) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N15) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N16) inferred ret type: ROOT
+    SEQ (uid: N17) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N18) inferred ret type: ROOT
+        ID (uid: N19) inferred ret type: INT_TYPEb [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N20) inferred ret type: ROOT
+        = (uid: N21) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N22) inferred ret type: INT_TYPEb [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          CALL (uid: N23) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            FUNCTION (uid: N24) inferred ret type: INT_TYPEfunc  (2 params: INT_TYPE INT_TYPE)[scope (1,1) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+              INT_LITERAL (uid: N25) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+              INT_LITERAL (uid: N26) inferred ret type: INT_TYPE29(type: INT_TYPE) 
+        PRINT (uid: N27) inferred ret type: ROOT
+          ID (uid: N28) inferred ret type: INT_TYPEb [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+        RETURN (uid: N29) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 8 
+          INT_LITERAL (uid: N30) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPEfunc  (2 params: VAR_INT  VAR_INT )[scope (0,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+      ID (uid: N3) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+      ID (uid: N4) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+    SEQ (uid: N5) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N6) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N7) inferred ret type: ROOT
+        = (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N9) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+          + (uid: N10) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N11) inferred ret type: INT_TYPEa [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+            ID (uid: N12) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+        RETURN (uid: N13) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to func at line 2 
+          ID (uid: N14) inferred ret type: INT_TYPEd [scope (1,0) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N15) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 8 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N16) inferred ret type: ROOT
+    SEQ (uid: N17) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N18) inferred ret type: ROOT
+        ID (uid: N19) inferred ret type: INT_TYPEb [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N20) inferred ret type: ROOT
+        = (uid: N21) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N22) inferred ret type: INT_TYPEb [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+          CALL (uid: N23) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            FUNCTION (uid: N24) inferred ret type: INT_TYPEfunc  (2 params: INT_TYPE INT_TYPE)[scope (1,1) <- (0,0)] declared at line 2 (type: INT_TYPE) 
+              INT_LITERAL (uid: N25) inferred ret type: INT_TYPE2(type: INT_TYPE) 
+              INT_LITERAL (uid: N26) inferred ret type: INT_TYPE29(type: INT_TYPE) 
+        PRINT (uid: N27) inferred ret type: ROOT
+          ID (uid: N28) inferred ret type: INT_TYPEb [scope (1,1) <- (0,0)] declared at line 10 (type: INT_TYPE) 
+        RETURN (uid: N29) inferred ret type: ROOT[scope (1,1) <- (0,0)]return to main at line 8 
+          INT_LITERAL (uid: N30) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __29 (offset: 0 or addr: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 15 entries
+0: (LABEL, func, -, -)
+1: (ADD, __T0, a, d)
+2: (ASSIGN, d, __T0, -)
+3: (RETURN, d, -, -)
+4: (LABEL, main, -, -)
+5: (ASSIGN, __T1, __2, -)
+6: (PUSH, __T1, -, -)
+7: (ASSIGN, __T2, __29, -)
+8: (PUSH, __T2, -, -)
+9: (PRECALL, func, -, -)
+10: (CALL, func, -, -)
+11: (POSTCALL, func, -, -)
+12: (ASSIGN, b, __RET_INT, -)
+13: (PRINT, b, -, -)
+14: (RETURN, __0, -, -)
+b -12
+a -12
+d -16
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 12
+  FUNC_INT func (2 params: VAR_INT  VAR_INT )space needed: 16
+  (1-0) contains:
+    VAR_INT a (offset: -8 or addr: 0)
+    VAR_INT d (offset: -12 or addr: 0)
+  (1-1) contains:
+    VAR_INT b (offset: -8 or addr: 0)
+
+
+===========================================================
+test10.c finished.

@@ -61,7 +61,7 @@ L_13_DONE:
 	rmmovl %eax, 664
 
 #(ADDR, __T4, b, -)
-	irmovl -12, %eax
+	irmovl -52, %eax
 	addl %ebp, %eax
 	rmmovl %eax, 668
 #(SUB, __T5, __T4, __T3)

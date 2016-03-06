@@ -13,7 +13,7 @@
                        | #(LABEL, foo, -, -)
   0x0014:              | foo:
                        | 
-  0x0014:30f108000000  | 	irmovl 8, %ecx
+  0x0014:30f10c000000  | 	irmovl 12, %ecx
   0x001a:6114          | 	subl %ecx, %esp
                        | #NUM PARAMS: 1
   0x001c:500504000000  | 	mrmovl 4(%ebp), %eax
@@ -82,7 +82,7 @@
                        | #(CALL, foo, -, -)
   0x00eb:8014000000    | 	call foo
                        | #(POSTCALL, foo, -, -)
-  0x00f0:30f10c000000  | 	irmovl 12, %ecx
+  0x00f0:30f110000000  | 	irmovl 16, %ecx
   0x00f6:2054          | 	rrmovl %ebp, %esp
   0x00f8:6014          | 	addl %ecx, %esp
                        | #(ASSIGN, a, __RET_INT, -)

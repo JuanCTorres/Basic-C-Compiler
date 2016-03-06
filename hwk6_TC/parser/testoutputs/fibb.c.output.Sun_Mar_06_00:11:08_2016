@@ -1,0 +1,192 @@
+Result of test done to parser.
+
+fibb.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+    SEQ (uid: N3) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N4) inferred ret type: ROOT
+        = (uid: N5) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N6) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          INT_LITERAL (uid: N7) inferred ret type: INT_TYPE10(type: INT_TYPE) 
+        = (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N9) inferred ret type: INT_TYPEfirst [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N10) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        = (uid: N11) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N12) inferred ret type: INT_TYPEsecond [scope (1,0) <- (0,0)] declared at line 5 (type: INT_TYPE) 
+          INT_LITERAL (uid: N13) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        ID (uid: N14) inferred ret type: INT_TYPEnext [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+        ID (uid: N15) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N16) inferred ret type: ROOT
+        FOR (uid: N17) inferred ret type: ROOT
+          = (uid: N18) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N19) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+            INT_LITERAL (uid: N20) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          < (uid: N21) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N22) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+            ID (uid: N23) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          ++ (uid: N24) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N25) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+          SEQ (uid: N26) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N27) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N28) inferred ret type: ROOT
+              IF_ELSE_STMT (uid: N29) inferred ret type: ROOT
+                <= (uid: N30) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N31) inferred ret type: INT_TYPEc [scope (2,0) <- (1,0)] declared at line 6 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N32) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+                SEQ (uid: N33) inferred ret type: ROOT
+                  LOCAL_DECLARATIONS (uid: N34) inferred ret type: ROOT
+                  STATEMENT_LIST (uid: N35) inferred ret type: ROOT
+                    = (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N37) inferred ret type: INT_TYPEnext [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      ID (uid: N38) inferred ret type: INT_TYPEc [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                SEQ (uid: N39) inferred ret type: ROOT
+                  LOCAL_DECLARATIONS (uid: N40) inferred ret type: ROOT
+                  STATEMENT_LIST (uid: N41) inferred ret type: ROOT
+                    = (uid: N42) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N43) inferred ret type: INT_TYPEnext [scope (3,1) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      + (uid: N44) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                        ID (uid: N45) inferred ret type: INT_TYPEfirst [scope (3,1) <- (2,0)] declared at line 4 (type: INT_TYPE) 
+                        ID (uid: N46) inferred ret type: INT_TYPEsecond [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                    = (uid: N47) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N48) inferred ret type: INT_TYPEfirst [scope (3,1) <- (2,0)] declared at line 4 (type: INT_TYPE) 
+                      ID (uid: N49) inferred ret type: INT_TYPEsecond [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                    = (uid: N50) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N51) inferred ret type: INT_TYPEsecond [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                      ID (uid: N52) inferred ret type: INT_TYPEnext [scope (3,1) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+              PRINT (uid: N53) inferred ret type: ROOT
+                ID (uid: N54) inferred ret type: INT_TYPEnext [scope (2,0) <- (1,0)] declared at line 6 (type: INT_TYPE) 
+        RETURN (uid: N55) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to main at line 1 
+          INT_LITERAL (uid: N56) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: INT_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+    SEQ (uid: N3) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N4) inferred ret type: ROOT
+        = (uid: N5) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N6) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          INT_LITERAL (uid: N7) inferred ret type: INT_TYPE10(type: INT_TYPE) 
+        = (uid: N8) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N9) inferred ret type: INT_TYPEfirst [scope (1,0) <- (0,0)] declared at line 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N10) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+        = (uid: N11) inferred ret type: INT_TYPE(type: INT_TYPE) 
+          ID (uid: N12) inferred ret type: INT_TYPEsecond [scope (1,0) <- (0,0)] declared at line 5 (type: INT_TYPE) 
+          INT_LITERAL (uid: N13) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+        ID (uid: N14) inferred ret type: INT_TYPEnext [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+        ID (uid: N15) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N16) inferred ret type: ROOT
+        FOR (uid: N17) inferred ret type: ROOT
+          = (uid: N18) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N19) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+            INT_LITERAL (uid: N20) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+          < (uid: N21) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N22) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+            ID (uid: N23) inferred ret type: INT_TYPEn [scope (1,0) <- (0,0)] declared at line 3 (type: INT_TYPE) 
+          ++ (uid: N24) inferred ret type: INT_TYPE(type: INT_TYPE) 
+            ID (uid: N25) inferred ret type: INT_TYPEc [scope (1,0) <- (0,0)] declared at line 6 (type: INT_TYPE) 
+          SEQ (uid: N26) inferred ret type: ROOT
+            LOCAL_DECLARATIONS (uid: N27) inferred ret type: ROOT
+            STATEMENT_LIST (uid: N28) inferred ret type: ROOT
+              IF_ELSE_STMT (uid: N29) inferred ret type: ROOT
+                <= (uid: N30) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                  ID (uid: N31) inferred ret type: INT_TYPEc [scope (2,0) <- (1,0)] declared at line 6 (type: INT_TYPE) 
+                  INT_LITERAL (uid: N32) inferred ret type: INT_TYPE1(type: INT_TYPE) 
+                SEQ (uid: N33) inferred ret type: ROOT
+                  LOCAL_DECLARATIONS (uid: N34) inferred ret type: ROOT
+                  STATEMENT_LIST (uid: N35) inferred ret type: ROOT
+                    = (uid: N36) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N37) inferred ret type: INT_TYPEnext [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      ID (uid: N38) inferred ret type: INT_TYPEc [scope (3,0) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                SEQ (uid: N39) inferred ret type: ROOT
+                  LOCAL_DECLARATIONS (uid: N40) inferred ret type: ROOT
+                  STATEMENT_LIST (uid: N41) inferred ret type: ROOT
+                    = (uid: N42) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N43) inferred ret type: INT_TYPEnext [scope (3,1) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+                      + (uid: N44) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                        ID (uid: N45) inferred ret type: INT_TYPEfirst [scope (3,1) <- (2,0)] declared at line 4 (type: INT_TYPE) 
+                        ID (uid: N46) inferred ret type: INT_TYPEsecond [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                    = (uid: N47) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N48) inferred ret type: INT_TYPEfirst [scope (3,1) <- (2,0)] declared at line 4 (type: INT_TYPE) 
+                      ID (uid: N49) inferred ret type: INT_TYPEsecond [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                    = (uid: N50) inferred ret type: INT_TYPE(type: INT_TYPE) 
+                      ID (uid: N51) inferred ret type: INT_TYPEsecond [scope (3,1) <- (2,0)] declared at line 5 (type: INT_TYPE) 
+                      ID (uid: N52) inferred ret type: INT_TYPEnext [scope (3,1) <- (2,0)] declared at line 6 (type: INT_TYPE) 
+              PRINT (uid: N53) inferred ret type: ROOT
+                ID (uid: N54) inferred ret type: INT_TYPEnext [scope (2,0) <- (1,0)] declared at line 6 (type: INT_TYPE) 
+        RETURN (uid: N55) inferred ret type: ROOT[scope (1,0) <- (0,0)]return to main at line 1 
+          INT_LITERAL (uid: N56) inferred ret type: INT_TYPE0(type: INT_TYPE) 
+(0-0) contains:
+  VAR_INT __10 (offset: 0 or addr: 0)
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 40 entries
+0: (LABEL, main, -, -)
+1: (ASSIGN, n, __10, -)
+2: (ASSIGN, first, __0, -)
+3: (ASSIGN, second, __1, -)
+4: (ASSIGN, c, __0, -)
+5: (LABEL, __L_17_FOR_BEGIN, -, -)
+6: (ASSIGN, __T0, c, -)
+7: (ASSIGN, __T1, n, -)
+8: (LT, __T2, __T0, __T1)
+9: (ifTrue, __L_21_TRUE, __T2, -)
+10: (ASSIGN, __T2, __0, -)
+11: (GOTO, __L_21_DONE, -, -)
+12: (LABEL, __L_21_TRUE, -, -)
+13: (ASSIGN, __T2, __1, -)
+14: (LABEL, __L_21_DONE, -, -)
+15: (ifFalse, __L_17_FOR_END, __T2, -)
+16: (ASSIGN, __T4, c, -)
+17: (ASSIGN, __T5, __1, -)
+18: (LTEQ, __T6, __T4, __T5)
+19: (ifTrue, __L_30_TRUE, __T6, -)
+20: (ASSIGN, __T6, __0, -)
+21: (GOTO, __L_30_DONE, -, -)
+22: (LABEL, __L_30_TRUE, -, -)
+23: (ASSIGN, __T6, __1, -)
+24: (LABEL, __L_30_DONE, -, -)
+25: (ASSIGN, __T3, __T6, -)
+26: (ifFalse, __L_29_ELSE, __T3, -)
+27: (ASSIGN, next, c, -)
+28: (GOTO, __L_29_FI, -, -)
+29: (LABEL, __L_29_ELSE, -, -)
+30: (ADD, __T7, first, second)
+31: (ASSIGN, next, __T7, -)
+32: (ASSIGN, first, second, -)
+33: (ASSIGN, second, next, -)
+34: (LABEL, __L_29_FI, -, -)
+35: (PRINT, next, -, -)
+36: (INC, c, -, -)
+37: (GOTO, __L_17_FOR_BEGIN, -, -)
+38: (LABEL, __L_17_FOR_END, -, -)
+39: (RETURN, __0, -, -)
+second -12
+c -16
+n -20
+next -24
+first -28
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_INT main (0 params:)space needed: 28
+  (1-0) contains:
+    VAR_INT second (offset: -8 or addr: 0)
+    VAR_INT c (offset: -12 or addr: 0)
+    VAR_INT n (offset: -16 or addr: 0)
+    VAR_INT next (offset: -20 or addr: 0)
+    VAR_INT first (offset: -24 or addr: 0)
+    (2-0) contains:
+      (3-0) contains:
+      (3-1) contains:
+
+
+===========================================================
+fibb.c finished.

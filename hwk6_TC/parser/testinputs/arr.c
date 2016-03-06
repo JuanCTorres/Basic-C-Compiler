@@ -39,6 +39,6 @@ int main (void) {
   print la[2];
   //printf("%d\n", la[2]);  
 
-  
+  return 123;
 
 }

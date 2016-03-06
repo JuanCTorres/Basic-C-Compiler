@@ -13,7 +13,7 @@
                        | #(LABEL, foo, -, -)
   0x0014:              | foo:
                        | 
-  0x0014:30f108000000  | 	irmovl 8, %ecx
+  0x0014:30f10c000000  | 	irmovl 12, %ecx
   0x001a:6114          | 	subl %ecx, %esp
                        | #NUM PARAMS: 1
   0x001c:500504000000  | 	mrmovl 4(%ebp), %eax

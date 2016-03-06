@@ -691,8 +691,9 @@ int check_function(ast_node root, symboltable_t *symtab) {
         else {
           int k = 0;
           for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
+            if(!((anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T) || (anode->return_type == ARRAY_TYPE_N && node->parameters[k] == VAR_ARRAY_INT_T)) ) {
 
-            if(!(anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T)) {
+            // if(!(anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T)) {
               funcError = 1;
               //printf("\n\n  parm type is: %s return_type is: %s \n\n", TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type));
               // fprintf(stderr, "\n\n %s return_type: %s but should be %s \n\n",anode->value_string ,NODE_NAME(anode->return_type), TYPE_NAME(node->parameters[k]));

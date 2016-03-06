@@ -1,0 +1,36 @@
+Result of test done to parser.
+
+simple.c BEGIN.
+===========================================================
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: VOID_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: VOID_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+    SEQ (uid: N3) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N4) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N5) inferred ret type: ROOT
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT
+  FUNC_DECLARATION (uid: N1) inferred ret type: VOID_TYPEmain  (0 params:)[scope (0,0) <- (0,0)] declared at line 1 (type: VOID_TYPE) 
+    FORMAL_PARAMS (uid: N2) inferred ret type: ROOT
+    SEQ (uid: N3) inferred ret type: ROOT
+      LOCAL_DECLARATIONS (uid: N4) inferred ret type: ROOT
+      STATEMENT_LIST (uid: N5) inferred ret type: ROOT
+(0-0) contains:
+  VAR_INT __1 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+There are 1 entries
+0: (LABEL, main, -, -)
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  FUNC_VOID main (0 params:)space needed: 0
+  (1-0) contains:
+
+
+===========================================================
+simple.c finished.

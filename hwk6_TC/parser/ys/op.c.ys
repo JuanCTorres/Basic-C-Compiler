@@ -13,7 +13,7 @@
 #(LABEL, foo, -, -)
 foo:
 
-	irmovl 8, %ecx
+	irmovl 12, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 1
 	mrmovl 4(%ebp), %eax
@@ -82,7 +82,7 @@ main:
 #(CALL, foo, -, -)
 	call foo
 #(POSTCALL, foo, -, -)
-	irmovl 12, %ecx
+	irmovl 16, %ecx
 	rrmovl %ebp, %esp
 	addl %ecx, %esp
 #(ASSIGN, a, __RET_INT, -)

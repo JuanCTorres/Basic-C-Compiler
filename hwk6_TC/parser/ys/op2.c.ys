@@ -13,7 +13,7 @@
 #(LABEL, foo, -, -)
 foo:
 
-	irmovl 8, %ecx
+	irmovl 12, %ecx
 	subl %ecx, %esp
 #NUM PARAMS: 1
 	mrmovl 4(%ebp), %eax

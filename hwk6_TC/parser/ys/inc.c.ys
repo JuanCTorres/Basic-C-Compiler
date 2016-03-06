@@ -61,12 +61,13 @@ L_16_DONE:
 	rmmovl %eax, 2496
 
 #(ADDR, __T4, a, -)
-	irmovl 2724, %eax
+	irmovl -28, %eax
+	addl %ebp, %eax
 	rmmovl %eax, 2500
-#(ADD, __T5, __T4, __T3)
+#(SUB, __T5, __T4, __T3)
 	mrmovl 2500, %eax
 	mrmovl 2496, %ecx
-	addl %ecx, %eax
+	subl %ecx, %eax
 	rmmovl %eax, 2504
 
 #(ASSIGN, __T5, __0, -)
@@ -79,7 +80,7 @@ L_16_DONE:
 	rmmovl %eax, 2512
 
 #(ADDR, __T8, b, -)
-	irmovl -8, %eax
+	irmovl -28, %eax
 	addl %ebp, %eax
 	rmmovl %eax, 2516
 #(SUB, __T9, __T8, __T7)
@@ -120,12 +121,13 @@ L_12_FOR_END:
 	rmmovl %eax, 2540
 
 #(ADDR, __T15, a, -)
-	irmovl 2724, %eax
+	irmovl -8, %eax
+	addl %ebp, %eax
 	rmmovl %eax, 2544
-#(ADD, __T16, __T15, __T14)
+#(SUB, __T16, __T15, __T14)
 	mrmovl 2544, %eax
 	mrmovl 2540, %ecx
-	addl %ecx, %eax
+	subl %ecx, %eax
 	rmmovl %eax, 2548
 
 #(DEREF, __T13, __T16, -)
@@ -139,12 +141,13 @@ L_12_FOR_END:
 	rmmovl %eax, 2556
 
 #(ADDR, __T19, a, -)
-	irmovl 2724, %eax
+	irmovl -8, %eax
+	addl %ebp, %eax
 	rmmovl %eax, 2560
-#(ADD, __T20, __T19, __T18)
+#(SUB, __T20, __T19, __T18)
 	mrmovl 2560, %eax
 	mrmovl 2556, %ecx
-	addl %ecx, %eax
+	subl %ecx, %eax
 	rmmovl %eax, 2564
 
 #(MULT, __T24, n, __4)
@@ -154,12 +157,13 @@ L_12_FOR_END:
 	rmmovl %eax, 2580
 
 #(ADDR, __T25, a, -)
-	irmovl 2724, %eax
+	irmovl -8, %eax
+	addl %ebp, %eax
 	rmmovl %eax, 2584
-#(ADD, __T26, __T25, __T24)
+#(SUB, __T26, __T25, __T24)
 	mrmovl 2584, %eax
 	mrmovl 2580, %ecx
-	addl %ecx, %eax
+	subl %ecx, %eax
 	rmmovl %eax, 2588
 
 #(DEREF, __T23, __T26, -)
@@ -293,12 +297,13 @@ L_53_DONE:
 	rmmovl %eax, 2676
 
 #(ADDR, __T49, a, -)
-	irmovl 2724, %eax
+	irmovl -28, %eax
+	addl %ebp, %eax
 	rmmovl %eax, 2680
-#(ADD, __T50, __T49, __T48)
+#(SUB, __T50, __T49, __T48)
 	mrmovl 2680, %eax
 	mrmovl 2676, %ecx
-	addl %ecx, %eax
+	subl %ecx, %eax
 	rmmovl %eax, 2684
 
 #(DEREF, __T47, __T50, -)
@@ -315,7 +320,7 @@ L_53_DONE:
 	rmmovl %eax, 2696
 
 #(ADDR, __T54, b, -)
-	irmovl -8, %eax
+	irmovl -28, %eax
 	addl %ebp, %eax
 	rmmovl %eax, 2700
 #(SUB, __T55, __T54, __T53)
