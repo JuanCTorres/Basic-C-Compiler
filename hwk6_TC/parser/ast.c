@@ -204,3 +204,27 @@ printf("inferred ret type: %s", NODE_NAME(root->return_type));
                       // subtrees, i.e., after done recursing.
   }
 }
+
+
+void patch_return_types(ast_node root){
+  switch(root->node_type){
+
+    case ARRAY_TYPE_N:             // check for return types!
+      if(root->left_child == NULL){
+        root->return_type = ARRAY_TYPE_N;
+      }
+      else{
+        root->return_type = INT_TYPE_N;
+      }
+      break;
+
+  default:
+    break;
+
+  }
+
+  ast_node child;
+  for(child = root->left_child; child != NULL; child = child->right_sibling){
+    patch_return_types(child);
+  }
+}

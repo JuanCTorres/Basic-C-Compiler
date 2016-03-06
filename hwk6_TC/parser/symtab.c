@@ -185,8 +185,11 @@ symhashtable_t *create_symhashtable(int entries) {
         for(anode = astnode->left_child->left_child; anode != NULL; anode = anode->right_sibling) {
           if(anode->return_type == INT_TYPE_N) {
             node->parameters[i] = VAR_INT_T;
-            i++;
           }
+          else if(anode->return_type == ARRAY_TYPE_N){
+            node->parameters[i] = VAR_ARRAY_INT_T;
+          }
+          i++;
         }
       }
 
@@ -615,7 +618,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
         node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(node != NULL); //as hashtable was built prev, it must be found for array_type_n
-      //if(root->return_type == 0) {
+      if(root->return_type == 0) {
         if(node->type == VAR_ARRAY_INT_T){
           if(root->left_child == NULL){
             root->return_type = ARRAY_TYPE_N;
@@ -625,7 +628,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
           }
         }
 
-      //}
+      }
       root->line_declared = node->abnode->line_num;
       break;
 
@@ -1246,12 +1249,6 @@ int check_types_in_expr(ast_node root) {
     check_types_in_expr(child);
   return 0;
 }
-
-
-
-
-
-
 
 
 void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab) {

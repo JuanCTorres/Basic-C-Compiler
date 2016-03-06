@@ -179,4 +179,6 @@ void insert_scope_info(ast_node root, int curr_level, int curr_sib, int parent_l
 void label_nodes(ast_node root);
 
 
+void patch_return_types(ast_node root);
+
 #endif

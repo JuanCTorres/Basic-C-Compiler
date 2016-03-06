@@ -55,7 +55,9 @@ if(argc != 2) {
  	// printf("\nNo syntatical errors detected.\n\n");
  	//}
  	if (!noRoot) {
-    	label_nodes(root);
+    label_nodes(root);
+
+		patch_return_types(root);	
 
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
