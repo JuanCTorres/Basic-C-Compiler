@@ -198,6 +198,9 @@ void check_binary(ast_node root);
 void check_assignment(ast_node root);
 
 void check_unary(ast_node root);
+
 void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab);
+
+void patch_symbol_table(ast_node root, symhashtable_t *symtable);
 
 #endif

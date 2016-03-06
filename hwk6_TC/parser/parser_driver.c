@@ -57,7 +57,7 @@ if(argc != 2) {
  	if (!noRoot) {
     label_nodes(root);
 
-		patch_return_types(root);	
+		patch_return_types(root);
 
  		symboltable_t *symtab = create_symboltable();
  		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
@@ -74,6 +74,8 @@ if(argc != 2) {
 	 		printf("\n\n");
 
 			infer_type(root); //must come after record_var_type_in_ast, infers types for OP and assign
+			patch_symbol_table(root, symtab->root);
+
 			if(typeError ) {
 				fprintf(stderr, "\nWARNING: There were type inconsistency errors. Data structure may be ill-formed.\n\n");
 			}

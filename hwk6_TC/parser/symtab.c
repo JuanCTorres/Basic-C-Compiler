@@ -1321,3 +1321,36 @@ void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab) {
                       // subtrees, i.e., after done recursing.
   }
 }
+
+void patch_symbol_table(ast_node root, symhashtable_t *symtable){
+
+  symhashtable_t *hashtable;
+  symnode_t * snode;
+
+  switch(root->node_type){
+
+    case ID_N:
+
+      hashtable = find_hashtable(symtable, root->curr_level, root->curr_sib);
+      if(hashtable != NULL){
+        snode = lookup_symhashtable(hashtable, root->value_string, NOHASHSLOT);
+        if(snode != NULL){
+          if(snode->type == VAR_ARRAY_INT_T && root->left_child == NULL){
+            printf("Found one\n\n");
+            root->return_type = ARRAY_TYPE_N;
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
+  ast_node child;
+
+  for(child = root->left_child; child != NULL; child = child->right_sibling){
+    patch_symbol_table(child, symtable);
+  }
+}
