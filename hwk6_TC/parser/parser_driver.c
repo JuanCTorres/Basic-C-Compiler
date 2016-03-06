@@ -61,6 +61,7 @@ if(argc != 2) {
  		build_symbol_table(root, 0, 0, symtab); //builds symbol table and checks for variable/func declaration and scope appropriate use
  		// redef_check(root, 0, 0, symtab);
 
+
  		if(symtabError) {	//when we get var/func use without declaration, we cannot progress any further as we cannot build the sym table which later funcs depend on
  			fprintf(stderr, "\nWARNING: There were symtab creation errors. Halting!\n");
  			return 1;
@@ -86,6 +87,9 @@ if(argc != 2) {
 			if(exprTypeError) {
 				fprintf(stderr, "\nWARNING: There were type disagreement in expressions. Data structure may be ill-formed.\n\n");
 			}
+
+			print_ast(root, 0, 0, 0); //print ast tree with added information
+
       //print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
 			//print_ast relies on check_return
@@ -104,6 +108,8 @@ if(argc != 2) {
       link_ast_to_symnode(root, symtab);
 
 			correct_arrays(root);
+
+			printf("\n\n\n");
 
 			print_ast(root, 0, 0, 0); //print ast tree with added information
 

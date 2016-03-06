@@ -418,12 +418,12 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
       break;
 
     case ID_N:      /* print the id */
-      
+
         check_if_redef(root, symtab ,level, sibno);
 
       if(root->return_type != 0) {  // a non-zero value means that it is a declaration, since only declarations
                                     // are assigned a return type when building the abstract syntax tree.
-        
+
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
           hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
@@ -614,13 +614,18 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
       for(;hash != NULL && node == NULL; hash = hash->parent) {
         node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
-      assert(node != NULL); //as hashtable was built prev, it must be found for array_typE_n
-      if(root->return_type == 0) {
+      assert(node != NULL); //as hashtable was built prev, it must be found for array_type_n
+      //if(root->return_type == 0) {
         if(node->type == VAR_ARRAY_INT_T){
-          root->return_type = INT_TYPE_N;
+          if(root->left_child == NULL){
+            root->return_type = ARRAY_TYPE_N;
+          }
+          else{
+            root->return_type = INT_TYPE_N;
+          }
         }
 
-      }
+      //}
       root->line_declared = node->abnode->line_num;
       break;
 
@@ -640,8 +645,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
   }
 
 
-  /* Recurse on each child of the subtree root, with a depth one
-     greater than the root's depth. */
+  /* Recurse on each child of the subtree root, with a depth one */
   ast_node child;
   for (child = root->left_child; child != NULL; child = child->right_sibling)
     record_var_type_in_ast(child, symtab);
@@ -1320,10 +1324,3 @@ void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab) {
                       // subtrees, i.e., after done recursing.
   }
 }
-
-
-
-
-
-
-
