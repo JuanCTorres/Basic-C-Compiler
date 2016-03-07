@@ -68,6 +68,7 @@ typedef struct symnode {
   decl_type *parameters;
   int num_parameters;
   struct ast_node_struct* abnode;
+  int array_length;
   int offset;
   int num_variables;
   int addr;
@@ -189,6 +190,10 @@ void collect_literals(ast_node root, symboltable_t *symtab);
 void link_ast_to_symnode(ast_node root, symboltable_t *symtab);
 
 void correct_arrays(ast_node root);
+
+symnode_t *create_const_symnode(char* name, int val);
+
+ast_node create_int_astnode(int val);
 
 /* ~~~~~~~~~~ Functions for checking type disagreements ~~~~~~~~~*/
 int check_types_in_expr(ast_node root);

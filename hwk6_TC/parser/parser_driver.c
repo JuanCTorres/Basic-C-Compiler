@@ -21,6 +21,7 @@
 #include "quad.h"
 #include "targetcode.h"
 
+extern symnode_t *num_constants[1000];
 
 ast_node root = NULL;
 
@@ -74,6 +75,7 @@ if(argc != 2) {
 	 		printf("\n\n");
 
 			infer_type(root); //must come after record_var_type_in_ast, infers types for OP and assign
+
 			patch_symbol_table(root, symtab->root);
 
 			if(typeError ) {
@@ -92,7 +94,7 @@ if(argc != 2) {
 				fprintf(stderr, "\nWARNING: There were type disagreement in expressions. Data structure may be ill-formed.\n\n");
 			}
 
-			print_ast(root, 0, 0, 0); //print ast tree with added information
+			//print_ast(root, 0, 0, 0); //print ast tree with added information
 
       //print_ast(root, 0, 0, 0); //print ast tree with added information
 			//print_ast relies on data inserted from build_symbol_table above;
@@ -108,6 +110,12 @@ if(argc != 2) {
       collect_literals(root, symtab);
 
       set_constants(symtab->literal_collection);
+
+			set_global_int_const();
+
+			for(int i = 0; i < 1000; i++){
+				printf("%d ", num_constants[i]->abnode->value_int);
+			}
 
       link_ast_to_symnode(root, symtab);
 

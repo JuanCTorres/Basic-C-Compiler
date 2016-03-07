@@ -4,7 +4,7 @@
 #
 #
 # Input: none
-# Output: 
+# Output:
 
 rm -f ./testoutputs/*
 make clean
@@ -23,6 +23,7 @@ do
 	printf "${fileArray[$i]} BEGIN.\n" >> "${file}"
 	printf "===========================================================\n\n" >> "${file}"
 
+	echo ${fileArray[$i]}
 	./parser ${fileArray[$i]} < ./testinputs/${fileArray[$i]} >> "${file}" 2>&1
 
 	if [ $? -eq 0 ];

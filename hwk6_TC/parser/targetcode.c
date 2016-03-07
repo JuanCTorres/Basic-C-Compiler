@@ -424,8 +424,9 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 				// If function has params
 				//if(node->abnode->left_child->left_child != NULL) {
 				if(has_params(node)){
-					hash = node->abnode->left_child->left_child->snode->parent; //param
-					// printf("\nLOLZ HERE!\n");
+					// Get the hashtable that the params live in.
+					hash = node->abnode->left_child->left_child->snode->parent;
+					// Make space for them
 					calculate_var_offsets_helper(hash);
 					node->needed_space = -offset;
 				}
@@ -433,12 +434,13 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 				// If function has locals
 				//else if(node->abnode->left_child->right_sibling->left_child->left_child != NULL) { //this means tht this function contains var declarations
 				else if(has_locals(node)){
+
 					// If local declaration contains an assignment, this node will be a '=' in the ast.
 					// Use its left child, which is linked to the variable declaration in the symbol table.
 					//if(node->abnode->left_child->right_sibling->left_child->left_child->left_child != NULL){
 					if(node->abnode->left_child->right_sibling->left_child->left_child->node_type == OP_ASSIGN_N){
-
 						hash = node->abnode->left_child->right_sibling->left_child->left_child->left_child->snode->parent; //hashtabel containing var declaration
+
 					// If it does not contain an assignment, simply use the node itself, which is
 					// linked to the variable declaration in the symbol table.
 					} else{
@@ -459,7 +461,6 @@ int calculate_var_offsets(symhashtable_t* hashtable) {
 }
 
 
-
 void calculate_var_offsets_helper(symhashtable_t* hashtable){
 
 	for(int j = 0; j < HASHSIZE; j++ ) {
@@ -471,7 +472,12 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable){
 			}
 			else if(node->type == VAR_ARRAY_INT_T) {
 				node->offset = offset;
-				offset = offset - 4 * node->abnode->array_length;
+				if(node->abnode->array_length != 0){
+					offset = offset - 4 * node->abnode->array_length;
+				}
+				else{
+					offset = offset - 4 * 100; // Allocate 100 elements for arrays as parameters
+				}
 			}
 		}
 	}

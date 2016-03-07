@@ -47,11 +47,11 @@ void label_nodes(ast_node root){
   root->node_no = curr_number++;
   ast_node child;
 
-  if(root->node_type == ARRAY_TYPE_N) {
-    if( root->left_child != NULL ){
-      root->array_length = root->left_child->value_int;
-    }
-  }
+  // if(root->node_type == ARRAY_TYPE_N) {
+  //   if( root->left_child != NULL ){
+  //     root->array_length = root->left_child->value_int;
+  //   }
+  // }
 
   for(child = root->left_child; child != NULL; child = child->right_sibling){
     label_nodes(child);
@@ -69,7 +69,7 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print the node type. */
   printf("%s (uid: N%d) ", NODE_NAME(root->node_type), root->node_no);
-printf("inferred ret type: %s", NODE_NAME(root->return_type));
+printf("inferred ret type: %s ", NODE_NAME(root->return_type));
 
 
   /* Print attributes specific to node types. */
@@ -95,6 +95,7 @@ printf("inferred ret type: %s", NODE_NAME(root->return_type));
       }
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
+      printf(" array length = %d ", root->snode->abnode->array_length);
       printf(" declared at line %d ", root->line_declared);
       break;
 
@@ -128,6 +129,9 @@ printf("inferred ret type: %s", NODE_NAME(root->return_type));
         // printf(" (type: %s)", NODE_NAME(root->return_type));
       }
       // printf("[in scope: (%d,%d) | child of (%d,%d)]", lvl, sublvl, MAX(lvl - 1, 0), siblings[lvl - 1]);
+      if(root->return_type == ARRAY_TYPE_N){
+        printf(" array length: %d ", root->snode->abnode->array_length);
+      }
       printf("[scope (%d,%d) <- (%d,%d)]", root->curr_level, root->curr_sib, root->parent_level, root->parent_sib);
       printf(" declared at line %d ", root->line_declared);
       break;
@@ -169,7 +173,7 @@ printf("inferred ret type: %s", NODE_NAME(root->return_type));
   }
 
   if(root->return_type != 0) {
-    printf("(type: %s) ", NODE_NAME(root->return_type));
+    printf(" (type: %s) ", NODE_NAME(root->return_type));
   }
 
   /* If ran out of space in array to track current sub-scope,

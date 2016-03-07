@@ -127,6 +127,30 @@ symhashtable_t *create_symhashtable(int entries) {
     return node;
   }
 
+  symnode_t *create_const_symnode(char* name, int val){
+    symnode_t *node = calloc(1, sizeof(symnode_t));
+    assert(node != NULL);
+
+    node->name = strdup(name);
+    node->num_parameters = 0;
+    node->num_val = val;
+    node->abnode = create_int_astnode(val);
+
+    return node;
+  }
+
+  ast_node create_int_astnode(int val){
+
+    assert(val < 1000);
+    ast_node node = create_ast_node(INT_LITERAL_N);
+    char *name = calloc(100, sizeof(char));
+    sprintf(name, "__%d", val);
+    node->value_string = name;
+    node->value_int = val;
+
+    return node;
+  }
+
 
 /* Insert a new entry into a symhashtable, but only if it is not
    already present. Return*/
@@ -149,6 +173,13 @@ symhashtable_t *create_symhashtable(int entries) {
 
       if(astnode->node_type == INT_LITERAL_N){
         node->num_val = astnode->value_int;
+      }
+
+      if(astnode->node_type == ARRAY_TYPE_N) {
+        if(astnode->left_child != NULL ){
+          astnode->array_length = astnode->left_child->value_int;
+          node->array_length = astnode->array_length;
+        }
       }
 
       if(astnode->node_type == STRING_LITERAL_N){
@@ -209,6 +240,11 @@ symhashtable_t *create_symhashtable(int entries) {
 
       node->next = hashtable->table[slot];
       hashtable->table[slot] = node;
+    }
+    else{
+      if(node->abnode->node_type == ARRAY_TYPE_N || node->abnode->return_type == ARRAY_TYPE_N) {
+        node->abnode->array_length = node->array_length;
+      }
     }
 
     return node;
@@ -528,7 +564,7 @@ void pretty_print(symhashtable_t *root, int depth) {
         printf(" (offset: %d or addr: %d)", node->offset, node->addr);
       }
       if(node->type == VAR_ARRAY_INT_T) {
-        printf(" (length: %d, offset: %d or addr: %d)", node->abnode->array_length, node->offset, node->addr);
+        printf(" (length: %d, offset: %d or addr: %d), sym_length = %d ", node->abnode->array_length, node->offset, node->addr, node->array_length);
       }
 
         printf("\n");
@@ -1337,7 +1373,6 @@ void patch_symbol_table(ast_node root, symhashtable_t *symtable){
         snode = lookup_symhashtable(hashtable, root->value_string, NOHASHSLOT);
         if(snode != NULL){
           if(snode->type == VAR_ARRAY_INT_T && root->left_child == NULL){
-            printf("Found one\n\n");
             root->return_type = ARRAY_TYPE_N;
           }
         }

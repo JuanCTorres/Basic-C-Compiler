@@ -15,7 +15,7 @@ extern quad_type *quad_array[1024*5];
 symnode_t* true_n = NULL;
 symnode_t* false_n = NULL;
 symnode_t* elem_size_n = NULL;
-
+symnode_t *num_constants[1000];
 
 //NOTE TO THE READER: "Abandon all hope, ye who enter here."
 
@@ -801,10 +801,25 @@ void CG(ast_node x, symhashtable_t *hashtable) {
       case FUNCTION_N:
         // Push arguments
         for(z = x->left_child; z != NULL; z = z->right_sibling){
-          temp = NewTemp(hashtable);
-          left_node = get_symnode(z, hashtable);
-          make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
-          make_insert_quad(Q_PUSH, temp, NULL, NULL);
+          // arrays with no slot specified -> entire arr as param.
+          if(z->return_type == ARRAY_TYPE_N && z->left_child == NULL){
+            for(int arr_i = 0; arr_i < z->snode->abnode->array_length; arr_i++){
+
+              insert_index_astnode(z, arr_i);
+              left_node = get_symnode(z, hashtable);
+              temp = NewTemp(hashtable);
+              make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
+              make_insert_quad(Q_PUSH, temp, NULL, NULL);
+
+            }
+            z->left_child = NULL; //undo the index additions; the ast did not have them initially.
+
+          } else{
+            temp = NewTemp(hashtable);
+            left_node = get_symnode(z, hashtable);
+            make_insert_quad(Q_ASSIGN, temp, left_node, NULL);
+            make_insert_quad(Q_PUSH, temp, NULL, NULL);
+          }
         }
         // Precall
         left_node = get_symnode(x, hashtable);
@@ -968,8 +983,29 @@ void set_constants(symhashtable_t *hashtable){
   }
 }
 
+void set_global_int_const(){
+  for(int val = 0; val < 1000; val++){
+    char *name = calloc(100, sizeof(char));
+    sprintf(name, "__%d", val);
+    num_constants[val] = create_const_symnode(name, val);
+  }
+}
+
+//
+// ast_node create_int_const(int val){
+//
+//   assert(val < 1000);
+//   ast_node node = create_ast_node(INT_LITERAL_N);
+//   char *name = calloc(100, sizeof(char));
+//   sprintf(name, "__%d", val);
+//   node->value_string = name;
+//   node->value_int = val;
+//
+//   return node;
+// }
+
 symnode_t *get_symnode(ast_node anode, symhashtable_t* hashtable) {
-  if(anode->node_type == ARRAY_TYPE_N) {
+  if(anode->node_type == ARRAY_TYPE_N || anode->return_type == ARRAY_TYPE_N) {
     return get_array_slot_val(anode, hashtable);
 
   }
@@ -1103,7 +1139,12 @@ symnode_t *get_array_slot_addr(ast_node anode, symhashtable_t *hashtable){
   temp4 = NewTemp(hashtable);
 
   // What index of the array are we looking for?
-  index = get_symnode(anode->left_child, hashtable);
+  if(anode->node_type == ID_N && anode->return_type == ARRAY_TYPE_N){
+    index = num_constants[anode->left_child->value_int];
+  } else{
+    index = get_symnode(anode->left_child, hashtable);
+  }
+
   assert(index != NULL);
 
   make_insert_quad(Q_MULT, temp, index, elem_size_n);
@@ -1142,4 +1183,9 @@ int is_var_global(symnode_t *var){
   } else{
     return 0;
   }
+}
+
+void insert_index_astnode(ast_node root, int i){
+  assert(i < 1000);
+  root->left_child = num_constants[i]->abnode;
 }

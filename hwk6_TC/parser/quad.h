@@ -133,5 +133,10 @@ Returns 1 if var is global, i.e., was declared in scope (0-0)
 */
 int is_var_global(symnode_t *var);
 
+/* */
+void set_global_int_const();
+
+void insert_index_astnode(ast_node root, int i);
+
 
 #endif
