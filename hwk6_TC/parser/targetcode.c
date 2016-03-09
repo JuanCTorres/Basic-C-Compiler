@@ -7,6 +7,7 @@
 
 #define MAINSTART 20
 #define DEBUG 1
+#define DEFAULT_ARRAY_PARAM_SIZE 20
 extern int temp_counter;
 
 /* In our memory space, first will come the program instructions, then the
@@ -218,15 +219,36 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					#if DEBUG
 					fprintf(ofile, "#NUM PARAMS: %d\n", array[i]->dest->num_parameters);
 					#endif
+
 					if(array[i]->dest->num_parameters > 0){
 
+						// Change # of params to let the for loop take care of every single
+						// slot in the arrays passed as parameters.
+						int num_arr = 0;
 						for(int j = 0; j < array[i]->dest->num_parameters; j++){
+							if(array[i]->dest->parameters[j] == VAR_ARRAY_INT_T){
+								num_arr++;
+							}
+						}
+
+						if(num_arr > 0){
+							fprintf(ofile, "#Increasing num of params\n");
+							array[i]->dest->num_parameters += (num_arr * DEFAULT_ARRAY_PARAM_SIZE - 1);
+						}
+						fprintf(ofile, "#New num of params: %d\n", array[i]->dest->num_parameters);
+						for(int j = 0; j < array[i]->dest->num_parameters; j++){
+							fprintf(ofile, "#%d\n", j);
 							fprintf(ofile, "\tmrmovl %d(%s), %s\n",
 							 	((j * 4) + 4), BASE_PTR, LEFT_OPERAND_REG);
 							fprintf(ofile, "\trmmovl %s, %d(%s)\n",
-							 	LEFT_OPERAND_REG, (-j * 4) - 8, BASE_PTR);
-
+							 	LEFT_OPERAND_REG, (-j * 4) - 8, BASE_PTR); // -8; -; 8 - 8;
 						}
+
+						// Change # of params back
+						if(num_arr > 0){
+							array[i]->dest->num_parameters-= (num_arr * DEFAULT_ARRAY_PARAM_SIZE - 1);
+						}
+
 					}
 				}
 				break;
@@ -273,7 +295,6 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 				else {
 					assert(0);
 				}
-				// for(int i = 0; i <strlen(array[i]->))
 				break;
 
 			case Q_EQ:
@@ -466,18 +487,27 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable){
 	for(int j = 0; j < HASHSIZE; j++ ) {
 		for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 			if(node->type == VAR_INT_T){
-				node->offset = offset;
-				offset -= 4;
-				printf("%s %d\n", node->name,offset);
+				if(!node->offset){
+					node->offset = offset;
+					offset -= 4;
+					printf("%s %d\n", node->name,offset);
+				}
 			}
-			else if(node->type == VAR_ARRAY_INT_T) {
-				node->offset = offset;
-				if(node->abnode->array_length != 0){
-					offset = offset - 4 * node->abnode->array_length;
+			else if(node->type == VAR_ARRAY_INT_T ||
+				 (node->abnode->node_type == ID_N && node->abnode->return_type == ARRAY_TYPE_N)) { // problem here
+				if(!node->offset){
+					node->offset = offset;
+					offset = offset - 4 * DEFAULT_ARRAY_PARAM_SIZE;
 				}
-				else{
-					offset = offset - 4 * 100; // Allocate 100 elements for arrays as parameters
-				}
+
+				//if(node->abnode->array_length != 0){
+				//	offset = offset - 4 * node->abnode->array_length;
+				//}
+				//else{
+					// Allocate a default number of elements for arrays as parameters
+					// (no way of knowing how long they are when they are params)
+
+				//}
 			}
 		}
 	}
@@ -777,7 +807,7 @@ void move_from_reg(char* reg, symnode_t* target){
 			fprintf(ofile, "rmmovl %s, %d(%s)\n", reg, target->offset, BASE_PTR);
 		}
 	} else{
-		fprintf(ofile, "Error: trying to assign a value to an right value\n");
+		fprintf(ofile, "Error: trying to assign a value to a right value\n");
 	}
 }
 

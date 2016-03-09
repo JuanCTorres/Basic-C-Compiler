@@ -16,7 +16,8 @@
 
 
 #define DELTA 10
-
+#define ELEMSIZE 4
+#define DEFAULT_ARRAY_PARAM_SIZE 20
 
 extern int symtabError;
 extern int typeError;
@@ -430,13 +431,39 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
    * or take other appropriate action.
    */
   switch (root->node_type) {
+    ast_node param;
+    int param_offset = 4;
+    int param_count = 0;
+
     case SEQ_N:     // change main level when see a new sequence
       level++;
       break;
 
     case FORMAL_PARAMS_N:
       level++;
+      param_count = 0;
       insert_scope_info(root, level, sibno, MAX(level - 1, 0), getSibling(level) );
+    //   for(param = root->left_child; param != NULL; param = param->right_sibling){
+    //     if(param->node_type == ARRAY_TYPE_N || param->return_type == ARRAY_TYPE_N){
+    //      param_count += DEFAULT_ARRAY_PARAM_SIZE;
+    //    }
+    //    else{
+    //      param_count++;
+    //    }
+    //  }
+    //  printf("PARAM COUNT!!!!! = %d\n", param_count);
+    //
+    //  for(param = root->left_child; param != NULL; param = param->right_sibling){
+    //    if(param->node_type == ARRAY_TYPE_N || param->return_type == ARRAY_TYPE_N){
+    //      param->snode->offset = param_count * 4;
+    //      param->snode->offset -= DEFAULT_ARRAY_PARAM_SIZE;
+    //    }
+    //    else{
+    //     param->snode->offset = param_count-- * 4;
+    //    }
+    // }
+
+
       break;
 
     case FUNC_DECLARATION_N: // function declaraions
@@ -1143,6 +1170,7 @@ void check_binary(ast_node root) {
       fprintf(stderr, "line: %d | Error: Type disagreement of variable(s) used with binary operator\n", root->line_num);
       fprintf(stderr, "%s\n", NODE_NAME(root->node_type));
     }
+
     if(root->left_child->node_type == CALL_N) {
       if(root->left_child->left_child->return_type == VOID_TYPE_N){
         exprTypeError = 1;
@@ -1374,12 +1402,25 @@ void patch_symbol_table(ast_node root, symhashtable_t *symtable){
         if(snode != NULL){
           if(snode->type == VAR_ARRAY_INT_T && root->left_child == NULL){
             root->return_type = ARRAY_TYPE_N;
+//           root->node_type = ARRAY_TYPE_N; // change in the future
           }
         }
-        break;
+      break;
 
-      default:
-        break;
+    case ARRAY_TYPE_N:
+      hashtable = find_hashtable(symtable, root->curr_level, root->curr_sib);
+      if(hashtable != NULL){
+        snode = lookup_symhashtable(hashtable, root->value_string, NOHASHSLOT);
+        if(snode != NULL){
+          if(snode->type == VAR_INT_T){
+            snode->type = VAR_ARRAY_INT_T;
+          }
+        }
+      }
+      break;
+
+    default:
+      break;
     }
   }
 
@@ -1388,5 +1429,42 @@ void patch_symbol_table(ast_node root, symhashtable_t *symtable){
 
   for(child = root->left_child; child != NULL; child = child->right_sibling){
     patch_symbol_table(child, symtable);
+  }
+}
+
+void assign_param_offsets(ast_node root){
+
+  if(root->node_type == FORMAL_PARAMS_N){
+    int param_count = 0;
+    ast_node param;
+
+    for(param = root->left_child; param != NULL; param = param->right_sibling){
+      if(param->node_type == ARRAY_TYPE_N || param->return_type == ARRAY_TYPE_N){
+        param_count += DEFAULT_ARRAY_PARAM_SIZE;
+      }
+      else{
+        param_count++;
+      }
+    }
+    printf("PARAM COUNT!!!!! = %d\n", param_count);
+
+    for(param = root->left_child; param != NULL; param = param->right_sibling){
+      printf("Param count: %d\n", param_count);
+      if(param->node_type == ARRAY_TYPE_N || param->return_type == ARRAY_TYPE_N){
+        printf("Array\n");
+        param->snode->offset = param_count * 4;
+        param_count -= DEFAULT_ARRAY_PARAM_SIZE;
+      }
+      else{
+        printf("var\n");
+        param->snode->offset = param_count-- * 4;
+      }
+      printf("param count after %d\n", param_count);
+    }
+  }
+
+  ast_node child;
+  for(child = root->left_child; child != NULL; child = child->right_sibling){
+    assign_param_offsets(child);
   }
 }

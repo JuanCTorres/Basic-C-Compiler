@@ -138,5 +138,9 @@ int has_params(symnode_t *node);
 /* Returns 1 if the function symnode has local var declarations, 0 otherwise*/
 int has_locals(symnode_t *node);
 
+/* Returns the offset from the base pointer after the parameters of a function
+are placed */
+int get_param_space(symnode_t *snode);
+
 
 #endif

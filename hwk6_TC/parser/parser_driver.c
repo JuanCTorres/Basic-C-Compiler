@@ -113,10 +113,6 @@ if(argc != 2) {
 
 			set_global_int_const();
 
-			for(int i = 0; i < 1000; i++){
-				printf("%d ", num_constants[i]->abnode->value_int);
-			}
-
       link_ast_to_symnode(root, symtab);
 
 			correct_arrays(root);
@@ -125,7 +121,9 @@ if(argc != 2) {
 
 			print_ast(root, 0, 0, 0); //print ast tree with added information
 
-      pretty_print(symtab->literal_collection, 0);
+			assign_param_offsets(root);
+
+			pretty_print(symtab->literal_collection, 0);
 
 	  	//add_temps_to_ast(root, symtab->literal_collection);
 

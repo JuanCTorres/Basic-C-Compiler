@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DEFAULT_ARRAY_PARAM_SIZE 20
+
 
 int temp_counter = 0;
 int quad_index = 0;
@@ -803,8 +805,10 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         for(z = x->left_child; z != NULL; z = z->right_sibling){
           // arrays with no slot specified -> entire arr as param.
           if(z->return_type == ARRAY_TYPE_N && z->left_child == NULL){
-            for(int arr_i = 0; arr_i < z->snode->abnode->array_length; arr_i++){
-
+            //for(int arr_i = 0; arr_i < z->snode->abnode->array_length; arr_i++){
+           for(int arr_i = 0; arr_i < DEFAULT_ARRAY_PARAM_SIZE; arr_i++){
+              printf("\t#About to push arr[%d]\n", (DEFAULT_ARRAY_PARAM_SIZE - arr_i - 1));
+              //insert_index_astnode(z, DEFAULT_ARRAY_PARAM_SIZE - arr_i - 1);
               insert_index_astnode(z, arr_i);
               left_node = get_symnode(z, hashtable);
               temp = NewTemp(hashtable);

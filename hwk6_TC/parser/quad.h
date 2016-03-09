@@ -138,5 +138,8 @@ void set_global_int_const();
 
 void insert_index_astnode(ast_node root, int i);
 
+/* pushes a parameter */
+//void push_param(ast_node root, symhashtable_t *hashtable);
+int push_param(ast_node root, symhashtable_t *hashtable, symnode_t *temp, int param_offset);
 
 #endif

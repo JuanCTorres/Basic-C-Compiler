@@ -208,4 +208,6 @@ void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab);
 
 void patch_symbol_table(ast_node root, symhashtable_t *symtable);
 
+void assign_param_offsets(ast_node root);
+
 #endif
