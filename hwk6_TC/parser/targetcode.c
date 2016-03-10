@@ -577,7 +577,12 @@ void print_global_vars(symboltable_t *symboltable){
     for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
       if(node->type == VAR_INT_T){
+      		if(node->abnode->right_sibling == NULL) {
 				fprintf(ofile, "\t.long 0x%08x\n", node->num_val);
+      		}
+      		else {
+      			fprintf(ofile, "\t.long 0x%08x\n", node->abnode->right_sibling->value_int);
+      		}
       }
 
 			if(node->type == VAR_ARRAY_INT_T) {
