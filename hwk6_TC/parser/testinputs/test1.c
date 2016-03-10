@@ -53,9 +53,11 @@ c = a && b;
 c = a || b;
 c = !b;
 c = -b;
-
+b = 10;
+print "about to print c"
 c = ++b;
 print c;
+print 10;
 
 c = --b;
 c = (a % 5);
