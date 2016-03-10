@@ -1,0 +1,245 @@
+                       | #END OF PROG: 364
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:8053000000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(ASSIGN, aaa, __7, -)
+  0x0014:30f007000000  | 	irmovl 7, %eax
+  0x001a:400f3e020000  | 	rmmovl %eax, 574
+                       | #(LABEL, func, -, -)
+  0x0020:              | func:
+                       | 
+  0x0020:30f100000000  | 	irmovl 0, %ecx
+  0x0026:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(PRINT, accessing aaa again in a different function:, -, -)
+  0x0028:30f284010000  | 	irmovl 388, %edx
+  0x002e:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(PRINT, aaa, -, -)
+  0x0034:502f3e020000  | 	mrmovl 574, %edx
+  0x003a:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(RETURN, __0, -, -)
+  0x0040:30f700000000  | 	irmovl 0, %edi
+  0x0046:2054          | 	rrmovl %ebp, %esp
+  0x0048:b05f          | 	popl %ebp
+  0x004a:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0050:6014          | 	addl %ecx, %esp
+  0x0052:90            | 	ret
+                       | #(LABEL, main, -, -)
+  0x0053:              | main:
+                       | 
+  0x0053:30f100000000  | 	irmovl 0, %ecx
+  0x0059:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(PRINT, aaa is a global var with value 7. Printing:, -, -)
+  0x005b:30f2e0010000  | 	irmovl 480, %edx
+  0x0061:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(PRINT, aaa, -, -)
+  0x0067:502f3e020000  | 	mrmovl 574, %edx
+  0x006d:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(PRECALL, func, -, -)
+  0x0073:a05f          | 	pushl %ebp
+  0x0075:2045          | 	rrmovl %esp, %ebp
+                       | #(CALL, func, -, -)
+  0x0077:8020000000    | 	call func
+                       | #(POSTCALL, func, -, -)
+  0x007c:30f104000000  | 	irmovl 4, %ecx
+  0x0082:2054          | 	rrmovl %ebp, %esp
+  0x0084:6014          | 	addl %ecx, %esp
+                       | #(RETURN, __0, -, -)
+  0x0086:30f700000000  | 	irmovl 0, %edi
+  0x008c:2054          | 	rrmovl %ebp, %esp
+  0x008e:b05f          | 	popl %ebp
+  0x0090:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0096:6014          | 	addl %ecx, %esp
+  0x0098:90            | 	ret
+  0x0184:              | .pos 0x184    #qwerty
+                       | 
+  0x0184:61            | 	.byte 	0x61
+                       | 
+  0x0185:63            | 	.byte 	0x63
+                       | 
+  0x0186:63            | 	.byte 	0x63
+                       | 
+  0x0187:65            | 	.byte 	0x65
+                       | 
+  0x0188:73            | 	.byte 	0x73
+                       | 
+  0x0189:73            | 	.byte 	0x73
+                       | 
+  0x018a:69            | 	.byte 	0x69
+                       | 
+  0x018b:6e            | 	.byte 	0x6e
+                       | 
+  0x018c:67            | 	.byte 	0x67
+                       | 
+  0x018d:20            | 	.byte 	0x20
+                       | 
+  0x018e:61            | 	.byte 	0x61
+                       | 
+  0x018f:61            | 	.byte 	0x61
+                       | 
+  0x0190:61            | 	.byte 	0x61
+                       | 
+  0x0191:20            | 	.byte 	0x20
+                       | 
+  0x0192:61            | 	.byte 	0x61
+                       | 
+  0x0193:67            | 	.byte 	0x67
+                       | 
+  0x0194:61            | 	.byte 	0x61
+                       | 
+  0x0195:69            | 	.byte 	0x69
+                       | 
+  0x0196:6e            | 	.byte 	0x6e
+                       | 
+  0x0197:20            | 	.byte 	0x20
+                       | 
+  0x0198:69            | 	.byte 	0x69
+                       | 
+  0x0199:6e            | 	.byte 	0x6e
+                       | 
+  0x019a:20            | 	.byte 	0x20
+                       | 
+  0x019b:61            | 	.byte 	0x61
+                       | 
+  0x019c:20            | 	.byte 	0x20
+                       | 
+  0x019d:64            | 	.byte 	0x64
+                       | 
+  0x019e:69            | 	.byte 	0x69
+                       | 
+  0x019f:66            | 	.byte 	0x66
+                       | 
+  0x01a0:66            | 	.byte 	0x66
+                       | 
+  0x01a1:65            | 	.byte 	0x65
+                       | 
+  0x01a2:72            | 	.byte 	0x72
+                       | 
+  0x01a3:65            | 	.byte 	0x65
+                       | 
+  0x01a4:6e            | 	.byte 	0x6e
+                       | 
+  0x01a5:74            | 	.byte 	0x74
+                       | 
+  0x01a6:20            | 	.byte 	0x20
+                       | 
+  0x01a7:66            | 	.byte 	0x66
+                       | 
+  0x01a8:75            | 	.byte 	0x75
+                       | 
+  0x01a9:6e            | 	.byte 	0x6e
+                       | 
+  0x01aa:63            | 	.byte 	0x63
+                       | 
+  0x01ab:74            | 	.byte 	0x74
+                       | 
+  0x01ac:69            | 	.byte 	0x69
+                       | 
+  0x01ad:6f            | 	.byte 	0x6f
+                       | 
+  0x01ae:6e            | 	.byte 	0x6e
+                       | 
+  0x01af:3a            | 	.byte 	0x3a
+                       | 
+  0x01b0:00            | 	.byte 	0x0
+  0x01e0:              | .pos 0x1e0    #qwerty
+                       | 
+  0x01e0:61            | 	.byte 	0x61
+                       | 
+  0x01e1:61            | 	.byte 	0x61
+                       | 
+  0x01e2:61            | 	.byte 	0x61
+                       | 
+  0x01e3:20            | 	.byte 	0x20
+                       | 
+  0x01e4:69            | 	.byte 	0x69
+                       | 
+  0x01e5:73            | 	.byte 	0x73
+                       | 
+  0x01e6:20            | 	.byte 	0x20
+                       | 
+  0x01e7:61            | 	.byte 	0x61
+                       | 
+  0x01e8:20            | 	.byte 	0x20
+                       | 
+  0x01e9:67            | 	.byte 	0x67
+                       | 
+  0x01ea:6c            | 	.byte 	0x6c
+                       | 
+  0x01eb:6f            | 	.byte 	0x6f
+                       | 
+  0x01ec:62            | 	.byte 	0x62
+                       | 
+  0x01ed:61            | 	.byte 	0x61
+                       | 
+  0x01ee:6c            | 	.byte 	0x6c
+                       | 
+  0x01ef:20            | 	.byte 	0x20
+                       | 
+  0x01f0:76            | 	.byte 	0x76
+                       | 
+  0x01f1:61            | 	.byte 	0x61
+                       | 
+  0x01f2:72            | 	.byte 	0x72
+                       | 
+  0x01f3:20            | 	.byte 	0x20
+                       | 
+  0x01f4:77            | 	.byte 	0x77
+                       | 
+  0x01f5:69            | 	.byte 	0x69
+                       | 
+  0x01f6:74            | 	.byte 	0x74
+                       | 
+  0x01f7:68            | 	.byte 	0x68
+                       | 
+  0x01f8:20            | 	.byte 	0x20
+                       | 
+  0x01f9:76            | 	.byte 	0x76
+                       | 
+  0x01fa:61            | 	.byte 	0x61
+                       | 
+  0x01fb:6c            | 	.byte 	0x6c
+                       | 
+  0x01fc:75            | 	.byte 	0x75
+                       | 
+  0x01fd:65            | 	.byte 	0x65
+                       | 
+  0x01fe:20            | 	.byte 	0x20
+                       | 
+  0x01ff:37            | 	.byte 	0x37
+                       | 
+  0x0200:2e            | 	.byte 	0x2e
+                       | 
+  0x0201:20            | 	.byte 	0x20
+                       | 
+  0x0202:50            | 	.byte 	0x50
+                       | 
+  0x0203:72            | 	.byte 	0x72
+                       | 
+  0x0204:69            | 	.byte 	0x69
+                       | 
+  0x0205:6e            | 	.byte 	0x6e
+                       | 
+  0x0206:74            | 	.byte 	0x74
+                       | 
+  0x0207:69            | 	.byte 	0x69
+                       | 
+  0x0208:6e            | 	.byte 	0x6e
+                       | 
+  0x0209:67            | 	.byte 	0x67
+                       | 
+  0x020a:3a            | 	.byte 	0x3a
+                       | 
+  0x020b:00            | 	.byte 	0x0
+                       | 
+  0x023e:              | .pos 0x23e   # Start of global var space 
+  0x023e:07000000      | 	.long 0x00000007
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

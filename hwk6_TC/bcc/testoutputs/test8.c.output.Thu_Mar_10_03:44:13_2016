@@ -1,0 +1,236 @@
+Result of test done to parser.
+
+test8.c BEGIN.
+===========================================================
+
+
+
+
+
+
+ROOT (uid: N0) inferred ret type: ROOT isDecl = 0, ignore = 0 
+  ID (uid: N1) inferred ret type: INT_TYPE isDecl = 1, ignore = 0 qq [scope (0,0) <- (0,0)] declared at line 1  (type: INT_TYPE) 
+  ARRAY_TYPE (uid: N2) inferred ret type: INT_TYPE isDecl = 1, ignore = 0 dd [scope (0,0) <- (0,0)] declared at line 2  (type: INT_TYPE) 
+    INT_LITERAL (uid: N3) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 10 (type: INT_TYPE) 
+  FUNC_DECLARATION (uid: N4) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 main  (0 params:)[scope (0,0) <- (0,0)] declared at line 4  (type: INT_TYPE) 
+    FORMAL_PARAMS (uid: N5) inferred ret type: ROOT isDecl = 0, ignore = 0 
+    SEQ (uid: N6) inferred ret type: ROOT isDecl = 0, ignore = 0 
+      LOCAL_DECLARATIONS (uid: N7) inferred ret type: ROOT isDecl = 0, ignore = 0 
+        ARRAY_TYPE (uid: N8) inferred ret type: INT_TYPE isDecl = 1, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+          INT_LITERAL (uid: N9) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 12 (type: INT_TYPE) 
+        ID (uid: N10) inferred ret type: INT_TYPE isDecl = 1, ignore = 0 b [scope (1,0) <- (0,0)] declared at line 8  (type: INT_TYPE) 
+        ID (uid: N11) inferred ret type: INT_TYPE isDecl = 1, ignore = 0 c [scope (1,0) <- (0,0)] declared at line 9  (type: INT_TYPE) 
+        ID (uid: N12) inferred ret type: INT_TYPE isDecl = 1, ignore = 0 d [scope (1,0) <- (0,0)] declared at line 10  (type: INT_TYPE) 
+      STATEMENT_LIST (uid: N13) inferred ret type: ROOT isDecl = 0, ignore = 0 
+        = (uid: N14) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ARRAY_TYPE (uid: N15) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+            INT_LITERAL (uid: N16) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 0 (type: INT_TYPE) 
+          INT_LITERAL (uid: N17) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 7 (type: INT_TYPE) 
+        = (uid: N18) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ARRAY_TYPE (uid: N19) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+            INT_LITERAL (uid: N20) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 1 (type: INT_TYPE) 
+          INT_LITERAL (uid: N21) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+        = (uid: N22) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ARRAY_TYPE (uid: N23) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+            INT_LITERAL (uid: N24) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+          INT_LITERAL (uid: N25) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 3 (type: INT_TYPE) 
+        = (uid: N26) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ID (uid: N27) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 b [scope (1,0) <- (0,0)] declared at line 8  (type: INT_TYPE) 
+          INT_LITERAL (uid: N28) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+        = (uid: N29) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ID (uid: N30) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 c [scope (1,0) <- (0,0)] declared at line 9  (type: INT_TYPE) 
+          INT_LITERAL (uid: N31) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 3 (type: INT_TYPE) 
+        = (uid: N32) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ID (uid: N33) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 d [scope (1,0) <- (0,0)] declared at line 10  (type: INT_TYPE) 
+          INT_LITERAL (uid: N34) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+        PRINT (uid: N35) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          STRING_LITERAL (uid: N36) inferred ret type: ROOT isDecl = 0, ignore = 0 d before 
+        PRINT (uid: N37) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          ID (uid: N38) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 d [scope (1,0) <- (0,0)] declared at line 10  (type: INT_TYPE) 
+        = (uid: N39) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ARRAY_TYPE (uid: N40) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+            INT_LITERAL (uid: N41) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+          INT_LITERAL (uid: N42) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+        PRINT (uid: N43) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          STRING_LITERAL (uid: N44) inferred ret type: ROOT isDecl = 0, ignore = 0 d after 
+        = (uid: N45) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ID (uid: N46) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 d [scope (1,0) <- (0,0)] declared at line 10  (type: INT_TYPE) 
+          + (uid: N47) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+            ARRAY_TYPE (uid: N48) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+              INT_LITERAL (uid: N49) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+            INT_LITERAL (uid: N50) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 3 (type: INT_TYPE) 
+        PRINT (uid: N51) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          STRING_LITERAL (uid: N52) inferred ret type: ROOT isDecl = 0, ignore = 0 a[4] == 2: (should be true). 
+        = (uid: N53) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ID (uid: N54) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 d [scope (1,0) <- (0,0)] declared at line 10  (type: INT_TYPE) 
+          == (uid: N55) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+            ARRAY_TYPE (uid: N56) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+              INT_LITERAL (uid: N57) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+            INT_LITERAL (uid: N58) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+        PRINT (uid: N59) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          ID (uid: N60) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 d [scope (1,0) <- (0,0)] declared at line 10  (type: INT_TYPE) 
+        IF_STMT (uid: N61) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          == (uid: N62) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+            ARRAY_TYPE (uid: N63) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+              INT_LITERAL (uid: N64) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+            INT_LITERAL (uid: N65) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 2 (type: INT_TYPE) 
+          SEQ (uid: N66) inferred ret type: ROOT isDecl = 0, ignore = 0 
+            LOCAL_DECLARATIONS (uid: N67) inferred ret type: ROOT isDecl = 0, ignore = 0 
+            STATEMENT_LIST (uid: N68) inferred ret type: ROOT isDecl = 0, ignore = 0 
+              PRINT (uid: N69) inferred ret type: ROOT isDecl = 0, ignore = 0 
+                STRING_LITERAL (uid: N70) inferred ret type: ROOT isDecl = 0, ignore = 0 c is: 
+              PRINT (uid: N71) inferred ret type: ROOT isDecl = 0, ignore = 0 
+                ID (uid: N72) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 c [scope (2,0) <- (1,0)] declared at line 9  (type: INT_TYPE) 
+        ++ (uid: N73) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ARRAY_TYPE (uid: N74) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+            INT_LITERAL (uid: N75) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+        = (uid: N30
+39
+76) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+          ID (uid: N77) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 c [scope (1,0) <- (0,0)] declared at line 9  (type: INT_TYPE) 
+          + (uid: N78) inferred ret type: INT_TYPE isDecl = 0, ignore = 0  (type: INT_TYPE) 
+            ID (uid: N79) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 b [scope (1,0) <- (0,0)] declared at line 8  (type: INT_TYPE) 
+            ARRAY_TYPE (uid: N80) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+              INT_LITERAL (uid: N81) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+        PRINT (uid: N82) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          STRING_LITERAL (uid: N83) inferred ret type: ROOT isDecl = 0, ignore = 0 Incrementing a[4] (should be 3 now): 
+        PRINT (uid: N84) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          ARRAY_TYPE (uid: N85) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 a [scope (1,0) <- (0,0)] declared at line 7  (type: INT_TYPE) 
+            INT_LITERAL (uid: N86) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 4 (type: INT_TYPE) 
+        PRINT (uid: N87) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          STRING_LITERAL (uid: N88) inferred ret type: ROOT isDecl = 0, ignore = 0 c = b + a[4] (should be 5 now) 
+        PRINT (uid: N89) inferred ret type: ROOT isDecl = 0, ignore = 0 
+          ID (uid: N90) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 c [scope (1,0) <- (0,0)] declared at line 9  (type: INT_TYPE) 
+        RETURN (uid: N91) inferred ret type: ROOT isDecl = 0, ignore = 0 [scope (1,0) <- (0,0)]return to main at line 4 
+          INT_LITERAL (uid: N92) inferred ret type: INT_TYPE isDecl = 0, ignore = 0 0 (type: INT_TYPE) 
+(0-0) contains:
+  STRING d after
+  STRING Incrementing a[4] (should be 3 now):
+  STRING c = b + a[4] (should be 5 now)
+  STRING a[4] == 2: (should be true).
+  VAR_INT __10 (offset: 0 or addr: 0)
+  VAR_INT __12 (offset: 0 or addr: 0)
+  STRING d before
+  VAR_INT __0 (offset: 0 or addr: 0)
+  VAR_INT __1 (offset: 0 or addr: 0)
+  STRING c is:
+  VAR_INT __2 (offset: 0 or addr: 0)
+  VAR_INT __3 (offset: 0 or addr: 0)
+  VAR_INT __4 (offset: 0 or addr: 0)
+  VAR_INT __7 (offset: 0 or addr: 0)
+There are 99 entries
+0: (LABEL, main, -, -)
+1: (MULT, __T0, __0, __4)
+2: (ADDR, __T1, a, -)
+3: (SUB, __T2, __T1, __T0)
+4: (ASSIGN, __T2, __7, -)
+5: (MULT, __T4, __1, __4)
+6: (ADDR, __T5, a, -)
+7: (SUB, __T6, __T5, __T4)
+8: (ASSIGN, __T6, __2, -)
+9: (MULT, __T8, __2, __4)
+10: (ADDR, __T9, a, -)
+11: (SUB, __T10, __T9, __T8)
+12: (ASSIGN, __T10, __3, -)
+13: (ASSIGN, b, __2, -)
+14: (ASSIGN, c, __3, -)
+15: (ASSIGN, d, __2, -)
+16: (PRINT, d before, -, -)
+17: (PRINT, d, -, -)
+18: (MULT, __T12, __4, __4)
+19: (ADDR, __T13, a, -)
+20: (SUB, __T14, __T13, __T12)
+21: (ASSIGN, __T14, __2, -)
+22: (PRINT, d after, -, -)
+23: (MULT, __T17, __4, __4)
+24: (ADDR, __T18, a, -)
+25: (SUB, __T19, __T18, __T17)
+26: (DEREF, __T16, __T19, -)
+27: (MULT, __T22, __4, __4)
+28: (ADDR, __T23, a, -)
+29: (SUB, __T24, __T23, __T22)
+30: (DEREF, __T21, __T24, -)
+31: (ADD, __T26, __T21, __3)
+32: (ASSIGN, d, __T26, -)
+33: (PRINT, a[4] == 2: (should be true)., -, -)
+34: (MULT, __T31, __4, __4)
+35: (ADDR, __T32, a, -)
+36: (SUB, __T33, __T32, __T31)
+37: (DEREF, __T30, __T33, -)
+38: (ASSIGN, __T27, __T30, -)
+39: (ASSIGN, __T28, __2, -)
+40: (EQ, __T29, __T27, __T28)
+41: (ifTrue, __L_55_TRUE, __T29, -)
+42: (ASSIGN, __T29, __0, -)
+43: (GOTO, __L_55_DONE, -, -)
+44: (LABEL, __L_55_TRUE, -, -)
+45: (ASSIGN, __T29, __1, -)
+46: (LABEL, __L_55_DONE, -, -)
+47: (ASSIGN, d, __T29, -)
+48: (PRINT, d, -, -)
+49: (MULT, __T40, __4, __4)
+50: (ADDR, __T41, a, -)
+51: (SUB, __T42, __T41, __T40)
+52: (DEREF, __T39, __T42, -)
+53: (ASSIGN, __T36, __T39, -)
+54: (ASSIGN, __T37, __2, -)
+55: (EQ, __T38, __T36, __T37)
+56: (ifTrue, __L_62_TRUE, __T38, -)
+57: (ASSIGN, __T38, __0, -)
+58: (GOTO, __L_62_DONE, -, -)
+59: (LABEL, __L_62_TRUE, -, -)
+60: (ASSIGN, __T38, __1, -)
+61: (LABEL, __L_62_DONE, -, -)
+62: (ASSIGN, __T35, __T38, -)
+63: (ifFalse, __L_61_FI, __T35, -)
+64: (PRINT, c is:, -, -)
+65: (PRINT, c, -, -)
+66: (LABEL, __L_61_FI, -, -)
+67: (MULT, __T45, __4, __4)
+68: (ADDR, __T46, a, -)
+69: (SUB, __T47, __T46, __T45)
+70: (DEREF, __T44, __T47, -)
+71: (MULT, __T49, __4, __4)
+72: (ADDR, __T50, a, -)
+73: (SUB, __T51, __T50, __T49)
+74: (MULT, __T55, __4, __4)
+75: (ADDR, __T56, a, -)
+76: (SUB, __T57, __T56, __T55)
+77: (DEREF, __T54, __T57, -)
+78: (ADD, __T53, __T54, __1)
+79: (ASSIGN, __T51, __T53, -)
+80: (MULT, __T60, __4, __4)
+81: (ADDR, __T61, a, -)
+82: (SUB, __T62, __T61, __T60)
+83: (DEREF, __T59, __T62, -)
+84: (MULT, __T65, __4, __4)
+85: (ADDR, __T66, a, -)
+86: (SUB, __T67, __T66, __T65)
+87: (DEREF, __T64, __T67, -)
+88: (ADD, __T69, b, __T64)
+89: (ASSIGN, c, __T69, -)
+90: (PRINT, Incrementing a[4] (should be 3 now):, -, -)
+91: (MULT, __T71, __4, __4)
+92: (ADDR, __T72, a, -)
+93: (SUB, __T73, __T72, __T71)
+94: (DEREF, __T70, __T73, -)
+95: (PRINT, __T70, -, -)
+96: (PRINT, c = b + a[4] (should be 5 now), -, -)
+97: (PRINT, c, -, -)
+98: (RETURN, __0, -, -)
+
+Print hashtables (level-sibno) according to their hierarchy
+(0-0) contains:
+  VAR_ARRAY_INT dd (length: 10, offset: 0 or addr: 3552), sym_length = 10 
+  VAR_INT qq (offset: 0 or addr: 3592)
+  FUNC_INT main (0 params:)space needed: 100
+  (1-0) contains:
+    VAR_ARRAY_INT a (length: 12, offset: -8 or addr: 0), sym_length = 12 
+    VAR_INT b (offset: -88 or addr: 0)
+    VAR_INT c (offset: -92 or addr: 0)
+    VAR_INT d (offset: -96 or addr: 0)
+    (2-0) contains:
+
+
+===========================================================
+test8.c finished.

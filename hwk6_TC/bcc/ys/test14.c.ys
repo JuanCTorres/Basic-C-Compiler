@@ -1,0 +1,245 @@
+#END OF PROG: 364
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(ASSIGN, aaa, __7, -)
+	irmovl 7, %eax
+	rmmovl %eax, 574
+#(LABEL, func, -, -)
+func:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(PRINT, accessing aaa again in a different function:, -, -)
+	irmovl 388, %edx
+	rmmovl %edx, 0x00FFFE10
+#(PRINT, aaa, -, -)
+	mrmovl 574, %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(LABEL, main, -, -)
+main:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(PRINT, aaa is a global var with value 7. Printing:, -, -)
+	irmovl 480, %edx
+	rmmovl %edx, 0x00FFFE10
+#(PRINT, aaa, -, -)
+	mrmovl 574, %edx
+	rmmovl %edx, 0x00FFFE14
+#(PRECALL, func, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, func, -, -)
+	call func
+#(POSTCALL, func, -, -)
+	irmovl 4, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x184    #qwerty
+
+	.byte 	0x61
+
+	.byte 	0x63
+
+	.byte 	0x63
+
+	.byte 	0x65
+
+	.byte 	0x73
+
+	.byte 	0x73
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x67
+
+	.byte 	0x20
+
+	.byte 	0x61
+
+	.byte 	0x61
+
+	.byte 	0x61
+
+	.byte 	0x20
+
+	.byte 	0x61
+
+	.byte 	0x67
+
+	.byte 	0x61
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x20
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x20
+
+	.byte 	0x61
+
+	.byte 	0x20
+
+	.byte 	0x64
+
+	.byte 	0x69
+
+	.byte 	0x66
+
+	.byte 	0x66
+
+	.byte 	0x65
+
+	.byte 	0x72
+
+	.byte 	0x65
+
+	.byte 	0x6e
+
+	.byte 	0x74
+
+	.byte 	0x20
+
+	.byte 	0x66
+
+	.byte 	0x75
+
+	.byte 	0x6e
+
+	.byte 	0x63
+
+	.byte 	0x74
+
+	.byte 	0x69
+
+	.byte 	0x6f
+
+	.byte 	0x6e
+
+	.byte 	0x3a
+
+	.byte 	0x0
+.pos 0x1e0    #qwerty
+
+	.byte 	0x61
+
+	.byte 	0x61
+
+	.byte 	0x61
+
+	.byte 	0x20
+
+	.byte 	0x69
+
+	.byte 	0x73
+
+	.byte 	0x20
+
+	.byte 	0x61
+
+	.byte 	0x20
+
+	.byte 	0x67
+
+	.byte 	0x6c
+
+	.byte 	0x6f
+
+	.byte 	0x62
+
+	.byte 	0x61
+
+	.byte 	0x6c
+
+	.byte 	0x20
+
+	.byte 	0x76
+
+	.byte 	0x61
+
+	.byte 	0x72
+
+	.byte 	0x20
+
+	.byte 	0x77
+
+	.byte 	0x69
+
+	.byte 	0x74
+
+	.byte 	0x68
+
+	.byte 	0x20
+
+	.byte 	0x76
+
+	.byte 	0x61
+
+	.byte 	0x6c
+
+	.byte 	0x75
+
+	.byte 	0x65
+
+	.byte 	0x20
+
+	.byte 	0x37
+
+	.byte 	0x2e
+
+	.byte 	0x20
+
+	.byte 	0x50
+
+	.byte 	0x72
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x74
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x67
+
+	.byte 	0x3a
+
+	.byte 	0x0
+
+.pos 0x23e   # Start of global var space 
+	.long 0x00000007
+.pos 0x0000FFFC
+stack:
