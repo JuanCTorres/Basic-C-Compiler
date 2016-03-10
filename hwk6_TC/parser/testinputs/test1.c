@@ -53,7 +53,7 @@ c = a && b;
 c = a || b;
 c = !b;
 c = -b;
-
+b = 15;
 c = ++b;
 print c;
 
