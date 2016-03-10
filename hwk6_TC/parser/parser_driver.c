@@ -70,6 +70,8 @@ if(argc != 2) {
  			return 1;
  		}
  		else {
+			pretty_print(symtab->root, 0);
+
 	 		record_var_type_in_ast(root, symtab); //must come after build_symbol_table, records all variable types by using symbol table
 
 	 		printf("\n\n");

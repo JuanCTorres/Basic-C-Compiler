@@ -112,6 +112,7 @@ varDeclaration : INT_T varDeclList ';' {
     while($2->right_sibling != NULL) {
         $2->return_type = INT_TYPE_N;
         $2 = $2->right_sibling;
+        $2->isDecl = 1;
       }
       $2->return_type = INT_TYPE_N;
       $2->isDecl = 1;
@@ -153,12 +154,14 @@ varDeclList: varDeclList ',' varDecl  {
 varDecl : ID_T  {
     ast_node t = create_ast_node(ID_N);
     t->line_num = num_lines;
+    t->isDecl = 1;
     t->value_string = strdup(savedIdText);
     $$ = t;
   }
 |  ID_T { /* embedded action needed to prevent savedidtext from being overwritten */
     ast_node t = create_ast_node(ID_N);
     t->line_num = num_lines;
+    t->isDecl = 1;
     t->value_string = strdup(savedIdText);
     $1 = t;
   }  '=' expression {
@@ -170,7 +173,8 @@ varDecl : ID_T  {
 |  ID_T '[' INTCONST_T ']' { /* array[number] */
     ast_node t1 = create_ast_node(ARRAY_TYPE_N);
     t1->line_num = num_lines;
-    ast_node  t2 = create_ast_node(INT_LITERAL_N);
+    t1->isDecl = 1;
+    ast_node t2 = create_ast_node(INT_LITERAL_N);
     t1->value_string = strdup(savedIdText);
     t1->left_child = t2;
     t2->value_int = atoi(savedLiteralText);
@@ -240,6 +244,7 @@ formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
      /* error handling <later>? */
     ast_node t = create_ast_node(ID_N);
     t->line_num = num_lines;
+    t->isDecl = 1;
     t->value_string = strdup(savedIdText);
     t->return_type = INT_TYPE_N;
     $$ = t;
@@ -248,6 +253,7 @@ formalParam : INT_T ID_T { /* replaced varTypeSpecifier to INT_T*/
     /*<later*/
     ast_node t = create_ast_node(ARRAY_TYPE_N);
     t->line_num = num_lines;
+    t->isDecl = 1;
     t->return_type = INT_TYPE_N;
     t->value_string = strdup(savedIdText);
     $$ = t;

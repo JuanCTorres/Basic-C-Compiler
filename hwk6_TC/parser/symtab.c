@@ -487,8 +487,9 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
         check_if_redef(root, symtab ,level, sibno);
 
-      if(root->return_type != 0) {  // a non-zero value means that it is a declaration, since only declarations
+      //if(root->return_type != 0) {  // a non-zero value means that it is a declaration, since only declarations
                                     // are assigned a return type when building the abstract syntax tree.
+      if(root->isDecl){
 
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
@@ -506,7 +507,8 @@ void build_symbol_table(ast_node root, int level, int sibno, symboltable_t *symt
 
         check_if_redef(root, symtab ,level, sibno);
 
-      if(root->return_type != 0) {
+      //cif(root->return_type != 0) {
+      if(root->isDecl){
         hash = find_hashtable(symtab->root, level, sibno);
         if(hash == NULL) {
           hash = make_insert_hashtable(symtab->root, level, sibno, MAX(level - 1, 0), getSibling(level) );
@@ -658,6 +660,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
       break;
 
     case ID_N:
+      printf("Now looking up %s \n", root->value_string);
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
       for(;hash != NULL && node == NULL; hash = hash->parent) {
@@ -665,6 +668,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
         node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(node != NULL); //as hashtable was built prev, it must be found for ID_N
+      printf("Found a node for %s \n", root->value_string);
 
       if(root->return_type == 0) {  // a zero value means that it is not a declaration, since only declarations
                                     // are assigned a return type when building the abstract syntax tree.
@@ -1342,7 +1346,7 @@ void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab) {
       break;
 
     case FUNCTION_N:
-      // check_if_declared(root, symtab ,level, sibno);
+      check_if_declared(root, symtab ,level, sibno);
       break;
 
     case ID_N:      /* print the id */

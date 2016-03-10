@@ -69,7 +69,8 @@ void print_ast(ast_node root, int depth, int lvl, int sublvl) {
 
   /* Print the node type. */
   printf("%s (uid: N%d) ", NODE_NAME(root->node_type), root->node_no);
-printf("inferred ret type: %s ", NODE_NAME(root->return_type));
+  printf("inferred ret type: %s ", NODE_NAME(root->return_type));
+  printf("isDecl = %d, ignore = %d ", root->isDecl, root->ignore_sym);
 
 
   /* Print attributes specific to node types. */
