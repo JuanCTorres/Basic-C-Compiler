@@ -46,17 +46,18 @@ e.g., checking that a variable has been defined before it is used.
 The program traverses the syntax tree created in previous steps, assuming that there have been no errors until this point (if there were, the program halts).
 
 
-### Generating target code
+## Changes
+#### Parameters
+##### Parameter offsets in local functions
+Parameters to a function are no longer addressed as negative offsets from the frame pointer. Previously, after parameters were pushed onto the stack and the frame pointer was moved beneath them, we
+copied the parameters below the frame pointer so that we could access all symbols in a scope in a uniform
+manner. This creates some complications and inefficiencies, so we have reverted this change. Now
+parameters are accessed as positive offsets from the frame pointer.
 
-We look at the sequence of three-address instructions one by one, and generate assembly code to implement the instructions specified by them.
-
-#### Conventions
-##### Maximum array length for arrays passed as parameters
-
+##### Entire arrays as parameters
 Since passing arrays as parameters does not work as in C where pointers are used, but instead
 we push onto the stack every element of the array, we have decided to limit the number of elements
 in the arrays that are passed as parameters.
-
 This is done because there is no way to know the length of the arrays that a function is expecting to be passed as arrays. When a function is declared and its signature specifies that it expects an
 entire array as a parameter, it looks like this:
 
@@ -74,40 +75,18 @@ accesses these data is unspecified.
 If, on the other hand, the array contains more than 20 elements, only the first 20 elements will be
 pushed onto the stack.
 
+It is entirely possible to still pass as many parameters individually to a function as desired. Passing
+an array longer than 20 elements can be done by passing its elements individually, even if this is not
+an ideal situation.
+
 A way to solve this in the future could include passing pointers when arrays are used as parameters
 or passing some sort of information in a temporary variable that can be read so that the function knows
 how many elements a particular array has.
 
 
-#### Memory use
-
-- Program code starts at the bottom of the memory space, at `0`.
-- Temporary storage variables are stored in the heap, above the program code. Each temporary variable has a unique temporary identifier, which is then used to calculate the offset from the beginning of the temporary memory space when accessing them.
-- String literals are stored in the heap, above the temporary space as `.byte` directives.
-- Global variables are stored in the heap, above the string literals, as `.long` directives.
-- Local variables are stored in the stack, with an offset from the frame pointer.
-- Parameters to a function are stored above the function's frame pointer, though we are copying them into the same space as locals (below the frame pointer), to make their handling easier
-
 ## Project status
-
-### The following features are working at the moment:
-
-- Arithmetic operations using local and global numbers, variables, and arrays.
-- Assignment operations to locals and global variables and arrays.
-- Printing local and global variables, as well as integer literals.
-- Returning variables and integer literals.
-- Passing variables and integer literals as parameters to functions.
-- Simple recursive functions.
-- Local nested scopes
 
 ### The following still have bugs:
 
 - Saving the value of multiple function calls, if they are on the same expression,
 e.g., `f(x) + g(y);`
-
-## Changes from previous versions of the program
-
-- Parameters to a function are no longer addressed as negative offsets from the frame pointer. Previously, after parameters were pushed onto the stack and the frame pointer was moved beneath them, we
-copied the parameters below the frame pointer so that we could access all symbols in a scope in a uniform
-manner. This creates some complications and inefficiencies, so we have reverted this change. Now
-parameters are accessed as positive offsets from the frame pointer.

@@ -12,7 +12,7 @@ make
 
 fileArray=($(ls ./testinputs/ | xargs -n 1 basename))
 tLen=${#fileArray[@]}
-
+compiler="bcc"
 
 for (( i=0; i<${tLen}; i++ ));
 do
@@ -24,7 +24,7 @@ do
 	printf "===========================================================\n\n" >> "${file}"
 
 	echo ${fileArray[$i]}
-	./parser ${fileArray[$i]} < ./testinputs/${fileArray[$i]} >> "${file}" 2>&1
+	./$compiler ${fileArray[$i]} < ./testinputs/${fileArray[$i]} >> "${file}" 2>&1
 
 	if [ $? -eq 0 ];
 	then
