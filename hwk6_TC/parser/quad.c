@@ -764,13 +764,11 @@ void CG(ast_node x, symhashtable_t *hashtable) {
 
       case PRINT_N:
         left_node = get_symnode(x->left_child, hashtable);
-        //make_insert_quad(Q_PRINT, x->left_child->temp_node, NULL, NULL);
         make_insert_quad(Q_PRINT, left_node, NULL, NULL);
         break;
 
       case READ_N:
         left_node = get_symnode(x->left_child, hashtable);
-        //make_insert_quad(Q_READ, x->left_child->temp_node, NULL, NULL);
         make_insert_quad(Q_READ, left_node, NULL, NULL);
         break;
 
@@ -779,11 +777,6 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         assert(left_node != NULL);
         if(x->left_child != NULL){
           make_insert_quad(Q_RETURN, left_node, NULL, NULL);
-          //make_insert_quad(Q_RETURN, x->left_child->temp_node, NULL, NULL);
-        } else{
-          //symnode_t * empty_return = create_symnode("empty_return", hashtable);
-          //empty_return->type = VOID_RET_T;
-          //make_insert_quad(Q_RETURN, NULL, NULL, NULL);
         }
         break;
 
@@ -792,9 +785,6 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         break;
 
       case CALL_N:
-        // Function epilogue
-        //label2 = NewLabel(x, "FUNC_EPILOGUE", hashtable);
-        //make_insert_quad(Q_LABEL, label2, NULL, NULL);
         left_node = get_symnode(x->left_child, hashtable);
         make_insert_quad(Q_POSTCALL, left_node, NULL, NULL);
         x->temp_node = create_symnode("__RET_INT", NULL);
@@ -805,10 +795,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
         for(z = x->left_child; z != NULL; z = z->right_sibling){
           // arrays with no slot specified -> entire arr as param.
           if(z->return_type == ARRAY_TYPE_N && z->left_child == NULL){
-            //for(int arr_i = 0; arr_i < z->snode->abnode->array_length; arr_i++){
            for(int arr_i = 0; arr_i < DEFAULT_ARRAY_PARAM_SIZE; arr_i++){
-              printf("\t#About to push arr[%d]\n", (DEFAULT_ARRAY_PARAM_SIZE - arr_i - 1));
-              //insert_index_astnode(z, DEFAULT_ARRAY_PARAM_SIZE - arr_i - 1);
               insert_index_astnode(z, arr_i);
               left_node = get_symnode(z, hashtable);
               temp = NewTemp(hashtable);

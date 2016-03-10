@@ -6,9 +6,12 @@
 # Input: none
 # Output:
 
-rm -f ./testoutputs/*
+# Clean output and previously compiled files
+rm -rf ./testoutputs/*
+rm -rf ys/*
 make clean
 make
+
 
 fileArray=($(ls ./testinputs/ | xargs -n 1 basename))
 tLen=${#fileArray[@]}

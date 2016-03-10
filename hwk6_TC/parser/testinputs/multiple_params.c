@@ -1,4 +1,4 @@
-int func(int a, int zz, int yy, int hallelujah, int jews, int u[]){
+int func(int a, int zz, int yy, int hallelujah, int something, int u[]){
   int b = 1;
   int c = 2;
   int d = 2;
