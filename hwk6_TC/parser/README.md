@@ -55,6 +55,10 @@ manner. This creates some complications and inefficiencies, so we have reverted 
 parameters are accessed as positive offsets from the frame pointer.
 
 ##### Entire arrays as parameters
+When entire arrays are passed as parameters, they are pushed to the stack. They function to which they are passed will treat
+them as local variables, and can access the values stored in the array as they were stored at the time they were passed to
+the function, but **will not modify the values of the array globally**.
+
 Since passing arrays as parameters does not work as in C where pointers are used, but instead
 we push onto the stack every element of the array, we have decided to limit the number of elements
 in the arrays that are passed as parameters.

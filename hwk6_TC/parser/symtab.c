@@ -203,9 +203,7 @@ symhashtable_t *create_symhashtable(int entries) {
         assert(astnode->left_child != NULL);
 
         for(anode = astnode->left_child->left_child; anode != NULL; anode = anode->right_sibling) {
-          //if(anode->return_type == INT_TYPE_N)
           i++;
-          //printf("node_name: %s return_type: %s i: %d\n", anode->value_string ,NODE_NAME(anode->return_type), i);
         }
 
         node->num_parameters = i;
@@ -593,7 +591,8 @@ void pretty_print(symhashtable_t *root, int depth) {
         printf(" (offset: %d or addr: %d)", node->offset, node->addr);
       }
       if(node->type == VAR_ARRAY_INT_T) {
-        printf(" (length: %d, offset: %d or addr: %d), sym_length = %d ", node->abnode->array_length, node->offset, node->addr, node->array_length);
+        printf(" (length: %d, offset: %d or addr: %d), sym_length = %d ",
+          node->abnode->array_length, node->offset, node->addr, node->array_length);
       }
 
         printf("\n");
@@ -739,32 +738,37 @@ int check_function(ast_node root, symboltable_t *symtab) {
           node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
           //node is the original declaration stored in symbol table
         }
-        assert(node != NULL); //as hashtable was built prev, it must be found for func_n
+        assert(node != NULL); //as hashtable was built previously, it must be found for func_n
 
-        // assert(root->left_child != NULL);
+        // Count the number of parameters passed to the function
         int i = 0;
         for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
-          //if(anode->return_type == INT_TYPE_N)
           i++;
-          //printf("node_name: %s return_type: %s i: %d\n", anode->value_string ,NODE_NAME(anode->return_type), i);
         }
-
-
 
         if(node->num_parameters != i) {
           funcError = 1;
-          fprintf(stderr, "line: %d | Error: Number of parameters to function %s does not match the declaration at line %d\n",root->line_num, root->value_string, root->line_declared);
+          fprintf(stderr, "line: %d | Error: Number of parameters to function %s does not match number of parameters in declaration at line %d\n",
+          root->line_num, root->value_string, root->line_declared);
         }
         else {
           int k = 0;
           for(anode = root->left_child; anode != NULL; anode = anode->right_sibling) {
-            if(!((anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T) || (anode->return_type == ARRAY_TYPE_N && node->parameters[k] == VAR_ARRAY_INT_T)) ) {
+            if(!((anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T) ||
+             (anode->return_type == ARRAY_TYPE_N && node->parameters[k] == VAR_ARRAY_INT_T)) ) {
 
             // if(!(anode->return_type == INT_TYPE_N && node->parameters[k] == VAR_INT_T)) {
               funcError = 1;
               //printf("\n\n  parm type is: %s return_type is: %s \n\n", TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type));
               // fprintf(stderr, "\n\n %s return_type: %s but should be %s \n\n",anode->value_string ,NODE_NAME(anode->return_type), TYPE_NAME(node->parameters[k]));
-              fprintf(stderr, "line: %d | Error: Input parameters to function %s does not match the declaration at line %d\n", root->line_num, root->value_string, root->line_declared);
+              assert(anode != NULL);
+              //assert(anode->snode
+              //assert(anode->snode);
+              fprintf(stderr, "%dth param. Expecting  %s, got (%s, %s)\n",
+                k, TYPE_NAME(node->parameters[k]), NODE_NAME(anode->return_type), NODE_NAME(anode->node_type));
+              //fprintf(stderr, "snode of ^ is %s ", anode->snode->name);
+              fprintf(stderr, "line: %d | Error: Input parameters to function %s do not match the declaration at line %d\n",
+                root->line_num, root->value_string, root->line_declared);
               return 1;
             }
             k++;
@@ -1022,12 +1026,14 @@ void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
       break;
 
     case ID_N:      /* print the id */
+      printf("connecting %s to ", root->value_string);
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
       for(;hash != NULL && snode == NULL; hash = hash->parent) {
         snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(snode != NULL);
+      printf("%s\n", snode->name);
       root->snode = snode;
       break;
 
@@ -1394,7 +1400,7 @@ void redef_check(ast_node root, int level, int sibno, symboltable_t *symtab) {
 void patch_symbol_table(ast_node root, symhashtable_t *symtable){
 
   symhashtable_t *hashtable;
-  symnode_t * snode;
+  symnode_t *snode = NULL;
 
   switch(root->node_type){
 
@@ -1402,7 +1408,12 @@ void patch_symbol_table(ast_node root, symhashtable_t *symtable){
 
       hashtable = find_hashtable(symtable, root->curr_level, root->curr_sib);
       if(hashtable != NULL){
-        snode = lookup_symhashtable(hashtable, root->value_string, NOHASHSLOT);
+        //snode = lookup_symhashtable(hashtable, root->value_string, NOHASHSLOT);
+        assert(hashtable != NULL);
+        assert(snode == NULL);
+        for(;hashtable != NULL && snode == NULL; hashtable = hashtable->parent) {
+          snode = lookup_symhashtable(hashtable, root->value_string, NOHASHSLOT);
+        }
         if(snode != NULL){
           if(snode->type == VAR_ARRAY_INT_T && root->left_child == NULL){
             root->return_type = ARRAY_TYPE_N;

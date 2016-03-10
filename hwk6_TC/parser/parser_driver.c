@@ -80,6 +80,8 @@ if(argc != 2) {
 
 			patch_symbol_table(root, symtab->root);
 
+			simple_print_ast(root, 0, 0, 0);
+
 			if(typeError ) {
 				fprintf(stderr, "\nWARNING: There were type inconsistency errors. Data structure may be ill-formed.\n\n");
 			}

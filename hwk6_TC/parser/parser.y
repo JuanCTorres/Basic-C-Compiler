@@ -174,6 +174,7 @@ varDecl : ID_T  {
     ast_node t1 = create_ast_node(ARRAY_TYPE_N);
     t1->line_num = num_lines;
     t1->isDecl = 1;
+    t1->return_type = ARRAY_TYPE_N;
     ast_node t2 = create_ast_node(INT_LITERAL_N);
     t1->value_string = strdup(savedIdText);
     t1->left_child = t2;
