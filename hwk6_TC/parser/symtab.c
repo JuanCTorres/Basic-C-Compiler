@@ -659,7 +659,7 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
       break;
 
     case ID_N:
-      printf("Now looking up %s \n", root->value_string);
+
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
       for(;hash != NULL && node == NULL; hash = hash->parent) {
@@ -667,7 +667,6 @@ void record_var_type_in_ast(ast_node root, symboltable_t *symtab) {
         node = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(node != NULL); //as hashtable was built prev, it must be found for ID_N
-      printf("Found a node for %s \n", root->value_string);
 
       if(root->return_type == 0) {  // a zero value means that it is not a declaration, since only declarations
                                     // are assigned a return type when building the abstract syntax tree.
@@ -1026,14 +1025,12 @@ void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
       break;
 
     case ID_N:      /* print the id */
-      printf("connecting %s to ", root->value_string);
       hash = find_hashtable(symtab->root, root->curr_level, root->curr_sib);
       assert(hash != NULL);
       for(;hash != NULL && snode == NULL; hash = hash->parent) {
         snode = lookup_symhashtable(hash, root->value_string, NOHASHSLOT);
       }
       assert(snode != NULL);
-      printf("%s\n", snode->name);
       root->snode = snode;
       break;
 
@@ -1067,13 +1064,6 @@ void link_ast_to_symnode(ast_node root, symboltable_t *symtab) {
 
       hash = symtab->literal_collection;
       assert(hash != NULL);
-
-      // if(root->left_child != NULL){
-      //   printf("NOT NULL\n\n\n\n");
-      //   ast_node wut = root->left_child;
-      //   printf("wut = %s\n", wut->value_string);
-      // }
-      // //assert(root->value_string != NULL);
       if(root->left_child->node_type == VOID_TYPE_N){
         snode = lookup_symhashtable(hash, root->left_child->value_string, NOHASHSLOT);
         root->left_child->snode = snode;
@@ -1096,13 +1086,10 @@ void correct_arrays(ast_node root){
   symnode_t *symnode = root->snode;
 
   if(symnode != NULL){
-    //fprintf(stderr, "FOUND ONE \n\n\n\n\n\n\n\n");
     if(symnode->type == VAR_ARRAY_INT_T){
       if(root->node_type == ID_N){
-        //fprintf(stderr, "\n\n\n\nFOUND: %s, ret_type = %s \n\n\n\n", root->value_string, NODE_NAME(root->return_type));
         if(root->left_child == NULL){ // no array slot
           root->return_type = ARRAY_TYPE_N;
-          //fprintf(stderr, "\n\n\n\nFOUND: %s, ret_type = %s \n\n\n\n", root->value_string, NODE_NAME(root->return_type));
         }
       }
     }
@@ -1461,20 +1448,15 @@ void assign_param_offsets(ast_node root){
         param_count++;
       }
     }
-    printf("PARAM COUNT!!!!! = %d\n", param_count);
 
     for(param = root->left_child; param != NULL; param = param->right_sibling){
-      printf("Param count: %d\n", param_count);
       if(param->node_type == ARRAY_TYPE_N || param->return_type == ARRAY_TYPE_N){
-        printf("Array\n");
         param->snode->offset = param_count * 4;
         param_count -= DEFAULT_ARRAY_PARAM_SIZE;
       }
       else{
-        printf("var\n");
         param->snode->offset = param_count-- * 4;
       }
-      printf("param count after %d\n", param_count);
     }
   }
 

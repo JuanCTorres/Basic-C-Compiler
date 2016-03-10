@@ -491,7 +491,6 @@ void calculate_var_offsets_helper(symhashtable_t* hashtable){
 				if(!node->offset){
 					node->offset = offset;
 					offset -= 4;
-					printf("%s %d\n", node->name,offset);
 				}
 			}
 			else if(node->type == VAR_ARRAY_INT_T ||
@@ -552,13 +551,11 @@ void calculate_global_var_addrs(symboltable_t *symboltable){
     for(symnode_t *node = hashtable->table[j]; node != NULL; node = node->next) {
 
       if(node->type == VAR_INT_T){
-      		printf("in var int \n");
 			node->addr = endofstr + global_var_offset;
 			global_var_offset += 4;
       }
 
 		else if(node->type == VAR_ARRAY_INT_T) {
-			printf("in var array \n");
 			node->addr = endofstr + global_var_offset;
 			global_var_offset += (node->abnode->array_length * 4);
 		}
