@@ -1,6 +1,6 @@
-# Target code generation
+# Final submission
 
-In this part of our compiler, we look at the array of quads generated in previous steps of our project, and with the help of the symbol, we generate code targeted at Y86-assembly.
+For this submission, we have focused on bug hunting and more testing.
 
 ## Authors
 - SeokJun Bing
@@ -51,26 +51,33 @@ The program traverses the syntax tree created in previous steps, assuming that t
 We look at the sequence of three-address instructions one by one, and generate assembly code to implement the instructions specified by them.
 
 #### Conventions
-##### Register use
+##### Maximum array length for arrays passed as parameters
 
-We have decided to use particular registers for specific purposes:
+Since passing arrays as parameters does not work as in C where pointers are used, but instead
+we push onto the stack every element of the array, we have decided to limit the number of elements
+in the arrays that are passed as parameters.
 
+This is done because there is no way to know the length of the arrays that a function is expecting to be passed as arrays. When a function is declared and its signature specifies that it expects an
+entire array as a parameter, it looks like this:
 
-- Left operand register, `LEFT_OPERAND_REG` is `%eax`.
-- Right operand register, `RIGHT_OPERAND_REG` is `%ecx`.
-- I/O register, `IO_REG`, is `%edx`. This register is used when moving values to I/O addresses.
-- Stack pointer, `STACK_PTR`, is `%esp`.
-- Base pointer, `BASE_PTR`, is `%ebp`.
-- Return register, `RETURN_REG`, is `%edi`. This register is used to return values from functions.
+    my_func(my_arr[]){
+        ...
+    }
 
-##### I/O
+`my_arr` has never been seen in the symbol table before, so there is no way to know how many elements
+it contains. By default, we consider all arrays passed as parameters to contain 20 elements, all of
+which are pushed onto the stack when an array is passed as a parameter. If the array passed as a
+parameter contains less than 20 elements, this approach results in more data being pushed onto the
+stack, but these data will not affect other local variables or parameters. The behavior when the user
+accesses these data is unspecified.
 
-I/O in our compiler is achieved by moving or reading data from the following addresses in memory:
+If, on the other hand, the array contains more than 20 elements, only the first 20 elements will be
+pushed onto the stack.
 
+A way to solve this in the future could include passing pointers when arrays are used as parameters
+or passing some sort of information in a temporary variable that can be read so that the function knows
+how many elements a particular array has.
 
-- `DSTR`, used to display a string value, is `0x00FFFE10`.
-- `DHXR`, used to display a hex value, is `0x00FFFE14`.
-- `KHXR`, used to read a hex value from the keyboard, is `0x00FFFE1C`.
 
 #### Memory use
 
@@ -95,12 +102,12 @@ I/O in our compiler is achieved by moving or reading data from the following add
 
 ### The following still have bugs:
 
-- Comparing arrays.
-- Returning arrays.
-- Printing arrays.
 - Saving the value of multiple function calls, if they are on the same expression,
 e.g., `f(x) + g(y);`
 
-## Changes from previous programs
+## Changes from previous versions of the program
 
-- Function prologues and epilogues are no longer just a label. Instead, each has its own three-address operation or quad.
+- Parameters to a function are no longer addressed as negative offsets from the frame pointer. Previously, after parameters were pushed onto the stack and the frame pointer was moved beneath them, we
+copied the parameters below the frame pointer so that we could access all symbols in a scope in a uniform
+manner. This creates some complications and inefficiencies, so we have reverted this change. Now
+parameters are accessed as positive offsets from the frame pointer.

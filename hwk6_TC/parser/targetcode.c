@@ -219,36 +219,37 @@ int gen_target_code (quad_type **array, char argv[], symboltable_t* symboltable)
 					#if DEBUG
 					fprintf(ofile, "#NUM PARAMS: %d\n", array[i]->dest->num_parameters);
 					#endif
+					fprintf(ofile, "#### SOMETHING\n");
 
 					if(array[i]->dest->num_parameters > 0){
-
-						// Change # of params to let the for loop take care of every single
-						// slot in the arrays passed as parameters.
-						int num_arr = 0;
-						for(int j = 0; j < array[i]->dest->num_parameters; j++){
-							if(array[i]->dest->parameters[j] == VAR_ARRAY_INT_T){
-								num_arr++;
-							}
-						}
-
-						if(num_arr > 0){
-							fprintf(ofile, "#Increasing num of params\n");
-							array[i]->dest->num_parameters += (num_arr * DEFAULT_ARRAY_PARAM_SIZE - 1);
-						}
-						fprintf(ofile, "#New num of params: %d\n", array[i]->dest->num_parameters);
-						for(int j = 0; j < array[i]->dest->num_parameters; j++){
-							fprintf(ofile, "#%d\n", j);
-							fprintf(ofile, "\tmrmovl %d(%s), %s\n",
-							 	((j * 4) + 4), BASE_PTR, LEFT_OPERAND_REG);
-							fprintf(ofile, "\trmmovl %s, %d(%s)\n",
-							 	LEFT_OPERAND_REG, (-j * 4) - 8, BASE_PTR); // -8; -; 8 - 8;
-						}
-
-						// Change # of params back
-						if(num_arr > 0){
-							array[i]->dest->num_parameters-= (num_arr * DEFAULT_ARRAY_PARAM_SIZE - 1);
-						}
-
+					//
+					// 	// Change # of params to let the for loop take care of every single
+					// 	// slot in the arrays passed as parameters.
+					// 	int num_arr = 0;
+					// 	for(int j = 0; j < array[i]->dest->num_parameters; j++){
+					// 		if(array[i]->dest->parameters[j] == VAR_ARRAY_INT_T){
+					// 			num_arr++;
+					// 		}
+					// 	}
+					//
+					// 	if(num_arr > 0){
+					// 		fprintf(ofile, "#Increasing num of params\n");
+					// 		array[i]->dest->num_parameters += (num_arr * DEFAULT_ARRAY_PARAM_SIZE - 1);
+					// 	}
+					// 	fprintf(ofile, "#New num of params: %d\n", array[i]->dest->num_parameters);
+					// 	for(int j = 0; j < array[i]->dest->num_parameters; j++){
+					// 		fprintf(ofile, "#%d\n", j);
+					// 		fprintf(ofile, "\tmrmovl %d(%s), %s\n",
+					// 		 	((j * 4) + 4), BASE_PTR, LEFT_OPERAND_REG);
+					// 		fprintf(ofile, "\trmmovl %s, %d(%s)\n",
+					// 		 	LEFT_OPERAND_REG, (-j * 4) - 8, BASE_PTR); // -8; -; 8 - 8;
+					// 	}
+					//
+					// 	// Change # of params back
+					// 	if(num_arr > 0){
+					// 		array[i]->dest->num_parameters-= (num_arr * DEFAULT_ARRAY_PARAM_SIZE - 1);
+					// 	}
+					//
 					}
 				}
 				break;

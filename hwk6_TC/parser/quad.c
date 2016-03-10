@@ -473,7 +473,7 @@ void CG(ast_node x, symhashtable_t *hashtable) {
       case OP_EQUALS_N:
 
         temp = NewTemp(hashtable);
-        fprintf(stderr, "left temp is %d\n", temp->num_val);
+        //fprintf(stderr, "left temp is %d\n", temp->num_val);
         temp2 = NewTemp(hashtable);
         temp3 = NewTemp(hashtable);
         label1 = NewLabel(x, "TRUE", hashtable);
@@ -980,7 +980,7 @@ void set_constants(symhashtable_t *hashtable){
   name = calloc(100, sizeof(char));
   sprintf(name, "__%d", ELEMSIZE);
   node2->value_string = name;
-  node2->value_int = ELEMSIZE * 2;
+  node2->value_int = ELEMSIZE; //8 ?
   elem_size_n = lookup_symhashtable(hashtable, name, NOHASHSLOT);
   if(elem_size_n == NULL){
     elem_size_n = insert_into_symhashtable(hashtable, node2);

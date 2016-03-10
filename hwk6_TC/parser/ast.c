@@ -216,9 +216,11 @@ void patch_return_types(ast_node root){
     case ARRAY_TYPE_N:             // check for return types!
       if(root->left_child == NULL){
         root->return_type = ARRAY_TYPE_N;
+
       }
       else{
         root->return_type = INT_TYPE_N;
+        //root->ignore_sym = 1;
       }
       break;
 

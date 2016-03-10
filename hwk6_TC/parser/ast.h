@@ -153,6 +153,7 @@ struct ast_node_struct {
   ast_node return_to;
   struct symnode *temp_node;
   int isDecl;
+  int ignore_sym;
 
 
 };
