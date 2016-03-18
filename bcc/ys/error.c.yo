@@ -1,0 +1,46 @@
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
+                       | #END OF PROG: 152
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:8014000000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(LABEL, main, -, -)
+  0x0014:              | main:
+                       | 
+  0x0014:30f10c000000  | 	irmovl 12, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(ADD, __T0, __2, __3)
+  0x001c:30f002000000  | 	irmovl 2, %eax
+  0x0022:30f103000000  | 	irmovl 3, %ecx
+  0x0028:6010          | 	addl %ecx, %eax
+  0x002a:400fac000000  | 	rmmovl %eax, 172
+                       | 
+                       | #(ASSIGN, y, __T0, -)
+  0x0030:500fac000000  | 	mrmovl 172, %eax
+  0x0036:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(ADD, __T1, x, y)
+  0x003c:500fbc000000  | 	mrmovl 188, %eax
+  0x0042:5015f8ffffff  | 	mrmovl -8(%ebp), %ecx
+  0x0048:6010          | 	addl %ecx, %eax
+  0x004a:400fb0000000  | 	rmmovl %eax, 176
+                       | 
+                       | #(RETURN, __0, -, -)
+  0x0050:30f700000000  | 	irmovl 0, %edi
+  0x0056:2054          | 	rrmovl %ebp, %esp
+  0x0058:b05f          | 	popl %ebp
+  0x005a:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0060:6014          | 	addl %ecx, %esp
+  0x0062:90            | 	ret
+                       | 
+  0x00bc:              | .pos 0xbc   # Start of global var space 
+  0x00bc:00000000      | 	.long 0x00000000
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

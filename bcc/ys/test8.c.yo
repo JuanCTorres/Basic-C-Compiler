@@ -1,0 +1,696 @@
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
+                       | #END OF PROG: 2972
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:8014000000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(LABEL, main, -, -)
+  0x0014:              | main:
+                       | 
+  0x0014:30f164000000  | 	irmovl 100, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(MULT, __T0, __0, __4)
+  0x001c:30f000000000  | 	irmovl 0, %eax
+  0x0022:30f104000000  | 	irmovl 4, %ecx
+  0x0028:6410          | 	mull %ecx, %eax
+  0x002a:400fb00b0000  | 	rmmovl %eax, 2992
+                       | 
+                       | #(ADDR, __T1, a, -)
+  0x0030:30f0f8ffffff  | 	irmovl -8, %eax
+  0x0036:6050          | 	addl %ebp, %eax
+  0x0038:400fb40b0000  | 	rmmovl %eax, 2996
+                       | #(SUB, __T2, __T1, __T0)
+  0x003e:500fb40b0000  | 	mrmovl 2996, %eax
+  0x0044:501fb00b0000  | 	mrmovl 2992, %ecx
+  0x004a:6110          | 	subl %ecx, %eax
+  0x004c:400fb80b0000  | 	rmmovl %eax, 3000
+                       | 
+                       | #(ASSIGN, __T2, __7, -)
+  0x0052:30f007000000  | 	irmovl 7, %eax
+  0x0058:501fb80b0000  | 	mrmovl 3000, %ecx
+  0x005e:400100000000  | 	rmmovl %eax, (%ecx)#(MULT, __T4, __1, __4)
+  0x0064:30f001000000  | 	irmovl 1, %eax
+  0x006a:30f104000000  | 	irmovl 4, %ecx
+  0x0070:6410          | 	mull %ecx, %eax
+  0x0072:400fc00b0000  | 	rmmovl %eax, 3008
+                       | 
+                       | #(ADDR, __T5, a, -)
+  0x0078:30f0f8ffffff  | 	irmovl -8, %eax
+  0x007e:6050          | 	addl %ebp, %eax
+  0x0080:400fc40b0000  | 	rmmovl %eax, 3012
+                       | #(SUB, __T6, __T5, __T4)
+  0x0086:500fc40b0000  | 	mrmovl 3012, %eax
+  0x008c:501fc00b0000  | 	mrmovl 3008, %ecx
+  0x0092:6110          | 	subl %ecx, %eax
+  0x0094:400fc80b0000  | 	rmmovl %eax, 3016
+                       | 
+                       | #(ASSIGN, __T6, __2, -)
+  0x009a:30f002000000  | 	irmovl 2, %eax
+  0x00a0:501fc80b0000  | 	mrmovl 3016, %ecx
+  0x00a6:400100000000  | 	rmmovl %eax, (%ecx)#(MULT, __T8, __2, __4)
+  0x00ac:30f002000000  | 	irmovl 2, %eax
+  0x00b2:30f104000000  | 	irmovl 4, %ecx
+  0x00b8:6410          | 	mull %ecx, %eax
+  0x00ba:400fd00b0000  | 	rmmovl %eax, 3024
+                       | 
+                       | #(ADDR, __T9, a, -)
+  0x00c0:30f0f8ffffff  | 	irmovl -8, %eax
+  0x00c6:6050          | 	addl %ebp, %eax
+  0x00c8:400fd40b0000  | 	rmmovl %eax, 3028
+                       | #(SUB, __T10, __T9, __T8)
+  0x00ce:500fd40b0000  | 	mrmovl 3028, %eax
+  0x00d4:501fd00b0000  | 	mrmovl 3024, %ecx
+  0x00da:6110          | 	subl %ecx, %eax
+  0x00dc:400fd80b0000  | 	rmmovl %eax, 3032
+                       | 
+                       | #(ASSIGN, __T10, __3, -)
+  0x00e2:30f003000000  | 	irmovl 3, %eax
+  0x00e8:501fd80b0000  | 	mrmovl 3032, %ecx
+  0x00ee:400100000000  | 	rmmovl %eax, (%ecx)#(ASSIGN, b, __2, -)
+  0x00f4:30f002000000  | 	irmovl 2, %eax
+  0x00fa:4005a8ffffff  | 	rmmovl %eax, -88(%ebp)
+                       | #(ASSIGN, c, __3, -)
+  0x0100:30f003000000  | 	irmovl 3, %eax
+  0x0106:4005a4ffffff  | 	rmmovl %eax, -92(%ebp)
+                       | #(ASSIGN, d, __2, -)
+  0x010c:30f002000000  | 	irmovl 2, %eax
+  0x0112:4005a0ffffff  | 	rmmovl %eax, -96(%ebp)
+                       | #(PRINT, d before, -, -)
+  0x0118:30f2ba0d0000  | 	irmovl 3514, %edx
+  0x011e:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(PRINT, d, -, -)
+  0x0124:5025a0ffffff  | 	mrmovl -96(%ebp), %edx
+  0x012a:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(MULT, __T12, __4, __4)
+  0x0130:30f004000000  | 	irmovl 4, %eax
+  0x0136:30f104000000  | 	irmovl 4, %ecx
+  0x013c:6410          | 	mull %ecx, %eax
+  0x013e:400fe00b0000  | 	rmmovl %eax, 3040
+                       | 
+                       | #(ADDR, __T13, a, -)
+  0x0144:30f0f8ffffff  | 	irmovl -8, %eax
+  0x014a:6050          | 	addl %ebp, %eax
+  0x014c:400fe40b0000  | 	rmmovl %eax, 3044
+                       | #(SUB, __T14, __T13, __T12)
+  0x0152:500fe40b0000  | 	mrmovl 3044, %eax
+  0x0158:501fe00b0000  | 	mrmovl 3040, %ecx
+  0x015e:6110          | 	subl %ecx, %eax
+  0x0160:400fe80b0000  | 	rmmovl %eax, 3048
+                       | 
+                       | #(ASSIGN, __T14, __2, -)
+  0x0166:30f002000000  | 	irmovl 2, %eax
+  0x016c:501fe80b0000  | 	mrmovl 3048, %ecx
+  0x0172:400100000000  | 	rmmovl %eax, (%ecx)#(PRINT, d after, -, -)
+  0x0178:30f2e00c0000  | 	irmovl 3296, %edx
+  0x017e:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(MULT, __T17, __4, __4)
+  0x0184:30f004000000  | 	irmovl 4, %eax
+  0x018a:30f104000000  | 	irmovl 4, %ecx
+  0x0190:6410          | 	mull %ecx, %eax
+  0x0192:400ff40b0000  | 	rmmovl %eax, 3060
+                       | 
+                       | #(ADDR, __T18, a, -)
+  0x0198:30f0f8ffffff  | 	irmovl -8, %eax
+  0x019e:6050          | 	addl %ebp, %eax
+  0x01a0:400ff80b0000  | 	rmmovl %eax, 3064
+                       | #(SUB, __T19, __T18, __T17)
+  0x01a6:500ff80b0000  | 	mrmovl 3064, %eax
+  0x01ac:501ff40b0000  | 	mrmovl 3060, %ecx
+  0x01b2:6110          | 	subl %ecx, %eax
+  0x01b4:400ffc0b0000  | 	rmmovl %eax, 3068
+                       | 
+                       | #(DEREF, __T16, __T19, -)
+  0x01ba:501ffc0b0000  | 	mrmovl 3068, %ecx
+  0x01c0:500100000000  | 	mrmovl (%ecx), %eax
+  0x01c6:400ff00b0000  | 	rmmovl %eax, 3056
+                       | #(MULT, __T22, __4, __4)
+  0x01cc:30f004000000  | 	irmovl 4, %eax
+  0x01d2:30f104000000  | 	irmovl 4, %ecx
+  0x01d8:6410          | 	mull %ecx, %eax
+  0x01da:400f080c0000  | 	rmmovl %eax, 3080
+                       | 
+                       | #(ADDR, __T23, a, -)
+  0x01e0:30f0f8ffffff  | 	irmovl -8, %eax
+  0x01e6:6050          | 	addl %ebp, %eax
+  0x01e8:400f0c0c0000  | 	rmmovl %eax, 3084
+                       | #(SUB, __T24, __T23, __T22)
+  0x01ee:500f0c0c0000  | 	mrmovl 3084, %eax
+  0x01f4:501f080c0000  | 	mrmovl 3080, %ecx
+  0x01fa:6110          | 	subl %ecx, %eax
+  0x01fc:400f100c0000  | 	rmmovl %eax, 3088
+                       | 
+                       | #(DEREF, __T21, __T24, -)
+  0x0202:501f100c0000  | 	mrmovl 3088, %ecx
+  0x0208:500100000000  | 	mrmovl (%ecx), %eax
+  0x020e:400f040c0000  | 	rmmovl %eax, 3076
+                       | #(ADD, __T26, __T21, __3)
+  0x0214:500f040c0000  | 	mrmovl 3076, %eax
+  0x021a:30f103000000  | 	irmovl 3, %ecx
+  0x0220:6010          | 	addl %ecx, %eax
+  0x0222:400f180c0000  | 	rmmovl %eax, 3096
+                       | 
+                       | #(ASSIGN, d, __T26, -)
+  0x0228:500f180c0000  | 	mrmovl 3096, %eax
+  0x022e:4005a0ffffff  | 	rmmovl %eax, -96(%ebp)
+                       | #(PRINT, a[4] == 2: (should be true)., -, -)
+  0x0234:30f27e0d0000  | 	irmovl 3454, %edx
+  0x023a:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(MULT, __T31, __4, __4)
+  0x0240:30f004000000  | 	irmovl 4, %eax
+  0x0246:30f104000000  | 	irmovl 4, %ecx
+  0x024c:6410          | 	mull %ecx, %eax
+  0x024e:400f2c0c0000  | 	rmmovl %eax, 3116
+                       | 
+                       | #(ADDR, __T32, a, -)
+  0x0254:30f0f8ffffff  | 	irmovl -8, %eax
+  0x025a:6050          | 	addl %ebp, %eax
+  0x025c:400f300c0000  | 	rmmovl %eax, 3120
+                       | #(SUB, __T33, __T32, __T31)
+  0x0262:500f300c0000  | 	mrmovl 3120, %eax
+  0x0268:501f2c0c0000  | 	mrmovl 3116, %ecx
+  0x026e:6110          | 	subl %ecx, %eax
+  0x0270:400f340c0000  | 	rmmovl %eax, 3124
+                       | 
+                       | #(DEREF, __T30, __T33, -)
+  0x0276:501f340c0000  | 	mrmovl 3124, %ecx
+  0x027c:500100000000  | 	mrmovl (%ecx), %eax
+  0x0282:400f280c0000  | 	rmmovl %eax, 3112
+                       | #(ASSIGN, __T27, __T30, -)
+  0x0288:500f280c0000  | 	mrmovl 3112, %eax
+  0x028e:400f1c0c0000  | 	rmmovl %eax, 3100
+                       | #(ASSIGN, __T28, __2, -)
+  0x0294:30f002000000  | 	irmovl 2, %eax
+  0x029a:400f200c0000  | 	rmmovl %eax, 3104
+                       | #(EQ, __T29, __T27, __T28)
+  0x02a0:500f1c0c0000  | 	mrmovl 3100, %eax
+  0x02a6:501f200c0000  | 	mrmovl 3104, %ecx
+  0x02ac:6110          | 	subl %ecx, %eax
+  0x02ae:400f240c0000  | 	rmmovl %eax, 3108
+                       | #(ifTrue, __L_55_TRUE, __T29, -)
+  0x02b4:73ca020000    | 	je L_55_TRUE
+                       | #(ASSIGN, __T29, __0, -)
+  0x02b9:30f000000000  | 	irmovl 0, %eax
+  0x02bf:400f240c0000  | 	rmmovl %eax, 3108
+                       | #(GOTO, __L_55_DONE, -, -)
+  0x02c5:70d6020000    | 	jmp L_55_DONE
+                       | #(LABEL, __L_55_TRUE, -, -)
+  0x02ca:              | L_55_TRUE:
+                       | 
+                       | #(ASSIGN, __T29, __1, -)
+  0x02ca:30f001000000  | 	irmovl 1, %eax
+  0x02d0:400f240c0000  | 	rmmovl %eax, 3108
+                       | #(LABEL, __L_55_DONE, -, -)
+  0x02d6:              | L_55_DONE:
+                       | 
+                       | #(ASSIGN, d, __T29, -)
+  0x02d6:500f240c0000  | 	mrmovl 3108, %eax
+  0x02dc:4005a0ffffff  | 	rmmovl %eax, -96(%ebp)
+                       | #(PRINT, d, -, -)
+  0x02e2:5025a0ffffff  | 	mrmovl -96(%ebp), %edx
+  0x02e8:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(MULT, __T40, __4, __4)
+  0x02ee:30f004000000  | 	irmovl 4, %eax
+  0x02f4:30f104000000  | 	irmovl 4, %ecx
+  0x02fa:6410          | 	mull %ecx, %eax
+  0x02fc:400f500c0000  | 	rmmovl %eax, 3152
+                       | 
+                       | #(ADDR, __T41, a, -)
+  0x0302:30f0f8ffffff  | 	irmovl -8, %eax
+  0x0308:6050          | 	addl %ebp, %eax
+  0x030a:400f540c0000  | 	rmmovl %eax, 3156
+                       | #(SUB, __T42, __T41, __T40)
+  0x0310:500f540c0000  | 	mrmovl 3156, %eax
+  0x0316:501f500c0000  | 	mrmovl 3152, %ecx
+  0x031c:6110          | 	subl %ecx, %eax
+  0x031e:400f580c0000  | 	rmmovl %eax, 3160
+                       | 
+                       | #(DEREF, __T39, __T42, -)
+  0x0324:501f580c0000  | 	mrmovl 3160, %ecx
+  0x032a:500100000000  | 	mrmovl (%ecx), %eax
+  0x0330:400f4c0c0000  | 	rmmovl %eax, 3148
+                       | #(ASSIGN, __T36, __T39, -)
+  0x0336:500f4c0c0000  | 	mrmovl 3148, %eax
+  0x033c:400f400c0000  | 	rmmovl %eax, 3136
+                       | #(ASSIGN, __T37, __2, -)
+  0x0342:30f002000000  | 	irmovl 2, %eax
+  0x0348:400f440c0000  | 	rmmovl %eax, 3140
+                       | #(EQ, __T38, __T36, __T37)
+  0x034e:500f400c0000  | 	mrmovl 3136, %eax
+  0x0354:501f440c0000  | 	mrmovl 3140, %ecx
+  0x035a:6110          | 	subl %ecx, %eax
+  0x035c:400f480c0000  | 	rmmovl %eax, 3144
+                       | #(ifTrue, __L_62_TRUE, __T38, -)
+  0x0362:7378030000    | 	je L_62_TRUE
+                       | #(ASSIGN, __T38, __0, -)
+  0x0367:30f000000000  | 	irmovl 0, %eax
+  0x036d:400f480c0000  | 	rmmovl %eax, 3144
+                       | #(GOTO, __L_62_DONE, -, -)
+  0x0373:7084030000    | 	jmp L_62_DONE
+                       | #(LABEL, __L_62_TRUE, -, -)
+  0x0378:              | L_62_TRUE:
+                       | 
+                       | #(ASSIGN, __T38, __1, -)
+  0x0378:30f001000000  | 	irmovl 1, %eax
+  0x037e:400f480c0000  | 	rmmovl %eax, 3144
+                       | #(LABEL, __L_62_DONE, -, -)
+  0x0384:              | L_62_DONE:
+                       | 
+                       | #(ASSIGN, __T35, __T38, -)
+  0x0384:500f480c0000  | 	mrmovl 3144, %eax
+  0x038a:400f3c0c0000  | 	rmmovl %eax, 3132
+                       | #(ifFalse, __L_61_FI, __T35, -)
+  0x0390:500f3c0c0000  | 	mrmovl 3132, %eax
+  0x0396:30f100000000  | 	irmovl 0, %ecx
+  0x039c:6110          | 	subl %ecx, %eax
+  0x039e:73bb030000    | 	je L_61_FI
+                       | #(PRINT, c is:, -, -)
+  0x03a3:30f2ce0d0000  | 	irmovl 3534, %edx
+  0x03a9:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(PRINT, c, -, -)
+  0x03af:5025a4ffffff  | 	mrmovl -92(%ebp), %edx
+  0x03b5:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(LABEL, __L_61_FI, -, -)
+  0x03bb:              | L_61_FI:
+                       | 
+                       | #(MULT, __T45, __4, __4)
+  0x03bb:30f004000000  | 	irmovl 4, %eax
+  0x03c1:30f104000000  | 	irmovl 4, %ecx
+  0x03c7:6410          | 	mull %ecx, %eax
+  0x03c9:400f640c0000  | 	rmmovl %eax, 3172
+                       | 
+                       | #(ADDR, __T46, a, -)
+  0x03cf:30f0f8ffffff  | 	irmovl -8, %eax
+  0x03d5:6050          | 	addl %ebp, %eax
+  0x03d7:400f680c0000  | 	rmmovl %eax, 3176
+                       | #(SUB, __T47, __T46, __T45)
+  0x03dd:500f680c0000  | 	mrmovl 3176, %eax
+  0x03e3:501f640c0000  | 	mrmovl 3172, %ecx
+  0x03e9:6110          | 	subl %ecx, %eax
+  0x03eb:400f6c0c0000  | 	rmmovl %eax, 3180
+                       | 
+                       | #(DEREF, __T44, __T47, -)
+  0x03f1:501f6c0c0000  | 	mrmovl 3180, %ecx
+  0x03f7:500100000000  | 	mrmovl (%ecx), %eax
+  0x03fd:400f600c0000  | 	rmmovl %eax, 3168
+                       | #(MULT, __T49, __4, __4)
+  0x0403:30f004000000  | 	irmovl 4, %eax
+  0x0409:30f104000000  | 	irmovl 4, %ecx
+  0x040f:6410          | 	mull %ecx, %eax
+  0x0411:400f740c0000  | 	rmmovl %eax, 3188
+                       | 
+                       | #(ADDR, __T50, a, -)
+  0x0417:30f0f8ffffff  | 	irmovl -8, %eax
+  0x041d:6050          | 	addl %ebp, %eax
+  0x041f:400f780c0000  | 	rmmovl %eax, 3192
+                       | #(SUB, __T51, __T50, __T49)
+  0x0425:500f780c0000  | 	mrmovl 3192, %eax
+  0x042b:501f740c0000  | 	mrmovl 3188, %ecx
+  0x0431:6110          | 	subl %ecx, %eax
+  0x0433:400f7c0c0000  | 	rmmovl %eax, 3196
+                       | 
+                       | #(MULT, __T55, __4, __4)
+  0x0439:30f004000000  | 	irmovl 4, %eax
+  0x043f:30f104000000  | 	irmovl 4, %ecx
+  0x0445:6410          | 	mull %ecx, %eax
+  0x0447:400f8c0c0000  | 	rmmovl %eax, 3212
+                       | 
+                       | #(ADDR, __T56, a, -)
+  0x044d:30f0f8ffffff  | 	irmovl -8, %eax
+  0x0453:6050          | 	addl %ebp, %eax
+  0x0455:400f900c0000  | 	rmmovl %eax, 3216
+                       | #(SUB, __T57, __T56, __T55)
+  0x045b:500f900c0000  | 	mrmovl 3216, %eax
+  0x0461:501f8c0c0000  | 	mrmovl 3212, %ecx
+  0x0467:6110          | 	subl %ecx, %eax
+  0x0469:400f940c0000  | 	rmmovl %eax, 3220
+                       | 
+                       | #(DEREF, __T54, __T57, -)
+  0x046f:501f940c0000  | 	mrmovl 3220, %ecx
+  0x0475:500100000000  | 	mrmovl (%ecx), %eax
+  0x047b:400f880c0000  | 	rmmovl %eax, 3208
+                       | #(ADD, __T53, __T54, __1)
+  0x0481:500f880c0000  | 	mrmovl 3208, %eax
+  0x0487:30f101000000  | 	irmovl 1, %ecx
+  0x048d:6010          | 	addl %ecx, %eax
+  0x048f:400f840c0000  | 	rmmovl %eax, 3204
+                       | 
+                       | #(ASSIGN, __T51, __T53, -)
+  0x0495:500f840c0000  | 	mrmovl 3204, %eax
+  0x049b:501f7c0c0000  | 	mrmovl 3196, %ecx
+  0x04a1:400100000000  | 	rmmovl %eax, (%ecx)#(MULT, __T60, __4, __4)
+  0x04a7:30f004000000  | 	irmovl 4, %eax
+  0x04ad:30f104000000  | 	irmovl 4, %ecx
+  0x04b3:6410          | 	mull %ecx, %eax
+  0x04b5:400fa00c0000  | 	rmmovl %eax, 3232
+                       | 
+                       | #(ADDR, __T61, a, -)
+  0x04bb:30f0f8ffffff  | 	irmovl -8, %eax
+  0x04c1:6050          | 	addl %ebp, %eax
+  0x04c3:400fa40c0000  | 	rmmovl %eax, 3236
+                       | #(SUB, __T62, __T61, __T60)
+  0x04c9:500fa40c0000  | 	mrmovl 3236, %eax
+  0x04cf:501fa00c0000  | 	mrmovl 3232, %ecx
+  0x04d5:6110          | 	subl %ecx, %eax
+  0x04d7:400fa80c0000  | 	rmmovl %eax, 3240
+                       | 
+                       | #(DEREF, __T59, __T62, -)
+  0x04dd:501fa80c0000  | 	mrmovl 3240, %ecx
+  0x04e3:500100000000  | 	mrmovl (%ecx), %eax
+  0x04e9:400f9c0c0000  | 	rmmovl %eax, 3228
+                       | #(MULT, __T65, __4, __4)
+  0x04ef:30f004000000  | 	irmovl 4, %eax
+  0x04f5:30f104000000  | 	irmovl 4, %ecx
+  0x04fb:6410          | 	mull %ecx, %eax
+  0x04fd:400fb40c0000  | 	rmmovl %eax, 3252
+                       | 
+                       | #(ADDR, __T66, a, -)
+  0x0503:30f0f8ffffff  | 	irmovl -8, %eax
+  0x0509:6050          | 	addl %ebp, %eax
+  0x050b:400fb80c0000  | 	rmmovl %eax, 3256
+                       | #(SUB, __T67, __T66, __T65)
+  0x0511:500fb80c0000  | 	mrmovl 3256, %eax
+  0x0517:501fb40c0000  | 	mrmovl 3252, %ecx
+  0x051d:6110          | 	subl %ecx, %eax
+  0x051f:400fbc0c0000  | 	rmmovl %eax, 3260
+                       | 
+                       | #(DEREF, __T64, __T67, -)
+  0x0525:501fbc0c0000  | 	mrmovl 3260, %ecx
+  0x052b:500100000000  | 	mrmovl (%ecx), %eax
+  0x0531:400fb00c0000  | 	rmmovl %eax, 3248
+                       | #(ADD, __T69, b, __T64)
+  0x0537:5005a8ffffff  | 	mrmovl -88(%ebp), %eax
+  0x053d:501fb00c0000  | 	mrmovl 3248, %ecx
+  0x0543:6010          | 	addl %ecx, %eax
+  0x0545:400fc40c0000  | 	rmmovl %eax, 3268
+                       | 
+                       | #(ASSIGN, c, __T69, -)
+  0x054b:500fc40c0000  | 	mrmovl 3268, %eax
+  0x0551:4005a4ffffff  | 	rmmovl %eax, -92(%ebp)
+                       | #(PRINT, Incrementing a[4] (should be 3 now):, -, -)
+  0x0557:30f2f20c0000  | 	irmovl 3314, %edx
+  0x055d:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(MULT, __T71, __4, __4)
+  0x0563:30f004000000  | 	irmovl 4, %eax
+  0x0569:30f104000000  | 	irmovl 4, %ecx
+  0x056f:6410          | 	mull %ecx, %eax
+  0x0571:400fcc0c0000  | 	rmmovl %eax, 3276
+                       | 
+                       | #(ADDR, __T72, a, -)
+  0x0577:30f0f8ffffff  | 	irmovl -8, %eax
+  0x057d:6050          | 	addl %ebp, %eax
+  0x057f:400fd00c0000  | 	rmmovl %eax, 3280
+                       | #(SUB, __T73, __T72, __T71)
+  0x0585:500fd00c0000  | 	mrmovl 3280, %eax
+  0x058b:501fcc0c0000  | 	mrmovl 3276, %ecx
+  0x0591:6110          | 	subl %ecx, %eax
+  0x0593:400fd40c0000  | 	rmmovl %eax, 3284
+                       | 
+                       | #(DEREF, __T70, __T73, -)
+  0x0599:501fd40c0000  | 	mrmovl 3284, %ecx
+  0x059f:500100000000  | 	mrmovl (%ecx), %eax
+  0x05a5:400fc80c0000  | 	rmmovl %eax, 3272
+                       | #(PRINT, __T70, -, -)
+  0x05ab:502fc80c0000  | 	mrmovl 3272, %edx
+  0x05b1:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(PRINT, c = b + a[4] (should be 5 now), -, -)
+  0x05b7:30f23e0d0000  | 	irmovl 3390, %edx
+  0x05bd:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(PRINT, c, -, -)
+  0x05c3:5025a4ffffff  | 	mrmovl -92(%ebp), %edx
+  0x05c9:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(RETURN, __0, -, -)
+  0x05cf:30f700000000  | 	irmovl 0, %edi
+  0x05d5:2054          | 	rrmovl %ebp, %esp
+  0x05d7:b05f          | 	popl %ebp
+  0x05d9:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x05df:6014          | 	addl %ecx, %esp
+  0x05e1:90            | 	ret
+  0x0ce0:              | .pos 0xce0    #qwerty
+                       | 
+  0x0ce0:64            | 	.byte 	0x64
+                       | 
+  0x0ce1:20            | 	.byte 	0x20
+                       | 
+  0x0ce2:61            | 	.byte 	0x61
+                       | 
+  0x0ce3:66            | 	.byte 	0x66
+                       | 
+  0x0ce4:74            | 	.byte 	0x74
+                       | 
+  0x0ce5:65            | 	.byte 	0x65
+                       | 
+  0x0ce6:72            | 	.byte 	0x72
+                       | 
+  0x0ce7:00            | 	.byte 	0x0
+  0x0cf2:              | .pos 0xcf2    #qwerty
+                       | 
+  0x0cf2:49            | 	.byte 	0x49
+                       | 
+  0x0cf3:6e            | 	.byte 	0x6e
+                       | 
+  0x0cf4:63            | 	.byte 	0x63
+                       | 
+  0x0cf5:72            | 	.byte 	0x72
+                       | 
+  0x0cf6:65            | 	.byte 	0x65
+                       | 
+  0x0cf7:6d            | 	.byte 	0x6d
+                       | 
+  0x0cf8:65            | 	.byte 	0x65
+                       | 
+  0x0cf9:6e            | 	.byte 	0x6e
+                       | 
+  0x0cfa:74            | 	.byte 	0x74
+                       | 
+  0x0cfb:69            | 	.byte 	0x69
+                       | 
+  0x0cfc:6e            | 	.byte 	0x6e
+                       | 
+  0x0cfd:67            | 	.byte 	0x67
+                       | 
+  0x0cfe:20            | 	.byte 	0x20
+                       | 
+  0x0cff:61            | 	.byte 	0x61
+                       | 
+  0x0d00:5b            | 	.byte 	0x5b
+                       | 
+  0x0d01:34            | 	.byte 	0x34
+                       | 
+  0x0d02:5d            | 	.byte 	0x5d
+                       | 
+  0x0d03:20            | 	.byte 	0x20
+                       | 
+  0x0d04:28            | 	.byte 	0x28
+                       | 
+  0x0d05:73            | 	.byte 	0x73
+                       | 
+  0x0d06:68            | 	.byte 	0x68
+                       | 
+  0x0d07:6f            | 	.byte 	0x6f
+                       | 
+  0x0d08:75            | 	.byte 	0x75
+                       | 
+  0x0d09:6c            | 	.byte 	0x6c
+                       | 
+  0x0d0a:64            | 	.byte 	0x64
+                       | 
+  0x0d0b:20            | 	.byte 	0x20
+                       | 
+  0x0d0c:62            | 	.byte 	0x62
+                       | 
+  0x0d0d:65            | 	.byte 	0x65
+                       | 
+  0x0d0e:20            | 	.byte 	0x20
+                       | 
+  0x0d0f:33            | 	.byte 	0x33
+                       | 
+  0x0d10:20            | 	.byte 	0x20
+                       | 
+  0x0d11:6e            | 	.byte 	0x6e
+                       | 
+  0x0d12:6f            | 	.byte 	0x6f
+                       | 
+  0x0d13:77            | 	.byte 	0x77
+                       | 
+  0x0d14:29            | 	.byte 	0x29
+                       | 
+  0x0d15:3a            | 	.byte 	0x3a
+                       | 
+  0x0d16:00            | 	.byte 	0x0
+  0x0d3e:              | .pos 0xd3e    #qwerty
+                       | 
+  0x0d3e:63            | 	.byte 	0x63
+                       | 
+  0x0d3f:20            | 	.byte 	0x20
+                       | 
+  0x0d40:3d            | 	.byte 	0x3d
+                       | 
+  0x0d41:20            | 	.byte 	0x20
+                       | 
+  0x0d42:62            | 	.byte 	0x62
+                       | 
+  0x0d43:20            | 	.byte 	0x20
+                       | 
+  0x0d44:2b            | 	.byte 	0x2b
+                       | 
+  0x0d45:20            | 	.byte 	0x20
+                       | 
+  0x0d46:61            | 	.byte 	0x61
+                       | 
+  0x0d47:5b            | 	.byte 	0x5b
+                       | 
+  0x0d48:34            | 	.byte 	0x34
+                       | 
+  0x0d49:5d            | 	.byte 	0x5d
+                       | 
+  0x0d4a:20            | 	.byte 	0x20
+                       | 
+  0x0d4b:28            | 	.byte 	0x28
+                       | 
+  0x0d4c:73            | 	.byte 	0x73
+                       | 
+  0x0d4d:68            | 	.byte 	0x68
+                       | 
+  0x0d4e:6f            | 	.byte 	0x6f
+                       | 
+  0x0d4f:75            | 	.byte 	0x75
+                       | 
+  0x0d50:6c            | 	.byte 	0x6c
+                       | 
+  0x0d51:64            | 	.byte 	0x64
+                       | 
+  0x0d52:20            | 	.byte 	0x20
+                       | 
+  0x0d53:62            | 	.byte 	0x62
+                       | 
+  0x0d54:65            | 	.byte 	0x65
+                       | 
+  0x0d55:20            | 	.byte 	0x20
+                       | 
+  0x0d56:35            | 	.byte 	0x35
+                       | 
+  0x0d57:20            | 	.byte 	0x20
+                       | 
+  0x0d58:6e            | 	.byte 	0x6e
+                       | 
+  0x0d59:6f            | 	.byte 	0x6f
+                       | 
+  0x0d5a:77            | 	.byte 	0x77
+                       | 
+  0x0d5b:29            | 	.byte 	0x29
+                       | 
+  0x0d5c:00            | 	.byte 	0x0
+  0x0d7e:              | .pos 0xd7e    #qwerty
+                       | 
+  0x0d7e:61            | 	.byte 	0x61
+                       | 
+  0x0d7f:5b            | 	.byte 	0x5b
+                       | 
+  0x0d80:34            | 	.byte 	0x34
+                       | 
+  0x0d81:5d            | 	.byte 	0x5d
+                       | 
+  0x0d82:20            | 	.byte 	0x20
+                       | 
+  0x0d83:3d            | 	.byte 	0x3d
+                       | 
+  0x0d84:3d            | 	.byte 	0x3d
+                       | 
+  0x0d85:20            | 	.byte 	0x20
+                       | 
+  0x0d86:32            | 	.byte 	0x32
+                       | 
+  0x0d87:3a            | 	.byte 	0x3a
+                       | 
+  0x0d88:20            | 	.byte 	0x20
+                       | 
+  0x0d89:28            | 	.byte 	0x28
+                       | 
+  0x0d8a:73            | 	.byte 	0x73
+                       | 
+  0x0d8b:68            | 	.byte 	0x68
+                       | 
+  0x0d8c:6f            | 	.byte 	0x6f
+                       | 
+  0x0d8d:75            | 	.byte 	0x75
+                       | 
+  0x0d8e:6c            | 	.byte 	0x6c
+                       | 
+  0x0d8f:64            | 	.byte 	0x64
+                       | 
+  0x0d90:20            | 	.byte 	0x20
+                       | 
+  0x0d91:62            | 	.byte 	0x62
+                       | 
+  0x0d92:65            | 	.byte 	0x65
+                       | 
+  0x0d93:20            | 	.byte 	0x20
+                       | 
+  0x0d94:74            | 	.byte 	0x74
+                       | 
+  0x0d95:72            | 	.byte 	0x72
+                       | 
+  0x0d96:75            | 	.byte 	0x75
+                       | 
+  0x0d97:65            | 	.byte 	0x65
+                       | 
+  0x0d98:29            | 	.byte 	0x29
+                       | 
+  0x0d99:2e            | 	.byte 	0x2e
+                       | 
+  0x0d9a:00            | 	.byte 	0x0
+  0x0dba:              | .pos 0xdba    #qwerty
+                       | 
+  0x0dba:64            | 	.byte 	0x64
+                       | 
+  0x0dbb:20            | 	.byte 	0x20
+                       | 
+  0x0dbc:62            | 	.byte 	0x62
+                       | 
+  0x0dbd:65            | 	.byte 	0x65
+                       | 
+  0x0dbe:66            | 	.byte 	0x66
+                       | 
+  0x0dbf:6f            | 	.byte 	0x6f
+                       | 
+  0x0dc0:72            | 	.byte 	0x72
+                       | 
+  0x0dc1:65            | 	.byte 	0x65
+                       | 
+  0x0dc2:00            | 	.byte 	0x0
+  0x0dce:              | .pos 0xdce    #qwerty
+                       | 
+  0x0dce:63            | 	.byte 	0x63
+                       | 
+  0x0dcf:20            | 	.byte 	0x20
+                       | 
+  0x0dd0:69            | 	.byte 	0x69
+                       | 
+  0x0dd1:73            | 	.byte 	0x73
+                       | 
+  0x0dd2:3a            | 	.byte 	0x3a
+                       | 
+  0x0dd3:00            | 	.byte 	0x0
+                       | 
+  0x0de0:              | .pos 0xde0   # Start of global var space 
+  0x0de0:00000000      | 	.long 0x00000000
+  0x0de4:00000000      | 	.long 0x00000000
+  0x0de8:00000000      | 	.long 0x00000000
+  0x0dec:00000000      | 	.long 0x00000000
+  0x0df0:00000000      | 	.long 0x00000000
+  0x0df4:00000000      | 	.long 0x00000000
+  0x0df8:00000000      | 	.long 0x00000000
+  0x0dfc:00000000      | 	.long 0x00000000
+  0x0e00:00000000      | 	.long 0x00000000
+  0x0e04:00000000      | 	.long 0x00000000
+  0x0e08:00000000      | 	.long 0x00000000
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

@@ -1,0 +1,98 @@
+#END OF PROG: 92
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(PRINT, Hello World! - From Jun & Juan <3, -, -)
+	irmovl 116, %edx
+	rmmovl %edx, 0x00FFFE10
+#(RETURN, __2, -, -)
+	irmovl 2, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x74    #qwerty
+
+	.byte 	0x48
+
+	.byte 	0x65
+
+	.byte 	0x6c
+
+	.byte 	0x6c
+
+	.byte 	0x6f
+
+	.byte 	0x20
+
+	.byte 	0x57
+
+	.byte 	0x6f
+
+	.byte 	0x72
+
+	.byte 	0x6c
+
+	.byte 	0x64
+
+	.byte 	0x21
+
+	.byte 	0x20
+
+	.byte 	0x2d
+
+	.byte 	0x20
+
+	.byte 	0x46
+
+	.byte 	0x72
+
+	.byte 	0x6f
+
+	.byte 	0x6d
+
+	.byte 	0x20
+
+	.byte 	0x4a
+
+	.byte 	0x75
+
+	.byte 	0x6e
+
+	.byte 	0x20
+
+	.byte 	0x26
+
+	.byte 	0x20
+
+	.byte 	0x4a
+
+	.byte 	0x75
+
+	.byte 	0x61
+
+	.byte 	0x6e
+
+	.byte 	0x20
+
+	.byte 	0x3c
+
+	.byte 	0x33
+
+	.byte 	0x0
+
+.pos 0xbe   # Start of global var space 
+.pos 0x0000FFFC
+stack:

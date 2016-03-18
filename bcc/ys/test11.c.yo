@@ -1,0 +1,145 @@
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
+                       | #END OF PROG: 692
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:8014000000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(LABEL, main, -, -)
+  0x0014:              | main:
+                       | 
+  0x0014:30f160000000  | 	irmovl 96, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(ASSIGN, a, __5, -)
+  0x001c:30f005000000  | 	irmovl 5, %eax
+  0x0022:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(MULT, __T0, a, __2)
+  0x0028:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x002e:30f102000000  | 	irmovl 2, %ecx
+  0x0034:6410          | 	mull %ecx, %eax
+  0x0036:400fc8020000  | 	rmmovl %eax, 712
+                       | 
+                       | #(ASSIGN, b, __T0, -)
+  0x003c:500fc8020000  | 	mrmovl 712, %eax
+  0x0042:4005f4ffffff  | 	rmmovl %eax, -12(%ebp)
+                       | #(PRINT, a, -, -)
+  0x0048:5025f8ffffff  | 	mrmovl -8(%ebp), %edx
+  0x004e:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(PRINT, b, -, -)
+  0x0054:5025f4ffffff  | 	mrmovl -12(%ebp), %edx
+  0x005a:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(ASSIGN, __T2, a, -)
+  0x0060:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0066:400fd0020000  | 	rmmovl %eax, 720
+                       | #(ASSIGN, __T3, b, -)
+  0x006c:5005f4ffffff  | 	mrmovl -12(%ebp), %eax
+  0x0072:400fd4020000  | 	rmmovl %eax, 724
+                       | #(EQ, __T4, __T2, __T3)
+  0x0078:500fd0020000  | 	mrmovl 720, %eax
+  0x007e:501fd4020000  | 	mrmovl 724, %ecx
+  0x0084:6110          | 	subl %ecx, %eax
+  0x0086:400fd8020000  | 	rmmovl %eax, 728
+                       | #(ifTrue, __L_21_TRUE, __T4, -)
+  0x008c:73a2000000    | 	je L_21_TRUE
+                       | #(ASSIGN, __T4, __0, -)
+  0x0091:30f000000000  | 	irmovl 0, %eax
+  0x0097:400fd8020000  | 	rmmovl %eax, 728
+                       | #(GOTO, __L_21_DONE, -, -)
+  0x009d:70ae000000    | 	jmp L_21_DONE
+                       | #(LABEL, __L_21_TRUE, -, -)
+  0x00a2:              | L_21_TRUE:
+                       | 
+                       | #(ASSIGN, __T4, __1, -)
+  0x00a2:30f001000000  | 	irmovl 1, %eax
+  0x00a8:400fd8020000  | 	rmmovl %eax, 728
+                       | #(LABEL, __L_21_DONE, -, -)
+  0x00ae:              | L_21_DONE:
+                       | 
+                       | #(ASSIGN, __T1, __T4, -)
+  0x00ae:500fd8020000  | 	mrmovl 728, %eax
+  0x00b4:400fcc020000  | 	rmmovl %eax, 716
+                       | #(ifFalse, __L_20_ELSE, __T1, -)
+  0x00ba:500fcc020000  | 	mrmovl 716, %eax
+  0x00c0:30f100000000  | 	irmovl 0, %ecx
+  0x00c6:6110          | 	subl %ecx, %eax
+  0x00c8:73de000000    | 	je L_20_ELSE
+                       | #(PRINT, in if TRUE, -, -)
+  0x00cd:30f2e0020000  | 	irmovl 736, %edx
+  0x00d3:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(GOTO, __L_20_FI, -, -)
+  0x00d9:70ea000000    | 	jmp L_20_FI
+                       | #(LABEL, __L_20_ELSE, -, -)
+  0x00de:              | L_20_ELSE:
+                       | 
+                       | #(PRINT, in if FALSE, -, -)
+  0x00de:30f2f8020000  | 	irmovl 760, %edx
+  0x00e4:402f10feff00  | 	rmmovl %edx, 0x00FFFE10
+                       | #(LABEL, __L_20_FI, -, -)
+  0x00ea:              | L_20_FI:
+                       | 
+                       | #(RETURN, __0, -, -)
+  0x00ea:30f700000000  | 	irmovl 0, %edi
+  0x00f0:2054          | 	rrmovl %ebp, %esp
+  0x00f2:b05f          | 	popl %ebp
+  0x00f4:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x00fa:6014          | 	addl %ecx, %esp
+  0x00fc:90            | 	ret
+  0x02e0:              | .pos 0x2e0    #qwerty
+                       | 
+  0x02e0:69            | 	.byte 	0x69
+                       | 
+  0x02e1:6e            | 	.byte 	0x6e
+                       | 
+  0x02e2:20            | 	.byte 	0x20
+                       | 
+  0x02e3:69            | 	.byte 	0x69
+                       | 
+  0x02e4:66            | 	.byte 	0x66
+                       | 
+  0x02e5:20            | 	.byte 	0x20
+                       | 
+  0x02e6:54            | 	.byte 	0x54
+                       | 
+  0x02e7:52            | 	.byte 	0x52
+                       | 
+  0x02e8:55            | 	.byte 	0x55
+                       | 
+  0x02e9:45            | 	.byte 	0x45
+                       | 
+  0x02ea:00            | 	.byte 	0x0
+  0x02f8:              | .pos 0x2f8    #qwerty
+                       | 
+  0x02f8:69            | 	.byte 	0x69
+                       | 
+  0x02f9:6e            | 	.byte 	0x6e
+                       | 
+  0x02fa:20            | 	.byte 	0x20
+                       | 
+  0x02fb:69            | 	.byte 	0x69
+                       | 
+  0x02fc:66            | 	.byte 	0x66
+                       | 
+  0x02fd:20            | 	.byte 	0x20
+                       | 
+  0x02fe:46            | 	.byte 	0x46
+                       | 
+  0x02ff:41            | 	.byte 	0x41
+                       | 
+  0x0300:4c            | 	.byte 	0x4c
+                       | 
+  0x0301:53            | 	.byte 	0x53
+                       | 
+  0x0302:45            | 	.byte 	0x45
+                       | 
+  0x0303:00            | 	.byte 	0x0
+                       | 
+  0x0316:              | .pos 0x316   # Start of global var space 
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

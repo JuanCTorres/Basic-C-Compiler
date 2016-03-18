@@ -1,0 +1,512 @@
+
+
+ #This function has locals 
+
+
+
+ #This function has locals 
+
+#END OF PROG: 1564
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, this_func, -, -)
+this_func:
+
+	irmovl 0, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(LABEL, some_func, -, -)
+some_func:
+
+	irmovl 92, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(ASSIGN, a, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, -8(%ebp)
+#(MULT, __T0, a, __4)
+	mrmovl -8(%ebp), %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1584
+
+#(ADDR, __T1, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1588
+#(SUB, __T2, __T1, __T0)
+	mrmovl 1588, %eax
+	mrmovl 1584, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1592
+
+#(ASSIGN, __T2, __300, -)
+	irmovl 300, %eax
+	mrmovl 1592, %ecx
+	rmmovl %eax, (%ecx)#(MULT, __T5, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1604
+
+#(ADDR, __T6, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1608
+#(SUB, __T7, __T6, __T5)
+	mrmovl 1608, %eax
+	mrmovl 1604, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1612
+
+#(ASSIGN, __T7, __300, -)
+	irmovl 300, %eax
+	mrmovl 1612, %ecx
+	rmmovl %eax, (%ecx)#(ASSIGN, __T4, __T7, -)
+	mrmovl 1612, %eax
+	rmmovl %eax, 1600
+#(ifFalse, __L_20_FI, __T4, -)
+	mrmovl 1600, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_20_FI
+#(PRINT, HELLOOOOOO\n, -, -)
+	irmovl 1964, %edx
+	rmmovl %edx, 0x00FFFE10
+#(PRINT, i[0] + 1000. Should be 1000, -, -)
+	irmovl 1906, %edx
+	rmmovl %edx, 0x00FFFE10
+#(MULT, __T10, __0, __4)
+	irmovl 0, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1624
+
+#(ADDR, __T11, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1628
+#(SUB, __T12, __T11, __T10)
+	mrmovl 1628, %eax
+	mrmovl 1624, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1632
+
+#(DEREF, __T9, __T12, -)
+	mrmovl 1632, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 1620
+#(MULT, __T15, __0, __4)
+	irmovl 0, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1644
+
+#(ADDR, __T16, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1648
+#(SUB, __T17, __T16, __T15)
+	mrmovl 1648, %eax
+	mrmovl 1644, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1652
+
+#(DEREF, __T14, __T17, -)
+	mrmovl 1652, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 1640
+#(ADD, __T19, __T14, __1000)
+	mrmovl 1640, %eax
+	irmovl 1000, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 1660
+
+#(PRINT, __T19, -, -)
+	mrmovl 1660, %edx
+	rmmovl %edx, 0x00FFFE14
+#(PRINT, i[1]. Should be 300., -, -)
+	irmovl 1862, %edx
+	rmmovl %edx, 0x00FFFE10
+#(MULT, __T21, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1668
+
+#(ADDR, __T22, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1672
+#(SUB, __T23, __T22, __T21)
+	mrmovl 1672, %eax
+	mrmovl 1668, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1676
+
+#(DEREF, __T20, __T23, -)
+	mrmovl 1676, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 1664
+#(PRINT, __T20, -, -)
+	mrmovl 1664, %edx
+	rmmovl %edx, 0x00FFFE14
+#(LABEL, __L_20_FI, -, -)
+L_20_FI:
+
+#(MULT, __T26, __0, __4)
+	irmovl 0, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1688
+
+#(ADDR, __T27, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1692
+#(SUB, __T28, __T27, __T26)
+	mrmovl 1692, %eax
+	mrmovl 1688, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1696
+
+#(DEREF, __T25, __T28, -)
+	mrmovl 1696, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 1684
+#(ASSIGN, a, __T25, -)
+	mrmovl 1684, %eax
+	rmmovl %eax, -8(%ebp)
+#(PRINT, a = i[0]. a should be 0., -, -)
+	irmovl 1728, %edx
+	rmmovl %edx, 0x00FFFE10
+#(PRINT, a, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(MULT, __T31, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 1708
+
+#(ADDR, __T32, i, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 1712
+#(SUB, __T33, __T32, __T31)
+	mrmovl 1712, %eax
+	mrmovl 1708, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 1716
+
+#(DEREF, __T30, __T33, -)
+	mrmovl 1716, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 1704
+#(RETURN, __T30, -, -)
+	mrmovl 1704, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(LABEL, main, -, -)
+main:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(PRECALL, some_func, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, some_func, -, -)
+	call some_func
+#(POSTCALL, some_func, -, -)
+	irmovl 96, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(ASSIGN, b, __RET_INT, -)
+	rrmovl %edi, %eax
+	rmmovl %eax, -8(%ebp)
+#(PRINT, Called some_func(). Returned i[1] = 300, -, -)
+	irmovl 1780, %edx
+	rmmovl %edx, 0x00FFFE10
+#(PRINT, b, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x6c0    #qwerty
+
+	.byte 	0x61
+
+	.byte 	0x20
+
+	.byte 	0x3d
+
+	.byte 	0x20
+
+	.byte 	0x69
+
+	.byte 	0x5b
+
+	.byte 	0x30
+
+	.byte 	0x5d
+
+	.byte 	0x2e
+
+	.byte 	0x20
+
+	.byte 	0x61
+
+	.byte 	0x20
+
+	.byte 	0x73
+
+	.byte 	0x68
+
+	.byte 	0x6f
+
+	.byte 	0x75
+
+	.byte 	0x6c
+
+	.byte 	0x64
+
+	.byte 	0x20
+
+	.byte 	0x62
+
+	.byte 	0x65
+
+	.byte 	0x20
+
+	.byte 	0x30
+
+	.byte 	0x2e
+
+	.byte 	0x0
+.pos 0x6f4    #qwerty
+
+	.byte 	0x43
+
+	.byte 	0x61
+
+	.byte 	0x6c
+
+	.byte 	0x6c
+
+	.byte 	0x65
+
+	.byte 	0x64
+
+	.byte 	0x20
+
+	.byte 	0x73
+
+	.byte 	0x6f
+
+	.byte 	0x6d
+
+	.byte 	0x65
+
+	.byte 	0x5f
+
+	.byte 	0x66
+
+	.byte 	0x75
+
+	.byte 	0x6e
+
+	.byte 	0x63
+
+	.byte 	0x28
+
+	.byte 	0x29
+
+	.byte 	0x2e
+
+	.byte 	0x20
+
+	.byte 	0x52
+
+	.byte 	0x65
+
+	.byte 	0x74
+
+	.byte 	0x75
+
+	.byte 	0x72
+
+	.byte 	0x6e
+
+	.byte 	0x65
+
+	.byte 	0x64
+
+	.byte 	0x20
+
+	.byte 	0x69
+
+	.byte 	0x5b
+
+	.byte 	0x31
+
+	.byte 	0x5d
+
+	.byte 	0x20
+
+	.byte 	0x3d
+
+	.byte 	0x20
+
+	.byte 	0x33
+
+	.byte 	0x30
+
+	.byte 	0x30
+
+	.byte 	0x0
+.pos 0x746    #qwerty
+
+	.byte 	0x69
+
+	.byte 	0x5b
+
+	.byte 	0x31
+
+	.byte 	0x5d
+
+	.byte 	0x2e
+
+	.byte 	0x20
+
+	.byte 	0x53
+
+	.byte 	0x68
+
+	.byte 	0x6f
+
+	.byte 	0x75
+
+	.byte 	0x6c
+
+	.byte 	0x64
+
+	.byte 	0x20
+
+	.byte 	0x62
+
+	.byte 	0x65
+
+	.byte 	0x20
+
+	.byte 	0x33
+
+	.byte 	0x30
+
+	.byte 	0x30
+
+	.byte 	0x2e
+
+	.byte 	0x0
+.pos 0x772    #qwerty
+
+	.byte 	0x69
+
+	.byte 	0x5b
+
+	.byte 	0x30
+
+	.byte 	0x5d
+
+	.byte 	0x20
+
+	.byte 	0x2b
+
+	.byte 	0x20
+
+	.byte 	0x31
+
+	.byte 	0x30
+
+	.byte 	0x30
+
+	.byte 	0x30
+
+	.byte 	0x2e
+
+	.byte 	0x20
+
+	.byte 	0x53
+
+	.byte 	0x68
+
+	.byte 	0x6f
+
+	.byte 	0x75
+
+	.byte 	0x6c
+
+	.byte 	0x64
+
+	.byte 	0x20
+
+	.byte 	0x62
+
+	.byte 	0x65
+
+	.byte 	0x20
+
+	.byte 	0x31
+
+	.byte 	0x30
+
+	.byte 	0x30
+
+	.byte 	0x30
+
+	.byte 	0x0
+.pos 0x7ac    #qwerty
+
+	.byte 	0x48
+
+	.byte 	0x45
+
+	.byte 	0x4c
+
+	.byte 	0x4c
+
+	.byte 	0x4f
+
+	.byte 	0x4f
+
+	.byte 	0x4f
+
+	.byte 	0x4f
+
+	.byte 	0x4f
+
+	.byte 	0x4f
+
+	.byte 	0xa
+
+	.byte 	0x0
+
+.pos 0x7cc   # Start of global var space 
+.pos 0x0000FFFC
+stack:

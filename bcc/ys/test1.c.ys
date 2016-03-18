@@ -1,0 +1,795 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 6032
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(ASSIGN, a, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6412
+#(ASSIGN, c, __23, -)
+	irmovl 23, %eax
+	rmmovl %eax, 6420
+#(LABEL, main, -, -)
+main:
+
+	irmovl 304, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(ASSIGN, h, __2, -)
+	irmovl 2, %eax
+	rmmovl %eax, -112(%ebp)
+#(ASSIGN, i, __3, -)
+	irmovl 3, %eax
+	rmmovl %eax, -116(%ebp)
+#(MULT, __T0, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6052
+
+#(MULT, __T1, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6056
+
+#(MULT, __T2, __T0, __4)
+	mrmovl 6052, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6060
+
+#(ADDR, __T3, cc, -)
+	irmovl -120, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 6064
+#(SUB, __T4, __T3, __T2)
+	mrmovl 6064, %eax
+	mrmovl 6060, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6068
+
+#(ASSIGN, __T4, __T1, -)
+	mrmovl 6056, %eax
+	mrmovl 6068, %ecx
+	rmmovl %eax, (%ecx)#(PRINT, test basics!\n, -, -)
+	irmovl 6376, %edx
+	rmmovl %edx, 0x00FFFE10
+#(READ, f, -, -)
+	mrmovl 0x00FFFE1C, %eax
+	rmmovl %eax, -108(%ebp)
+#(PRINT, f, -, -)
+	mrmovl -108(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(SUB, __T6, __1, b)
+	irmovl 1, %eax
+	mrmovl -92(%ebp), %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6076
+
+#(ASSIGN, c, __T6, -)
+	mrmovl 6076, %eax
+	rmmovl %eax, -96(%ebp)
+#(ADD, __T7, b, __1)
+	mrmovl -92(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 6080
+
+#(ASSIGN, c, __T7, -)
+	mrmovl 6080, %eax
+	rmmovl %eax, -96(%ebp)
+#(SUB, __T8, __5, __5)
+	irmovl 5, %eax
+	irmovl 5, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6084
+
+#(ASSIGN, c, __T8, -)
+	mrmovl 6084, %eax
+	rmmovl %eax, -96(%ebp)
+#(MULT, __T9, __1, __-6)
+	irmovl 1, %eax
+	irmovl -6, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6088
+
+#(ASSIGN, c, __T9, -)
+	mrmovl 6088, %eax
+	rmmovl %eax, -96(%ebp)
+#(SUB, __T10, __-2, __9)
+	irmovl -2, %eax
+	irmovl 9, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6092
+
+#(ASSIGN, c, __T10, -)
+	mrmovl 6092, %eax
+	rmmovl %eax, -96(%ebp)
+#(ADD, __T11, __1, __7)
+	irmovl 1, %eax
+	irmovl 7, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 6096
+
+#(ASSIGN, c, __T11, -)
+	mrmovl 6096, %eax
+	rmmovl %eax, -96(%ebp)
+#(SUB, __T12, __1, __-10)
+	irmovl 1, %eax
+	irmovl -10, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6100
+
+#(ASSIGN, c, __T12, -)
+	mrmovl 6100, %eax
+	rmmovl %eax, -96(%ebp)
+#(SUB, __T13, __22, __-88)
+	irmovl 22, %eax
+	irmovl -88, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6104
+
+#(ASSIGN, c, __T13, -)
+	mrmovl 6104, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, b, __5, -)
+	irmovl 5, %eax
+	rmmovl %eax, -92(%ebp)
+#(NEG, __T14, b, -)
+	mrmovl -92(%ebp), %ecx
+	irmovl 0, %eax
+	subl %ecx, %eax
+	rmmovl %eax, 6108
+#(MULT, __T15, a, __T14)
+	mrmovl -88(%ebp), %eax
+	mrmovl 6108, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6112
+
+#(ASSIGN, c, __T15, -)
+	mrmovl 6112, %eax
+	rmmovl %eax, -96(%ebp)
+#(ADD, __T16, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 6116
+
+#(ASSIGN, c, __T16, -)
+	mrmovl 6116, %eax
+	rmmovl %eax, -96(%ebp)
+#(SUB, __T17, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6120
+
+#(ASSIGN, c, __T17, -)
+	mrmovl 6120, %eax
+	rmmovl %eax, -96(%ebp)
+#(MULT, __T18, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6124
+
+#(ASSIGN, c, __T18, -)
+	mrmovl 6124, %eax
+	rmmovl %eax, -96(%ebp)
+#(DIV, __T19, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	divl %ecx, %eax
+	rmmovl %eax, 6128
+
+#(ASSIGN, c, __T19, -)
+	mrmovl 6128, %eax
+	rmmovl %eax, -96(%ebp)
+#(MOD, __T20, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	modl %ecx, %eax
+	rmmovl %eax, 6132
+
+#(ASSIGN, c, __T20, -)
+	mrmovl 6132, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T21, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6136
+#(ASSIGN, __T22, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6140
+#(LT, __T23, __T21, __T22)
+	mrmovl 6136, %eax
+	mrmovl 6140, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6144
+#(ifTrue, __L_119_TRUE, __T23, -)
+	jl L_119_TRUE
+#(ASSIGN, __T23, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6144
+#(GOTO, __L_119_DONE, -, -)
+	jmp L_119_DONE
+#(LABEL, __L_119_TRUE, -, -)
+L_119_TRUE:
+
+#(ASSIGN, __T23, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6144
+#(LABEL, __L_119_DONE, -, -)
+L_119_DONE:
+
+#(ASSIGN, c, __T23, -)
+	mrmovl 6144, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T24, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6148
+#(ASSIGN, __T25, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6152
+#(LTEQ, __T26, __T24, __T25)
+	mrmovl 6148, %eax
+	mrmovl 6152, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6156
+#(ifTrue, __L_124_TRUE, __T26, -)
+	jle L_124_TRUE
+#(ASSIGN, __T26, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6156
+#(GOTO, __L_124_DONE, -, -)
+	jmp L_124_DONE
+#(LABEL, __L_124_TRUE, -, -)
+L_124_TRUE:
+
+#(ASSIGN, __T26, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6156
+#(LABEL, __L_124_DONE, -, -)
+L_124_DONE:
+
+#(ASSIGN, c, __T26, -)
+	mrmovl 6156, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T27, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6160
+#(ASSIGN, __T28, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6164
+#(GT, __T29, __T27, __T28)
+	mrmovl 6160, %eax
+	mrmovl 6164, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6168
+#(ifTrue, __L_129_TRUE, __T29, -)
+	jg L_129_TRUE
+#(ASSIGN, __T29, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6168
+#(GOTO, __L_129_DONE, -, -)
+	jmp L_129_DONE
+#(LABEL, __L_129_TRUE, -, -)
+L_129_TRUE:
+
+#(ASSIGN, __T29, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6168
+#(LABEL, __L_129_DONE, -, -)
+L_129_DONE:
+
+#(ASSIGN, c, __T29, -)
+	mrmovl 6168, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T30, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6172
+#(ASSIGN, __T31, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6176
+#(GTEQ, __T32, __T30, __T31)
+	mrmovl 6172, %eax
+	mrmovl 6176, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6180
+#(ifTrue, __L_134_TRUE, __T32, -)
+	jge L_134_TRUE
+#(ASSIGN, __T32, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6180
+#(GOTO, __L_134_DONE, -, -)
+	jmp L_134_DONE
+#(LABEL, __L_134_TRUE, -, -)
+L_134_TRUE:
+
+#(ASSIGN, __T32, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6180
+#(LABEL, __L_134_DONE, -, -)
+L_134_DONE:
+
+#(ASSIGN, c, __T32, -)
+	mrmovl 6180, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T33, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6184
+#(ASSIGN, __T34, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6188
+#(EQ, __T35, __T33, __T34)
+	mrmovl 6184, %eax
+	mrmovl 6188, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6192
+#(ifTrue, __L_139_TRUE, __T35, -)
+	je L_139_TRUE
+#(ASSIGN, __T35, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6192
+#(GOTO, __L_139_DONE, -, -)
+	jmp L_139_DONE
+#(LABEL, __L_139_TRUE, -, -)
+L_139_TRUE:
+
+#(ASSIGN, __T35, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6192
+#(LABEL, __L_139_DONE, -, -)
+L_139_DONE:
+
+#(ASSIGN, c, __T35, -)
+	mrmovl 6192, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T36, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6196
+#(ASSIGN, __T37, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6200
+#(NEQ, __T38, __T36, __T37)
+	mrmovl 6196, %eax
+	mrmovl 6200, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6204
+#(ifTrue, __L_144_TRUE, __T38, -)
+	jne L_144_TRUE
+#(ASSIGN, __T38, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6204
+#(GOTO, __L_144_DONE, -, -)
+	jmp L_144_DONE
+#(LABEL, __L_144_TRUE, -, -)
+L_144_TRUE:
+
+#(ASSIGN, __T38, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6204
+#(LABEL, __L_144_DONE, -, -)
+L_144_DONE:
+
+#(ASSIGN, c, __T38, -)
+	mrmovl 6204, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T40, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6212
+#(ifFalse, __L_149_FALSE, __T40, -)
+	mrmovl 6212, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_149_FALSE
+#(ASSIGN, __T41, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6216
+#(ifFalse, __L_149_FALSE, __T41, -)
+	mrmovl 6216, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_149_FALSE
+#(ASSIGN, __T42, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6220
+#(GOTO, __L_149_DONE, -, -)
+	jmp L_149_DONE
+#(LABEL, __L_149_FALSE, -, -)
+L_149_FALSE:
+
+#(ASSIGN, __T42, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6220
+#(LABEL, __L_149_DONE, -, -)
+L_149_DONE:
+
+#(ASSIGN, c, __T42, -)
+	mrmovl 6220, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T43, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6224
+#(ifTrue, __L_154_TRUE, __T43, -)
+	mrmovl 6224, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_154_TRUE
+#(ASSIGN, __T46, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6236
+#(ifTrue, __L_154_TRUE, __T43, -)
+	mrmovl 6224, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_154_TRUE
+#(ASSIGN, __T45, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6232
+#(GOTO, __L_154_DONE, -, -)
+	jmp L_154_DONE
+#(LABEL, __L_154_TRUE, -, -)
+L_154_TRUE:
+
+#(ASSIGN, __T45, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6232
+#(LABEL, __L_154_DONE, -, -)
+L_154_DONE:
+
+#(ASSIGN, c, __T45, -)
+	mrmovl 6232, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, __T47, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, 6240
+#(ifFalse, __L_159_FALSE, __T47, -)
+	mrmovl 6240, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_159_FALSE
+#(ASSIGN, __T48, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6244
+#(GOTO, __L_159_DONE, -, -)
+	jmp L_159_DONE
+#(LABEL, __L_159_FALSE, -, -)
+L_159_FALSE:
+
+#(ASSIGN, __T48, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6244
+#(LABEL, __L_159_DONE, -, -)
+L_159_DONE:
+
+#(ASSIGN, c, __T48, -)
+	mrmovl 6244, %eax
+	rmmovl %eax, -96(%ebp)
+#(NEG, __T49, b, -)
+	mrmovl -92(%ebp), %ecx
+	irmovl 0, %eax
+	subl %ecx, %eax
+	rmmovl %eax, 6248
+#(ASSIGN, c, __T49, -)
+	mrmovl 6248, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, b, __10, -)
+	irmovl 10, %eax
+	rmmovl %eax, -92(%ebp)
+#(PRINT, about to print c, -, -)
+	irmovl 6340, %edx
+	rmmovl %edx, 0x00FFFE10
+#(INC, b, -, -)
+	mrmovl -92(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -92(%ebp)
+#(ASSIGN, c, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, -96(%ebp)
+#(PRINT, c, -, -)
+	mrmovl -96(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(PRINT, __10, -, -)
+	irmovl 10, %edx
+	rmmovl %edx, 0x00FFFE14
+#(DEC, b, -, -)
+	mrmovl -92(%ebp), %eax
+	irmovl 1, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, -92(%ebp)
+#(ASSIGN, c, b, -)
+	mrmovl -92(%ebp), %eax
+	rmmovl %eax, -96(%ebp)
+#(MOD, __T52, a, __5)
+	mrmovl -88(%ebp), %eax
+	irmovl 5, %ecx
+	modl %ecx, %eax
+	rmmovl %eax, 6260
+
+#(ASSIGN, c, __T52, -)
+	mrmovl 6260, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, c, __-23, -)
+	irmovl -23, %eax
+	rmmovl %eax, -96(%ebp)
+#(ASSIGN, a, __100, -)
+	irmovl 100, %eax
+	rmmovl %eax, -88(%ebp)
+#(LABEL, __L_190_FOR_BEGIN, -, -)
+L_190_FOR_BEGIN:
+
+#(ASSIGN, __T53, a, -)
+	mrmovl -88(%ebp), %eax
+	rmmovl %eax, 6264
+#(ASSIGN, __T54, __200, -)
+	irmovl 200, %eax
+	rmmovl %eax, 6268
+#(LT, __T55, __T53, __T54)
+	mrmovl 6264, %eax
+	mrmovl 6268, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6272
+#(ifTrue, __L_194_TRUE, __T55, -)
+	jl L_194_TRUE
+#(ASSIGN, __T55, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6272
+#(GOTO, __L_194_DONE, -, -)
+	jmp L_194_DONE
+#(LABEL, __L_194_TRUE, -, -)
+L_194_TRUE:
+
+#(ASSIGN, __T55, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6272
+#(LABEL, __L_194_DONE, -, -)
+L_194_DONE:
+
+#(ifFalse, __L_190_FOR_END, __T55, -)
+	mrmovl 6272, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_190_FOR_END
+#(ASSIGN, zz, __-100, -)
+	irmovl -100, %eax
+	rmmovl %eax, -200(%ebp)
+#(ADD, __T56, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 6276
+
+#(ADD, __T57, e, f)
+	mrmovl -104(%ebp), %eax
+	mrmovl -108(%ebp), %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 6280
+
+#(ASSIGN, c, __T57, -)
+	mrmovl 6280, %eax
+	rmmovl %eax, -96(%ebp)
+#(INC, a, -, -)
+	mrmovl -88(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -88(%ebp)
+#(GOTO, __L_190_FOR_BEGIN, -, -)
+	jmp L_190_FOR_BEGIN
+#(LABEL, __L_190_FOR_END, -, -)
+L_190_FOR_END:
+
+#(LABEL, __L_213_WHILE_BEGIN, -, -)
+L_213_WHILE_BEGIN:
+
+#(DIV, __T59, a, __5)
+	mrmovl -88(%ebp), %eax
+	irmovl 5, %ecx
+	divl %ecx, %eax
+	rmmovl %eax, 6288
+
+#(ADD, __T60, __-3, __-8)
+	irmovl -3, %eax
+	irmovl -8, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 6292
+
+#(SUB, __T61, __T59, __T60)
+	mrmovl 6288, %eax
+	mrmovl 6292, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6296
+
+#(ASSIGN, __T62, __T61, -)
+	mrmovl 6296, %eax
+	rmmovl %eax, 6300
+#(ASSIGN, __T63, __100, -)
+	irmovl 100, %eax
+	rmmovl %eax, 6304
+#(EQ, __T64, __T62, __T63)
+	mrmovl 6300, %eax
+	mrmovl 6304, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6308
+#(ifTrue, __L_214_TRUE, __T64, -)
+	je L_214_TRUE
+#(ASSIGN, __T64, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6308
+#(GOTO, __L_214_DONE, -, -)
+	jmp L_214_DONE
+#(LABEL, __L_214_TRUE, -, -)
+L_214_TRUE:
+
+#(ASSIGN, __T64, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6308
+#(LABEL, __L_214_DONE, -, -)
+L_214_DONE:
+
+#(ifFalse, __L_213_WHILE_END, __T64, -)
+	mrmovl 6308, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_213_WHILE_END
+#(MULT, __T65, __12, __21)
+	irmovl 12, %eax
+	irmovl 21, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6312
+
+#(PRINT, __T65, -, -)
+	mrmovl 6312, %edx
+	rmmovl %edx, 0x00FFFE14
+#(GOTO, __L_213_WHILE_BEGIN, -, -)
+	jmp L_213_WHILE_BEGIN
+#(LABEL, __L_213_WHILE_END, -, -)
+L_213_WHILE_END:
+
+#(LABEL, __L_233_DO_WHILE_BEGIN, -, -)
+L_233_DO_WHILE_BEGIN:
+
+#(ASSIGN, asd, dsa, -)
+	mrmovl -288(%ebp), %eax
+	rmmovl %eax, -292(%ebp)
+#(ifTrue, __L_233_DO_WHILE_BEGIN, __1, -)
+	irmovl 1, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	jne L_233_DO_WHILE_BEGIN
+#(MULT, __T67, a, b)
+	mrmovl -88(%ebp), %eax
+	mrmovl -92(%ebp), %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 6320
+
+#(ASSIGN, __T68, __T67, -)
+	mrmovl 6320, %eax
+	rmmovl %eax, 6324
+#(ASSIGN, __T69, d, -)
+	mrmovl -100(%ebp), %eax
+	rmmovl %eax, 6328
+#(EQ, __T70, __T68, __T69)
+	mrmovl 6324, %eax
+	mrmovl 6328, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 6332
+#(ifTrue, __L_244_TRUE, __T70, -)
+	je L_244_TRUE
+#(ASSIGN, __T70, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 6332
+#(GOTO, __L_244_DONE, -, -)
+	jmp L_244_DONE
+#(LABEL, __L_244_TRUE, -, -)
+L_244_TRUE:
+
+#(ASSIGN, __T70, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 6332
+#(LABEL, __L_244_DONE, -, -)
+L_244_DONE:
+
+#(ASSIGN, __T66, __T70, -)
+	mrmovl 6332, %eax
+	rmmovl %eax, 6316
+#(ifFalse, __L_243_ELSE, __T66, -)
+	mrmovl 6316, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_243_ELSE
+#(GOTO, __L_243_FI, -, -)
+	jmp L_243_FI
+#(LABEL, __L_243_ELSE, -, -)
+L_243_ELSE:
+
+#(LABEL, __L_243_FI, -, -)
+L_243_FI:
+
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x18c4    #qwerty
+
+	.byte 	0x61
+
+	.byte 	0x62
+
+	.byte 	0x6f
+
+	.byte 	0x75
+
+	.byte 	0x74
+
+	.byte 	0x20
+
+	.byte 	0x74
+
+	.byte 	0x6f
+
+	.byte 	0x20
+
+	.byte 	0x70
+
+	.byte 	0x72
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x74
+
+	.byte 	0x20
+
+	.byte 	0x63
+
+	.byte 	0x0
+.pos 0x18e8    #qwerty
+
+	.byte 	0x74
+
+	.byte 	0x65
+
+	.byte 	0x73
+
+	.byte 	0x74
+
+	.byte 	0x20
+
+	.byte 	0x62
+
+	.byte 	0x61
+
+	.byte 	0x73
+
+	.byte 	0x69
+
+	.byte 	0x63
+
+	.byte 	0x73
+
+	.byte 	0x21
+
+	.byte 	0xa
+
+	.byte 	0x0
+
+.pos 0x190c   # Start of global var space 
+	.long 0x00000000
+	.long 0x00000000
+	.long 0x00000017
+.pos 0x0000FFFC
+stack:

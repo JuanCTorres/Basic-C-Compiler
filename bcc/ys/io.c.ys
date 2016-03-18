@@ -1,0 +1,52 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 152
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 12, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(ASSIGN, a, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, -8(%ebp)
+#(PRINT, a, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(PRINT, Hello, -, -)
+	irmovl 176, %edx
+	rmmovl %edx, 0x00FFFE10
+#(RETURN, __void, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0xb0    #qwerty
+
+	.byte 	0x48
+
+	.byte 	0x65
+
+	.byte 	0x6c
+
+	.byte 	0x6c
+
+	.byte 	0x6f
+
+	.byte 	0x0
+
+.pos 0xc2   # Start of global var space 
+.pos 0x0000FFFC
+stack:

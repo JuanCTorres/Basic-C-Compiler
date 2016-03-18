@@ -1,0 +1,810 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 5284
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, foo, -, -)
+foo:
+
+	irmovl 8, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 1
+#### SOMETHING
+#(MULT, __T0, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5304
+
+#(ADDR, __T1, bar, -)
+	irmovl 80, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5308
+#(SUB, __T2, __T1, __T0)
+	mrmovl 5308, %eax
+	mrmovl 5304, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5312
+
+#(ASSIGN, __T2, __3, -)
+	irmovl 3, %eax
+	mrmovl 5312, %ecx
+	rmmovl %eax, (%ecx)#(MULT, __T5, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5324
+
+#(ADDR, __T6, bar, -)
+	irmovl 80, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5328
+#(SUB, __T7, __T6, __T5)
+	mrmovl 5328, %eax
+	mrmovl 5324, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5332
+
+#(DEREF, __T4, __T7, -)
+	mrmovl 5332, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5320
+#(RETURN, __T4, -, -)
+	mrmovl 5320, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+#(LABEL, main, -, -)
+main:
+
+	irmovl 96, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(MULT, __T10, __0, __4)
+	irmovl 0, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5344
+
+#(ADDR, __T11, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5348
+#(SUB, __T12, __T11, __T10)
+	mrmovl 5348, %eax
+	mrmovl 5344, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5352
+
+#(DEREF, __T9, __T12, -)
+	mrmovl 5352, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5340
+#(ASSIGN, __T14, __T9, -)
+	mrmovl 5340, %eax
+	rmmovl %eax, 5360
+#(PUSH, __T14, -, -)
+	mrmovl 5360, %eax
+	pushl %eax
+#(MULT, __T16, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5368
+
+#(ADDR, __T17, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5372
+#(SUB, __T18, __T17, __T16)
+	mrmovl 5372, %eax
+	mrmovl 5368, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5376
+
+#(DEREF, __T15, __T18, -)
+	mrmovl 5376, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5364
+#(ASSIGN, __T20, __T15, -)
+	mrmovl 5364, %eax
+	rmmovl %eax, 5384
+#(PUSH, __T20, -, -)
+	mrmovl 5384, %eax
+	pushl %eax
+#(MULT, __T22, __2, __4)
+	irmovl 2, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5392
+
+#(ADDR, __T23, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5396
+#(SUB, __T24, __T23, __T22)
+	mrmovl 5396, %eax
+	mrmovl 5392, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5400
+
+#(DEREF, __T21, __T24, -)
+	mrmovl 5400, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5388
+#(ASSIGN, __T26, __T21, -)
+	mrmovl 5388, %eax
+	rmmovl %eax, 5408
+#(PUSH, __T26, -, -)
+	mrmovl 5408, %eax
+	pushl %eax
+#(MULT, __T28, __3, __4)
+	irmovl 3, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5416
+
+#(ADDR, __T29, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5420
+#(SUB, __T30, __T29, __T28)
+	mrmovl 5420, %eax
+	mrmovl 5416, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5424
+
+#(DEREF, __T27, __T30, -)
+	mrmovl 5424, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5412
+#(ASSIGN, __T32, __T27, -)
+	mrmovl 5412, %eax
+	rmmovl %eax, 5432
+#(PUSH, __T32, -, -)
+	mrmovl 5432, %eax
+	pushl %eax
+#(MULT, __T34, __4, __4)
+	irmovl 4, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5440
+
+#(ADDR, __T35, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5444
+#(SUB, __T36, __T35, __T34)
+	mrmovl 5444, %eax
+	mrmovl 5440, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5448
+
+#(DEREF, __T33, __T36, -)
+	mrmovl 5448, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5436
+#(ASSIGN, __T38, __T33, -)
+	mrmovl 5436, %eax
+	rmmovl %eax, 5456
+#(PUSH, __T38, -, -)
+	mrmovl 5456, %eax
+	pushl %eax
+#(MULT, __T40, __5, __4)
+	irmovl 5, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5464
+
+#(ADDR, __T41, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5468
+#(SUB, __T42, __T41, __T40)
+	mrmovl 5468, %eax
+	mrmovl 5464, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5472
+
+#(DEREF, __T39, __T42, -)
+	mrmovl 5472, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5460
+#(ASSIGN, __T44, __T39, -)
+	mrmovl 5460, %eax
+	rmmovl %eax, 5480
+#(PUSH, __T44, -, -)
+	mrmovl 5480, %eax
+	pushl %eax
+#(MULT, __T46, __6, __4)
+	irmovl 6, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5488
+
+#(ADDR, __T47, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5492
+#(SUB, __T48, __T47, __T46)
+	mrmovl 5492, %eax
+	mrmovl 5488, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5496
+
+#(DEREF, __T45, __T48, -)
+	mrmovl 5496, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5484
+#(ASSIGN, __T50, __T45, -)
+	mrmovl 5484, %eax
+	rmmovl %eax, 5504
+#(PUSH, __T50, -, -)
+	mrmovl 5504, %eax
+	pushl %eax
+#(MULT, __T52, __7, __4)
+	irmovl 7, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5512
+
+#(ADDR, __T53, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5516
+#(SUB, __T54, __T53, __T52)
+	mrmovl 5516, %eax
+	mrmovl 5512, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5520
+
+#(DEREF, __T51, __T54, -)
+	mrmovl 5520, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5508
+#(ASSIGN, __T56, __T51, -)
+	mrmovl 5508, %eax
+	rmmovl %eax, 5528
+#(PUSH, __T56, -, -)
+	mrmovl 5528, %eax
+	pushl %eax
+#(MULT, __T58, __8, __4)
+	irmovl 8, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5536
+
+#(ADDR, __T59, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5540
+#(SUB, __T60, __T59, __T58)
+	mrmovl 5540, %eax
+	mrmovl 5536, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5544
+
+#(DEREF, __T57, __T60, -)
+	mrmovl 5544, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5532
+#(ASSIGN, __T62, __T57, -)
+	mrmovl 5532, %eax
+	rmmovl %eax, 5552
+#(PUSH, __T62, -, -)
+	mrmovl 5552, %eax
+	pushl %eax
+#(MULT, __T64, __9, __4)
+	irmovl 9, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5560
+
+#(ADDR, __T65, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5564
+#(SUB, __T66, __T65, __T64)
+	mrmovl 5564, %eax
+	mrmovl 5560, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5568
+
+#(DEREF, __T63, __T66, -)
+	mrmovl 5568, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5556
+#(ASSIGN, __T68, __T63, -)
+	mrmovl 5556, %eax
+	rmmovl %eax, 5576
+#(PUSH, __T68, -, -)
+	mrmovl 5576, %eax
+	pushl %eax
+#(MULT, __T70, __10, __4)
+	irmovl 10, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5584
+
+#(ADDR, __T71, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5588
+#(SUB, __T72, __T71, __T70)
+	mrmovl 5588, %eax
+	mrmovl 5584, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5592
+
+#(DEREF, __T69, __T72, -)
+	mrmovl 5592, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5580
+#(ASSIGN, __T74, __T69, -)
+	mrmovl 5580, %eax
+	rmmovl %eax, 5600
+#(PUSH, __T74, -, -)
+	mrmovl 5600, %eax
+	pushl %eax
+#(MULT, __T76, __11, __4)
+	irmovl 11, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5608
+
+#(ADDR, __T77, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5612
+#(SUB, __T78, __T77, __T76)
+	mrmovl 5612, %eax
+	mrmovl 5608, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5616
+
+#(DEREF, __T75, __T78, -)
+	mrmovl 5616, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5604
+#(ASSIGN, __T80, __T75, -)
+	mrmovl 5604, %eax
+	rmmovl %eax, 5624
+#(PUSH, __T80, -, -)
+	mrmovl 5624, %eax
+	pushl %eax
+#(MULT, __T82, __12, __4)
+	irmovl 12, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5632
+
+#(ADDR, __T83, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5636
+#(SUB, __T84, __T83, __T82)
+	mrmovl 5636, %eax
+	mrmovl 5632, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5640
+
+#(DEREF, __T81, __T84, -)
+	mrmovl 5640, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5628
+#(ASSIGN, __T86, __T81, -)
+	mrmovl 5628, %eax
+	rmmovl %eax, 5648
+#(PUSH, __T86, -, -)
+	mrmovl 5648, %eax
+	pushl %eax
+#(MULT, __T88, __13, __4)
+	irmovl 13, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5656
+
+#(ADDR, __T89, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5660
+#(SUB, __T90, __T89, __T88)
+	mrmovl 5660, %eax
+	mrmovl 5656, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5664
+
+#(DEREF, __T87, __T90, -)
+	mrmovl 5664, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5652
+#(ASSIGN, __T92, __T87, -)
+	mrmovl 5652, %eax
+	rmmovl %eax, 5672
+#(PUSH, __T92, -, -)
+	mrmovl 5672, %eax
+	pushl %eax
+#(MULT, __T94, __14, __4)
+	irmovl 14, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5680
+
+#(ADDR, __T95, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5684
+#(SUB, __T96, __T95, __T94)
+	mrmovl 5684, %eax
+	mrmovl 5680, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5688
+
+#(DEREF, __T93, __T96, -)
+	mrmovl 5688, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5676
+#(ASSIGN, __T98, __T93, -)
+	mrmovl 5676, %eax
+	rmmovl %eax, 5696
+#(PUSH, __T98, -, -)
+	mrmovl 5696, %eax
+	pushl %eax
+#(MULT, __T100, __15, __4)
+	irmovl 15, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5704
+
+#(ADDR, __T101, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5708
+#(SUB, __T102, __T101, __T100)
+	mrmovl 5708, %eax
+	mrmovl 5704, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5712
+
+#(DEREF, __T99, __T102, -)
+	mrmovl 5712, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5700
+#(ASSIGN, __T104, __T99, -)
+	mrmovl 5700, %eax
+	rmmovl %eax, 5720
+#(PUSH, __T104, -, -)
+	mrmovl 5720, %eax
+	pushl %eax
+#(MULT, __T106, __16, __4)
+	irmovl 16, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5728
+
+#(ADDR, __T107, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5732
+#(SUB, __T108, __T107, __T106)
+	mrmovl 5732, %eax
+	mrmovl 5728, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5736
+
+#(DEREF, __T105, __T108, -)
+	mrmovl 5736, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5724
+#(ASSIGN, __T110, __T105, -)
+	mrmovl 5724, %eax
+	rmmovl %eax, 5744
+#(PUSH, __T110, -, -)
+	mrmovl 5744, %eax
+	pushl %eax
+#(MULT, __T112, __17, __4)
+	irmovl 17, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5752
+
+#(ADDR, __T113, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5756
+#(SUB, __T114, __T113, __T112)
+	mrmovl 5756, %eax
+	mrmovl 5752, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5760
+
+#(DEREF, __T111, __T114, -)
+	mrmovl 5760, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5748
+#(ASSIGN, __T116, __T111, -)
+	mrmovl 5748, %eax
+	rmmovl %eax, 5768
+#(PUSH, __T116, -, -)
+	mrmovl 5768, %eax
+	pushl %eax
+#(MULT, __T118, __18, __4)
+	irmovl 18, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5776
+
+#(ADDR, __T119, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5780
+#(SUB, __T120, __T119, __T118)
+	mrmovl 5780, %eax
+	mrmovl 5776, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5784
+
+#(DEREF, __T117, __T120, -)
+	mrmovl 5784, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5772
+#(ASSIGN, __T122, __T117, -)
+	mrmovl 5772, %eax
+	rmmovl %eax, 5792
+#(PUSH, __T122, -, -)
+	mrmovl 5792, %eax
+	pushl %eax
+#(MULT, __T124, __19, __4)
+	irmovl 19, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5800
+
+#(ADDR, __T125, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5804
+#(SUB, __T126, __T125, __T124)
+	mrmovl 5804, %eax
+	mrmovl 5800, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5808
+
+#(DEREF, __T123, __T126, -)
+	mrmovl 5808, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5796
+#(ASSIGN, __T128, __T123, -)
+	mrmovl 5796, %eax
+	rmmovl %eax, 5816
+#(PUSH, __T128, -, -)
+	mrmovl 5816, %eax
+	pushl %eax
+#(PRECALL, foo, -, -)
+	pushl %ebp
+	rrmovl %esp, %ebp
+#(CALL, foo, -, -)
+	call foo
+#(POSTCALL, foo, -, -)
+	irmovl 12, %ecx
+	rrmovl %ebp, %esp
+	addl %ecx, %esp
+#(ASSIGN, a, __RET_INT, -)
+	rrmovl %edi, %eax
+	rmmovl %eax, -8(%ebp)
+#(MULT, __T130, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5824
+
+#(ADDR, __T131, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5828
+#(SUB, __T132, __T131, __T130)
+	mrmovl 5828, %eax
+	mrmovl 5824, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5832
+
+#(DEREF, __T129, __T132, -)
+	mrmovl 5832, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5820
+#(MULT, __T134, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5840
+
+#(ADDR, __T135, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5844
+#(SUB, __T136, __T135, __T134)
+	mrmovl 5844, %eax
+	mrmovl 5840, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5848
+
+#(MULT, __T140, __1, __4)
+	irmovl 1, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5864
+
+#(ADDR, __T141, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5868
+#(SUB, __T142, __T141, __T140)
+	mrmovl 5868, %eax
+	mrmovl 5864, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5872
+
+#(DEREF, __T139, __T142, -)
+	mrmovl 5872, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5860
+#(ADD, __T138, __T139, __1)
+	mrmovl 5860, %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 5856
+
+#(ASSIGN, __T136, __T138, -)
+	mrmovl 5856, %eax
+	mrmovl 5848, %ecx
+	rmmovl %eax, (%ecx)#(MULT, __T144, __T138, __4)
+	mrmovl 5856, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5880
+
+#(ADD, __T145, a, __T144)
+	mrmovl -8(%ebp), %eax
+	mrmovl 5880, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 5884
+
+#(SUB, __T146, __T145, __5)
+	mrmovl 5884, %eax
+	irmovl 5, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5888
+
+#(ASSIGN, c, __T146, -)
+	mrmovl 5888, %eax
+	rmmovl %eax, -92(%ebp)
+#(INC, a, -, -)
+	mrmovl -8(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -8(%ebp)
+#(MULT, __T149, a, __4)
+	mrmovl -8(%ebp), %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5900
+
+#(ADDR, __T150, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5904
+#(SUB, __T151, __T150, __T149)
+	mrmovl 5904, %eax
+	mrmovl 5900, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5908
+
+#(DEREF, __T148, __T151, -)
+	mrmovl 5908, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5896
+#(MULT, __T153, a, __4)
+	mrmovl -8(%ebp), %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5916
+
+#(ADDR, __T154, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5920
+#(SUB, __T155, __T154, __T153)
+	mrmovl 5920, %eax
+	mrmovl 5916, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5924
+
+#(MULT, __T159, a, __4)
+	mrmovl -8(%ebp), %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5940
+
+#(ADDR, __T160, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5944
+#(SUB, __T161, __T160, __T159)
+	mrmovl 5944, %eax
+	mrmovl 5940, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5948
+
+#(DEREF, __T158, __T161, -)
+	mrmovl 5948, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5936
+#(ADD, __T157, __T158, __1)
+	mrmovl 5936, %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, 5932
+
+#(ASSIGN, __T155, __T157, -)
+	mrmovl 5932, %eax
+	mrmovl 5924, %ecx
+	rmmovl %eax, (%ecx)#(ASSIGN, a, __T157, -)
+	mrmovl 5932, %eax
+	rmmovl %eax, -8(%ebp)
+#(NEG, __T163, a, -)
+	mrmovl -8(%ebp), %ecx
+	irmovl 0, %eax
+	subl %ecx, %eax
+	rmmovl %eax, 5956
+#(ASSIGN, a, __T163, -)
+	mrmovl 5956, %eax
+	rmmovl %eax, -8(%ebp)
+#(NEG, __T164, a, -)
+	mrmovl -8(%ebp), %ecx
+	irmovl 0, %eax
+	subl %ecx, %eax
+	rmmovl %eax, 5960
+#(MULT, __T166, __T164, __4)
+	mrmovl 5960, %eax
+	irmovl 4, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 5968
+
+#(ADDR, __T167, b, -)
+	irmovl -12, %eax
+	addl %ebp, %eax
+	rmmovl %eax, 5972
+#(SUB, __T168, __T167, __T166)
+	mrmovl 5972, %eax
+	mrmovl 5968, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 5976
+
+#(DEREF, __T165, __T168, -)
+	mrmovl 5976, %ecx
+	mrmovl (%ecx), %eax
+	rmmovl %eax, 5964
+#(PRINT, __T165, -, -)
+	mrmovl 5964, %edx
+	rmmovl %edx, 0x00FFFE14
+#(RETURN, __void, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+
+.pos 0x1768   # Start of global var space 
+.pos 0x0000FFFC
+stack:

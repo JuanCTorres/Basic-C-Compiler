@@ -1,0 +1,810 @@
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
+                       | #END OF PROG: 5284
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:80bf000000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(LABEL, foo, -, -)
+  0x0014:              | foo:
+                       | 
+  0x0014:30f108000000  | 	irmovl 8, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 1
+                       | #### SOMETHING
+                       | #(MULT, __T0, __1, __4)
+  0x001c:30f001000000  | 	irmovl 1, %eax
+  0x0022:30f104000000  | 	irmovl 4, %ecx
+  0x0028:6410          | 	mull %ecx, %eax
+  0x002a:400fb8140000  | 	rmmovl %eax, 5304
+                       | 
+                       | #(ADDR, __T1, bar, -)
+  0x0030:30f050000000  | 	irmovl 80, %eax
+  0x0036:6050          | 	addl %ebp, %eax
+  0x0038:400fbc140000  | 	rmmovl %eax, 5308
+                       | #(SUB, __T2, __T1, __T0)
+  0x003e:500fbc140000  | 	mrmovl 5308, %eax
+  0x0044:501fb8140000  | 	mrmovl 5304, %ecx
+  0x004a:6110          | 	subl %ecx, %eax
+  0x004c:400fc0140000  | 	rmmovl %eax, 5312
+                       | 
+                       | #(ASSIGN, __T2, __3, -)
+  0x0052:30f003000000  | 	irmovl 3, %eax
+  0x0058:501fc0140000  | 	mrmovl 5312, %ecx
+  0x005e:400100000000  | 	rmmovl %eax, (%ecx)#(MULT, __T5, __1, __4)
+  0x0064:30f001000000  | 	irmovl 1, %eax
+  0x006a:30f104000000  | 	irmovl 4, %ecx
+  0x0070:6410          | 	mull %ecx, %eax
+  0x0072:400fcc140000  | 	rmmovl %eax, 5324
+                       | 
+                       | #(ADDR, __T6, bar, -)
+  0x0078:30f050000000  | 	irmovl 80, %eax
+  0x007e:6050          | 	addl %ebp, %eax
+  0x0080:400fd0140000  | 	rmmovl %eax, 5328
+                       | #(SUB, __T7, __T6, __T5)
+  0x0086:500fd0140000  | 	mrmovl 5328, %eax
+  0x008c:501fcc140000  | 	mrmovl 5324, %ecx
+  0x0092:6110          | 	subl %ecx, %eax
+  0x0094:400fd4140000  | 	rmmovl %eax, 5332
+                       | 
+                       | #(DEREF, __T4, __T7, -)
+  0x009a:501fd4140000  | 	mrmovl 5332, %ecx
+  0x00a0:500100000000  | 	mrmovl (%ecx), %eax
+  0x00a6:400fc8140000  | 	rmmovl %eax, 5320
+                       | #(RETURN, __T4, -, -)
+  0x00ac:507fc8140000  | 	mrmovl 5320, %edi
+  0x00b2:2054          | 	rrmovl %ebp, %esp
+  0x00b4:b05f          | 	popl %ebp
+  0x00b6:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x00bc:6014          | 	addl %ecx, %esp
+  0x00be:90            | 	ret
+                       | #(LABEL, main, -, -)
+  0x00bf:              | main:
+                       | 
+  0x00bf:30f160000000  | 	irmovl 96, %ecx
+  0x00c5:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(MULT, __T10, __0, __4)
+  0x00c7:30f000000000  | 	irmovl 0, %eax
+  0x00cd:30f104000000  | 	irmovl 4, %ecx
+  0x00d3:6410          | 	mull %ecx, %eax
+  0x00d5:400fe0140000  | 	rmmovl %eax, 5344
+                       | 
+                       | #(ADDR, __T11, b, -)
+  0x00db:30f0f4ffffff  | 	irmovl -12, %eax
+  0x00e1:6050          | 	addl %ebp, %eax
+  0x00e3:400fe4140000  | 	rmmovl %eax, 5348
+                       | #(SUB, __T12, __T11, __T10)
+  0x00e9:500fe4140000  | 	mrmovl 5348, %eax
+  0x00ef:501fe0140000  | 	mrmovl 5344, %ecx
+  0x00f5:6110          | 	subl %ecx, %eax
+  0x00f7:400fe8140000  | 	rmmovl %eax, 5352
+                       | 
+                       | #(DEREF, __T9, __T12, -)
+  0x00fd:501fe8140000  | 	mrmovl 5352, %ecx
+  0x0103:500100000000  | 	mrmovl (%ecx), %eax
+  0x0109:400fdc140000  | 	rmmovl %eax, 5340
+                       | #(ASSIGN, __T14, __T9, -)
+  0x010f:500fdc140000  | 	mrmovl 5340, %eax
+  0x0115:400ff0140000  | 	rmmovl %eax, 5360
+                       | #(PUSH, __T14, -, -)
+  0x011b:500ff0140000  | 	mrmovl 5360, %eax
+  0x0121:a00f          | 	pushl %eax
+                       | #(MULT, __T16, __1, __4)
+  0x0123:30f001000000  | 	irmovl 1, %eax
+  0x0129:30f104000000  | 	irmovl 4, %ecx
+  0x012f:6410          | 	mull %ecx, %eax
+  0x0131:400ff8140000  | 	rmmovl %eax, 5368
+                       | 
+                       | #(ADDR, __T17, b, -)
+  0x0137:30f0f4ffffff  | 	irmovl -12, %eax
+  0x013d:6050          | 	addl %ebp, %eax
+  0x013f:400ffc140000  | 	rmmovl %eax, 5372
+                       | #(SUB, __T18, __T17, __T16)
+  0x0145:500ffc140000  | 	mrmovl 5372, %eax
+  0x014b:501ff8140000  | 	mrmovl 5368, %ecx
+  0x0151:6110          | 	subl %ecx, %eax
+  0x0153:400f00150000  | 	rmmovl %eax, 5376
+                       | 
+                       | #(DEREF, __T15, __T18, -)
+  0x0159:501f00150000  | 	mrmovl 5376, %ecx
+  0x015f:500100000000  | 	mrmovl (%ecx), %eax
+  0x0165:400ff4140000  | 	rmmovl %eax, 5364
+                       | #(ASSIGN, __T20, __T15, -)
+  0x016b:500ff4140000  | 	mrmovl 5364, %eax
+  0x0171:400f08150000  | 	rmmovl %eax, 5384
+                       | #(PUSH, __T20, -, -)
+  0x0177:500f08150000  | 	mrmovl 5384, %eax
+  0x017d:a00f          | 	pushl %eax
+                       | #(MULT, __T22, __2, __4)
+  0x017f:30f002000000  | 	irmovl 2, %eax
+  0x0185:30f104000000  | 	irmovl 4, %ecx
+  0x018b:6410          | 	mull %ecx, %eax
+  0x018d:400f10150000  | 	rmmovl %eax, 5392
+                       | 
+                       | #(ADDR, __T23, b, -)
+  0x0193:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0199:6050          | 	addl %ebp, %eax
+  0x019b:400f14150000  | 	rmmovl %eax, 5396
+                       | #(SUB, __T24, __T23, __T22)
+  0x01a1:500f14150000  | 	mrmovl 5396, %eax
+  0x01a7:501f10150000  | 	mrmovl 5392, %ecx
+  0x01ad:6110          | 	subl %ecx, %eax
+  0x01af:400f18150000  | 	rmmovl %eax, 5400
+                       | 
+                       | #(DEREF, __T21, __T24, -)
+  0x01b5:501f18150000  | 	mrmovl 5400, %ecx
+  0x01bb:500100000000  | 	mrmovl (%ecx), %eax
+  0x01c1:400f0c150000  | 	rmmovl %eax, 5388
+                       | #(ASSIGN, __T26, __T21, -)
+  0x01c7:500f0c150000  | 	mrmovl 5388, %eax
+  0x01cd:400f20150000  | 	rmmovl %eax, 5408
+                       | #(PUSH, __T26, -, -)
+  0x01d3:500f20150000  | 	mrmovl 5408, %eax
+  0x01d9:a00f          | 	pushl %eax
+                       | #(MULT, __T28, __3, __4)
+  0x01db:30f003000000  | 	irmovl 3, %eax
+  0x01e1:30f104000000  | 	irmovl 4, %ecx
+  0x01e7:6410          | 	mull %ecx, %eax
+  0x01e9:400f28150000  | 	rmmovl %eax, 5416
+                       | 
+                       | #(ADDR, __T29, b, -)
+  0x01ef:30f0f4ffffff  | 	irmovl -12, %eax
+  0x01f5:6050          | 	addl %ebp, %eax
+  0x01f7:400f2c150000  | 	rmmovl %eax, 5420
+                       | #(SUB, __T30, __T29, __T28)
+  0x01fd:500f2c150000  | 	mrmovl 5420, %eax
+  0x0203:501f28150000  | 	mrmovl 5416, %ecx
+  0x0209:6110          | 	subl %ecx, %eax
+  0x020b:400f30150000  | 	rmmovl %eax, 5424
+                       | 
+                       | #(DEREF, __T27, __T30, -)
+  0x0211:501f30150000  | 	mrmovl 5424, %ecx
+  0x0217:500100000000  | 	mrmovl (%ecx), %eax
+  0x021d:400f24150000  | 	rmmovl %eax, 5412
+                       | #(ASSIGN, __T32, __T27, -)
+  0x0223:500f24150000  | 	mrmovl 5412, %eax
+  0x0229:400f38150000  | 	rmmovl %eax, 5432
+                       | #(PUSH, __T32, -, -)
+  0x022f:500f38150000  | 	mrmovl 5432, %eax
+  0x0235:a00f          | 	pushl %eax
+                       | #(MULT, __T34, __4, __4)
+  0x0237:30f004000000  | 	irmovl 4, %eax
+  0x023d:30f104000000  | 	irmovl 4, %ecx
+  0x0243:6410          | 	mull %ecx, %eax
+  0x0245:400f40150000  | 	rmmovl %eax, 5440
+                       | 
+                       | #(ADDR, __T35, b, -)
+  0x024b:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0251:6050          | 	addl %ebp, %eax
+  0x0253:400f44150000  | 	rmmovl %eax, 5444
+                       | #(SUB, __T36, __T35, __T34)
+  0x0259:500f44150000  | 	mrmovl 5444, %eax
+  0x025f:501f40150000  | 	mrmovl 5440, %ecx
+  0x0265:6110          | 	subl %ecx, %eax
+  0x0267:400f48150000  | 	rmmovl %eax, 5448
+                       | 
+                       | #(DEREF, __T33, __T36, -)
+  0x026d:501f48150000  | 	mrmovl 5448, %ecx
+  0x0273:500100000000  | 	mrmovl (%ecx), %eax
+  0x0279:400f3c150000  | 	rmmovl %eax, 5436
+                       | #(ASSIGN, __T38, __T33, -)
+  0x027f:500f3c150000  | 	mrmovl 5436, %eax
+  0x0285:400f50150000  | 	rmmovl %eax, 5456
+                       | #(PUSH, __T38, -, -)
+  0x028b:500f50150000  | 	mrmovl 5456, %eax
+  0x0291:a00f          | 	pushl %eax
+                       | #(MULT, __T40, __5, __4)
+  0x0293:30f005000000  | 	irmovl 5, %eax
+  0x0299:30f104000000  | 	irmovl 4, %ecx
+  0x029f:6410          | 	mull %ecx, %eax
+  0x02a1:400f58150000  | 	rmmovl %eax, 5464
+                       | 
+                       | #(ADDR, __T41, b, -)
+  0x02a7:30f0f4ffffff  | 	irmovl -12, %eax
+  0x02ad:6050          | 	addl %ebp, %eax
+  0x02af:400f5c150000  | 	rmmovl %eax, 5468
+                       | #(SUB, __T42, __T41, __T40)
+  0x02b5:500f5c150000  | 	mrmovl 5468, %eax
+  0x02bb:501f58150000  | 	mrmovl 5464, %ecx
+  0x02c1:6110          | 	subl %ecx, %eax
+  0x02c3:400f60150000  | 	rmmovl %eax, 5472
+                       | 
+                       | #(DEREF, __T39, __T42, -)
+  0x02c9:501f60150000  | 	mrmovl 5472, %ecx
+  0x02cf:500100000000  | 	mrmovl (%ecx), %eax
+  0x02d5:400f54150000  | 	rmmovl %eax, 5460
+                       | #(ASSIGN, __T44, __T39, -)
+  0x02db:500f54150000  | 	mrmovl 5460, %eax
+  0x02e1:400f68150000  | 	rmmovl %eax, 5480
+                       | #(PUSH, __T44, -, -)
+  0x02e7:500f68150000  | 	mrmovl 5480, %eax
+  0x02ed:a00f          | 	pushl %eax
+                       | #(MULT, __T46, __6, __4)
+  0x02ef:30f006000000  | 	irmovl 6, %eax
+  0x02f5:30f104000000  | 	irmovl 4, %ecx
+  0x02fb:6410          | 	mull %ecx, %eax
+  0x02fd:400f70150000  | 	rmmovl %eax, 5488
+                       | 
+                       | #(ADDR, __T47, b, -)
+  0x0303:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0309:6050          | 	addl %ebp, %eax
+  0x030b:400f74150000  | 	rmmovl %eax, 5492
+                       | #(SUB, __T48, __T47, __T46)
+  0x0311:500f74150000  | 	mrmovl 5492, %eax
+  0x0317:501f70150000  | 	mrmovl 5488, %ecx
+  0x031d:6110          | 	subl %ecx, %eax
+  0x031f:400f78150000  | 	rmmovl %eax, 5496
+                       | 
+                       | #(DEREF, __T45, __T48, -)
+  0x0325:501f78150000  | 	mrmovl 5496, %ecx
+  0x032b:500100000000  | 	mrmovl (%ecx), %eax
+  0x0331:400f6c150000  | 	rmmovl %eax, 5484
+                       | #(ASSIGN, __T50, __T45, -)
+  0x0337:500f6c150000  | 	mrmovl 5484, %eax
+  0x033d:400f80150000  | 	rmmovl %eax, 5504
+                       | #(PUSH, __T50, -, -)
+  0x0343:500f80150000  | 	mrmovl 5504, %eax
+  0x0349:a00f          | 	pushl %eax
+                       | #(MULT, __T52, __7, __4)
+  0x034b:30f007000000  | 	irmovl 7, %eax
+  0x0351:30f104000000  | 	irmovl 4, %ecx
+  0x0357:6410          | 	mull %ecx, %eax
+  0x0359:400f88150000  | 	rmmovl %eax, 5512
+                       | 
+                       | #(ADDR, __T53, b, -)
+  0x035f:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0365:6050          | 	addl %ebp, %eax
+  0x0367:400f8c150000  | 	rmmovl %eax, 5516
+                       | #(SUB, __T54, __T53, __T52)
+  0x036d:500f8c150000  | 	mrmovl 5516, %eax
+  0x0373:501f88150000  | 	mrmovl 5512, %ecx
+  0x0379:6110          | 	subl %ecx, %eax
+  0x037b:400f90150000  | 	rmmovl %eax, 5520
+                       | 
+                       | #(DEREF, __T51, __T54, -)
+  0x0381:501f90150000  | 	mrmovl 5520, %ecx
+  0x0387:500100000000  | 	mrmovl (%ecx), %eax
+  0x038d:400f84150000  | 	rmmovl %eax, 5508
+                       | #(ASSIGN, __T56, __T51, -)
+  0x0393:500f84150000  | 	mrmovl 5508, %eax
+  0x0399:400f98150000  | 	rmmovl %eax, 5528
+                       | #(PUSH, __T56, -, -)
+  0x039f:500f98150000  | 	mrmovl 5528, %eax
+  0x03a5:a00f          | 	pushl %eax
+                       | #(MULT, __T58, __8, __4)
+  0x03a7:30f008000000  | 	irmovl 8, %eax
+  0x03ad:30f104000000  | 	irmovl 4, %ecx
+  0x03b3:6410          | 	mull %ecx, %eax
+  0x03b5:400fa0150000  | 	rmmovl %eax, 5536
+                       | 
+                       | #(ADDR, __T59, b, -)
+  0x03bb:30f0f4ffffff  | 	irmovl -12, %eax
+  0x03c1:6050          | 	addl %ebp, %eax
+  0x03c3:400fa4150000  | 	rmmovl %eax, 5540
+                       | #(SUB, __T60, __T59, __T58)
+  0x03c9:500fa4150000  | 	mrmovl 5540, %eax
+  0x03cf:501fa0150000  | 	mrmovl 5536, %ecx
+  0x03d5:6110          | 	subl %ecx, %eax
+  0x03d7:400fa8150000  | 	rmmovl %eax, 5544
+                       | 
+                       | #(DEREF, __T57, __T60, -)
+  0x03dd:501fa8150000  | 	mrmovl 5544, %ecx
+  0x03e3:500100000000  | 	mrmovl (%ecx), %eax
+  0x03e9:400f9c150000  | 	rmmovl %eax, 5532
+                       | #(ASSIGN, __T62, __T57, -)
+  0x03ef:500f9c150000  | 	mrmovl 5532, %eax
+  0x03f5:400fb0150000  | 	rmmovl %eax, 5552
+                       | #(PUSH, __T62, -, -)
+  0x03fb:500fb0150000  | 	mrmovl 5552, %eax
+  0x0401:a00f          | 	pushl %eax
+                       | #(MULT, __T64, __9, __4)
+  0x0403:30f009000000  | 	irmovl 9, %eax
+  0x0409:30f104000000  | 	irmovl 4, %ecx
+  0x040f:6410          | 	mull %ecx, %eax
+  0x0411:400fb8150000  | 	rmmovl %eax, 5560
+                       | 
+                       | #(ADDR, __T65, b, -)
+  0x0417:30f0f4ffffff  | 	irmovl -12, %eax
+  0x041d:6050          | 	addl %ebp, %eax
+  0x041f:400fbc150000  | 	rmmovl %eax, 5564
+                       | #(SUB, __T66, __T65, __T64)
+  0x0425:500fbc150000  | 	mrmovl 5564, %eax
+  0x042b:501fb8150000  | 	mrmovl 5560, %ecx
+  0x0431:6110          | 	subl %ecx, %eax
+  0x0433:400fc0150000  | 	rmmovl %eax, 5568
+                       | 
+                       | #(DEREF, __T63, __T66, -)
+  0x0439:501fc0150000  | 	mrmovl 5568, %ecx
+  0x043f:500100000000  | 	mrmovl (%ecx), %eax
+  0x0445:400fb4150000  | 	rmmovl %eax, 5556
+                       | #(ASSIGN, __T68, __T63, -)
+  0x044b:500fb4150000  | 	mrmovl 5556, %eax
+  0x0451:400fc8150000  | 	rmmovl %eax, 5576
+                       | #(PUSH, __T68, -, -)
+  0x0457:500fc8150000  | 	mrmovl 5576, %eax
+  0x045d:a00f          | 	pushl %eax
+                       | #(MULT, __T70, __10, __4)
+  0x045f:30f00a000000  | 	irmovl 10, %eax
+  0x0465:30f104000000  | 	irmovl 4, %ecx
+  0x046b:6410          | 	mull %ecx, %eax
+  0x046d:400fd0150000  | 	rmmovl %eax, 5584
+                       | 
+                       | #(ADDR, __T71, b, -)
+  0x0473:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0479:6050          | 	addl %ebp, %eax
+  0x047b:400fd4150000  | 	rmmovl %eax, 5588
+                       | #(SUB, __T72, __T71, __T70)
+  0x0481:500fd4150000  | 	mrmovl 5588, %eax
+  0x0487:501fd0150000  | 	mrmovl 5584, %ecx
+  0x048d:6110          | 	subl %ecx, %eax
+  0x048f:400fd8150000  | 	rmmovl %eax, 5592
+                       | 
+                       | #(DEREF, __T69, __T72, -)
+  0x0495:501fd8150000  | 	mrmovl 5592, %ecx
+  0x049b:500100000000  | 	mrmovl (%ecx), %eax
+  0x04a1:400fcc150000  | 	rmmovl %eax, 5580
+                       | #(ASSIGN, __T74, __T69, -)
+  0x04a7:500fcc150000  | 	mrmovl 5580, %eax
+  0x04ad:400fe0150000  | 	rmmovl %eax, 5600
+                       | #(PUSH, __T74, -, -)
+  0x04b3:500fe0150000  | 	mrmovl 5600, %eax
+  0x04b9:a00f          | 	pushl %eax
+                       | #(MULT, __T76, __11, __4)
+  0x04bb:30f00b000000  | 	irmovl 11, %eax
+  0x04c1:30f104000000  | 	irmovl 4, %ecx
+  0x04c7:6410          | 	mull %ecx, %eax
+  0x04c9:400fe8150000  | 	rmmovl %eax, 5608
+                       | 
+                       | #(ADDR, __T77, b, -)
+  0x04cf:30f0f4ffffff  | 	irmovl -12, %eax
+  0x04d5:6050          | 	addl %ebp, %eax
+  0x04d7:400fec150000  | 	rmmovl %eax, 5612
+                       | #(SUB, __T78, __T77, __T76)
+  0x04dd:500fec150000  | 	mrmovl 5612, %eax
+  0x04e3:501fe8150000  | 	mrmovl 5608, %ecx
+  0x04e9:6110          | 	subl %ecx, %eax
+  0x04eb:400ff0150000  | 	rmmovl %eax, 5616
+                       | 
+                       | #(DEREF, __T75, __T78, -)
+  0x04f1:501ff0150000  | 	mrmovl 5616, %ecx
+  0x04f7:500100000000  | 	mrmovl (%ecx), %eax
+  0x04fd:400fe4150000  | 	rmmovl %eax, 5604
+                       | #(ASSIGN, __T80, __T75, -)
+  0x0503:500fe4150000  | 	mrmovl 5604, %eax
+  0x0509:400ff8150000  | 	rmmovl %eax, 5624
+                       | #(PUSH, __T80, -, -)
+  0x050f:500ff8150000  | 	mrmovl 5624, %eax
+  0x0515:a00f          | 	pushl %eax
+                       | #(MULT, __T82, __12, __4)
+  0x0517:30f00c000000  | 	irmovl 12, %eax
+  0x051d:30f104000000  | 	irmovl 4, %ecx
+  0x0523:6410          | 	mull %ecx, %eax
+  0x0525:400f00160000  | 	rmmovl %eax, 5632
+                       | 
+                       | #(ADDR, __T83, b, -)
+  0x052b:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0531:6050          | 	addl %ebp, %eax
+  0x0533:400f04160000  | 	rmmovl %eax, 5636
+                       | #(SUB, __T84, __T83, __T82)
+  0x0539:500f04160000  | 	mrmovl 5636, %eax
+  0x053f:501f00160000  | 	mrmovl 5632, %ecx
+  0x0545:6110          | 	subl %ecx, %eax
+  0x0547:400f08160000  | 	rmmovl %eax, 5640
+                       | 
+                       | #(DEREF, __T81, __T84, -)
+  0x054d:501f08160000  | 	mrmovl 5640, %ecx
+  0x0553:500100000000  | 	mrmovl (%ecx), %eax
+  0x0559:400ffc150000  | 	rmmovl %eax, 5628
+                       | #(ASSIGN, __T86, __T81, -)
+  0x055f:500ffc150000  | 	mrmovl 5628, %eax
+  0x0565:400f10160000  | 	rmmovl %eax, 5648
+                       | #(PUSH, __T86, -, -)
+  0x056b:500f10160000  | 	mrmovl 5648, %eax
+  0x0571:a00f          | 	pushl %eax
+                       | #(MULT, __T88, __13, __4)
+  0x0573:30f00d000000  | 	irmovl 13, %eax
+  0x0579:30f104000000  | 	irmovl 4, %ecx
+  0x057f:6410          | 	mull %ecx, %eax
+  0x0581:400f18160000  | 	rmmovl %eax, 5656
+                       | 
+                       | #(ADDR, __T89, b, -)
+  0x0587:30f0f4ffffff  | 	irmovl -12, %eax
+  0x058d:6050          | 	addl %ebp, %eax
+  0x058f:400f1c160000  | 	rmmovl %eax, 5660
+                       | #(SUB, __T90, __T89, __T88)
+  0x0595:500f1c160000  | 	mrmovl 5660, %eax
+  0x059b:501f18160000  | 	mrmovl 5656, %ecx
+  0x05a1:6110          | 	subl %ecx, %eax
+  0x05a3:400f20160000  | 	rmmovl %eax, 5664
+                       | 
+                       | #(DEREF, __T87, __T90, -)
+  0x05a9:501f20160000  | 	mrmovl 5664, %ecx
+  0x05af:500100000000  | 	mrmovl (%ecx), %eax
+  0x05b5:400f14160000  | 	rmmovl %eax, 5652
+                       | #(ASSIGN, __T92, __T87, -)
+  0x05bb:500f14160000  | 	mrmovl 5652, %eax
+  0x05c1:400f28160000  | 	rmmovl %eax, 5672
+                       | #(PUSH, __T92, -, -)
+  0x05c7:500f28160000  | 	mrmovl 5672, %eax
+  0x05cd:a00f          | 	pushl %eax
+                       | #(MULT, __T94, __14, __4)
+  0x05cf:30f00e000000  | 	irmovl 14, %eax
+  0x05d5:30f104000000  | 	irmovl 4, %ecx
+  0x05db:6410          | 	mull %ecx, %eax
+  0x05dd:400f30160000  | 	rmmovl %eax, 5680
+                       | 
+                       | #(ADDR, __T95, b, -)
+  0x05e3:30f0f4ffffff  | 	irmovl -12, %eax
+  0x05e9:6050          | 	addl %ebp, %eax
+  0x05eb:400f34160000  | 	rmmovl %eax, 5684
+                       | #(SUB, __T96, __T95, __T94)
+  0x05f1:500f34160000  | 	mrmovl 5684, %eax
+  0x05f7:501f30160000  | 	mrmovl 5680, %ecx
+  0x05fd:6110          | 	subl %ecx, %eax
+  0x05ff:400f38160000  | 	rmmovl %eax, 5688
+                       | 
+                       | #(DEREF, __T93, __T96, -)
+  0x0605:501f38160000  | 	mrmovl 5688, %ecx
+  0x060b:500100000000  | 	mrmovl (%ecx), %eax
+  0x0611:400f2c160000  | 	rmmovl %eax, 5676
+                       | #(ASSIGN, __T98, __T93, -)
+  0x0617:500f2c160000  | 	mrmovl 5676, %eax
+  0x061d:400f40160000  | 	rmmovl %eax, 5696
+                       | #(PUSH, __T98, -, -)
+  0x0623:500f40160000  | 	mrmovl 5696, %eax
+  0x0629:a00f          | 	pushl %eax
+                       | #(MULT, __T100, __15, __4)
+  0x062b:30f00f000000  | 	irmovl 15, %eax
+  0x0631:30f104000000  | 	irmovl 4, %ecx
+  0x0637:6410          | 	mull %ecx, %eax
+  0x0639:400f48160000  | 	rmmovl %eax, 5704
+                       | 
+                       | #(ADDR, __T101, b, -)
+  0x063f:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0645:6050          | 	addl %ebp, %eax
+  0x0647:400f4c160000  | 	rmmovl %eax, 5708
+                       | #(SUB, __T102, __T101, __T100)
+  0x064d:500f4c160000  | 	mrmovl 5708, %eax
+  0x0653:501f48160000  | 	mrmovl 5704, %ecx
+  0x0659:6110          | 	subl %ecx, %eax
+  0x065b:400f50160000  | 	rmmovl %eax, 5712
+                       | 
+                       | #(DEREF, __T99, __T102, -)
+  0x0661:501f50160000  | 	mrmovl 5712, %ecx
+  0x0667:500100000000  | 	mrmovl (%ecx), %eax
+  0x066d:400f44160000  | 	rmmovl %eax, 5700
+                       | #(ASSIGN, __T104, __T99, -)
+  0x0673:500f44160000  | 	mrmovl 5700, %eax
+  0x0679:400f58160000  | 	rmmovl %eax, 5720
+                       | #(PUSH, __T104, -, -)
+  0x067f:500f58160000  | 	mrmovl 5720, %eax
+  0x0685:a00f          | 	pushl %eax
+                       | #(MULT, __T106, __16, __4)
+  0x0687:30f010000000  | 	irmovl 16, %eax
+  0x068d:30f104000000  | 	irmovl 4, %ecx
+  0x0693:6410          | 	mull %ecx, %eax
+  0x0695:400f60160000  | 	rmmovl %eax, 5728
+                       | 
+                       | #(ADDR, __T107, b, -)
+  0x069b:30f0f4ffffff  | 	irmovl -12, %eax
+  0x06a1:6050          | 	addl %ebp, %eax
+  0x06a3:400f64160000  | 	rmmovl %eax, 5732
+                       | #(SUB, __T108, __T107, __T106)
+  0x06a9:500f64160000  | 	mrmovl 5732, %eax
+  0x06af:501f60160000  | 	mrmovl 5728, %ecx
+  0x06b5:6110          | 	subl %ecx, %eax
+  0x06b7:400f68160000  | 	rmmovl %eax, 5736
+                       | 
+                       | #(DEREF, __T105, __T108, -)
+  0x06bd:501f68160000  | 	mrmovl 5736, %ecx
+  0x06c3:500100000000  | 	mrmovl (%ecx), %eax
+  0x06c9:400f5c160000  | 	rmmovl %eax, 5724
+                       | #(ASSIGN, __T110, __T105, -)
+  0x06cf:500f5c160000  | 	mrmovl 5724, %eax
+  0x06d5:400f70160000  | 	rmmovl %eax, 5744
+                       | #(PUSH, __T110, -, -)
+  0x06db:500f70160000  | 	mrmovl 5744, %eax
+  0x06e1:a00f          | 	pushl %eax
+                       | #(MULT, __T112, __17, __4)
+  0x06e3:30f011000000  | 	irmovl 17, %eax
+  0x06e9:30f104000000  | 	irmovl 4, %ecx
+  0x06ef:6410          | 	mull %ecx, %eax
+  0x06f1:400f78160000  | 	rmmovl %eax, 5752
+                       | 
+                       | #(ADDR, __T113, b, -)
+  0x06f7:30f0f4ffffff  | 	irmovl -12, %eax
+  0x06fd:6050          | 	addl %ebp, %eax
+  0x06ff:400f7c160000  | 	rmmovl %eax, 5756
+                       | #(SUB, __T114, __T113, __T112)
+  0x0705:500f7c160000  | 	mrmovl 5756, %eax
+  0x070b:501f78160000  | 	mrmovl 5752, %ecx
+  0x0711:6110          | 	subl %ecx, %eax
+  0x0713:400f80160000  | 	rmmovl %eax, 5760
+                       | 
+                       | #(DEREF, __T111, __T114, -)
+  0x0719:501f80160000  | 	mrmovl 5760, %ecx
+  0x071f:500100000000  | 	mrmovl (%ecx), %eax
+  0x0725:400f74160000  | 	rmmovl %eax, 5748
+                       | #(ASSIGN, __T116, __T111, -)
+  0x072b:500f74160000  | 	mrmovl 5748, %eax
+  0x0731:400f88160000  | 	rmmovl %eax, 5768
+                       | #(PUSH, __T116, -, -)
+  0x0737:500f88160000  | 	mrmovl 5768, %eax
+  0x073d:a00f          | 	pushl %eax
+                       | #(MULT, __T118, __18, __4)
+  0x073f:30f012000000  | 	irmovl 18, %eax
+  0x0745:30f104000000  | 	irmovl 4, %ecx
+  0x074b:6410          | 	mull %ecx, %eax
+  0x074d:400f90160000  | 	rmmovl %eax, 5776
+                       | 
+                       | #(ADDR, __T119, b, -)
+  0x0753:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0759:6050          | 	addl %ebp, %eax
+  0x075b:400f94160000  | 	rmmovl %eax, 5780
+                       | #(SUB, __T120, __T119, __T118)
+  0x0761:500f94160000  | 	mrmovl 5780, %eax
+  0x0767:501f90160000  | 	mrmovl 5776, %ecx
+  0x076d:6110          | 	subl %ecx, %eax
+  0x076f:400f98160000  | 	rmmovl %eax, 5784
+                       | 
+                       | #(DEREF, __T117, __T120, -)
+  0x0775:501f98160000  | 	mrmovl 5784, %ecx
+  0x077b:500100000000  | 	mrmovl (%ecx), %eax
+  0x0781:400f8c160000  | 	rmmovl %eax, 5772
+                       | #(ASSIGN, __T122, __T117, -)
+  0x0787:500f8c160000  | 	mrmovl 5772, %eax
+  0x078d:400fa0160000  | 	rmmovl %eax, 5792
+                       | #(PUSH, __T122, -, -)
+  0x0793:500fa0160000  | 	mrmovl 5792, %eax
+  0x0799:a00f          | 	pushl %eax
+                       | #(MULT, __T124, __19, __4)
+  0x079b:30f013000000  | 	irmovl 19, %eax
+  0x07a1:30f104000000  | 	irmovl 4, %ecx
+  0x07a7:6410          | 	mull %ecx, %eax
+  0x07a9:400fa8160000  | 	rmmovl %eax, 5800
+                       | 
+                       | #(ADDR, __T125, b, -)
+  0x07af:30f0f4ffffff  | 	irmovl -12, %eax
+  0x07b5:6050          | 	addl %ebp, %eax
+  0x07b7:400fac160000  | 	rmmovl %eax, 5804
+                       | #(SUB, __T126, __T125, __T124)
+  0x07bd:500fac160000  | 	mrmovl 5804, %eax
+  0x07c3:501fa8160000  | 	mrmovl 5800, %ecx
+  0x07c9:6110          | 	subl %ecx, %eax
+  0x07cb:400fb0160000  | 	rmmovl %eax, 5808
+                       | 
+                       | #(DEREF, __T123, __T126, -)
+  0x07d1:501fb0160000  | 	mrmovl 5808, %ecx
+  0x07d7:500100000000  | 	mrmovl (%ecx), %eax
+  0x07dd:400fa4160000  | 	rmmovl %eax, 5796
+                       | #(ASSIGN, __T128, __T123, -)
+  0x07e3:500fa4160000  | 	mrmovl 5796, %eax
+  0x07e9:400fb8160000  | 	rmmovl %eax, 5816
+                       | #(PUSH, __T128, -, -)
+  0x07ef:500fb8160000  | 	mrmovl 5816, %eax
+  0x07f5:a00f          | 	pushl %eax
+                       | #(PRECALL, foo, -, -)
+  0x07f7:a05f          | 	pushl %ebp
+  0x07f9:2045          | 	rrmovl %esp, %ebp
+                       | #(CALL, foo, -, -)
+  0x07fb:8014000000    | 	call foo
+                       | #(POSTCALL, foo, -, -)
+  0x0800:30f10c000000  | 	irmovl 12, %ecx
+  0x0806:2054          | 	rrmovl %ebp, %esp
+  0x0808:6014          | 	addl %ecx, %esp
+                       | #(ASSIGN, a, __RET_INT, -)
+  0x080a:2070          | 	rrmovl %edi, %eax
+  0x080c:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(MULT, __T130, __1, __4)
+  0x0812:30f001000000  | 	irmovl 1, %eax
+  0x0818:30f104000000  | 	irmovl 4, %ecx
+  0x081e:6410          | 	mull %ecx, %eax
+  0x0820:400fc0160000  | 	rmmovl %eax, 5824
+                       | 
+                       | #(ADDR, __T131, b, -)
+  0x0826:30f0f4ffffff  | 	irmovl -12, %eax
+  0x082c:6050          | 	addl %ebp, %eax
+  0x082e:400fc4160000  | 	rmmovl %eax, 5828
+                       | #(SUB, __T132, __T131, __T130)
+  0x0834:500fc4160000  | 	mrmovl 5828, %eax
+  0x083a:501fc0160000  | 	mrmovl 5824, %ecx
+  0x0840:6110          | 	subl %ecx, %eax
+  0x0842:400fc8160000  | 	rmmovl %eax, 5832
+                       | 
+                       | #(DEREF, __T129, __T132, -)
+  0x0848:501fc8160000  | 	mrmovl 5832, %ecx
+  0x084e:500100000000  | 	mrmovl (%ecx), %eax
+  0x0854:400fbc160000  | 	rmmovl %eax, 5820
+                       | #(MULT, __T134, __1, __4)
+  0x085a:30f001000000  | 	irmovl 1, %eax
+  0x0860:30f104000000  | 	irmovl 4, %ecx
+  0x0866:6410          | 	mull %ecx, %eax
+  0x0868:400fd0160000  | 	rmmovl %eax, 5840
+                       | 
+                       | #(ADDR, __T135, b, -)
+  0x086e:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0874:6050          | 	addl %ebp, %eax
+  0x0876:400fd4160000  | 	rmmovl %eax, 5844
+                       | #(SUB, __T136, __T135, __T134)
+  0x087c:500fd4160000  | 	mrmovl 5844, %eax
+  0x0882:501fd0160000  | 	mrmovl 5840, %ecx
+  0x0888:6110          | 	subl %ecx, %eax
+  0x088a:400fd8160000  | 	rmmovl %eax, 5848
+                       | 
+                       | #(MULT, __T140, __1, __4)
+  0x0890:30f001000000  | 	irmovl 1, %eax
+  0x0896:30f104000000  | 	irmovl 4, %ecx
+  0x089c:6410          | 	mull %ecx, %eax
+  0x089e:400fe8160000  | 	rmmovl %eax, 5864
+                       | 
+                       | #(ADDR, __T141, b, -)
+  0x08a4:30f0f4ffffff  | 	irmovl -12, %eax
+  0x08aa:6050          | 	addl %ebp, %eax
+  0x08ac:400fec160000  | 	rmmovl %eax, 5868
+                       | #(SUB, __T142, __T141, __T140)
+  0x08b2:500fec160000  | 	mrmovl 5868, %eax
+  0x08b8:501fe8160000  | 	mrmovl 5864, %ecx
+  0x08be:6110          | 	subl %ecx, %eax
+  0x08c0:400ff0160000  | 	rmmovl %eax, 5872
+                       | 
+                       | #(DEREF, __T139, __T142, -)
+  0x08c6:501ff0160000  | 	mrmovl 5872, %ecx
+  0x08cc:500100000000  | 	mrmovl (%ecx), %eax
+  0x08d2:400fe4160000  | 	rmmovl %eax, 5860
+                       | #(ADD, __T138, __T139, __1)
+  0x08d8:500fe4160000  | 	mrmovl 5860, %eax
+  0x08de:30f101000000  | 	irmovl 1, %ecx
+  0x08e4:6010          | 	addl %ecx, %eax
+  0x08e6:400fe0160000  | 	rmmovl %eax, 5856
+                       | 
+                       | #(ASSIGN, __T136, __T138, -)
+  0x08ec:500fe0160000  | 	mrmovl 5856, %eax
+  0x08f2:501fd8160000  | 	mrmovl 5848, %ecx
+  0x08f8:400100000000  | 	rmmovl %eax, (%ecx)#(MULT, __T144, __T138, __4)
+  0x08fe:500fe0160000  | 	mrmovl 5856, %eax
+  0x0904:30f104000000  | 	irmovl 4, %ecx
+  0x090a:6410          | 	mull %ecx, %eax
+  0x090c:400ff8160000  | 	rmmovl %eax, 5880
+                       | 
+                       | #(ADD, __T145, a, __T144)
+  0x0912:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0918:501ff8160000  | 	mrmovl 5880, %ecx
+  0x091e:6010          | 	addl %ecx, %eax
+  0x0920:400ffc160000  | 	rmmovl %eax, 5884
+                       | 
+                       | #(SUB, __T146, __T145, __5)
+  0x0926:500ffc160000  | 	mrmovl 5884, %eax
+  0x092c:30f105000000  | 	irmovl 5, %ecx
+  0x0932:6110          | 	subl %ecx, %eax
+  0x0934:400f00170000  | 	rmmovl %eax, 5888
+                       | 
+                       | #(ASSIGN, c, __T146, -)
+  0x093a:500f00170000  | 	mrmovl 5888, %eax
+  0x0940:4005a4ffffff  | 	rmmovl %eax, -92(%ebp)
+                       | #(INC, a, -, -)
+  0x0946:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x094c:30f101000000  | 	irmovl 1, %ecx
+  0x0952:6010          | 	addl %ecx, %eax
+  0x0954:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(MULT, __T149, a, __4)
+  0x095a:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x0960:30f104000000  | 	irmovl 4, %ecx
+  0x0966:6410          | 	mull %ecx, %eax
+  0x0968:400f0c170000  | 	rmmovl %eax, 5900
+                       | 
+                       | #(ADDR, __T150, b, -)
+  0x096e:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0974:6050          | 	addl %ebp, %eax
+  0x0976:400f10170000  | 	rmmovl %eax, 5904
+                       | #(SUB, __T151, __T150, __T149)
+  0x097c:500f10170000  | 	mrmovl 5904, %eax
+  0x0982:501f0c170000  | 	mrmovl 5900, %ecx
+  0x0988:6110          | 	subl %ecx, %eax
+  0x098a:400f14170000  | 	rmmovl %eax, 5908
+                       | 
+                       | #(DEREF, __T148, __T151, -)
+  0x0990:501f14170000  | 	mrmovl 5908, %ecx
+  0x0996:500100000000  | 	mrmovl (%ecx), %eax
+  0x099c:400f08170000  | 	rmmovl %eax, 5896
+                       | #(MULT, __T153, a, __4)
+  0x09a2:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x09a8:30f104000000  | 	irmovl 4, %ecx
+  0x09ae:6410          | 	mull %ecx, %eax
+  0x09b0:400f1c170000  | 	rmmovl %eax, 5916
+                       | 
+                       | #(ADDR, __T154, b, -)
+  0x09b6:30f0f4ffffff  | 	irmovl -12, %eax
+  0x09bc:6050          | 	addl %ebp, %eax
+  0x09be:400f20170000  | 	rmmovl %eax, 5920
+                       | #(SUB, __T155, __T154, __T153)
+  0x09c4:500f20170000  | 	mrmovl 5920, %eax
+  0x09ca:501f1c170000  | 	mrmovl 5916, %ecx
+  0x09d0:6110          | 	subl %ecx, %eax
+  0x09d2:400f24170000  | 	rmmovl %eax, 5924
+                       | 
+                       | #(MULT, __T159, a, __4)
+  0x09d8:5005f8ffffff  | 	mrmovl -8(%ebp), %eax
+  0x09de:30f104000000  | 	irmovl 4, %ecx
+  0x09e4:6410          | 	mull %ecx, %eax
+  0x09e6:400f34170000  | 	rmmovl %eax, 5940
+                       | 
+                       | #(ADDR, __T160, b, -)
+  0x09ec:30f0f4ffffff  | 	irmovl -12, %eax
+  0x09f2:6050          | 	addl %ebp, %eax
+  0x09f4:400f38170000  | 	rmmovl %eax, 5944
+                       | #(SUB, __T161, __T160, __T159)
+  0x09fa:500f38170000  | 	mrmovl 5944, %eax
+  0x0a00:501f34170000  | 	mrmovl 5940, %ecx
+  0x0a06:6110          | 	subl %ecx, %eax
+  0x0a08:400f3c170000  | 	rmmovl %eax, 5948
+                       | 
+                       | #(DEREF, __T158, __T161, -)
+  0x0a0e:501f3c170000  | 	mrmovl 5948, %ecx
+  0x0a14:500100000000  | 	mrmovl (%ecx), %eax
+  0x0a1a:400f30170000  | 	rmmovl %eax, 5936
+                       | #(ADD, __T157, __T158, __1)
+  0x0a20:500f30170000  | 	mrmovl 5936, %eax
+  0x0a26:30f101000000  | 	irmovl 1, %ecx
+  0x0a2c:6010          | 	addl %ecx, %eax
+  0x0a2e:400f2c170000  | 	rmmovl %eax, 5932
+                       | 
+                       | #(ASSIGN, __T155, __T157, -)
+  0x0a34:500f2c170000  | 	mrmovl 5932, %eax
+  0x0a3a:501f24170000  | 	mrmovl 5924, %ecx
+  0x0a40:400100000000  | 	rmmovl %eax, (%ecx)#(ASSIGN, a, __T157, -)
+  0x0a46:500f2c170000  | 	mrmovl 5932, %eax
+  0x0a4c:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(NEG, __T163, a, -)
+  0x0a52:5015f8ffffff  | 	mrmovl -8(%ebp), %ecx
+  0x0a58:30f000000000  | 	irmovl 0, %eax
+  0x0a5e:6110          | 	subl %ecx, %eax
+  0x0a60:400f44170000  | 	rmmovl %eax, 5956
+                       | #(ASSIGN, a, __T163, -)
+  0x0a66:500f44170000  | 	mrmovl 5956, %eax
+  0x0a6c:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(NEG, __T164, a, -)
+  0x0a72:5015f8ffffff  | 	mrmovl -8(%ebp), %ecx
+  0x0a78:30f000000000  | 	irmovl 0, %eax
+  0x0a7e:6110          | 	subl %ecx, %eax
+  0x0a80:400f48170000  | 	rmmovl %eax, 5960
+                       | #(MULT, __T166, __T164, __4)
+  0x0a86:500f48170000  | 	mrmovl 5960, %eax
+  0x0a8c:30f104000000  | 	irmovl 4, %ecx
+  0x0a92:6410          | 	mull %ecx, %eax
+  0x0a94:400f50170000  | 	rmmovl %eax, 5968
+                       | 
+                       | #(ADDR, __T167, b, -)
+  0x0a9a:30f0f4ffffff  | 	irmovl -12, %eax
+  0x0aa0:6050          | 	addl %ebp, %eax
+  0x0aa2:400f54170000  | 	rmmovl %eax, 5972
+                       | #(SUB, __T168, __T167, __T166)
+  0x0aa8:500f54170000  | 	mrmovl 5972, %eax
+  0x0aae:501f50170000  | 	mrmovl 5968, %ecx
+  0x0ab4:6110          | 	subl %ecx, %eax
+  0x0ab6:400f58170000  | 	rmmovl %eax, 5976
+                       | 
+                       | #(DEREF, __T165, __T168, -)
+  0x0abc:501f58170000  | 	mrmovl 5976, %ecx
+  0x0ac2:500100000000  | 	mrmovl (%ecx), %eax
+  0x0ac8:400f4c170000  | 	rmmovl %eax, 5964
+                       | #(PRINT, __T165, -, -)
+  0x0ace:502f4c170000  | 	mrmovl 5964, %edx
+  0x0ad4:402f14feff00  | 	rmmovl %edx, 0x00FFFE14
+                       | #(RETURN, __void, -, -)
+  0x0ada:30f700000000  | 	irmovl 0, %edi
+  0x0ae0:2054          | 	rrmovl %ebp, %esp
+  0x0ae2:b05f          | 	popl %ebp
+  0x0ae4:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0aea:6014          | 	addl %ecx, %esp
+  0x0aec:90            | 	ret
+                       | 
+  0x1768:              | .pos 0x1768   # Start of global var space 
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

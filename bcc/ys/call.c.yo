@@ -1,0 +1,56 @@
+                       | 
+                       | 
+                       |  #This function has locals 
+                       | 
+                       | #END OF PROG: 244
+                       | 
+  0x0000:              | .pos 0
+  0x0000:30f4fcff0000  | 	irmovl stack, %esp
+  0x0006:30f5fcff0000  | 	irmovl stack, %ebp
+  0x000c:802f000000    | 	call main
+  0x0011:00            | 	halt
+  0x0014:              | .pos 0x14
+                       | #(LABEL, foo, -, -)
+  0x0014:              | foo:
+                       | 
+  0x0014:30f100000000  | 	irmovl 0, %ecx
+  0x001a:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(RETURN, __0, -, -)
+  0x001c:30f700000000  | 	irmovl 0, %edi
+  0x0022:2054          | 	rrmovl %ebp, %esp
+  0x0024:b05f          | 	popl %ebp
+  0x0026:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x002c:6014          | 	addl %ecx, %esp
+  0x002e:90            | 	ret
+                       | #(LABEL, main, -, -)
+  0x002f:              | main:
+                       | 
+  0x002f:30f10c000000  | 	irmovl 12, %ecx
+  0x0035:6114          | 	subl %ecx, %esp
+                       | #NUM PARAMS: 0
+                       | #### SOMETHING
+                       | #(PRECALL, foo, -, -)
+  0x0037:a05f          | 	pushl %ebp
+  0x0039:2045          | 	rrmovl %esp, %ebp
+                       | #(CALL, foo, -, -)
+  0x003b:8014000000    | 	call foo
+                       | #(POSTCALL, foo, -, -)
+  0x0040:30f104000000  | 	irmovl 4, %ecx
+  0x0046:2054          | 	rrmovl %ebp, %esp
+  0x0048:6014          | 	addl %ecx, %esp
+                       | #(ASSIGN, a, __RET_INT, -)
+  0x004a:2070          | 	rrmovl %edi, %eax
+  0x004c:4005f8ffffff  | 	rmmovl %eax, -8(%ebp)
+                       | #(RETURN, __void, -, -)
+  0x0052:30f700000000  | 	irmovl 0, %edi
+  0x0058:2054          | 	rrmovl %ebp, %esp
+  0x005a:b05f          | 	popl %ebp
+  0x005c:30f1f8ffffff  | 	irmovl -8, %ecx
+  0x0062:6014          | 	addl %ecx, %esp
+  0x0064:90            | 	ret
+                       | 
+  0x0110:              | .pos 0x110   # Start of global var space 
+  0xfffc:              | .pos 0x0000FFFC
+  0xfffc:              | stack:

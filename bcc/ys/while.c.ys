@@ -1,0 +1,84 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 572
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 16, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(ASSIGN, a, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, -8(%ebp)
+#(LABEL, __L_9_WHILE_BEGIN, -, -)
+L_9_WHILE_BEGIN:
+
+#(ASSIGN, __T0, a, -)
+	mrmovl -8(%ebp), %eax
+	rmmovl %eax, 592
+#(ASSIGN, __T1, __10, -)
+	irmovl 10, %eax
+	rmmovl %eax, 596
+#(LT, __T2, __T0, __T1)
+	mrmovl 592, %eax
+	mrmovl 596, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 600
+#(ifTrue, __L_10_TRUE, __T2, -)
+	jl L_10_TRUE
+#(ASSIGN, __T2, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 600
+#(GOTO, __L_10_DONE, -, -)
+	jmp L_10_DONE
+#(LABEL, __L_10_TRUE, -, -)
+L_10_TRUE:
+
+#(ASSIGN, __T2, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 600
+#(LABEL, __L_10_DONE, -, -)
+L_10_DONE:
+
+#(ifFalse, __L_9_WHILE_END, __T2, -)
+	mrmovl 600, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_9_WHILE_END
+#(INC, a, -, -)
+	mrmovl -8(%ebp), %eax
+	irmovl 1, %ecx
+	addl %ecx, %eax
+	rmmovl %eax, -8(%ebp)
+#(ASSIGN, b, a, -)
+	mrmovl -8(%ebp), %eax
+	rmmovl %eax, -12(%ebp)
+#(PRINT, a, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(GOTO, __L_9_WHILE_BEGIN, -, -)
+	jmp L_9_WHILE_BEGIN
+#(LABEL, __L_9_WHILE_END, -, -)
+L_9_WHILE_END:
+
+#(RETURN, __void, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+
+.pos 0x268   # Start of global var space 
+.pos 0x0000FFFC
+stack:

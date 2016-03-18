@@ -1,0 +1,145 @@
+
+
+ #This function has locals 
+
+#END OF PROG: 692
+
+.pos 0
+	irmovl stack, %esp
+	irmovl stack, %ebp
+	call main
+	halt
+.pos 0x14
+#(LABEL, main, -, -)
+main:
+
+	irmovl 96, %ecx
+	subl %ecx, %esp
+#NUM PARAMS: 0
+#### SOMETHING
+#(ASSIGN, a, __5, -)
+	irmovl 5, %eax
+	rmmovl %eax, -8(%ebp)
+#(MULT, __T0, a, __2)
+	mrmovl -8(%ebp), %eax
+	irmovl 2, %ecx
+	mull %ecx, %eax
+	rmmovl %eax, 712
+
+#(ASSIGN, b, __T0, -)
+	mrmovl 712, %eax
+	rmmovl %eax, -12(%ebp)
+#(PRINT, a, -, -)
+	mrmovl -8(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(PRINT, b, -, -)
+	mrmovl -12(%ebp), %edx
+	rmmovl %edx, 0x00FFFE14
+#(ASSIGN, __T2, a, -)
+	mrmovl -8(%ebp), %eax
+	rmmovl %eax, 720
+#(ASSIGN, __T3, b, -)
+	mrmovl -12(%ebp), %eax
+	rmmovl %eax, 724
+#(EQ, __T4, __T2, __T3)
+	mrmovl 720, %eax
+	mrmovl 724, %ecx
+	subl %ecx, %eax
+	rmmovl %eax, 728
+#(ifTrue, __L_21_TRUE, __T4, -)
+	je L_21_TRUE
+#(ASSIGN, __T4, __0, -)
+	irmovl 0, %eax
+	rmmovl %eax, 728
+#(GOTO, __L_21_DONE, -, -)
+	jmp L_21_DONE
+#(LABEL, __L_21_TRUE, -, -)
+L_21_TRUE:
+
+#(ASSIGN, __T4, __1, -)
+	irmovl 1, %eax
+	rmmovl %eax, 728
+#(LABEL, __L_21_DONE, -, -)
+L_21_DONE:
+
+#(ASSIGN, __T1, __T4, -)
+	mrmovl 728, %eax
+	rmmovl %eax, 716
+#(ifFalse, __L_20_ELSE, __T1, -)
+	mrmovl 716, %eax
+	irmovl 0, %ecx
+	subl %ecx, %eax
+	je L_20_ELSE
+#(PRINT, in if TRUE, -, -)
+	irmovl 736, %edx
+	rmmovl %edx, 0x00FFFE10
+#(GOTO, __L_20_FI, -, -)
+	jmp L_20_FI
+#(LABEL, __L_20_ELSE, -, -)
+L_20_ELSE:
+
+#(PRINT, in if FALSE, -, -)
+	irmovl 760, %edx
+	rmmovl %edx, 0x00FFFE10
+#(LABEL, __L_20_FI, -, -)
+L_20_FI:
+
+#(RETURN, __0, -, -)
+	irmovl 0, %edi
+	rrmovl %ebp, %esp
+	popl %ebp
+	irmovl -8, %ecx
+	addl %ecx, %esp
+	ret
+.pos 0x2e0    #qwerty
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x20
+
+	.byte 	0x69
+
+	.byte 	0x66
+
+	.byte 	0x20
+
+	.byte 	0x54
+
+	.byte 	0x52
+
+	.byte 	0x55
+
+	.byte 	0x45
+
+	.byte 	0x0
+.pos 0x2f8    #qwerty
+
+	.byte 	0x69
+
+	.byte 	0x6e
+
+	.byte 	0x20
+
+	.byte 	0x69
+
+	.byte 	0x66
+
+	.byte 	0x20
+
+	.byte 	0x46
+
+	.byte 	0x41
+
+	.byte 	0x4c
+
+	.byte 	0x53
+
+	.byte 	0x45
+
+	.byte 	0x0
+
+.pos 0x316   # Start of global var space 
+.pos 0x0000FFFC
+stack:
